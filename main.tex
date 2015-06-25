@@ -6,6 +6,9 @@
 \usepackage{amssymb}
 \usepackage{mathabx}
 \usepackage{amsthm}
+\usepackage[usenames,dvipsnames]{xcolor}
+\newcommand{\kacper}[1]{ \bf  { \color{Orchid}{Kc: #1}}  }
+
 \newtheorem*{remark}{Remark}
 \newenvironment{claim}[1]{\par\noindent\underline{Claim:}\space#1}{}
 \newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\hfill $\blacksquare$}
@@ -13,6 +16,8 @@
 \title{Normalised HSIC and Lancaster are aymptotically degenerate V-statistics}
 \author{Paul Rubenstein}
 \date{June 2015}
+
+
 
 \begin{document}
 
@@ -39,7 +44,7 @@ In the first half of this document, we prove the above for HSIC. Some parts of t
 \item Show that the terms which do not go to zero form a type of HSIC
 \item Apply HSIC result.
 \item ??????
-\item Acquisition by google
+\item Acquisition by google 
 \end{itemize}
 
 \section{HSIC}
@@ -53,6 +58,8 @@ Let $k, l$ be kernels with associated feature maps $\phi$ and $\psi$. Given obse
 Let $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^{n} \phi(X_i)$ and let $\tilde{K}_{ij} = \langle \phi(X_i) - \tilde{\mu}_X, \phi(X_j) - \tilde{\mu}_X \rangle$, and similar for $\tilde{\mu}_Y$ and $\tilde{L}$. These are the \emph{empirically} centred gram matrices.
 
 Let $\mu_X = \mathbb{E}_X\phi(X)$ and let $\bar{K}_{ij} = \langle \phi(X_i) - \mu_X, \phi(X_j) - \mu_X \rangle$, and similar for $\mu_Y$ and $\bar{L}$. These are the \emph{population} centred gram matrices.
+
+\kacper{Define operators  $K_{++}$, $K_+$ and $L \circ K$ for matrices}
 
 \subsection{The test statistic for HSIC}
 The biased estimator for HSIC that we are interested in is the V-statistic
