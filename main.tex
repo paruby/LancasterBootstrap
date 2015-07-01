@@ -44,7 +44,7 @@ In the first half of this document, we prove the above for HSIC. Some parts of t
 \item Show that the terms which do not go to zero form a type of HSIC
 \item Apply HSIC result.
 \item ??????
-\item Acquisition by google 
+\item Acquisition by google \kacper{groupies would be nicer}
 \end{itemize}
 
 \section{HSIC}
@@ -113,7 +113,7 @@ T(\phi, \psi, \{X_i\},\{Y_i\}) = \frac{1}{n^2}(K\circ L)_{++} - \frac{2}{n^3}(KL
 where $K$ and $L$ are the gram matrices of the observations with respect to the feature maps $\phi$ and $\psi$.
 
 Now define, for constants $W$ and $Z$, the new feature maps $\phi'(X) = \phi(X) - W$ and $\psi'(Y) = \psi(Y) - Z$. Let $K'$ and $L'$ be the gram matrices with respect to the feature maps $\phi'$ and $\psi'$. Then
-
+\kacper{this can be shorten - since  $\phi'(X_i) - \frac{1}{n}\sum_k \phi'(X_k) = \phi(X_i) - \frac{1}{n}\sum_k \phi(X_k)$, then the claim holds  }
 \begin{align*}
 T(\phi', \psi', \{X_i\},\{Y_i\}) & = \frac{1}{n^2} \mathlarger{\mathlarger{\sum_{ij}}} \mathlarger{\mathlarger{\langle}} \phi'(X_i) - \frac{1}{n}\sum_k \phi'(X_k), \phi'(X_j) - \frac{1}{n}\sum_k \phi'(X_k) \mathlarger{\mathlarger{\rangle}} \\ & \quad\quad\quad\quad \times \mathlarger{\mathlarger{\langle}} \psi'(Y_i) - \frac{1}{n}\sum_k \psi'(Y_k), \psi'(Y_j) - \frac{1}{n}\sum_k \psi'(Y_k) \mathlarger{\mathlarger{\rangle}} \\ &
 = \frac{1}{n^2} \mathlarger{\mathlarger{\sum_{ij}}} \mathlarger{\mathlarger{\langle}} \phi(X_i) - W - \frac{1}{n}\sum_k (\phi(X_k)-W), \phi(X_j)-W - \frac{1}{n}\sum_k (\phi(X_k)-W) \mathlarger{\mathlarger{\rangle}} \\ & \quad\quad\quad\quad \times \mathlarger{\mathlarger{\langle}} \psi(Y_i) - Z - \frac{1}{n}\sum_k (\psi(Y_k) - Z), \psi(Y_j) - Z - \frac{1}{n}\sum_k (\psi(Y_k) - Z) \mathlarger{\mathlarger{\rangle}}\\&
@@ -240,6 +240,17 @@ n\langle \frac{1}{n} \sum_{j}[(\phi(X_j)-\mu_X)\otimes(\psi(Y_j)-\mu_Y)],
 n\langle \tilde{C}_{XY},(\tilde{\mu}_X - \mu_X) \otimes (\tilde{\mu}_Y - \mu_Y)\rangle \\ &= 
 O(\frac{1}{\sqrt{n}})
 \end{align*}
+
+
+% Since features are centered, without loss of generality we can assume $E\phi(X_i)=0, E \psi(Y_j) =0 $ and write  
+% \begin{align*}
+% \frac{1}{n^2}(\bar{K}\bar{L})_{++} &= \frac{1}{n^2} \sum_{ijk}\langle \phi(X_i),\phi(X_j) \rangle \langle \psi(Y_j),\psi(Y_k) \rangle \\&=
+% \frac{1}{n} \sum_{j}\langle \sqrt n \tilde \mu_X,\phi(X_j) \rangle \langle \psi(Y_j),\sqrt n \tilde \mu_Y \rangle \\&=  
+% \frac{1}{n} \sum_{j} A_{j,n} B_{j,n} 
+% \end{align*}
+% where $A_{j,n} = \langle \sqrt n \tilde \mu_X,\phi(X_j) \rangle$, $B_{j,n} =  \langle \psi(Y_j),\sqrt n \tilde \mu_Y \rangle$.
+% We will use LLN, $EA_{j,n} = \frac{1} {\sqrt n} k(X_j,)$
+
 \end{claimproof}
 
 \begin{claimproof}[3]
