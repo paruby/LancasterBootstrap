@@ -241,16 +241,11 @@ n\langle \tilde{C}_{XY},(\tilde{\mu}_X - \mu_X) \otimes (\tilde{\mu}_Y - \mu_Y)\
 O(\frac{1}{\sqrt{n}})
 \end{align*}
 
-
-% Since features are centered, without loss of generality we can assume $E\phi(X_i)=0, E \psi(Y_j) =0 $ and write  
-% \begin{align*}
-% \frac{1}{n^2}(\bar{K}\bar{L})_{++} &= \frac{1}{n^2} \sum_{ijk}\langle \phi(X_i),\phi(X_j) \rangle \langle \psi(Y_j),\psi(Y_k) \rangle \\&=
-% \frac{1}{n} \sum_{j}\langle \sqrt n \tilde \mu_X,\phi(X_j) \rangle \langle \psi(Y_j),\sqrt n \tilde \mu_Y \rangle \\&=  
-% \frac{1}{n} \sum_{j} A_{j,n} B_{j,n} 
-% \end{align*}
-% where $A_{j,n} = \langle \sqrt n \tilde \mu_X,\phi(X_j) \rangle$, $B_{j,n} =  \langle \psi(Y_j),\sqrt n \tilde \mu_Y \rangle$.
-% We will use LLN, $EA_{j,n} = \frac{1} {\sqrt n} k(X_j,)$
-
+\kacper{Can't you use clt for $\sqrt n \tilde{C}_{XY}$, $ \sqrt n( \tilde{\mu}_Y - \mu_Y)$ , $\sqrt n (\tilde{\mu}_X - \mu_X)$?  You would have 
+\[
+ \frac{1}{\sqrt n} \langle \sqrt n \tilde{C}_{XY},\sqrt n (\tilde{\mu}_X - \mu_X) \otimes \sqrt n (\tilde{\mu}_Y - \mu_Y)\rangle.
+\]
+Currently you use result for HSIC, I thought that idea is to use only CLT (LLN) in Hilbert space and have proof to which you plug in the most up to date CLT.} 
 \end{claimproof}
 
 \begin{claimproof}[3]
