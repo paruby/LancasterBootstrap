@@ -1,0 +1,20 @@
+%Paul Rubenstein, 2015
+%Code for Lancaster interaction with timeseries
+%performs each of the 4 tests, taking the data
+%as input using Gaussian kernel with fixed sigma
+%for all data
+function [results] = all_tests(X,Y,Z,sigma,numBootstraps,alpha)
+n=length(X);
+%TODO: add check that X,Y,Z same length
+
+K = GaussKern(X',X',sigma);
+L = GaussKern(Y',Y',sigma);
+M = GaussKern(Z',Z',sigma);
+
+xMatrix = x_indep_matrix(K,L,M);
+yMatrix = y_indep_matrix(K,L,M);
+zMatrix = z_indep_matrix(K,L,M);
+totalMatrix = total_indep_matrix(K,L,M);
+
+
+end
