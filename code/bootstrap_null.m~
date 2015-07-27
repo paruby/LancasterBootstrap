@@ -12,11 +12,9 @@ for process = 1:numBootstrap
         %matFix = (processes(:,process)-mn)*(processes(:,process)-mn)';
         vec = processes(:,process)-mn;
     else
-        %matFix = processes(:,process)*processes(:,process)';
-        vec = processes(:,process);
+        matFix = processes(:,process)*processes(:,process)';
     end
-    %testStats(process) =  m*mean2(statMatrix.*matFix );
-    testStats(process) = (1/m)*(vec'*statMatrix*vec);
+    testStats(process) =  m*mean2(statMatrix.*matFix );
 end
 
 results.testStat = testStat;

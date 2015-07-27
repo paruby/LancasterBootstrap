@@ -31,4 +31,8 @@ Z = hmmgenerate(len,transitionz,eye(length(states)));
 yerrors = [-1,0,1];
 Y = X + yerrors(randi(3,1,len));
 Y = mod(Y-1,length(states))+1;
+
+%zerrors = [-1,0,1];
+%Z = X + zerrors(randi(3,1,len));
+%Z = mod(Z-1,length(states))+1;
 end
