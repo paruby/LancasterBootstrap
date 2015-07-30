@@ -14,47 +14,55 @@ L = GaussKern(Y',Y',sigma);
 fprintf('Constructing Z gram matrix...\n')
 M = GaussKern(Z',Z',sigma);
 
+Kc = empirically_centre(K);
+clear K
+Lc = empirically_centre(L);
+clear L
+Mc = empirically_centre(M);
+clear M;
+
+
 
 fprintf('Constructing X independence test statistic...\n')
-xMatrix = x_indep_matrix(K,L,M);
+xMatrix = Kc.*empirically_centre(Lc.*Mc);
 fprintf('Bootstrapping X independence test statistic...\n')
 xresults = bootstrap_null(n,numBootstraps,xMatrix,alpha,@bootstrap_series,2);
 clear xMatrix
 
 
 fprintf('Constructing Y independence test statistic...\n')
-yMatrix = y_indep_matrix(K,L,M);
+yMatrix = Lc.*empirically_centre(Kc.*Mc);
 fprintf('Bootstrapping Y independence test statistic...\n')
 yresults = bootstrap_null(n,numBootstraps,yMatrix,alpha,@bootstrap_series,2);
 clear yMatrix
 
 fprintf('Constructing Z independence test statistic...\n')
-zMatrix = z_indep_matrix(K,L,M);
+zMatrix = Mc.*empirically_centre(Kc.*Lc);
 fprintf('Bootstrapping Z independence test statistic...\n')
 zresults = bootstrap_null(n,numBootstraps,zMatrix,alpha,@bootstrap_series,2);
 clear zMatrix
 
 fprintf('Constructing total independence test statistic...\n')
-totalMatrix = total_indep_matrix(K,L,M);
+totalMatrix = Kc.*Lc.*Mc;
 fprintf('Bootstrapping total independence test statistic...\n')
 totalresults = bootstrap_null(n,numBootstraps,totalMatrix,alpha,@bootstrap_series,2);
 clear totalMatrix
 
 
 fprintf('Constructing X vs Y HSIC test statistic...\n')
-xyHSICmatrix = HSIC_matrix(K,L);
+xyHSICmatrix = Kc.*Lc;
 fprintf('Bootstrapping XY HSIC test statistic...\n')
 xyHSICresults = bootstrap_null(n,numBootstraps,xyHSICmatrix,alpha,@bootstrap_series,2);
 clear xyHSICmatrix
 
 fprintf('Constructing X vs Z HSIC test statistic...\n')
-xzHSICmatrix = HSIC_matrix(K,M);
+xzHSICmatrix = Kc.*Mc;
 fprintf('Bootstrapping XZ HSIC test statistic...\n')
 xzHSICresults = bootstrap_null(n,numBootstraps,xzHSICmatrix,alpha,@bootstrap_series,2);
 clear xzHSICmatrix
 
 fprintf('Constructing Y vs Z HSIC test statistic...\n')
-yzHSICmatrix = HSIC_matrix(L,M);
+yzHSICmatrix = Lc.*Mc;
 fprintf('Bootstrapping YZ HSIC test statistic...\n')
 yzHSICresults = bootstrap_null(n,numBootstraps,yzHSICmatrix,alpha,@bootstrap_series,2);
 clear yzHSICmatrix
