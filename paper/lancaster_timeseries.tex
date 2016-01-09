@@ -18,12 +18,15 @@
 \usepackage{natbib}
 \usepackage{amsthm}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{relsize}
 
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 \newtheorem{definition}{Definition}
 \newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
 \newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\hfill $\blacksquare$}
 
 % For algorithms
@@ -58,7 +61,7 @@
 \begin{document} 
 
 \twocolumn[
-\icmltitle{A Kernel Test for Three-Variable Interactions with Random Processes}
+\icmltitle{A Kernel Test for Three-Variable Interactions with Random Processes (ICML 2016)}
 
 % It is OKAY to include author information, even for blind
 % submissions: the style file will automatically remove it for you
@@ -117,17 +120,28 @@ In this section we briefly introduce the theory and definitions required to unde
 
 Given an integrally strictly positive definite kernel $k$ on a set $\mathcal{Z}$, the mapping induced by $k$ from $\mathcal{M(Z)}$, the set of signed measures on $\mathcal{Z}$, to the RKHS $\mathcal{H}_k$ of $k$ via $m \mapsto \int k(x,\cdot)dm(x)$ is injective. Given a finite sample $z_1,\ldots,z_n$ drawn from a probability distribution $\mathbb{P}_z$, the mean embedding $\mu_{\mathbb{P}_z}$ can be estimated as $\hat\mu_{\mathbb{P}_z} = \frac{1}{n}\sum_{i=1}^{n}k(z_i,\cdot)$. This idea is exploited in the construction of certain statistical tests including two sample independence testing (HSIC) - in this case, we wish to understand whether $\mathbb{P}_{XY}$ factorises as $\mathbb{P}_{X}\mathbb{P}_{Y}$ based on finite samples $(X_i,Y_i)$ drawn from $\mathbb{P}_{XY}$. We can consider distance between the empirical embeddings of the two measures via $\| \hat\mu_{\mathbb{P}_{XY}}  - \hat\mu_{\mathbb{P}_{X}\mathbb{P}_{Y}}\|^2$. We can then bootstrap this statistic to generate samples of it under the null hypothesis that $\mathbb{P}_{XY} = \mathbb{P}_{X}\mathbb{P}_{Y}$ to calculate a threshold distance over which we would reject the null hypothesis and conclude that the distribution does not factorise
 
+\subsubsection{Notation?}
+
+Maybe put all notation here? Need to define gram matrices, empirically centred gram matrices and population centred gram matrices.
+
 \subsection{Lancaster}
 
-The above ideas of injectively embedding measures into a Hilbert space can be extended from the two variable case to consider properties of three or more variables. The Lancaster statistic on the triple of variables $(X,Y,Z)$ is defined as the signed measure $\Delta_LP = \mathbb{P}_{XYZ} - \mathbb{P}_{XY}\mathbb{P}_{Z} - \mathbb{P}_{XZ}\mathbb{P}_{Y} - \mathbb{P}_{X}\mathbb{P}_{YZ} + 2\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}$. It can be shown that if any variable is independent of the other two, then $\Delta_LP = 0$. That is,
+The above ideas of injectively embedding measures into a Hilbert space can be extended from the two variable case to consider properties of three or more variables. The Lancaster statistic on the triple of variables $(X,Y,Z)$ is defined as the signed measure $\Delta_LP = \mathbb{P}_{XYZ} - \mathbb{P}_{XY}\mathbb{P}_{Z} - \mathbb{P}_{XZ}\mathbb{P}_{Y} - \mathbb{P}_{X}\mathbb{P}_{YZ} + 2\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}$. It is straightforward to show that if any variable is independent of the other two (equivalently, if the joint distribution $\mathbb{P}_{XYZ}$ factorises into a product of marginals in any way), then $\Delta_LP = 0$. That is, writing $\mathcal{A}_X = \{X \independent (Y,Z)\}$ and similar for $\mathcal{A}_Y$ and $\mathcal{A}_Z$, we have that
 
-\[(X,Y) \independent Z \enspace \lor \enspace (X,Z) \independent Y \enspace \lor \enspace X \independent (Y,Z) \Rightarrow \Delta_LP=0 \]
+\[\mathcal{A}_X \enspace \lor \enspace \mathcal{A}_Y \enspace \lor \enspace \mathcal{A}_Z \Rightarrow \Delta_LP=0 \]
 
-Given a finite sample $(X_i,Y_i,Z_i)_{i=1}^n$, the mean embedding of the Lancaster interaction can be empirically estimated as $\Delta_L\hat{P} = \hat{\mu}_{\mathbb{P}_{XYZ}} - \hat{\mu}_{\mathbb{P}_{XY}\mathbb{P}_{Z}} - \hat{\mu}_{\mathbb{P}_{XZ}\mathbb{P}_{Y}} - \hat{\mu}_{\mathbb{P}_{X}\mathbb{P}_{YZ}} + 2\hat{\mu}_{\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}}$. The squared norm of this quantity will be the test statistic of concern for us.
+Given a finite sample $(X_i,Y_i,Z_i)_{i=1}^n$, the mean embedding of the Lancaster interaction can be empirically estimated as $\Delta_L\hat{P} = \hat{\mu}_{\mathbb{P}_{XYZ}} - \hat{\mu}_{\mathbb{P}_{XY}\mathbb{P}_{Z}} - \hat{\mu}_{\mathbb{P}_{XZ}\mathbb{P}_{Y}} - \hat{\mu}_{\mathbb{P}_{X}\mathbb{P}_{YZ}} + 2\hat{\mu}_{\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}}$. We use the squared RKHS norm of this quantity as a test statistic to test the following hypothesis:
 
-Given kernels $k,l$ and $m$ on $\mathcal{X},\mathcal{Y}$ and $\mathcal{Z}$ respectively, the kernel $k\otimes l \otimes m$ defines a kernel on $\mathcal{X}\times \mathcal{Y} \times \mathcal{Z}$. Letting $K, L$ and $M$ denote the gram matrices, where for example $K_{ij} = k(X_i,X_j)$, we can write
+$\mathcal{H}_0: \mathcal{A}_X \enspace \lor \enspace \mathcal{A}_Y \enspace \lor \enspace \mathcal{A}_Z $\\
+$\mathcal{H}_1: \mathbb{P}_{XYZ}$ does not factorise in any way
+
+Given kernels $k,l$ and $m$ on $\mathcal{X},\mathcal{Y}$ and $\mathcal{Z}$ respectively, $k\otimes l \otimes m$ defines a kernel on $\mathcal{X}\times \mathcal{Y} \times \mathcal{Z}$. We write $K, L$ and $M$ to denote the gram matrices of each kernel with respect to the observations, where for example $K_{ij} = k(X_i,X_j)$. We further write $\tilde{K}, \tilde{L}$ and $\tilde{M}$ for the empirically centred gram matrices, where for example $\tilde{K}_{ij} = k(X_i,X_j) - \frac{1}{n}\sum_ik(X_i,X_j)  - \frac{1}{n}\sum_jk(X_i,X_j) + \frac{1}{n^2}\sum_{ij}k(X_i,X_j)$. We can then write [Lancaster]
 
 $\|\Delta_L\hat{P}\|_{k\otimes l \otimes m}^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}$
+
+where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$.
+
+The next part of the statistical test is to find threshold values of the statistic beyond which we would reject the null hypothesis. In the case that the observations are drawn \emph{iid}, this can be done using a permutation bootstrap method. Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately. We reject the composite null hypothesis if and only if we reject all three of the components. For more information on the details of the bootstrapping method, see [Lancaster].
 
 \subsection{Time series}
 In this paper we are extending the existing Lancaster test from the \emph{iid} case to a case in which our observations are drawn from a random process. There are various formalisations of memory or 'mixing' of a random process; of relevance to this paper are the following two:
@@ -174,6 +188,7 @@ Of relevance to us is the fact that many kernel test statistics can be viewed as
 
 \subsection{Wild Bootstrap}
 
+I think I should define the wild bootstrap here, so that in the next section I can focus on just proving that it can be applied.
 
 
 \subsection{Hilbert spaced random variable CLT}
@@ -195,6 +210,37 @@ Should we actually state the theorem here? We should include the proof that our 
 \end{itemize} 
 
 \section{Lancaster Interaction for Random Processes}
+
+(Following kacper's paper...)
+
+In this section we construct the Lancaster Interaction test for random processes. The major difficulty in doing so is showing that the test statistic asymptotically satisfies the conditions of the Wild Bootstrap under the null hypothesis of the test, and therefore the Wild Bootstrap can be used to resample the test statistic and provide consistent thresholds for desired p-values.
+
+The approach taken in this paper can also be applied to the HSIC test statistic to give a simpler proof that the Wild Bootstrap can be used for HSIC+timeseries than that given in [Kacper].
+
+\begin{theorem}
+Suppose that $\mathbb{P}_{XYZ} = \mathbb{P}_{XY}\mathbb{P}_Z$ and that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is both:
+
+\begin{itemize}
+\item $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$
+\item $\tau$-mixing with coefficients $\tau(m)$ satisfying $\sum_{m=1}^\infty m^2 \sqrt{\tau(m)} < \infty$
+\end{itemize} . Then, as $n\longrightarrow \infty$, 
+
+\[ n\| \Delta_L\hat{P} \|^2 \longrightarrow \frac{1}{n}\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right) _{++} \]
+
+and this is a normalised degenerate V-statistic.
+\end{theorem}
+
+\begin{corollary}
+Suppose in addition to the above that $W$ is drawn from a process satisfying the conditions of [Wild Bootstrap]. Then asymptotically,
+
+\[\frac{1}{n}\left(W^\intercal\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right)W\right) _{++}\]
+
+has the same distribution as $ n\| \Delta_L\hat{P} \|^2$. 
+\end{corollary}
+
+We can therefore use this to generate samples of the test statistic $ n\| \Delta_L\hat{P} \|^2$ under the null hypothesis that $\mathcal{A}_Z$. By symmetry, we can therefore use this 
+
+
 \begin{itemize}
 \item Statement of Wild Bootstrap theorem (maybe in background though?)
 \item Proof that Lancaster satisfies WB theorem hypothesis
