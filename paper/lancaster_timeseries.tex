@@ -85,15 +85,19 @@
 ]
 
 \begin{abstract} 
-Explain what this is all about, and the main contributions:
 
-\begin{itemize}
-\item Applied Wild Bootstrap to Lancaster test statistic
-\item Main theoretical challenge was to show that the conditions required to apply WB are satisfied by Lancaster
-\item This was done in a novel way - rather than using the Hoeffding decomposition, we come up with a new method which is simpler, (but requires an extra condition on the timeseries?)
-\item We also show that the power of the Lancaster test described in Arthur's original paper can be improved - we show that they used conservative p-values
-\end{itemize}
+A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{iid} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. That the wild bootstrap can be applied to the Lancaster statistic was proved in a novel way, which may provide a simpler framework for proving similar properties of other kernel statistics than previously existed.  It is also shown that the multiple testing correction proposed in [Lancaster] is too conservative, and a new correction is proposed that increases test power.
 \end{abstract} 
+
+%Explain what this is all about, and the main contributions:
+%
+%\begin{itemize}
+%\item Applied Wild Bootstrap to Lancaster test statistic
+%\item Main theoretical challenge was to show that the conditions required to apply WB are satisfied by Lancaster
+%\item This was done in a novel way - rather than using the Hoeffding decomposition, we come up with a new method which is simpler, (but requires an extra condition on the timeseries?)
+%\item We also show that the power of the Lancaster test described in Arthur's original paper can be improved - we show that they used conservative p-values
+%\end{itemize}
+%
 
 \section{Introduction}
 \label{introduction}
@@ -118,21 +122,25 @@ This work combines the works of [HSIC + time series] and [Lancaster interaction]
 
 In this section we briefly introduce the theory and definitions required to understand the statement and proof of our main result.
 
-\subsection{Kernel Mean Embedding (and HSIC?)}
+\subsection{Kernels and RKHS notation}
 
-Given an integrally strictly positive definite kernel $k$ on a set $\mathcal{Z}$, the mapping induced by $k$ from $\mathcal{M(Z)}$, the set of signed measures on $\mathcal{Z}$, to the RKHS $\mathcal{H}_k$ of $k$ via $m \mapsto \int k(x,\cdot)dm(x)$ is injective. Given a finite sample $z_1,\ldots,z_n$ drawn from a probability distribution $\mathbb{P}_z$, the mean embedding $\mu_{\mathbb{P}_z}$ can be estimated as $\hat\mu_{\mathbb{P}_z} = \frac{1}{n}\sum_{i=1}^{n}k(z_i,\cdot)$. This idea is exploited in the construction of certain statistical tests including two sample independence testing (HSIC) - in this case, we wish to understand whether $\mathbb{P}_{XY}$ factorises as $\mathbb{P}_{X}\mathbb{P}_{Y}$ based on finite samples $(X_i,Y_i)$ drawn from $\mathbb{P}_{XY}$. We can consider distance between the empirical embeddings of the two measures via $\| \hat\mu_{\mathbb{P}_{XY}}  - \hat\mu_{\mathbb{P}_{X}\mathbb{P}_{Y}}\|^2$. We can then bootstrap this statistic to generate samples of it under the null hypothesis that $\mathbb{P}_{XY} = \mathbb{P}_{X}\mathbb{P}_{Y}$ to calculate a threshold distance over which we would reject the null hypothesis and conclude that the distribution does not factorise
+%Given an integrally strictly positive definite kernel $k$ on a set $\mathcal{X}$, the mapping induced by $k$ from $\mathcal{M(X)}$, the set of signed measures on $\mathcal{X}$, to the RKHS $\mathcal{H}_k$ of $k$ via $m \mapsto \int k(x,\cdot)dm(x)$ is injective. Given a finite sample $X_1,\ldots,X_n$ drawn from a probability distribution $\mathbb{P}_X$, the mean embedding $\mu_{\mathbb{P}_X}$ can be estimated as $\tilde\mu_{\mathbb{P}_X} = \frac{1}{n}\sum_{i=1}^{n}k(X_i,\cdot)$. 
 
-\subsubsection{Notation?}
+%This idea is exploited in the construction of certain statistical tests including two sample independence testing (HSIC) - in this case, we wish to understand whether $\mathbb{P}_{XY}$ factorises as $\mathbb{P}_{X}\mathbb{P}_{Y}$ based on finite samples $(X_i,Y_i)$ drawn from $\mathbb{P}_{XY}$. We can consider distance between the empirical embeddings of the two measures via $\| \tilde\mu_{\mathbb{P}_{XY}}  - \tilde\mu_{\mathbb{P}_{X}\mathbb{P}_{Y}}\|^2$. We can then bootstrap this statistic to generate samples of it under the null hypothesis that $\mathbb{P}_{XY} = \mathbb{P}_{X}\mathbb{P}_{Y}$ to calculate a threshold distance over which we would reject the null hypothesis and conclude that the distribution does not factorise
 
-Maybe put all notation here? Need to define gram matrices, empirically centred gram matrices and population centred gram matrices.
+Throughout this paper we will stick to the convention that $X,Y$ and $Z$ are random variables taking value in $\mathcal{X}, \mathcal{Y}$ and $\mathcal{Z}$, on which we define $k, l$ and $m$ respectively to be kernels. We will assume that our kernels are characteristic and bounded. We describe some notation relevant to the kernel $k$; similar notation holds for $l$ and $m$.
 
-Throughout this paper we will stick to the convention that $X,Y$ and $Z$ are random variables taking value in $\mathcal{X}, \mathcal{Y}$ and $\mathcal{Z}$, on which we define $k, l$ and $m$ respectively to be kernels. We will assume that our kernels are characteristic and bounded. We describe some notation relevant to the kernel $k$; similar notation holds for the other two kernels.
+Associated with the kernel $k$ is a Hilbert space $\mathcal{H}_k$ of functions on $\mathcal{X}$ and a feature map $\phi_X:\mathcal{X}\longrightarrow\mathcal{H}_k$ such that $k(x,x') = \langle \phi_X(x),\phi_X(x')\rangle$. Given observations $\{X_i\}_{i=1}^n$, we write $K$ to be the \emph{Gram matrix} with entries $K_{ij} = k(X_i,X_j)$.  
 
-Associated with the kernel $k$ is a Hilbert space $\mathcal{H}_k$ of functions on $\mathcal{X}$ and a feature map $\phi_X:\mathcal{X}\longrightarrow\mathcal{H}_k$ such that $k(x,x') = \langle \phi_X(x),\phi_X(x')\rangle$. Given observations $\{X_i\}_{i=1}^n$, we write $K$ to be the \emph{Gram matrix} with entries $K_{ij} = k(X_i,X_j)$.  We write $\mu_X := \mathbb{E}_X k(X,\cdot)$ which we call the \emph{mean embedding} of the random variable $X$. When $k$ is bounded we can think of $\mu_X$ as the expectation of the $\mathcal{H}_k$-valued random variable $\phi_X(X)$. We write $\hat{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$ and remark that $\hat{k}(x,x') = \langle\phi_X(x)-\hat{\mu}_X,\phi_X(x')-\hat{\mu}_X\rangle$ is a kernel with feature map $\bar{\phi}_X(X) = \phi_X(X) - \mu_X$. We denote by $\hat{K}$ the Gram matrix with respect to $\hat{k}$ and call this the \emph{empirically centred Gram matrix}. We note also that $\bar{k}(x,x') = \langle\phi_X(x)-\mu_X,\phi_X(x')-\mu_X\rangle$ is a kernel with feature map $\hat{\phi}_X(X) = \phi_X(X) - \hat\mu_X$. We denote by $\bar{K}$ the Gram matrix with respect to $\bar{k}$ and call this the \emph{population centred Gram matrix}. We note further here that if $k$ and $l$ are kernels on $\mathcal{X}$ and $\mathcal{Y}$, then $k\otimes l$ is a kernel on $\mathcal{X}\times \mathcal{Y}$. We write $C_{XY} = \mathbb{E}_{XY}\bar{\phi}_X(X)\otimes\bar{\phi}_Y(Y)$ called the \emph{population centred covariance operator} and define $\bar{C}_{XY} = \frac{1}{n}\sum_{i=1}^n\bar{\phi}_X(X_i)\otimes\bar{\phi}_Y(Y_i)$ to be its empirical counterpart. Note that we can consider $C_{XY}$ to be an operator $\mathcal{H}_l \longrightarrow \mathcal{H}_k$, or as an element of the Hilbert space $\mathcal{H}_{k\otimes l}$
+We write $\mu_X := \mathbb{E}_X k(X,\cdot) \in \mathcal{H}_k$ which we call the \emph{mean embedding} of the random variable $X$. When $k$ is \emph{characteristic}, the mapping from the set of probability distributions to $\mathcal{H}_k$ given by $\mathbb{P}_X \mapsto \mu_X$ is injective. When $k$ is bounded we can think of $\mu_X$ as the expectation of the $\mathcal{H}_k$-valued random variable $\phi_X(X)$. We write $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$ and remark that $\tilde{k}(x,x') = \langle\phi_X(x)-\tilde{\mu}_X,\phi_X(x')-\tilde{\mu}_X\rangle$ is a kernel with feature map $\tilde{\phi}_X(X) = \phi_X(X) - \tilde{\mu}_X$. We denote by $\tilde{K}$ the Gram matrix with respect to $\tilde{k}$ and call this the \emph{empirically centred Gram matrix}. We note also that $\bar{k}(x,x') = \langle\phi_X(x)-\mu_X,\phi_X(x')-\mu_X\rangle$ is a kernel with feature map $\bar{\phi}_X(X) = \phi_X(X) - \mu_X$. We write $\bar\mu_X = \tilde\mu_X - \mu_X$, the empirical mean embedding with respect to $\bar{k}$. We denote by $\bar{K}$ the Gram matrix with respect to $\bar{k}$ and call this the \emph{population centred Gram matrix}. 
+
+If $k$ and $l$ are kernels on $\mathcal{X}$ and $\mathcal{Y}$, then $k\otimes l$ is a kernel on $\mathcal{X}\times \mathcal{Y}$. We write $C_{XY} = \mathbb{E}_{XY}\bar{\phi}_X(X)\otimes\bar{\phi}_Y(Y)$ called the \emph{population centred covariance operator} and define $\bar{C}_{XY} = \frac{1}{n}\sum_{i=1}^n\bar{\phi}_X(X_i)\otimes\bar{\phi}_Y(Y_i)$ to be its empirical counterpart. Note that we can consider $C_{XY}$ to be an operator $\mathcal{H}_l \longrightarrow \mathcal{H}_k$, or as an element of the Hilbert space $\mathcal{H}_{k\otimes l}$. In the latter case we consider it to be the difference of the two mean embeddings $C_{XY}=\mu_{XY} - \mu_{X}\otimes\mu_{Y}$
 
 \subsection{Lancaster}
 
-The above ideas of injectively embedding measures into a Hilbert space can be extended from the two variable case to consider properties of three or more variables. The Lancaster statistic on the triple of variables $(X,Y,Z)$ is defined as the signed measure $\Delta_LP = \mathbb{P}_{XYZ} - \mathbb{P}_{XY}\mathbb{P}_{Z} - \mathbb{P}_{XZ}\mathbb{P}_{Y} - \mathbb{P}_{X}\mathbb{P}_{YZ} + 2\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}$. It is straightforward to show that if any variable is independent of the other two (equivalently, if the joint distribution $\mathbb{P}_{XYZ}$ factorises into a product of marginals in any way), then $\Delta_LP = 0$. That is, writing $\mathcal{H}_X = \{X \independent (Y,Z)\}$ and similar for $\mathcal{H}_Y$ and $\mathcal{H}_Z$, we have that
+The idea of injectively embedding measures into a Hilbert space can be exploited to design statistical tests to test certain properties of the distributions from which observations are drawn. For example, HSIC is an independence test for two random variables with test statistic $\|\tilde\mu_{\mathbb{P}_{XY}} - \tilde\mu_{\mathbb{P}_X\mathbb{P}_Y}\|^2$, using the fact that $\mu_{\mathbb{P}_{XY}} = \mu_{\mathbb{P}_X\mathbb{P}_Y}$ iff $\mathbb{P}_{XY}=\mathbb{P}_X\mathbb{P}_{Y}$ to understand the asymptotic properties of the statistic under the null and alternative hypotheses.
+
+The Lancaster test is an extension from the two variable case to consider properties of three variables. The Lancaster statistic on the triple of variables $(X,Y,Z)$ is defined as the signed measure $\Delta_LP = \mathbb{P}_{XYZ} - \mathbb{P}_{XY}\mathbb{P}_{Z} - \mathbb{P}_{XZ}\mathbb{P}_{Y} - \mathbb{P}_{X}\mathbb{P}_{YZ} + 2\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}$. It is straightforward to show that if any variable is independent of the other two (equivalently, if the joint distribution $\mathbb{P}_{XYZ}$ factorises into a product of marginals in any way), then $\Delta_LP = 0$. That is, writing $\mathcal{H}_X = \{X \independent (Y,Z)\}$ and similar for $\mathcal{H}_Y$ and $\mathcal{H}_Z$, we have that
 
 \[\mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z \Rightarrow \Delta_LP=0 \]
 
@@ -141,9 +149,12 @@ Given a finite sample $(X_i,Y_i,Z_i)_{i=1}^n$, the mean embedding of the Lancast
 $\mathcal{H}_0: \mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z $\\
 $\mathcal{H}_1: \mathbb{P}_{XYZ}$ does not factorise in any way
 
-Given kernels $k,l$ and $m$ on $\mathcal{X},\mathcal{Y}$ and $\mathcal{Z}$ respectively, $k\otimes l \otimes m$ defines a kernel on $\mathcal{X}\times \mathcal{Y} \times \mathcal{Z}$. We write $K, L$ and $M$ to denote the gram matrices of each kernel with respect to the observations, where for example $K_{ij} = k(X_i,X_j)$. We further write $\tilde{K}, \tilde{L}$ and $\tilde{M}$ for the empirically centred gram matrices, where for example $\tilde{K}_{ij} = k(X_i,X_j) - \frac{1}{n}\sum_ik(X_i,X_j)  - \frac{1}{n}\sum_jk(X_i,X_j) + \frac{1}{n^2}\sum_{ij}k(X_i,X_j)$. We can then write [Lancaster]
+By [Lancaster], we can write  
+\[\|\Delta_L\hat{P}\|_{k\otimes l \otimes m}^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}\]
 
-$\|\Delta_L\hat{P}\|_{k\otimes l \otimes m}^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}$
+%Given kernels $k,l$ and $m$ on $\mathcal{X},\mathcal{Y}$ and $\mathcal{Z}$ respectively, $k\otimes l \otimes m$ defines a kernel on $\mathcal{X}\times \mathcal{Y} \times \mathcal{Z}$. We write $K, L$ and $M$ to denote the gram matrices of each kernel with respect to the observations, where for example $K_{ij} = k(X_i,X_j)$. We further write $\tilde{K}, \tilde{L}$ and $\tilde{M}$ for the empirically centred gram matrices, where for example $\tilde{K}_{ij} = k(X_i,X_j) - \frac{1}{n}\sum_ik(X_i,X_j)  - \frac{1}{n}\sum_jk(X_i,X_j) + \frac{1}{n^2}\sum_{ij}k(X_i,X_j)$. We can then write [Lancaster]
+
+
 
 where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$.
 
@@ -152,26 +163,16 @@ The next part of the statistical test is to find threshold values of the statist
 \subsection{Time series}
 In this paper we are extending the existing Lancaster test from the \emph{iid} case to a case in which our observations are drawn from a random process. There are various formalisations of memory or 'mixing' of a random process; of relevance to this paper are the following two:
 
-\subsubsection{$\tau$-mixing}
 \begin{definition}
 A process $(X_t)_{t}$ is \emph{$\tau$-mixing} if $\tau(r) \longrightarrow 0$ as $r\longrightarrow \infty$, where
-
 \[\tau(r) = \sup_{l\in \mathbb{N}} \frac{1}{l} \sup_{r\leq i_1 \leq \ldots \leq i_l} \tau(\mathcal{F}_0,(X_{i_1}, \ldots, X_{i_l})) \longrightarrow 0\]
-
 where
-
 \[ \tau(\mathcal{M},X) = \mathbb{E} (\sup_{g \in \Lambda} | \int g(t) \mathbb{P}_{X|\mathcal{M}}(dt) -  \int g(t) \mathbb{P}_{X}(dt) |)\]
-
 \end{definition}
-
-\subsubsection{$\beta$-mixing}
-
 
 \begin{definition}
 A process $(X_t)_{t}$ is \emph{$\beta$-mixing} (also known as \emph{absolutely regular}) if $\beta(m) \longrightarrow 0$ as $m\longrightarrow \infty$, where
-
 \[ \beta(m) = \frac{1}{2} \sup_n \sup \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}(A_i \cap B_j) - \mathbb{P}(A_i)\mathbb{P}(B_j)| \]
-
 where the second supremum is taken  over all finite partitions $\{A_1,\ldots, A_I \}$ and  $\{B_1,\ldots, B_J\}$ of the sample space such that $A_i \in \mathcal{H}_1^n$ and $B_j \in \mathcal{H}_{n+m}^\infty$ and $\mathcal{H}_b^c = \sigma(X_b,X_{b+1},\ldots,X_{c})$
 \end{definition}
 
@@ -188,36 +189,22 @@ A V-statistic of a k-argument, symmetric function $f$ given $iid$ observations $
 
 In this case, $V(f,\mathcal{S})$ is a biased (but asymptotically unbiased) estimator of $\mathbb{E}_{S_{i_1},\ldots S_{i_k} \sim \mathbb{P}}[f(S_{i_1},\ldots,S_{i_k})]$
 
-In this paper we are only concerned with V-statistics for which $k=2$. We call $nV(f,\mathcal{S})$ \emph{normalised}. We call $f$ the \emph{core} of $V$ and we say that $f$ is \emph{degenerate} if, for any $s_1$, $\mathbb{E}_{S_2 \sim \mathbb{P}}[f(s_1,S_2)] = 0$ in which case we say that $V$ is a \emph{degenerate V-statistic} 
+In this paper we are only concerned with V-statistics for which $k=2$. We call $nV(f,\mathcal{S})$ \emph{normalised}. We call $f$ the \emph{core} of $V$ and we say that $f$ is \emph{degenerate} if, for any $s_1$, $\mathbb{E}_{S_2 \sim \mathbb{P}}[f(s_1,S_2)] = 0$, in which case we say that $V$ is a \emph{degenerate V-statistic}.
 
-Of relevance to us is the fact that many kernel test statistics can be viewed as normalised V-statistics which, under the null hypothesis, are degenerate. If moreover the test statistics diverge under the alternative hypothesis, the test would be consistent. Our main result is to prove that the Lancaster statistic is asymptotically a degenerate V-statistic.
+Many kernel test statistics can be viewed as normalised V-statistics which, under the null hypothesis, are degenerate. If moreover the test statistics diverge under the alternative hypothesis, the test would be consistent. Our main result is to prove that, under the null hypothesis, the Lancaster statistic is asymptotically a degenerate V-statistic.
 
 \subsection{Wild Bootstrap}
 
-In many frequentist statistical tests, estimates of the test statistic threshold required to achieve a given Type I error ***ie p-value*** are obtained through a bootstrap resampling method. In the case of the Lancaster and HSIC tests with \emph{iid} observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{iid} assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any backward dependence. 
+In many frequentist statistical tests, estimates of the test statistic threshold required to achieve a given Type I error are obtained through a bootstrap resampling method. In the case of the Lancaster and HSIC tests with \emph{iid} observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{iid} assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any backward dependence. 
 
-When our test statistics are normalised V-statistics which are degenerate under the null hypothesis, the Wild Bootstrap is a method that comes to our rescue. Rather than directly providing a way to generate new samples, it directly resamples the test statistic subject to certain conditions, which can be categorised as concerning: (1) Appropriate $\tau$-mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(f,\mathcal{S}_n)$, then [Wild Bootstrap] tell us that a random matrix $W$ can be drawn simply such that the bootstrapped statistic $nV_b(f,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}f(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(f,\mathcal{S})$ that is of crucial importance to this paper is that $f$ must be a degenerate core.
+If our test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the wild bootstrap is a method to directly resample the test statistic under the null hypothesis (in contrast to other methods that first generate a new simulated dataset and then compute the test statistic on this dataset). These conditions can be categorised as concerning: (1) Appropriate $\tau$-mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(f,\mathcal{S}_n)$, then [Wild Bootstrap] tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic $nV_b(f,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}f(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(f,\mathcal{S})$ that is of crucial importance to this paper is that $f$ must be a degenerate core.
 
 
 
 
 \subsection{Hilbert spaced random variable CLT}
 
-Should we actually state the theorem here? We should include the proof that our situation satisfies the conditions of the theorem regardless though, but maybe in the supplementary section.
-
-
-\begin{itemize}
-\item Kernel mean embedding
-\item Lancaster
-\item Time series
-\begin{itemize}
-\item $\tau$-mixing
-\item $\beta$-mixing
-\item Lemma that sub-processes of $\beta$-mixing processes are $\beta$-mixing
-\end{itemize}
-\item V-statistics
-\item Hilbert space valued random variable central limit theorem
-\end{itemize} 
+In this paper we will exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables, the conditions required of the processes may be weakened.
 
 \section{Lancaster Interaction for Random Processes}
 
@@ -270,16 +257,63 @@ If $\mathcal{H}_0$ is true, then so must one of the components. WLOG assume that
 Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall, is therefore more conservative than necessary and thus loses on test power compared to the `correction' proposed here.
 
 \section{Experiments}
+
+\begin{algorithm}[tb]
+   \caption{Test $\mathcal{H}_Z$ with Wild Bootstrap}
+   \label{alg:Lancaster}
+\begin{algorithmic}
+   \STATE {\bfseries Input:} $\tilde{K}$, $\tilde{L}$, $\tilde{M}$, each size $n\times n$, $N$= number of bootstraps, $\alpha=$ p-value threshold
+   \STATE $\|\Delta_L\hat{P}\|^2 = \frac{1}{n}\left(\widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)_{++}$
+   \STATE samples = zeros(1,N)
+   \FOR{$i=1$ {\bfseries to} $N$}
+   \STATE draw random matrix W
+   \STATE samples[$i$] = $\frac{1}{n}\left(W^\intercal\left( \widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)W\right) _{++}$
+   \ENDFOR
+   \IF{sum($\|\Delta_L\hat{P}\|^2 >$ samples)$>\frac{\alpha}{N}$}
+   \STATE Reject $\mathcal{H}_Z$
+   \ELSE
+   \STATE Do not reject $\mathcal{H}_Z$
+   \ENDIF
+\end{algorithmic}
+\end{algorithm}
+
 \subsection{Artificial data}
+\subsubsection{Weak pairwise interaction, strong joint interaction}
+Example 2 in thesis. 3-way HSIC in principle should be able to detect the interaction, but Lancaster is much more powerful. See Figure \ref{weak-pairwise-strong-joint}.
+
+\begin{figure}[ht]
+\vskip 0.2in
+\begin{center}
+\centerline{\includegraphics[scale=0.6]{ICML_Figure1.pdf}}
+\caption{Artificial data section 1. Look how much better Lancaster does than HSIC!}
+\label{weak-pairwise-strong-joint}
+\end{center}
+\vskip -0.2in
+\end{figure} 
+
+\subsubsection{False positive rates}
+Example 4 in thesis. Comparison of wild bootstrap to permutation bootstrap
+
+
+\begin{figure}[ht]
+\vskip 0.2in
+\begin{center}
+\centerline{\includegraphics[scale=0.6]{ICML_figure2.pdf}}
+\caption{Artificial data section 2. Look how much better the wild bootstrap does than permutation!}
+\label{wildBootstrap_is_necessary}
+\end{center}
+\vskip -0.2in
+\end{figure} 
+
+
+
 \subsection{Real data}
 Maybe check this out for some data? \url{https://stat.duke.edu/~mw/ts_data_sets.html}
 
 \section{Proofs}
 
+\begin{claimproof}(Lemma \ref{lemma:hilbertCLT})
 
-Proof of Lemma \ref{lemma:hilbertCLT}:
-
-\begin{claimproof}
 We exploit Theorem 1.1 from \cite{dehling2015bootstrap}. Using the language of this paper, $\bar{\phi}(X_i)$ is a 1-approximating functional of $(X_i)_i$, following straightforwardly from the definition of 1-approximating functionals given. 
 
 Since our kernels are bounded, $\exists C: \enspace \|\bar{\phi}(X_i)\| < C $ and so \[\mathbb{E}\|\bar{\phi}(X_1)\|^{2+\delta} <C^{2+\delta}< \infty \enspace \forall \delta>0\]
@@ -290,18 +324,13 @@ We can take $f_m = \bar{\phi}(X_0)\enspace \forall m$ and so achieve $a_m= 0 \en
 By assumption on the time series, condition (3) is satisfied.
 
 Thus, by Theorem 1.1 in \cite{dehling2015bootstrap}
-
-\[\sqrt{n} (\hat{\mu}_{X} - \mu_{X}) \widesim[2]{n\longrightarrow\infty} N\]
-
-
+\[\sqrt{n} (\tilde{\mu}_{X} - \mu_{X}) \widesim[2]{n\longrightarrow\infty} N\]
 where $N$ is a Hilbert space valued Gaussian random variable. Thus 
-\[\|\hat{\mu}_{X} - \mu_{X}\| = O(\frac{1}{\sqrt{n}})\]
-
+\[\|\tilde{\mu}_{X} - \mu_{X}\| = O(\frac{1}{\sqrt{n}})\]
 \end{claimproof}
 
 
-Proof of Theorem \ref{theorem:lancasterAsymptote}
-\begin{claimproof}
+\begin{claimproof}(Theorem \ref{theorem:lancasterAsymptote})
 
 By writing 
 \begin{align*}
@@ -331,8 +360,7 @@ n\|\Delta_L&\hat{P}\|^2 \\&=
 \frac{4}{n^5}\bar{K}_{++} \bar{L}_{++} \bar{M}_{++} \\
 \end{align*}
 
-Each of these terms can be expressed as inner products between empirical estimates of population centred covariance operators and tensor products of mean embeddings, and rewriting them as such gives
-
+Each of these terms can be expressed as inner products between empirical estimates of population centred covariance operators and tensor products of mean embeddings. Rewriting them as such yields:
 \begin{align*}
 n\|\Delta_L \hat{P}\|^2 &= n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\& -
 2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\& -
@@ -350,7 +378,6 @@ n\langle \bar{C}_{YZ}\otimes\bar{\mu}_X,\bar{C}_{YZ}\otimes\bar{\mu}_X \rangle \
 4n\langle \bar{C}_{YZ}\otimes \bar{\mu}_X,\bar{\mu}_Y \otimes\bar{\mu}_Z \otimes \bar{\mu}_X \rangle \\& +
 4n\langle \bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z,\bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z \rangle \\
 \end{align*}
-
 By assumption, $\mathbb{P}_{XYZ} =\mathbb{P}_{XY}\mathbb{P}_{Z}$ and thus the expectation operator also factorises similarly. As a consequence, 
 \begin{align*}
 C_{XYZ} &= \mathbb{E}_{XYZ}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)] \\
@@ -361,7 +388,7 @@ Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respectiv
 
 This can be used to show that 
 \begin{align*}
-n\|\Delta_L \hat{P}\|^2 & \longrightarrow n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
+n\|\Delta_L& \hat{P}\|^2  \longrightarrow n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
 2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle -
 2n\langle \bar{C}_{XZY},\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\ &=
 \frac{1}{n}((\bar{K}\circ \bar{L}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\bar{K}\circ \bar{L})\bar{M})_{++} + \frac{1}{n^3}(\bar{K}\circ \bar{L})_{++}\bar{M}_{++}
@@ -389,8 +416,7 @@ To show that this is a normalised degenerate V-statistic observe that, writing $
 &\frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}= \frac{1}{n}\sum_{ij} h(S_i,S_j)
 \end{align*}
 
-And thus it is a normalised V-statistic. To show that it is degenerate, fix any $s_i$ and observe that
-$\mathbb{E}_{S_j}h(s_i,S_j)=0$
+And thus it is a normalised V-statistic. To show that it is degenerate, fix any $s_i$ and observe that $\mathbb{E}_{S_j}h(s_i,S_j)=0$ since $\mathbb{E}_{XYZ} =\mathbb{E}_{XY}\mathbb{E}_{Z}$.
 
 \end{claimproof}
 
