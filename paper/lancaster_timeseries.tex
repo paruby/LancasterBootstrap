@@ -86,7 +86,9 @@
 
 \begin{abstract} 
 
-A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{iid} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. That the wild bootstrap can be applied to the Lancaster statistic was proved in a novel way, which may provide a simpler framework for proving similar properties of other kernel statistics than previously existed.  It is also shown that the multiple testing correction proposed in [Lancaster] is too conservative, and a new correction is proposed that increases test power.
+A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{iid} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we show that the Lancaster statistic satisfies the conditions required to use the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
+
+(An additional minor contribution is that it is also shown that the multiple testing correction proposed in [Lancaster] is too conservative, and a new correction is proposed that increases test power)
 \end{abstract} 
 
 %Explain what this is all about, and the main contributions:
@@ -102,21 +104,27 @@ A wild bootstrap method is applied to the Lancaster three-variable interaction m
 \section{Introduction}
 \label{introduction}
 
-\begin{itemize}
-\item Describe three variable interaction. It is particularly useful for cases in which any pairwise interaction is weak, but that the three variables interact strongly together.
-\item Test consists of two parts - calculating the test statistic, and bootstrapping the statistic to sample from the null in order to calculate the p-value threshold.
-\item When using time series, the difficult part is the bootstrapping because shuffling the indices breaks the temporal dependence structure.
-\item In [Leucht], they give a method for bootstrapping a certain class of statistics.
-\item The main contributions of this paper are the folllowing:
-\begin{itemize}
-\item To show that the Lancaster test statistic is such a statistic
-\item This is done using a new style of technique which in particular gives a significantly simpler proof that HSIC is also such a statistic (and thus simplifies the proofs used in [HSIC+time series])
-\item To show that the multiple testing corrections used in [Lancaster] are too conservative, and therefore that we can improve test power by using a more relaxed correction.
-\end{itemize}
-\end{itemize}
+Nonparametric testing of independence or interaction between random variables is a core staple of machine learning and statistics. Many existing methods rely on the assumption that the observed data are drawn \emph{iid}, which for many applications is unrealistic and restrictive. Recent work has begun to extend statistical tests exploiting the theory of Reproducing Kernel Hilbert Spaces (RKHSs) from the \emph{iid} case to the time series case. Of course, these tests also rely on rather restrictive assumptions on the mixing properties of the processes from which the observations are drawn; nonetheless they are a significant relaxation on the \emph{iid} assumption and are a step towards methods capable of handling more general forms of time-dependent data. 
 
+The Lancaster interaction is a test statistic capable of detecting dependence between three random variables. The null hypothesis for this test is that the joint distribution of the three variables factorises in some way. In the \emph{iid} case, thresholds for the test statistic are found by using a permutation bootstrap technique: this amounts to shuffling the indices of one or more of the variables and recalculating the test statistic on this bootstrapped data set, providing a valid sample of test statistic under the null hypothesis. When our samples exhibit temporal dependence, shuffling the time indices destroys this dependence and so does not provide a valid sample. The wild bootstrap is a method that has been proposed to correctly resample from the null distribution, subject to certain conditions on the test statistic and the processes from which the observations have been drawn.
 
-This work combines the works of [HSIC + time series] and [Lancaster interaction] to give a non-parametric test for three variable interactions in which the samples are drawn from random processes.
+In this paper we show that the Lancaster interaction test statistic satisfies the conditions required to apply the wild bootstrap procedure; moreover, we provide a proof that is simpler than existing techniques, and may be adapted to prove similar properties of other kernel statistics. In particular, the proof of a similar property for the HSIC test statistic given in [Kacper] can be substantially simplified, using a version of the Central Limit Theorem for Hilbert space valued random variables instead of the Hoeffding decomposition and theory of U- and V-statistics.
+%
+%\begin{itemize}
+%\item Describe three variable interaction. It is particularly useful for cases in which any pairwise interaction is weak, but that the three variables interact strongly together.
+%\item Test consists of two parts - calculating the test statistic, and bootstrapping the statistic to sample from the null in order to calculate the p-value threshold.
+%\item When using time series, the difficult part is the bootstrapping because shuffling the indices breaks the temporal dependence structure.
+%\item In [Leucht], they give a method for bootstrapping a certain class of statistics.
+%\item The main contributions of this paper are the folllowing:
+%\begin{itemize}
+%\item To show that the Lancaster test statistic is such a statistic
+%\item This is done using a new style of technique which in particular gives a significantly simpler proof that HSIC is also such a statistic (and thus simplifies the proofs used in [HSIC+time series])
+%\item To show that the multiple testing corrections used in [Lancaster] are too conservative, and therefore that we can improve test power by using a more relaxed correction.
+%\end{itemize}
+%\end{itemize}
+%
+%
+%This work combines the works of [HSIC + time series] and [Lancaster interaction] to give a non-parametric test for three variable interactions in which the samples are drawn from random processes.
 
 \section{Background} 
 
@@ -158,7 +166,7 @@ By [Lancaster], we can write
 
 where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$.
 
-The next part of the statistical test is to find threshold values of the statistic beyond which we would reject the null hypothesis. In the case that the observations are drawn \emph{iid}, this can be done using a permutation bootstrap method. Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately. We reject the composite null hypothesis if and only if we reject all three of the components. For more information on the details of the bootstrapping method, see [Lancaster].
+The next part of the statistical test is to find threshold values of the statistic beyond which we would reject the null hypothesis. Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components. In the case that the observations are drawn \emph{iid}, the data can be resampled using permutation bootstrap method. For example, under $\mathcal{H}_X$, the bootstrapped dataset $\{X_{\pi(i)},Y_i,Z_i \}_{i=1}^n$ has the same likelihood as the original dataset, and so this can be used to generate a valid resample of the test statistic under $\mathcal{H}_X$. For more information on the details of the bootstrapping method, see [Lancaster].
 
 \subsection{Time series}
 In this paper we are extending the existing Lancaster test from the \emph{iid} case to a case in which our observations are drawn from a random process. There are various formalisations of memory or 'mixing' of a random process; of relevance to this paper are the following two:
@@ -215,7 +223,7 @@ In this section we construct the Lancaster Interaction test for random processes
 The approach taken in this paper can also be applied to the HSIC test statistic to give a simpler proof that the Wild Bootstrap can be used for HSIC+timeseries than that given in [Kacper].
 
 \begin{lemma}\label{lemma:hilbertCLT}
-Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ and that $k$ is a bounded kernel on $\mathcal{X}$. Then $\|\hat\mu_X - \mu_X\|_k = O(n^{-\frac{1}{2}})$
+Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta > 0$ and that $k$ is a bounded kernel on $\mathcal{X}$. Then $\|\hat\mu_X - \mu_X\|_k = O(n^{-\frac{1}{2}})$
 
 \end{lemma}
 
@@ -225,9 +233,9 @@ Suppose that $\mathbb{P}_{XYZ} = \mathbb{P}_{XY}\mathbb{P}_Z$ and that $(X_i,Y_i
 \begin{itemize}
 \item $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$
 \item $\tau$-mixing with coefficients $\tau(m)$ satisfying $\sum_{m=1}^\infty m^2 \sqrt{\tau(m)} < \infty$
-\end{itemize} . Then, as $n\longrightarrow \infty$, 
+\end{itemize}  Then, as $n\longrightarrow \infty$, 
 
-\[ n\| \Delta_L\hat{P} \|^2 \longrightarrow \frac{1}{n}\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right) _{++} \]
+\[ n\| \Delta_L\hat{P} \|^2 \xrightarrow{O(n^{-\frac{1}{2}})} \frac{1}{n}\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right) _{++} \]
 
 and this is a normalised degenerate V-statistic.
 \end{theorem}
@@ -242,7 +250,7 @@ has the same distribution as $ n\| \Delta_L\hat{P} \|^2$.
 
 We can therefore use this to generate samples of the test statistic $ n\| \Delta_L\hat{P} \|^2$ under the null hypothesis $\mathcal{H}_Z$. Using these samples we can select a threshold value of the test statistic such that the Type I error is bounded by whatever $\alpha$ we choose. By symmetry, we can use a similar procedure to test $\mathcal{H}_X$ and $\mathcal{H}_Y$.
 
-\section{Multiple testing correction}
+\subsection*{Multiple testing correction}
 In the Lancaster test, we use a composite null hypothesis which requires us to test each of the three hypotheses $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ separately. We reject the null hypothesis $\mathcal{H}_0$ if and only if we reject all three of the components. In [Lancaster], it is suggested that the Holm-Bonferroni correction be used to account for multiple testing. We show here that more relaxed conditions on the p-values can be used while still bounding the Type I error, thus increasing test power.
 
 Denote by $\mathcal{A}_*$ the event that $\mathcal{H}_*$ is rejected. Then
@@ -254,9 +262,14 @@ Denote by $\mathcal{A}_*$ the event that $\mathcal{H}_*$ is rejected. Then
 
 If $\mathcal{H}_0$ is true, then so must one of the components. WLOG assume that $\mathcal{H}_X$ is true. If we use significance levels of $\alpha$ in each test individually then $\mathbb{P}(\mathcal{A}_X) \leq \alpha$ and thus $\mathbb{P}(\mathcal{A}_0) \leq \alpha$.
 
-Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall, is therefore more conservative than necessary and thus loses on test power compared to the `correction' proposed here.
+Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall, is therefore more conservative than necessary and thus loses on test power compared to the `simple correction' proposed here.
 
 \section{Experiments}
+
+The Lancaster test described above amounts to a method to test each of the sub-hypotheses $\mathcal{H}_X, \mathcal{H}_Y, \mathcal{H}_Z$. Rather than using the Lancaster test statistic with wild bootstrap to test each of these, we could instead use HSIC (it has been previously proved in [Kacper wb], but see supplementary material for a simpler proof that the wild bootstrap can be applied to HSIC). For example, by considering the pair of variables $(X,Y)$ and $Z$ with kernels $k\otimes l$ and $m$ respectively, HSIC can be used to test $\mathcal{H}_Z$. Similar grouping of the variables can be used to test $\mathcal{H}_X$ and $\mathcal{H}_Y$. Applying the same multiple testing correction as in the Lancaster test, we derive an alternative test of dependence between three variables. We refer to this HSIC based procedure as \emph{3-way HSIC}.
+
+In the case of \emph{iid} observations, it was shown in [Lancaster] that Lancaster statistical test is more sensitive to dependence between three random variables than the above HSIC-based test when pairwise interaction is weak but joint interaction is strong. In this section, we demonstrate that the same is true in the time series case on synthetic data.
+
 
 \begin{algorithm}[tb]
    \caption{Test $\mathcal{H}_Z$ with Wild Bootstrap}
@@ -266,7 +279,7 @@ Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less
    \STATE $\|\Delta_L\hat{P}\|^2 = \frac{1}{n}\left(\widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)_{++}$
    \STATE samples = zeros(1,N)
    \FOR{$i=1$ {\bfseries to} $N$}
-   \STATE draw random matrix W
+   \STATE Draw random matrix W according to Wild Bootstrap
    \STATE samples[$i$] = $\frac{1}{n}\left(W^\intercal\left( \widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)W\right) _{++}$
    \ENDFOR
    \IF{sum($\|\Delta_L\hat{P}\|^2 >$ samples)$>\frac{\alpha}{N}$}
@@ -277,29 +290,64 @@ Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Artificial data}
-\subsubsection{Weak pairwise interaction, strong joint interaction}
+\subsection{Weak pairwise interaction, strong joint interaction}\label{experiment1}
+
+
 Example 2 in thesis. 3-way HSIC in principle should be able to detect the interaction, but Lancaster is much more powerful. See Figure \ref{weak-pairwise-strong-joint}.
+
+Synthetic data were generated from autoregressive processes $X$, $Y$ and $Z$ according to:
+
+\begin{align*}
+X_t &= \frac{1}{2}X_{t-1} + \epsilon_t\\
+Y_t &= \frac{1}{2}Y_{t-1} + \eta_t\\
+Z_t &= \frac{1}{2}Z_{t-1} + d |\theta_t|\text{sign}(X_t Y_t) + \zeta_t\\
+\end{align*}
+
+where $X_0, Y_0, Z_0, \epsilon_t, \eta_t, \theta_t$ and $\zeta_t$ are \emph{iid} $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $(X_t,Y_t)_t$.
+
+Data were generated according to this definition with varying values for the dependence coefficient. For each value of the dependence coefficient, 500 datasets were generated, each consisting of 2000 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
+
+Observe that the random variables are pairwise independent but jointly dependent when considered together. Indeed, $X$ and $Y$ are independent, and $Z$ is independent of $X$ and $Y$ when considered separately since the marginal distributions of $X$ and $Y$ are both normal distributions with mean 0 and therefore $\text{sign}(X_t Y_t)$ is either $-1$ or $1$ with equal probability when conditioned upon neither or exactly one of $X_t$ or $Y_t$. When considered jointly, the three variables are dependent as knowledge of both $X$ and $Y$ gives information about the value of $Z$.
+
+In this experiment, all of the tests should be able to detect the dependence and therefore reject the null hypothesis in the limit of infinite data. In the finite data regime, the dependence coefficient affects drastically how hard it is to detect the dependence. The results of this experiment are presented in Figure \ref{weak-pairwise-strong-joint}. Observe that the Lancaster test is much more sensitive to the dependence than the 3-way HSIC test is and achieves very high test power with weak dependence coefficients while 3-way HSIC has very low test power. Observe also that when using the simple multiple testing correction a higher test power is achieved than with the Holm-Bonferroni correction.
+
+As before, Lancaster with the `naive' correction outperforms Lancaster with Holm-Bonferroni.
+
+
 
 \begin{figure}[ht]
 \vskip 0.2in
 \begin{center}
 \centerline{\includegraphics[scale=0.6]{ICML_Figure1.pdf}}
-\caption{Artificial data section 1. Look how much better Lancaster does than HSIC!}
+\caption{Results of experiment in section \ref{experiment1}. Observe that the Lancaster test is much more sensitive to dependence than 3-way HSIC. Note also that the test power is higher when using the simple correction when compared to the Holm-Bonferroni multiple testing correction.}
 \label{weak-pairwise-strong-joint}
 \end{center}
 \vskip -0.2in
 \end{figure} 
 
-\subsubsection{False positive rates}
+\subsection{False positive rates}\label{experiment2}
 Example 4 in thesis. Comparison of wild bootstrap to permutation bootstrap
+
+The purpose of this example is to demonstrate that in the time series case, existing permutation bootstrap methods fail to control the Type I error, while the wild bootstrap does correctly find test statistic thresholds.
+
+Synthetic data were generated from autoregressive processes $X$, $Y$ and $Z$ according to:
+
+\begin{align*}
+X_t &= aX_{t-1} + \epsilon_t\\
+Y_t &= aY_{t-1} + \eta_t\\
+Z_t &= aZ_{t-1} +  \zeta_t\\
+\end{align*}
+
+where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{iid} $\mathcal{N}(0,1)$ random variables and $a$, called the \emph{dependence coefficient}, determines how temporally dependent the processes are. Observe that each process is independent of the others and so the null hypothesis is true.
+
+The Lancaster test was performed using both the Wild Bootstrap and the simple permutation bootstrap (used in the \emph{iid} case) in order to sample from the null distributions of the test statistic. We used a fixed desired false positive rate $\alpha = 0.05$ with sample of size 1000, with 500 experiments run for each value of $a$. Figure \ref{wildBootstrap_is_necessary} shows the false positive rates for these two methods for varying $a$. It shows that as the processes become more dependent, the false positive rate for the permutation method becomes very large, and is not bounded by the fixed $\alpha$, whereas the false positive rate for the Wild Bootstrap method is bounded by $\alpha$.
 
 
 \begin{figure}[ht]
 \vskip 0.2in
 \begin{center}
 \centerline{\includegraphics[scale=0.6]{ICML_figure2.pdf}}
-\caption{Artificial data section 2. Look how much better the wild bootstrap does than permutation!}
+\caption{Results of experiment in section \ref{experiment2}. Whereas the wild bootstrap succeeds in controlling the Type I error across all values of the dependence coefficient, the permutation bootstrap fails to control the Type I error as it does not sample from the correct null distribution as temporal dependence between samples increases.}
 \label{wildBootstrap_is_necessary}
 \end{center}
 \vskip -0.2in
@@ -394,7 +442,7 @@ n\|\Delta_L& \hat{P}\|^2  \longrightarrow n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \
 \frac{1}{n}((\bar{K}\circ \bar{L}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\bar{K}\circ \bar{L})\bar{M})_{++} + \frac{1}{n^3}(\bar{K}\circ \bar{L})_{++}\bar{M}_{++}
 \end{align*}
 
-since all the other terms go to 0 - we show this here for $n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle$; the proofs for the other terms are similar.
+since all the other terms decay at least as quickly as $O(\frac{1}{\sqrt{n}})$ - we show this here for $n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle$; the proofs for the other terms are similar.
 \begin{align*}
 &n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\
 &\leq n \| \bar{\mu}_X\otimes\bar{C}_{YZ}\| \|\bar{C}_{XY}\otimes\bar{\mu}_Z \| \\
@@ -409,7 +457,7 @@ By treating $\bar{k}\otimes\bar{l}$ as a kernel on the single variable $T:=(X,Y)
 n\|\Delta_L \hat{P}\|^2 & \longrightarrow \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\overline{\bar{K}\circ \bar{L}})\bar{M})_{++} + \frac{1}{n^3}(\overline{\bar{K}\circ \bar{L}})_{++}\bar{M}_{++}
 \end{align*}
 
-By rewriting the above expression in terms of the operator $\bar{C}_{TZ}$ and mean embeddings $\mu_T$ and $\mu_Z$, it can be shown by a similar argument to before that the latter two terms of the above expression tend to 0, and thus  $n\|\Delta_L \hat{P}\|^2 \longrightarrow \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}$ as required.
+By rewriting the above expression in terms of the operator $\bar{C}_{TZ}$ and mean embeddings $\mu_T$ and $\mu_Z$, it can be shown by a similar argument to before that the latter two terms of the above expression tend to 0 at least as $O(\frac{1}{n})$, and thus  $n\|\Delta_L \hat{P}\|^2 \xrightarrow{O(\frac{1}{\sqrt{n}})} \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}$ as required.
 
 To show that this is a normalised degenerate V-statistic observe that, writing $S_i=(X_i,Y_i,Z_i)$ and $h(S_i,S_j) = \langle\bar{\phi}(X_i)\otimes\bar{\phi}(Y_i) - C_{XY},\bar{\phi}(X_j)\otimes\bar{\phi}(Y_j) - C_{XY}\rangle\langle\bar{\phi}(Z_i),\bar{\phi}(Z_j)\rangle$, we can write:
 \begin{align*}
