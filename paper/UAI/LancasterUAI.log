@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.7.20)  21 FEB 2016 17:10
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.7.20)  22 FEB 2016 00:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**sample2e.tex
-(./sample2e.tex
+**LancasterUAI.tex
+(./LancasterUAI.tex
 LaTeX2e <2011/06/27>
 Babel <3.9f> and hyphenation patterns for 78 languages loaded.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/article.cls
@@ -319,8 +319,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip60
 )
-(./sample2e.aux)
-\openout1 = `sample2e.aux'.
+(./LancasterUAI.aux)
+\openout1 = `LancasterUAI.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
 LaTeX Font Info:    ... okay on input line 70.
@@ -337,9 +337,11 @@ LaTeX Font Info:    ... okay on input line 70.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 70.
 LaTeX Font Info:    ... okay on input line 70.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 70.
- (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
-) (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+)
+(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count125
 \scratchdimen=\dimen120
@@ -382,9 +384,9 @@ LaTeX Info: Redefining \ref on input line 70.
 LaTeX Info: Redefining \pageref on input line 70.
 LaTeX Info: Redefining \nameref on input line 70.
 
-(./sample2e.out) (./sample2e.out)
+(./LancasterUAI.out) (./LancasterUAI.out)
 \@outlinefile=\write3
-\openout3 = `sample2e.out'.
+\openout3 = `LancasterUAI.out'.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 73.
@@ -522,21 +524,21 @@ Package atveryend Info: Empty hook `BeforeClearDocument' on input line 503.
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 503.
- (./sample2e.aux)
+ (./LancasterUAI.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 503.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 503.
-Package rerunfilecheck Info: File `sample2e.out' has not changed.
+Package rerunfilecheck Info: File `LancasterUAI.out' has not changed.
 (rerunfilecheck)             Checksum: 9E4AFEBEF1D9E915A8691D31832031A8;997.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 503.
  ) 
 Here is how much of TeX's memory you used:
  7037 strings out of 493315
- 99722 string characters out of 6137904
- 211391 words of memory out of 5000000
+ 99774 string characters out of 6137904
+ 210391 words of memory out of 5000000
  10335 multiletter control sequences out of 15000+600000
  21180 words of font info for 57 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 29i,12n,28p,1253b,462s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,12n,28p,1257b,462s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -556,7 +558,7 @@ e/2013/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2013/t
 exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/
 fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type
 1/urw/times/utmri8a.pfb>
-Output written on sample2e.pdf (8 pages, 239573 bytes).
+Output written on LancasterUAI.pdf (8 pages, 239622 bytes).
 PDF statistics:
  237 PDF objects out of 1000 (max. 8388607)
  202 compressed objects within 3 object streams
