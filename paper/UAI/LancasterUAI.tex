@@ -157,7 +157,14 @@ By [Lancaster], we can write
 
 
 
-where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$.
+where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$. For two gram matrices $A$ and $B$, it can be shown that $\left(A\circ\tilde{B}\right)_{++} = \left(\tilde{A}\circ\tilde{B}\right)_{++}$. Thus by considering $\tilde{K}\circ \tilde{L}$ to be the gram matrix of the kernel $\tilde{k}\otimes\tilde{l}$, we can also write
+
+\begin{equation}\label{eqn:lancaster2}
+\|\Delta_L\hat{P}\|_{k\otimes l \otimes m}^2 = \frac{1}{n^2}\left(\widetilde{(\tilde{K}\circ\tilde{L})}\circ\tilde{M}\right)_{++}
+\end{equation}
+
+We can similarly group together either of the other two pairs of Gram matrices and empirically recentre.
+
 
 The next part of the statistical test is to find threshold values of the statistic beyond which we would reject the null hypothesis. Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components. In the case that the observations are drawn \emph{iid}, the data can be resampled using permutation bootstrap method. For example, under $\mathcal{H}_X$, the bootstrapped dataset $\{X_{\pi(i)},Y_i,Z_i \}_{i=1}^n$ can be used to generate a valid resample of the test statistic under $\mathcal{H}_X$. For more information on the details of the bootstrapping method, see [Lancaster].
 
@@ -211,9 +218,9 @@ In this paper we will exploit a Central Limit Theorem for Hilbert space valued r
 
 \section{Lancaster Interaction for Random Processes}
 
-In this section we construct the Lancaster interaction test for random processes. The major difficulty in doing so is showing that, under the null hypothesis, the test statistic is a normalised degenerate V-statistic and therefore the Wild Bootstrap can be used to resample the test statistic and provide consistent thresholds for desired p-values.
+In this section we construct the Lancaster interaction test for random processes. The major difficulty in doing so is showing that, under the null hypothesis, the test statistic is a normalised degenerate V-statistic and therefore the Wild Bootstrap can be used to resample the test statistic and provide thresholds for desired p-values. The procedure for testing is summarised in Algorithm \ref{alg:Lancaster}.
 
-The basic idea of the proof presented here is to rewrite the test statistic as a sum of terms involving population centred gram matrices (as opposed to the empirically centred gram matrices in the presentation of the statistic in \ref{eqn:lancaster}). Under the null hypothesis, one of these terms is a normalised degenerate V-statistic and all of the others decay to $0$ as $n \longrightarrow \infty$. 
+The basic idea of the proof presented in this paper is to rewrite the test statistic as a sum of terms involving population centred gram matrices (as opposed to the empirically centred gram matrices in the presentation of the statistic in equation \ref{eqn:lancaster}). Under the null hypothesis, one of these terms is a normalised degenerate V-statistic and all of the others decay to $0$ as $n \longrightarrow \infty$. 
 
 In contrast, existing proof methods have employed the theory of U- and V-statistics; in particular, the Hoeffding decomposition of the core of a V-statistic as a sum of other cores. This allows the rewriting of the V-statistic as a sum of other V-statistics, which under the null hypothesis decay to 0.
 
@@ -221,10 +228,14 @@ Both approaches amount to the same result, but they tackle the issue of centring
 
 The approach taken in this paper can also be applied to the HSIC test statistic to give a simpler proof that the Wild Bootstrap can be used for HSIC+timeseries than that given in [Kacper].
 
+The following lemma is a consequence of the Central Limit Theorem of [Dehling]. After having written the Lancaster test statistic as a sum of terms involving population centred gram matrices, this lemma will be crucial to showing that the majority of the terms decay to 0.
+
 \begin{lemma}\label{lemma:hilbertCLT}
 Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta > 0$ and that $k$ is a bounded kernel on $\mathcal{X}$. Then $\|\hat\mu_X - \mu_X\|_k = O(n^{-\frac{1}{2}})$
 
 \end{lemma}
+
+The following Theorem gives sufficient conditions for the hypothesis of the Wild Bootstrap to be satisfied.
 
 \begin{theorem}\label{theorem:lancasterAsymptote}
 Suppose that $\mathbb{P}_{XYZ} = \mathbb{P}_{XY}\mathbb{P}_Z$ and that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is both:
@@ -244,7 +255,7 @@ Suppose in addition to the above that $W$ is drawn from a process satisfying the
 
 \[\frac{1}{n}\left(W^\intercal\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right)W\right) _{++}\]
 
-has the same distribution as $ n\| \Delta_L\hat{P} \|^2$. 
+is distributed as $ n\| \Delta_L\hat{P} \|^2$. 
 \end{corollary}
 
 We can therefore use this to generate samples of the test statistic $ n\| \Delta_L\hat{P} \|^2$ under the null hypothesis $\mathcal{H}_Z$. Using these samples we can select a threshold value of the test statistic such that the Type I error is bounded by whatever $\alpha$ we choose. By symmetry, we can use a similar procedure to test $\mathcal{H}_X$ and $\mathcal{H}_Y$.
@@ -268,6 +279,7 @@ Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less
 The Lancaster test described above amounts to a method to test each of the sub-hypotheses $\mathcal{H}_X, \mathcal{H}_Y, \mathcal{H}_Z$. Rather than using the Lancaster test statistic with wild bootstrap to test each of these, we could instead use HSIC (it has been previously proved in [Kacper wb], but see supplementary material for a simpler proof that the wild bootstrap can be applied to HSIC). For example, by considering the pair of variables $(X,Y)$ and $Z$ with kernels $k\otimes l$ and $m$ respectively, HSIC can be used to test $\mathcal{H}_Z$. Similar grouping of the variables can be used to test $\mathcal{H}_X$ and $\mathcal{H}_Y$. Applying the same multiple testing correction as in the Lancaster test, we derive an alternative test of dependence between three variables. We refer to this HSIC based procedure as \emph{3-way HSIC}.
 
 In the case of \emph{iid} observations, it was shown in [Lancaster] that Lancaster statistical test is more sensitive to dependence between three random variables than the above HSIC-based test when pairwise interaction is weak but joint interaction is strong. In this section, we demonstrate that the same is true in the time series case on synthetic data.
+
 
 
 \begin{algorithm}[tb]
@@ -357,6 +369,10 @@ The Lancaster test was performed using both the Wild Bootstrap and the simple pe
 \subsection{Real data}
 Maybe check this out for some data? \url{https://stat.duke.edu/~mw/ts_data_sets.html}
 
+\section{Discussion}
+
+Talk about relative merits of using HSIC and Lancaster. Mention the fact that the two methods that were compared in the experiments section were very similar; they differ only in the fact that in HSIC the initial gram matrices are not centred before the Hadamard product is centred. Yet dispite this small change, the statistic has rather different properties.
+
 \section{Proofs}
 
 \begin{claimproof}(Lemma \ref{lemma:hilbertCLT})
@@ -379,12 +395,18 @@ where $N$ is a Hilbert space valued Gaussian random variable. Thus
 
 \begin{claimproof}(Theorem \ref{theorem:lancasterAsymptote})
 
-By writing 
+By observing that
+\begin{align*}
+& \phi_X(X_i)- \frac{1}{n}\sum_k\phi_X(X_k) \\
+= &  (\phi_X(X_i) - \mu_X) - \frac{1}{n}\sum_k (\phi_X(X_k) - \mu_X)\\
+= &\bar\phi_X(X_i)- \frac{1}{n}\sum_k\bar\phi_X(X_k)
+\end{align*}
+we can therefore expand $\tilde{K}$ in terms of $\bar{K}$ as
 \begin{align*}
 &\tilde{K}_{ij} \\ 
 &= \langle\phi_X(X_i)- \frac{1}{n}\sum_k\phi_X(X_k),\phi_X(X_j) - \frac{1}{n}\sum_k\phi_X(X_k)\rangle \\
 &= \langle\bar\phi_X(X_i)- \frac{1}{n}\sum_k\bar\phi_X(X_k),\bar\phi_X(X_j) - \frac{1}{n}\sum_k\bar\phi_X(X_k)\rangle \\
-&= \bar{K}_{ij} - \frac{1}{n}\sum_k\bar{K}_{ik} - \frac{1}{n}\sum_k\bar{K}_{jk} + \frac{1}{n^2}\sum_k\bar{K}_{kl}
+&= \bar{K}_{ij} - \frac{1}{n}\sum_k\bar{K}_{ik} - \frac{1}{n}\sum_k\bar{K}_{jk} + \frac{1}{n^2}\sum_{kl}\bar{K}_{kl}
 \end{align*}
 and expanding $\tilde{L}$ and $\tilde{M}$ in a similar way, we can rewrite the Lancaster test statistic as
 
@@ -431,17 +453,17 @@ C_{XYZ} &= \mathbb{E}_{XYZ}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)\otimes\bar\phi_Z(Z
 & = \mathbb{E}_{XY}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)]\otimes\mathbb{E}_{Z}\bar\phi_Z(Z)=0
 \end{align*}
 
-Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respective Hilbert spaces. Lemma \ref{lemma:beta} tells us that each subprocess of $(X_i,Y_i,Z_i)$ satisfies the same $\beta$-mixing conditions as $(X_i,Y_i,Z_i)$, thus by applying Lemma \ref{lemma:hilbertCLT} to each of the covariance operators at the top of this paragraph we see that each of $\|\bar{C}_{XZY}\|$, $\|\bar{C}_{YZX}\|$, $\|\bar{C}_{XZ}\|$, $\|\bar{C}_{YZ}\|$, $\|\bar{\mu}_X\|$, $\|\bar{\mu}_Y\|$, $\|\bar{\mu}_Z\| = O\left(\frac{1}{\sqrt{n}}\right)$
+Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respective Hilbert spaces. Lemma \ref{lemma:beta} tells us that each subprocess of $(X_i,Y_i,Z_i)$ satisfies the same $\beta$-mixing conditions as $(X_i,Y_i,Z_i)$, thus by applying Lemma \ref{lemma:hilbertCLT} it follows that $\|\bar{C}_{XZY}\|$, $\|\bar{C}_{YZX}\|$, $\|\bar{C}_{XZ}\|$, $\|\bar{C}_{YZ}\|$, $\|\bar{\mu}_X\|$, $\|\bar{\mu}_Y\|$, $\|\bar{\mu}_Z\| = O\left(\frac{1}{\sqrt{n}}\right)$
 
-This can be used to show that 
+It thus follows that
 \begin{align*}
-n\|\Delta_L& \hat{P}\|^2  \longrightarrow n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
+n\|\Delta_L& \hat{P}\|^2  \xrightarrow{O(n^{-\frac{1}{2}})} n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
 2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle -
 2n\langle \bar{C}_{XZY},\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\ &=
 \frac{1}{n}((\bar{K}\circ \bar{L}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\bar{K}\circ \bar{L})\bar{M})_{++} + \frac{1}{n^3}(\bar{K}\circ \bar{L})_{++}\bar{M}_{++}
 \end{align*}
 
-since all the other terms decay at least as quickly as $O(\frac{1}{\sqrt{n}})$ - we show this here for $n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle$; the proofs for the other terms are similar.
+since all the other terms decay at least as quickly as $O(\frac{1}{\sqrt{n}})$. This is shown here for $n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle$; the proofs for the other terms are similar.
 \begin{align*}
 &n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\
 &\leq n \| \bar{\mu}_X\otimes\bar{C}_{YZ}\| \|\bar{C}_{XY}\otimes\bar{\mu}_Z \| \\
@@ -451,12 +473,14 @@ since all the other terms decay at least as quickly as $O(\frac{1}{\sqrt{n}})$ -
 & = n \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)} \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)} O(1) \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)} = \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)}
 \end{align*}
 
-By treating $\bar{k}\otimes\bar{l}$ as a kernel on the single variable $T:=(X,Y)$, we can perform the same recentering trick as before to show that 
+It can be shown that $\bar{K}\circ \bar{L}$ in the above expression can be replaced with $\overline{\bar{K}\circ \bar{L}}$ while preserving equality. That is, we can equivalently write
 \begin{align*}
 n\|\Delta_L \hat{P}\|^2 & \longrightarrow \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\overline{\bar{K}\circ \bar{L}})\bar{M})_{++} + \frac{1}{n^3}(\overline{\bar{K}\circ \bar{L}})_{++}\bar{M}_{++}
 \end{align*}
-
-By rewriting the above expression in terms of the operator $\bar{C}_{TZ}$ and mean embeddings $\mu_T$ and $\mu_Z$, it can be shown by a similar argument to before that the latter two terms of the above expression tend to 0 at least as $O(\frac{1}{n})$, and thus  $n\|\Delta_L \hat{P}\|^2 \xrightarrow{O(\frac{1}{\sqrt{n}})} \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}$ as required.
+This is equivalent to treating $\bar{k}\otimes\bar{l}$ as a kernel on the single variable $T:=(X,Y)$ and performing another recentering trick as we did at the beginning of this proof. By rewriting the above expression in terms of the operator $\bar{C}_{TZ}$ and mean embeddings $\mu_T$ and $\mu_Z$, it can be shown by a similar argument to before that the latter two terms tend to 0 at least as $O(\frac{1}{n})$, and thus  
+\begin{align*}
+n\|\Delta_L \hat{P}\|^2 \xrightarrow{O(\frac{1}{\sqrt{n}})} \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}
+\end{align*} as required.
 
 To show that this is a normalised degenerate V-statistic observe that, writing $S_i=(X_i,Y_i,Z_i)$ and $h(S_i,S_j) = \langle\bar{\phi}(X_i)\otimes\bar{\phi}(Y_i) - C_{XY},\bar{\phi}(X_j)\otimes\bar{\phi}(Y_j) - C_{XY}\rangle\langle\bar{\phi}(Z_i),\bar{\phi}(Z_j)\rangle$, we can write:
 \begin{align*}
@@ -469,26 +493,6 @@ And thus it is a normalised V-statistic. To show that it is degenerate, fix any 
 
 
 
-
-Proof of Lemma \ref{lemma:beta}:
-\begin{claimproof} Let us consider $(X_t,Y_t)_t$.
-Let us call $\beta_{XYZ}(m)$ the coefficients for the process $(X_t,Y_t,Z_t)_t$, and $\beta_{XY}(m)$ the coefficients for the process $(X_t,Y_t)_t$. 
-
-Observe that for $A \in \sigma((X_b,Y_b),\ldots, (X_c,Y_c))$, it is the case that $A \times \mathcal{Z} \in \sigma((X_b,Y_b,Z_b),\ldots, (X_c,Y_c,Z_c))$ and $\mathbb{P}_{XY}(A) = \mathbb{P}_{XYZ}(A\times \mathcal{Z})$.
-
-Thus
-
-\begin{align*}
-\beta_{XY}(m) &= \frac{1}{2} \sup_n \sup_{ \{A_i^{XY} \}, \{B_j^{XY} \} } \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}_{XY}(A_i^{XY} \cap B_j^{XY}) - \mathbb{P}_{XYZ}(A_i^{XY})\mathbb{P}_{XYZ}(B_j^{XY})| \\
-&= \frac{1}{2} \sup_n \sup_{ \{A_i^{XY} \}, \{B_j^{XY} \} } \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}_{XYZ}((A_i^{XY}\times \mathcal{Z}) \cap (B_j^{XY} \times \mathcal{Z})) \\& \quad \quad\quad \quad \quad \quad\quad \quad \quad \quad\quad \quad- \mathbb{P}_{XYZ}(A_i^{XY}\times \mathcal{Z})\mathbb{P}_{XYZ}(B_j^{XY} \times \mathcal{Z})| \\
-& \leq \frac{1}{2} \sup_n \sup_{ \{A_i^{XYZ} \}, \{B_j^{XYZ} \} } \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}_{XYZ}(A_i^{XYZ} \cap B_j^{XYZ}) - \mathbb{P}_{XYZ}(A_i^{XYZ})\mathbb{P}_{XYZ}(B_j^{XYZ})| \\
-& = \beta_{XYZ}(m)
-\end{align*}
-
-Thus we have shown that  $\beta_{XYZ}(m) \longrightarrow 0 \implies \beta_{XY}(m) \longrightarrow 0$. That is, if  $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing then so is  $(X_t,Y_t)_t$ 
-
-A similar argument holds for any other sub-process.
-\end{claimproof}
 \section*{Acknowledgments} 
 cheers!
 
@@ -509,5 +513,116 @@ D.C.: Spartan Books.
 
 G.~Tesauro (1989). Neurogammon wins computer Olympiad.  {\it Neural
 Computation} {\bf 1}(3):321-323.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\onecolumn
+
+\section{Supplementary material}
+This supplementary section contains a proof of Lemma \ref{lemma:beta} and a proof that the HSIC statistic asymptotically satisfies the hypothesis of the Wild Bootstrap.
+
+\subsection{Proof of Lemma \ref{lemma:beta}}
+
+\begin{claimproof}(Lemma \ref{lemma:beta}) 
+
+Let us consider $(X_t,Y_t)_t$.
+Let us call $\beta_{XYZ}(m)$ the coefficients for the process $(X_t,Y_t,Z_t)_t$, and $\beta_{XY}(m)$ the coefficients for the process $(X_t,Y_t)_t$. 
+
+Observe that for $A \in \sigma((X_b,Y_b),\ldots, (X_c,Y_c))$, it is the case that $A \times \mathcal{Z} \in \sigma((X_b,Y_b,Z_b),\ldots, (X_c,Y_c,Z_c))$ and $\mathbb{P}_{XY}(A) = \mathbb{P}_{XYZ}(A\times \mathcal{Z})$.
+
+Thus
+
+\begin{align*}
+\beta_{XY}(m) &= \frac{1}{2} \sup_n \sup_{ \{A_i^{XY} \}, \{B_j^{XY} \} } \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}_{XY}(A_i^{XY} \cap B_j^{XY}) - \mathbb{P}_{XYZ}(A_i^{XY})\mathbb{P}_{XYZ}(B_j^{XY})| \\
+&= \frac{1}{2} \sup_n \sup_{ \{A_i^{XY} \}, \{B_j^{XY} \} } \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}_{XYZ}((A_i^{XY}\times \mathcal{Z}) \cap (B_j^{XY} \times \mathcal{Z})) \\& \quad \quad\quad \quad \quad \quad\quad \quad \quad \quad\quad \quad- \mathbb{P}_{XYZ}(A_i^{XY}\times \mathcal{Z})\mathbb{P}_{XYZ}(B_j^{XY} \times \mathcal{Z})| \\
+& \leq \frac{1}{2} \sup_n \sup_{ \{A_i^{XYZ} \}, \{B_j^{XYZ} \} } \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}_{XYZ}(A_i^{XYZ} \cap B_j^{XYZ}) - \mathbb{P}_{XYZ}(A_i^{XYZ})\mathbb{P}_{XYZ}(B_j^{XYZ})| \\
+& = \beta_{XYZ}(m)
+\end{align*}
+
+Thus we have shown that  $\beta_{XYZ}(m) \longrightarrow 0 \implies \beta_{XY}(m) \longrightarrow 0$. That is, if  $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing then so is  $(X_t,Y_t)_t$ 
+
+A similar argument holds for any other sub-process.
+\end{claimproof}
+
+\subsection{Proof that HSIC can be Wild Bootstrapped}
+
+Given samples $\{(X_i,Y_i)\}_{i=1}^n$, and taking all notation involving kernels and base spaces as before, the HSIC statistic is defined to be the squared RKHS distance between the empirical embeddings of the distributions $\mathbb{P}_{XY}$ and $\mathbb{P}_X\mathbb{P}_Y$:
+
+\begin{align*}
+HSIC_b & = \| \frac{1}{n}\sum_i \phi_X(X_i) \otimes \phi_Y(Y_i) - \left(\frac{1}{n}\sum_i \phi_X(X_i)\right) \otimes \left(\frac{1}{n}\sum_i \phi_Y(Y_i) \right)\|^2 \\
+& = \frac{1}{n^2} (K\circ L)_{++}  - \frac{2}{n^3}(KL)_{++} + \frac{1}{n^4}K_{++}L_{++} \\
+& = \frac{1}{n^2}(\tilde{K}\circ \tilde{L})_{++}
+\end{align*}
+where the last equality can be shown easily by expanding $\tilde{K}$ (and $\tilde{L}$ similarly) as
+\begin{align*}
+\tilde{K}_{ij} &= \langle\phi_X(X_i)- \frac{1}{n}\sum_k\phi_X(X_k),\phi_X(X_j) - \frac{1}{n}\sum_k\phi_X(X_k)\rangle \\
+&= K_{ij} - \frac{1}{n}\sum_kK_{ik} - \frac{1}{n}\sum_kK_{jk} + \frac{1}{n^2}\sum_{kl}K_{kl}
+\end{align*} 
+
+\begin{theorem}
+Suppose that $\mathbb{P}_{XY} = \mathbb{P}_X\mathbb{P}_Y$. Then 
+\begin{align*}
+nHSIC_b & \xrightarrow{O(n^{-\frac{1}{2}})} \frac{1}{n} (\bar{K}\circ \bar{L})_{++}
+\end{align*}
+and this is a normalised degenerate V-statistic.
+\end{theorem}
+
+\begin{proof}
+By writing
+\begin{align*}
+\tilde{K}_{ij} &= \bar{K}_{ij} - \frac{1}{n}\sum_k\bar{K}_{ik} - \frac{1}{n}\sum_k\bar{K}_{jk} + \frac{1}{n^2}\sum_{kl}\bar{K}_{kl}
+\end{align*} 
+and similar for $\tilde{L}$ we can rewrite $nHSIC_b$ as 
+\begin{align*}
+nHSIC_b & = \frac{1}{n} (\bar{K}\circ \bar{L})_{++}  - \frac{2}{n^2}(\bar{K}\bar{L})_{++} + \frac{1}{n^3}\bar{K}_{++}\bar{L}_{++} \\
+\end{align*}
+We will show that the latter two terms in the above expression decay to 0 as $n\longrightarrow\infty$. 
+
+By assumption, $\mathbb{P}_{XY} = \mathbb{P}_X\mathbb{P}_Y$ and thus the expectation operator factorises similarly. Therefore 
+\begin{align*}
+C_{XY} & = \mathbb{E}_{XY}[\bar{\phi}_X(X)\otimes\bar{\phi}_Y(Y)] \\
+& = \mathbb{E}_{X}[\bar{\phi}_X(X)]\otimes\mathbb{E}_Y[\bar{\phi}_Y(Y)] = 0\otimes 0 = 0\\
+\end{align*}
+
+Thus by Lemma \ref{lemma:hilbertCLT} as before, it follows that $\|\bar{C}_{XY}\|, \|\bar{\mu}_X\|, \|\bar{\mu}_Y\| = O(n^{-\frac{1}{2}})$. 
+
+We can write the latter two terms in the above expression for $nHSIC_b$ in terms of these quantities:
+
+\begin{align*}
+\frac{1}{n^2}(\bar{K}\bar{L})_{++} &= \frac{1}{n^2} \sum_{ijk}\bar{K}_{ij}\bar{L}_{jk}\\
+&= \frac{1}{n^2} \sum_{ijk}\langle \bar{\phi}_X(X_i),\bar{\phi}_X(X_j) \rangle \langle \bar{\phi}_Y(Y_j),\bar{\phi}_Y(Y_k)\rangle \\&=
+\frac{1}{n^2} \sum_{ijk}\langle \bar{\phi}_X(X_j)\otimes\bar{\phi}_Y(Y_j),
+\bar{\phi}_X(X_i)\otimes\bar{\phi}_Y(Y_k)\rangle \\&=
+n\langle \frac{1}{n} \sum_{j}[\bar{\phi}_X(X_j)\otimes\bar{\phi}_Y(Y_j)],
+[\frac{1}{n} \sum_{i}\bar{\phi}_X(X_i)]\otimes[\frac{1}{n} \sum_{k}\bar{\phi}_Y(Y_k)]\rangle \\&=
+n\langle \bar{C}_{XY},\bar{\mu}_X  \otimes \bar{\mu}_Y \rangle \\ 
+&\leq n \|\bar{C}_{XY}\|\|\bar{\mu}_X\| \| \bar{\mu}_Y\|\\
+&= O(n^{-\frac{1}{2}})
+\end{align*}
+
+\begin{align*}
+ \frac{1}{n^3}\bar{K}_{++}\bar{L}_{++} &= \frac{1}{n^3}\mathlarger{\mathlarger{\sum}}_{i,j}\bar{K}_{ij}\bar{L}_{ij}\\
+ & =  \frac{1}{n^3}\mathlarger{\mathlarger{\sum}}_{i,j}\mathlarger{\mathlarger{\langle}} \bar{\phi}_X(X_i), \bar{\phi}_X(X_j) \mathlarger{\mathlarger{\rangle}} \mathlarger{\mathlarger{\sum}}_{k,l}\mathlarger{\mathlarger{\langle}} \bar{\phi}_Y(Y_k), \bar{\phi}_Y(Y_l) \mathlarger{\mathlarger{\rangle}} \\ &
+ = n\mathlarger{\mathlarger{\langle}} \frac{1}{n}\sum_i\bar{\phi}_X(X_i) , \frac{1}{n}\sum_j\bar{\phi}_X(X_j) \mathlarger{\mathlarger{\rangle}} \mathlarger{\mathlarger{\langle}} \frac{1}{n}\sum_k\bar{\phi}_Y(Y_k)  , \frac{1}{n}\sum_l\bar{\phi}_Y(Y_l) \mathlarger{\mathlarger{\rangle}}\\&
+ = n \mathlarger{\mathlarger{\langle}} \bar{\mu}_X , \bar{\mu}_X \mathlarger{\mathlarger{\rangle}} \mathlarger{\mathlarger{\langle}} \bar{\mu}_Y , \bar{\mu}_Y  \mathlarger{\mathlarger{\rangle}} \\ &
+= n\|\bar{\mu}_X \|^2 \|\bar{\mu}_Y \|^2\\ &= nO(n^{-2}) \\&= O(n^{-1})
+\end{align*}
+
+
+It follows that $nHSIC_b  \xrightarrow{O(n^{-\frac{1}{2}})} \frac{1}{n} (\bar{K}\circ \bar{L})_{++}$
+
+To show that this is a normalised degenerate V-statistic observe that, writing $S_i=(X_i,Y_i)$ and $h(S_i,S_j) = \langle\bar{\phi}(X_i),\bar{\phi}(X_j)\rangle \langle\bar{\phi}(Y_i),\bar{\phi}(Y_j)\rangle$, we can write:
+\begin{align*}
+ \frac{1}{n} (\bar{K}\circ \bar{L})_{++}= \frac{1}{n}\sum_{ij} h(S_i,S_j)
+\end{align*}
+
+and thus it is a normalised V-statistic. To show that it is degenerate, fix any $s_i$ and observe that 
+\begin{align*}
+\mathbb{E}_{S}h(s_i,S) &= \mathbb{E}_X\mathbb{E}_Y \langle\bar{\phi}(x_i),\bar{\phi}(X)\rangle \langle\bar{\phi}(y_i),\bar{\phi}(Y)\rangle \\
+&= \langle\bar{\phi}(x_i),\mathbb{E}_X\bar{\phi}(X)\rangle \langle\bar{\phi}(y_i),\mathbb{E}_Y\bar{\phi}(Y)\rangle \\
+&= \langle\bar{\phi}(x_i),0\rangle \langle\bar{\phi}(y_i),0\rangle = 0\\
+\end{align*}	
+\end{proof}
 
 \end{document}
