@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.7.20)  22 FEB 2016 00:22
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.7.20)  23 FEB 2016 12:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -412,29 +412,26 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ] [2]
-LaTeX Font Info:    Calculating math sizes for size <11.99997> on input line 18
-7.
-
-Underfull \vbox (badness 3907) has occurred while \output is active []
-
+LaTeX Font Info:    Calculating math sizes for size <11.99997> on input line 19
+1.
  [3]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 223.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 233.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 223.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 233.
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--224
+Underfull \hbox (badness 10000) in paragraph at lines 233--234
 []$\OML/cmm/m/it/10 ^^L$\OT1/ptm/m/it/10 -mixing with co-ef-fi-cients $\OML/cmm
 /m/it/10 ^^L\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 )$ \OT1/ptm/m/it
 /10 sat-is-fy-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
+Underfull \hbox (badness 10000) in paragraph at lines 234--235
 []$\OML/cmm/m/it/10 ^^\$\OT1/ptm/m/it/10 -mixing with co-ef-fi-cients $\OML/cmm
 /m/it/10 ^^\\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 )$ \OT1/ptm/m/it
 /10 sat-is-fy-ing
@@ -442,100 +439,107 @@ Underfull \hbox (badness 10000) in paragraph at lines 224--225
 
 [4]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 264.
- <ICML_Figure1.pdf, id=106, 383.4325pt x 316.18124pt>
+put line 274.
+ <ICML_Figure1.pdf, id=108, 383.4325pt x 316.18124pt>
 File: ICML_Figure1.pdf Graphic file (type pdf)
 
 <use ICML_Figure1.pdf>
-Package pdftex.def Info: ICML_Figure1.pdf used on input line 310.
+Package pdftex.def Info: ICML_Figure1.pdf used on input line 320.
 (pdftex.def)             Requested size: 230.06126pt x 189.7102pt.
- [5 <./ICML_Figure1.pdf>]
-<ICML_figure2.pdf, id=132, 386.44376pt x 340.27126pt>
+ [5]
+<ICML_figure2.pdf, id=130, 386.44376pt x 340.27126pt>
 File: ICML_figure2.pdf Graphic file (type pdf)
  <use ICML_figure2.pdf>
-Package pdftex.def Info: ICML_figure2.pdf used on input line 338.
+Package pdftex.def Info: ICML_figure2.pdf used on input line 348.
 (pdftex.def)             Requested size: 231.86804pt x 204.16432pt.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 348.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 358.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
+Underfull \vbox (badness 4144) has occurred while \output is active []
+
+
 
 Package natbib Warning: Citation `dehling2015bootstrap' on page 6 undefined on 
-input line 354.
+input line 364.
 
 
 Package natbib Warning: Citation `dehling2015bootstrap' on page 6 undefined on 
-input line 363.
+input line 373.
 
-
-Overfull \hbox (3.35747pt too wide) in paragraph at lines 378--378
+[6 <./ICML_Figure1.pdf> <./ICML_figure2.pdf>]
+Overfull \hbox (3.35747pt too wide) in paragraph at lines 388--388
 [] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6 <./ICML_figure2.pdf>]
-Overfull \hbox (7.27774pt too wide) in paragraph at lines 432--432
+
+Overfull \hbox (7.27774pt too wide) in paragraph at lines 442--442
 [] 
  []
 
 
-Overfull \hbox (12.3377pt too wide) in paragraph at lines 442--442
+Overfull \hbox (12.3377pt too wide) in paragraph at lines 452--452
 [] 
  []
 
 
-Underfull \hbox (badness 5622) in paragraph at lines 451--452
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+Underfull \hbox (badness 5622) in paragraph at lines 461--462
 []\OT1/ptm/m/n/10 To show that this is a nor-malised de-gen-er-ate V-
  []
 
 
-Underfull \hbox (badness 1077) in paragraph at lines 451--452
+Underfull \hbox (badness 1077) in paragraph at lines 461--462
 \OT1/ptm/m/n/10 statistic ob-serve that, writ-ing $\OML/cmm/m/it/10 S[] \OT1/cm
 r/m/n/10 = (\OML/cmm/m/it/10 X[]; Y[]; Z[]\OT1/cmr/m/n/10 )$ \OT1/ptm/m/n/10 an
 d
  []
 
-[7]
-Overfull \hbox (181.03851pt too wide) in paragraph at lines 476--476
+
+Overfull \hbox (181.03851pt too wide) in paragraph at lines 486--486
 [] 
  []
 
 
-Underfull \hbox (badness 1052) in paragraph at lines 478--479
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 488--489
 []\OT1/ptm/m/n/10 Thus we have shown that $\OML/cmm/m/it/10 ^^L[]\OT1/cmr/m/n/1
 0 (\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 ) [][]\OMS/cmsy/m/n/10 ! \OT1/cmr/m/n/10 0
   =[]\OMS/cmsy/m/n/10 )
  []
 
 
-Underfull \hbox (badness 3635) in paragraph at lines 500--502
+Underfull \hbox (badness 3635) in paragraph at lines 510--512
 []\OT1/ptm/m/n/10 G. Tesauro (1989). Neu-rogam-mon wins com-puter
  []
 
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 503.
-[8
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 503.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 513.
+[8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 513.
  (./LancasterUAI.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 503.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 503.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 513.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 513.
 Package rerunfilecheck Info: File `LancasterUAI.out' has not changed.
 (rerunfilecheck)             Checksum: 9E4AFEBEF1D9E915A8691D31832031A8;997.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 503.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 513.
  ) 
 Here is how much of TeX's memory you used:
- 7037 strings out of 493315
- 99774 string characters out of 6137904
- 210391 words of memory out of 5000000
- 10335 multiletter control sequences out of 15000+600000
+ 7039 strings out of 493315
+ 99801 string characters out of 6137904
+ 208443 words of memory out of 5000000
+ 10336 multiletter control sequences out of 15000+600000
  21180 words of font info for 57 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  29i,12n,28p,1257b,462s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -558,10 +562,10 @@ e/2013/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2013/t
 exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/
 fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type
 1/urw/times/utmri8a.pfb>
-Output written on LancasterUAI.pdf (8 pages, 239622 bytes).
+Output written on LancasterUAI.pdf (8 pages, 240930 bytes).
 PDF statistics:
- 237 PDF objects out of 1000 (max. 8388607)
- 202 compressed objects within 3 object streams
- 48 named destinations out of 1000 (max. 500000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 205 compressed objects within 3 object streams
+ 49 named destinations out of 1000 (max. 500000)
  131 words of extra memory for PDF output out of 10000 (max. 10000000)
 
