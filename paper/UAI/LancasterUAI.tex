@@ -272,7 +272,7 @@ Denote by $\mathcal{A}_*$ the event that $\mathcal{H}_*$ is rejected. Then
 
 If $\mathcal{H}_0$ is true, then so must one of the components. WLOG assume that $\mathcal{H}_X$ is true. If we use significance levels of $\alpha$ in each test individually then $\mathbb{P}(\mathcal{A}_X) \leq \alpha$ and thus $\mathbb{P}(\mathcal{A}_0) \leq \alpha$.
 
-Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall, is therefore more conservative than necessary and thus loses on test power compared to the `simple correction' proposed here.
+Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall. It is therefore more conservative than necessary and thus has worse test power compared to the `simple correction' proposed here.
 
 \section{Experiments}
 
@@ -303,8 +303,9 @@ In the case of \emph{iid} observations, it was shown in [Lancaster] that Lancast
 
 \subsection{Weak pairwise interaction, strong joint interaction}\label{experiment1}
 
+In this example, we demonstrate that the Lancaster test has greater power than 3-way HSIC when the pairwise interaction is weak, but joint interaction is strong.
 
-Example 2 in thesis. 3-way HSIC in principle should be able to detect the interaction, but Lancaster is much more powerful. See Figure \ref{weak-pairwise-strong-joint}.
+%Example 2 in thesis. 3-way HSIC in principle should be able to detect the interaction, but Lancaster is much more powerful. See Figure \ref{weak-pairwise-strong-joint}.
 
 Synthetic data were generated from autoregressive processes $X$, $Y$ and $Z$ according to:
 
@@ -316,30 +317,27 @@ Z_t &= \frac{1}{2}Z_{t-1} + d |\theta_t|\text{sign}(X_t Y_t) + \zeta_t\\
 
 where $X_0, Y_0, Z_0, \epsilon_t, \eta_t, \theta_t$ and $\zeta_t$ are \emph{iid} $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $(X_t,Y_t)_t$.
 
-Data were generated according to this definition with varying values for the dependence coefficient. For each value of the dependence coefficient, 500 datasets were generated, each consisting of 2000 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
+Data were generated according to this definition with varying values for the dependence coefficient. For each value of the dependence coefficient, 300 datasets were generated, each consisting of 1200 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
 
 Observe that the random variables are pairwise independent but jointly dependent when considered together. Indeed, $X$ and $Y$ are independent, and $Z$ is independent of $X$ and $Y$ when considered separately since the marginal distributions of $X$ and $Y$ are both normal distributions with mean 0 and therefore $\text{sign}(X_t Y_t)$ is either $-1$ or $1$ with equal probability when conditioned upon neither or exactly one of $X_t$ or $Y_t$. When considered jointly, the three variables are dependent as knowledge of both $X$ and $Y$ gives information about the value of $Z$.
 
-In this experiment, all of the tests should be able to detect the dependence and therefore reject the null hypothesis in the limit of infinite data. In the finite data regime, the dependence coefficient affects drastically how hard it is to detect the dependence. The results of this experiment are presented in Figure \ref{weak-pairwise-strong-joint}. Observe that the Lancaster test is much more sensitive to the dependence than the 3-way HSIC test is and achieves very high test power with weak dependence coefficients while 3-way HSIC has very low test power. Observe also that when using the simple multiple testing correction a higher test power is achieved than with the Holm-Bonferroni correction.
-
-As before, Lancaster with the `naive' correction outperforms Lancaster with Holm-Bonferroni.
-
+In this experiment, both the Lancaster and 3-way HSIC tests should be able to detect the dependence and therefore reject the null hypothesis in the limit of infinite data. In the finite data regime, the dependence coefficient affects drastically how hard it is to detect the dependence. The results of this experiment are presented in Figure \ref{weak-pairwise-strong-joint}. Observe that the Lancaster test is much more sensitive to the dependence than the 3-way HSIC test is and achieves very high test power with weak dependence coefficients while 3-way HSIC has very low test power. Observe also that when using the simple multiple testing correction a higher test power is achieved than with the Holm-Bonferroni correction.
 
 
 \begin{figure}[ht]
 \vskip 0.2in
 \begin{center}
-\centerline{\includegraphics[scale=0.6]{ICML_Figure1.pdf}}
-\caption{Results of experiment in section \ref{experiment1}. Observe that the Lancaster test is much more sensitive to dependence than 3-way HSIC. Note also that the test power is higher when using the simple correction when compared to the Holm-Bonferroni multiple testing correction.}
+\centerline{\includegraphics[scale=0.6]{UAI_Figure1.pdf}}
+\caption{Results of experiment in Section \ref{experiment1}. (S) refers to the simple multiple correction; (HB) refers to Holm-Bonferroni. Observe that the Lancaster test is much more sensitive to dependence than 3-way HSIC. Note also that the test power is higher when using the simple correction when compared to the Holm-Bonferroni multiple testing correction.}
 \label{weak-pairwise-strong-joint}
 \end{center}
 \vskip -0.2in
 \end{figure} 
 
 \subsection{False positive rates}\label{experiment2}
-Example 4 in thesis. Comparison of wild bootstrap to permutation bootstrap
+%Example 4 in thesis. Comparison of wild bootstrap to permutation bootstrap
 
-The purpose of this example is to demonstrate that in the time series case, existing permutation bootstrap methods fail to control the Type I error, while the wild bootstrap does correctly find test statistic thresholds.
+The purpose of this example is to demonstrate that in the time series case, existing permutation bootstrap methods fail to control the Type I error, while the  wild bootstrap does correctly find test statistic thresholds.
 
 Synthetic data were generated from autoregressive processes $X$, $Y$ and $Z$ according to:
 
@@ -349,7 +347,7 @@ Y_t &= aY_{t-1} + \eta_t\\
 Z_t &= aZ_{t-1} +  \zeta_t\\
 \end{align*}
 
-where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{iid} $\mathcal{N}(0,1)$ random variables and $a$, called the \emph{dependence coefficient}, determines how temporally dependent the processes are. Observe that each process is independent of the others and so the null hypothesis is true.
+where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{iid} $\mathcal{N}(0,1)$ random variables and $a$, called the \emph{dependence coefficient}, determines how temporally dependent the processes are. The null hypothesis in this example is true as each process is independent of the others.
 
 The Lancaster test was performed using both the Wild Bootstrap and the simple permutation bootstrap (used in the \emph{iid} case) in order to sample from the null distributions of the test statistic. We used a fixed desired false positive rate $\alpha = 0.05$ with sample of size 1000, with 500 experiments run for each value of $a$. Figure \ref{wildBootstrap_is_necessary} shows the false positive rates for these two methods for varying $a$. It shows that as the processes become more dependent, the false positive rate for the permutation method becomes very large, and is not bounded by the fixed $\alpha$, whereas the false positive rate for the Wild Bootstrap method is bounded by $\alpha$.
 
@@ -366,8 +364,10 @@ The Lancaster test was performed using both the Wild Bootstrap and the simple pe
 
 
 
-\subsection{Real data}
-Maybe check this out for some data? \url{https://stat.duke.edu/~mw/ts_data_sets.html}
+\subsection{Strong pairwise interaction}
+In this example, we show the limitations of the Lancaster test. When pairwise interaction is strong, 3-way HSIC has greater test power than Lancaster.
+
+
 
 \section{Discussion}
 
