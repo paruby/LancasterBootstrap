@@ -13,6 +13,8 @@ xreturn = x(2:1000)-x(1:999);
 yreturn = y(2:1000)-y(1:999);
 zreturn = z(2:1000)-z(1:999);
 
+plot(xreturn)
+
 xreturn_sd = xreturn/sqrt(var(xreturn));
 yreturn_sd = yreturn/sqrt(var(yreturn));
 zreturn_sd = zreturn/sqrt(var(zreturn));
