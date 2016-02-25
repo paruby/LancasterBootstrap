@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.15)  24 FEB 2016 20:09
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.15)  25 FEB 2016 11:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -422,80 +422,94 @@ Underfull \hbox (badness 10000) in paragraph at lines 245--246
 [4]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 286.
- [5] <UAI_Figure1.pdf, id=141, 393.47pt x 337.26pt>
+ [5] <UAI_Figure1.pdf, id=141, 382.42876pt x 341.275pt>
 File: UAI_Figure1.pdf Graphic file (type pdf)
- <use UAI_Figure1.pdf>
-Package pdftex.def Info: UAI_Figure1.pdf used on input line 330.
-(pdftex.def)             Requested size: 236.0838pt x 202.35756pt.
 
-<ICML_figure2.pdf, id=145, 386.44376pt x 340.27126pt>
+<use UAI_Figure1.pdf>
+Package pdftex.def Info: UAI_Figure1.pdf used on input line 330.
+(pdftex.def)             Requested size: 229.45901pt x 204.76657pt.
+ <ICML_figure2.pdf, id=145, 386.44376pt x 340.27126pt>
 File: ICML_figure2.pdf Graphic file (type pdf)
- <use ICML_figure2.pdf>
+
+<use ICML_figure2.pdf>
 Package pdftex.def Info: ICML_figure2.pdf used on input line 358.
 (pdftex.def)             Requested size: 231.86804pt x 204.16432pt.
+ <UAI_Figure3.pdf, id=148, 375.4025pt x 338.26375pt>
+File: UAI_Figure3.pdf Graphic file (type pdf)
 
-[6 <./UAI_Figure1.pdf> <./ICML_figure2.pdf>]
+<use UAI_Figure3.pdf>
+Package pdftex.def Info: UAI_Figure3.pdf used on input line 373.
+(pdftex.def)             Requested size: 225.24323pt x 202.95981pt.
+ [6 <./UAI_Figure1.pdf> <./ICML_figure2.pdf>]
 
 Package natbib Warning: Citation `dehling2015bootstrap' on page 7 undefined on 
-input line 380.
+input line 388.
 
 
 Package natbib Warning: Citation `dehling2015bootstrap' on page 7 undefined on 
-input line 389.
+input line 397.
 
 
-Overfull \hbox (3.35747pt too wide) in paragraph at lines 410--410
-[] 
- []
-
-[7]
-Overfull \hbox (7.27774pt too wide) in paragraph at lines 464--464
+Overfull \hbox (3.35747pt too wide) in paragraph at lines 418--418
 [] 
  []
 
 
-Overfull \hbox (12.3377pt too wide) in paragraph at lines 474--474
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7 <./UAI_Figure3.pdf>]
+Overfull \hbox (7.27774pt too wide) in paragraph at lines 472--472
 [] 
  []
 
 
-Underfull \hbox (badness 5622) in paragraph at lines 485--486
+Overfull \hbox (12.3377pt too wide) in paragraph at lines 482--482
+[] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 5622) in paragraph at lines 493--494
 []\OT1/ptm/m/n/10 To show that this is a nor-malised de-gen-er-ate V-
  []
 
 
-Underfull \hbox (badness 1077) in paragraph at lines 485--486
+Underfull \hbox (badness 1077) in paragraph at lines 493--494
 \OT1/ptm/m/n/10 statistic ob-serve that, writ-ing $\OML/cmm/m/it/10 S[] \OT1/cm
 r/m/n/10 = (\OML/cmm/m/it/10 X[]; Y[]; Z[]\OT1/cmr/m/n/10 )$ \OT1/ptm/m/n/10 an
 d
  []
 
-
-Underfull \hbox (badness 3635) in paragraph at lines 514--516
+[8]
+Underfull \hbox (badness 3635) in paragraph at lines 522--524
 []\OT1/ptm/m/n/10 G. Tesauro (1989). Neu-rogam-mon wins com-puter
  []
 
-[8] [9
+[9
 
-] [10]
+] [10
+
+] [11]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 628.
-[11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 628.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 636.
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 636.
  (./LancasterUAI.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 628.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 628.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 636.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 636.
 Package rerunfilecheck Info: File `LancasterUAI.out' has not changed.
 (rerunfilecheck)             Checksum: 31F8F496287EDB369C0FA651B8F3260D;1278.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 628.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 636.
  ) 
 Here is how much of TeX's memory you used:
- 6913 strings out of 493308
- 96820 string characters out of 6140092
- 203516 words of memory out of 5000000
- 10222 multiletter control sequences out of 15000+600000
+ 6921 strings out of 493308
+ 96954 string characters out of 6140092
+ 202538 words of memory out of 5000000
+ 10227 multiletter control sequences out of 15000+600000
  22574 words of font info for 64 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  29i,20n,28p,1257b,462s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -517,9 +531,9 @@ e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive
 exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on LancasterUAI.pdf (11 pages, 319284 bytes).
+Output written on LancasterUAI.pdf (12 pages, 348685 bytes).
 PDF statistics:
- 268 PDF objects out of 1000 (max. 8388607)
- 58 named destinations out of 1000 (max. 500000)
- 163 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 278 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 500000)
+ 168 words of extra memory for PDF output out of 10000 (max. 10000000)
 
