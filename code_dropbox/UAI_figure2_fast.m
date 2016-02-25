@@ -5,17 +5,20 @@ rejections = tosave{1};
 
 h=figure;
 
-plot(dependence_coefficients,rejections(:,1),'-ob')
+plot(dependence_coefficients,rejections(:,1),'-or')
 xlabel('Dependence coefficient')
 ylabel('Type I error')
 title('False positives - Wild Bootstrap vs Permutation')
 
 hold
 
-plot(dependence_coefficients,rejections(:,2),'-or')
+plot(dependence_coefficients,rejections(:,2),'-o','color',[1,0.7,0])
+plot([0.1,0.9],[0.05,0.05],'--k')
 
-
-legend('Lancaster with Wild Bootstrap','Lancaster with Permutation Bootstrap','Location','NorthWest')
+legend('Lancaster with Wild Bootstrap',...
+'Lancaster with Permutation Bootstrap',...
+'Desired error bound (0.05)',...
+'Location','NorthWest')
 
 
 ti = get(gca,'TightInset')
