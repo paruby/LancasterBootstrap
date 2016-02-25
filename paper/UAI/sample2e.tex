@@ -14,7 +14,8 @@
 \usepackage{subfigure} 
 \usepackage{amssymb}
 % For citations
-\usepackage{natbib}
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{abbrvnat}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -203,20 +204,7 @@ All acknowledgements go at the end of the paper.
 
 \subsubsection*{References}
 
-References follow the acknowledgements.  Use unnumbered third level
-heading for the references title.  Any choice of citation style is
-acceptable as long as you are consistent.
+\bibliography{ref}
 
-
-J.~Alspector, B.~Gupta, and R.~B.~Allen  (1989). Performance of a
-stochastic learning microchip.  In D. S. Touretzky (ed.), {\it Advances
-in Neural Information Processing Systems 1}, 748-760.  San Mateo, Calif.:
-Morgan Kaufmann.
-
-F.~Rosenblatt (1962). {\it Principles of Neurodynamics.} Washington,
-D.C.: Spartan Books.
-
-G.~Tesauro (1989). Neurogammon wins computer Olympiad.  {\it Neural
-Computation} {\bf 1}(3):321-323.
 
 \end{document}

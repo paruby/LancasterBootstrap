@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.15)  25 FEB 2016 16:24
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.15)  25 FEB 2016 18:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -397,57 +397,59 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 82.
 
-
-Package natbib Warning: Citation `doukhan1994mixing' on page 1 undefined on inp
-ut line 84.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
-] [2]
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2]
 LaTeX Font Info:    Calculating math sizes for size <11.99997> on input line 20
-6.
- [3]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 252.
+7.
 
+[3]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 253.
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 252.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 253.
 
-Underfull \hbox (badness 10000) in paragraph at lines 252--253
+Underfull \hbox (badness 10000) in paragraph at lines 253--254
 []$\OML/cmm/m/it/10 ^^L$\OT1/ptm/m/it/10 -mixing with co-ef-fi-cients $\OML/cmm
 /m/it/10 ^^L\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 )$ \OT1/ptm/m/it
 /10 sat-is-fy-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--254
+Underfull \hbox (badness 10000) in paragraph at lines 254--255
 []$\OML/cmm/m/it/10 ^^\$\OT1/ptm/m/it/10 -mixing with co-ef-fi-cients $\OML/cmm
 /m/it/10 ^^\\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 )$ \OT1/ptm/m/it
 /10 sat-is-fy-ing
  []
 
+
+Package natbib Warning: Citation `holm1979simple' on page 4 undefined on input 
+line 273.
+
 [4]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 294.
- [5] <UAI_Figure1.pdf, id=145, 382.42876pt x 341.275pt>
+put line 295.
+ [5] <UAI_Figure1.pdf, id=214, 382.42876pt x 341.275pt>
 File: UAI_Figure1.pdf Graphic file (type pdf)
 
 <use UAI_Figure1.pdf>
-Package pdftex.def Info: UAI_Figure1.pdf used on input line 338.
+Package pdftex.def Info: UAI_Figure1.pdf used on input line 339.
 (pdftex.def)             Requested size: 229.45901pt x 204.76657pt.
- <UAI_Figure2.pdf, id=149, 376.40625pt x 334.24875pt>
+ <UAI_Figure2.pdf, id=218, 376.40625pt x 334.24875pt>
 File: UAI_Figure2.pdf Graphic file (type pdf)
 
 <use UAI_Figure2.pdf>
-Package pdftex.def Info: UAI_Figure2.pdf used on input line 364.
+Package pdftex.def Info: UAI_Figure2.pdf used on input line 365.
 (pdftex.def)             Requested size: 225.84547pt x 200.55078pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -457,96 +459,123 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.381 \end{align*}
+l.382 \end{align*}
                   pdfTeX warning (ext4): destination with the same identifier (
 name{figure.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.381 \end{align*}
+l.382 \end{align*}
                    <./UAI_Figure1.pdf> <./UAI_Figure2.pdf>]
-<UAI_Figure3.pdf, id=167, 375.4025pt x 338.26375pt>
+<UAI_Figure3.pdf, id=236, 375.4025pt x 338.26375pt>
 File: UAI_Figure3.pdf Graphic file (type pdf)
  <use UAI_Figure3.pdf>
-Package pdftex.def Info: UAI_Figure3.pdf used on input line 395.
+Package pdftex.def Info: UAI_Figure3.pdf used on input line 396.
 (pdftex.def)             Requested size: 225.24323pt x 202.95981pt.
 
+Underfull \hbox (badness 10000) in paragraph at lines 405--406
+\OT1/ptm/m/n/10 Exchange rates be-tween three pairs of cur-ren-cies
+ []
 
-Package natbib Warning: Citation `dehling2015bootstrap' on page 7 undefined on 
-input line 426.
+
+Underfull \hbox (badness 1406) in paragraph at lines 405--406
+\OT1/ptm/m/n/10 (AUD/EUR, CHF/GBP, CAD/JPY) at 5 minute in-ter-
+ []
+
+
+Underfull \hbox (badness 1082) in paragraph at lines 405--406
+\OT1/ptm/m/n/10 data were pro-cessed by tak-ing the re-turns (dif-fer-ence
+ []
+
+
+Underfull \hbox (badness 3919) in paragraph at lines 405--406
+\OT1/ptm/m/n/10 be-tween con-sec-u-tive terms within each time se-ries,
+ []
 
 [7pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.431 W
-       e can take $f_m = \bar{\phi}(X_0)\enspace \forall m$ and so achieve $...
- <./UAI_Figure3.pdf>]
+l.429 
+       <./UAI_Figure3.pdf>]
+Overfull \hbox (3.35747pt too wide) in paragraph at lines 464--464
+[] 
+ []
 
-Package natbib Warning: Citation `dehling2015bootstrap' on page 8 undefined on 
-input line 435.
-
-
-Overfull \hbox (3.35747pt too wide) in paragraph at lines 456--456
+[8]
+Overfull \hbox (7.27774pt too wide) in paragraph at lines 518--518
 [] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8]
-Overfull \hbox (7.27774pt too wide) in paragraph at lines 510--510
+Overfull \hbox (12.3377pt too wide) in paragraph at lines 528--528
 [] 
  []
 
 
-Overfull \hbox (12.3377pt too wide) in paragraph at lines 520--520
-[] 
- []
-
-
-Underfull \hbox (badness 5622) in paragraph at lines 531--532
+Underfull \hbox (badness 5622) in paragraph at lines 539--540
 []\OT1/ptm/m/n/10 To show that this is a nor-malised de-gen-er-ate V-
  []
 
 
-Underfull \hbox (badness 1077) in paragraph at lines 531--532
+Underfull \hbox (badness 1077) in paragraph at lines 539--540
 \OT1/ptm/m/n/10 statistic ob-serve that, writ-ing $\OML/cmm/m/it/10 S[] \OT1/cm
 r/m/n/10 = (\OML/cmm/m/it/10 X[]; Y[]; Z[]\OT1/cmr/m/n/10 )$ \OT1/ptm/m/n/10 an
 d
  []
 
-No file LancasterUAI.bbl.
-
-Underfull \hbox (badness 3635) in paragraph at lines 561--563
-[]\OT1/ptm/m/n/10 G. Tesauro (1989). Neu-rogam-mon wins com-puter
+(./LancasterUAI.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 54--58
+[]\OT1/ptm/m/n/10 A. Gret-ton, O. Bous-quet, A. Smola, and
  []
 
-[9] [10
 
-] [11]
+Underfull \hbox (badness 1264) in paragraph at lines 54--58
+\OT1/ptm/m/n/10 B. Sch[]olkopf.  Mea-sur-ing sta-tis-ti-cal de-pen-dence
+ []
+
+
+Underfull \hbox (badness 1163) in paragraph at lines 68--72
+[]\OT1/ptm/m/n/10 A. Gret-ton, K. Fuku-mizu, C. H. Teo, L. Song,
+ []
+
+
+Underfull \hbox (badness 5245) in paragraph at lines 75--79
+[]\OT1/ptm/m/n/10 A. Gret-ton, K. M. Borg-wardt, M. J. Rasch,
+ []
+
+[9]
+Underfull \hbox (badness 1043) in paragraph at lines 123--128
+[]\OT1/ptm/m/n/10 B. K. Sripe-rum-budur, A. Gret-ton, K. Fuku-mizu,
+ []
+
+) [10
+
+] [11
+
+] [12]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 675.
-[12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 675.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 669.
+[13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 669.
  (./LancasterUAI.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 675.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 675.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 669.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 669.
 Package rerunfilecheck Info: File `LancasterUAI.out' has not changed.
-(rerunfilecheck)             Checksum: 626DF69BA947E0BAFFC53806C0319CDB;1358.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 675.
+(rerunfilecheck)             Checksum: B1F28FC4394615A657A67797F543DEB8;1418.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 669.
  ) 
 Here is how much of TeX's memory you used:
- 6971 strings out of 493308
- 97671 string characters out of 6140092
- 203773 words of memory out of 5000000
- 10271 multiletter control sequences out of 15000+600000
- 22574 words of font info for 64 fonts, out of 8000000 for 9000
+ 7073 strings out of 493308
+ 100149 string characters out of 6140092
+ 207012 words of memory out of 5000000
+ 10345 multiletter control sequences out of 15000+600000
+ 23583 words of font info for 70 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 29i,20n,28p,1257b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,20n,28p,1365b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
@@ -558,16 +587,17 @@ msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
-s/utmri8a.pfb>
-Output written on LancasterUAI.pdf (12 pages, 356740 bytes).
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr
+i8a.pfb>
+Output written on LancasterUAI.pdf (13 pages, 387271 bytes).
 PDF statistics:
- 286 PDF objects out of 1000 (max. 8388607)
- 61 named destinations out of 1000 (max. 500000)
- 176 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 370 PDF objects out of 1000 (max. 8388607)
+ 84 named destinations out of 1000 (max. 500000)
+ 184 words of extra memory for PDF output out of 10000 (max. 10000000)
 

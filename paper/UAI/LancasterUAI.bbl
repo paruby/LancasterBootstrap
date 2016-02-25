@@ -1,0 +1,141 @@
+\begin{thebibliography}{21}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Berlinet and Thomas-Agnan(2011)]{berlinet2011reproducing}
+A.~Berlinet and C.~Thomas-Agnan.
+\newblock \emph{Reproducing kernel Hilbert spaces in probability and
+  statistics}.
+\newblock Springer Science \&amp; Business Media, 2011.
+
+\bibitem[Bradley et~al.(2005)]{bradley2005basic}
+R.~C. Bradley et~al.
+\newblock Basic properties of strong mixing conditions. a survey and some open
+  questions.
+\newblock \emph{Probability surveys}, 2\penalty0 (2):\penalty0 107--144, 2005.
+
+\bibitem[Chwialkowski and Gretton(2014)]{chwialkowski2014kernel}
+K.~Chwialkowski and A.~Gretton.
+\newblock A kernel independence test for random processes.
+\newblock \emph{arXiv preprint arXiv:1402.4501}, 2014.
+
+\bibitem[Chwialkowski et~al.(2014)Chwialkowski, Sejdinovic, and
+  Gretton]{chwialkowski2014wild}
+K.~P. Chwialkowski, D.~Sejdinovic, and A.~Gretton.
+\newblock A wild bootstrap for degenerate kernel tests.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  3608--3616, 2014.
+
+\bibitem[Dedecker et~al.(2007)Dedecker, Doukhan, Lang, Rafael, Louhichi, and
+  Prieur]{dedecker2007weak}
+J.~Dedecker, P.~Doukhan, G.~Lang, L.~R.~J. Rafael, S.~Louhichi, and C.~Prieur.
+\newblock Weak dependence.
+\newblock In \emph{Weak Dependence: With Examples and Applications}, pages
+  9--20. Springer, 2007.
+
+\bibitem[Dehling et~al.(2015)Dehling, Sharipov, and
+  Wendler]{dehling2015bootstrap}
+H.~Dehling, O.~S. Sharipov, and M.~Wendler.
+\newblock Bootstrap for dependent hilbert space-valued random variables with
+  application to von mises statistics.
+\newblock \emph{Journal of Multivariate Analysis}, 133:\penalty0 200--215,
+  2015.
+
+\bibitem[Doukhan(1994)]{doukhan1994mixing}
+P.~Doukhan.
+\newblock \emph{Mixing}.
+\newblock Springer, 1994.
+
+\bibitem[Gretton et~al.(2005{\natexlab{a}})Gretton, Bousquet, Smola, and
+  Sch{\"o}lkopf]{gretton2005measuring}
+A.~Gretton, O.~Bousquet, A.~Smola, and B.~Sch{\"o}lkopf.
+\newblock Measuring statistical dependence with hilbert-schmidt norms.
+\newblock In \emph{Algorithmic learning theory}, pages 63--77. Springer,
+  2005{\natexlab{a}}.
+
+\bibitem[Gretton et~al.(2005{\natexlab{b}})Gretton, Herbrich, Smola, Bousquet,
+  and Sch{\"o}lkopf]{gretton2005kernel}
+A.~Gretton, R.~Herbrich, A.~Smola, O.~Bousquet, and B.~Sch{\"o}lkopf.
+\newblock Kernel methods for measuring independence.
+\newblock \emph{The Journal of Machine Learning Research}, 6:\penalty0
+  2075--2129, 2005{\natexlab{b}}.
+
+\bibitem[Gretton et~al.(2007)Gretton, Fukumizu, Teo, Song, Sch{\"o}lkopf, and
+  Smola]{gretton2007kernel}
+A.~Gretton, K.~Fukumizu, C.~H. Teo, L.~Song, B.~Sch{\"o}lkopf, and A.~J. Smola.
+\newblock A kernel statistical test of independence.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  585--592, 2007.
+
+\bibitem[Gretton et~al.(2012)Gretton, Borgwardt, Rasch, Sch{\"o}lkopf, and
+  Smola]{gretton2012kernel}
+A.~Gretton, K.~M. Borgwardt, M.~J. Rasch, B.~Sch{\"o}lkopf, and A.~Smola.
+\newblock A kernel two-sample test.
+\newblock \emph{The Journal of Machine Learning Research}, 13\penalty0
+  (1):\penalty0 723--773, 2012.
+
+\bibitem[Lancaster(1969)]{lancaster1969chi}
+H.~O. Lancaster.
+\newblock \emph{Chi-Square Distribution}.
+\newblock Wiley Online Library, 1969.
+
+\bibitem[Leucht and Neumann(2013)]{leucht2013dependent}
+A.~Leucht and M.~H. Neumann.
+\newblock Dependent wild bootstrap for degenerate u-and v-statistics.
+\newblock \emph{Journal of Multivariate Analysis}, 117:\penalty0 257--280,
+  2013.
+
+\bibitem[Sch{\"o}lkopf and Smola(2002)]{scholkopf2002learning}
+B.~Sch{\"o}lkopf and A.~J. Smola.
+\newblock \emph{Learning with kernels: Support vector machines, regularization,
+  optimization, and beyond}.
+\newblock MIT press, 2002.
+
+\bibitem[Sejdinovic et~al.(2013)Sejdinovic, Gretton, and
+  Bergsma]{sejdinovic2013kernel}
+D.~Sejdinovic, A.~Gretton, and W.~Bergsma.
+\newblock A kernel test for three-variable interactions.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  1124--1132, 2013.
+
+\bibitem[Serfling(2009)]{serfling2009approximation}
+R.~J. Serfling.
+\newblock \emph{Approximation theorems of mathematical statistics}, volume 162.
+\newblock John Wiley \&amp; Sons, 2009.
+
+\bibitem[Shao(2010)]{shao2010dependent}
+X.~Shao.
+\newblock The dependent wild bootstrap.
+\newblock \emph{Journal of the American Statistical Association}, 105\penalty0
+  (489):\penalty0 218--235, 2010.
+
+\bibitem[Smola et~al.(2007)Smola, Gretton, Song, and
+  Sch{\"o}lkopf]{smola2007hilbert}
+A.~Smola, A.~Gretton, L.~Song, and B.~Sch{\"o}lkopf.
+\newblock A hilbert space embedding for distributions.
+\newblock In \emph{Algorithmic Learning Theory}, pages 13--31. Springer, 2007.
+
+\bibitem[Sriperumbudur et~al.(2010)Sriperumbudur, Gretton, Fukumizu,
+  Sch{\"o}lkopf, and Lanckriet]{sriperumbudur2010hilbert}
+B.~K. Sriperumbudur, A.~Gretton, K.~Fukumizu, B.~Sch{\"o}lkopf, and G.~R.
+  Lanckriet.
+\newblock Hilbert space embeddings and metrics on probability measures.
+\newblock \emph{The Journal of Machine Learning Research}, 11:\penalty0
+  1517--1561, 2010.
+
+\bibitem[Sriperumbudur et~al.(2011)Sriperumbudur, Fukumizu, and
+  Lanckriet]{sriperumbudur2011universality}
+B.~K. Sriperumbudur, K.~Fukumizu, and G.~R. Lanckriet.
+\newblock Universality, characteristic kernels and rkhs embedding of measures.
+\newblock \emph{The Journal of Machine Learning Research}, 12:\penalty0
+  2389--2410, 2011.
+
+\bibitem[Steinwart and Christmann(2008)]{steinwart2008support}
+I.~Steinwart and A.~Christmann.
+\newblock \emph{Support vector machines}.
+\newblock Springer Science \&amp; Business Media, 2008.
+
+\end{thebibliography}
