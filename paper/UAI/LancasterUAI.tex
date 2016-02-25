@@ -119,7 +119,35 @@ In this paper we show that the Lancaster interaction test statistic satisfies th
 %
 %This work combines the works of [HSIC + time series] and [Lancaster interaction] to give a non-parametric test for three variable interactions in which the samples are drawn from random processes.
 
-\section{Background} 
+\section{Main results}
+The Lancaster interaction on the triple of variables $(X,Y,Z)$ is defined as the signed measure $\Delta_LP = \mathbb{P}_{XYZ} - \mathbb{P}_{XY}\mathbb{P}_{Z} - \mathbb{P}_{XZ}\mathbb{P}_{Y} - \mathbb{P}_{X}\mathbb{P}_{YZ} + 2\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}$. It is straightforward to show that if any variable is independent of the other two (equivalently, if the joint distribution $\mathbb{P}_{XYZ}$ factorises into a product of marginals in any way), then $\Delta_LP = 0$. That is, writing $\mathcal{H}_X = \{X \independent (Y,Z)\}$ and similar for $\mathcal{H}_Y$ and $\mathcal{H}_Z$, we have that
+
+\[\mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z \Rightarrow \Delta_LP=0 \]
+
+By [Lancaster], we can consider mean embedding of this measure 
+\begin{align}
+ \mu_L = \int k(x,\cdot) l(y,\cdot) m(z,\cdot) \Delta_LP 
+\end{align}
+
+
+Also by By [Lancaster] given a finite sample $(X_i,Y_i,Z_i)_{i=1}^n$, the norm  mean embedding of the Lancaster interaction, $\mu_L$ can be empirically estimated as
+\begin{equation}\label{eqn:lancaster}
+\|\mu_L\|^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}
+\end{equation}
+
+
+We show that under suitable mixing assumptions  distribution of  $\frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}$ is same as distribution of
+$\frac{1}{n^2}\left(\overline{K}\circ\overline{L}\circ\overline{M}\right)_{++}$
+
+We show that the above can be written as a V-statics 
+\[ V(f,\mathcal{S}) =  \frac{1}{n^k} \mathlarger{\sum}_{1\leq i,j \leq n} \overline{K}\prod \overline{L}\prod\overline{M} (S_i,S_j)
+\]
+where  $S_i = (X_i,Y_i,Z_i)$. Finally we show that $\overline{K} \prod \overline{L} \prod \overline{M} $ is a positive definite, degenerate, bounded kernel. This allows us to apply Leucht and kacper results and construct an interaction test 
+
+PUT here testing theorem ie. under the null distribution of $\|\mu_L\|^2 $ can be approximated using this and that and under alternative we got consistency since this and that. 
+
+
+\section{Details} 
 
 In this section we briefly introduce the theory and definitions required to understand the statement and proof of our main result. For a more in-depth introduction, see e.g. \cite{steinwart2008support}\cite{berlinet2011reproducing}\cite{scholkopf2002learning}
 
