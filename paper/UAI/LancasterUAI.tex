@@ -13,7 +13,15 @@
 \usepackage{subfigure} 
 \usepackage{amssymb}
 % For citations
+% Citations
 \usepackage{natbib}
+\bibliographystyle{abbrvnat}            % citation style in References section
+\renewcommand{\bibsection}{}            % removes the References heading
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue,linkcolor=blue]{hyperref}
+                                        % turns citations into hyperlinks
+
+
+
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -41,7 +49,7 @@
 
 % Packages hyperref and algorithmic misbehave sometimes.  We can fix
 % this with the following command.
-\newcommand{\theHalgorithm}{\arabic{algorithm}}
+%\newcommand{\theHalgorithm}{\arabic{algorithm}}
 \newcommand*{\LargerCdot}{\raisebox{-0.25ex}{\scalebox{1.5}{$\cdot$}}}
 
 \title{A Kernel Test for Three-Variable Interactions with Random Processes (UAI 2016)}
@@ -73,7 +81,7 @@
 
 \begin{abstract} 
 
-A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{iid} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we show that the Lancaster statistic satisfies the conditions required to use the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
+A wild bootstrap method is applied to the \cite{doukhan1994mixing} Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{iid} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we show that the Lancaster statistic satisfies the conditions required to use the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
 
 %(An additional minor contribution is that it is also shown that the multiple testing correction proposed in [Lancaster] is too conservative, and a new correction is proposed that increases test power)
 \end{abstract} 
@@ -405,11 +413,11 @@ while for the 3-way HSIC test we bootstrap:
 nHSIC_b = \frac{1}{n}\left(\widetilde{\left( K \circ L\right) }\circ \tilde{M} \right)_{++}
 \end{align*}
 
-These two quantities differ only in the centring of $K$ and $L$, amounting to constant shifts in the respective feature spaces of $k$ and $l$. This difference has the consequence of quite drastically changing the types of dependency that each statistic is sensitive to.
+These two quantities differ only in the centring of $K$ and $L$, amounting to constant shifts in the respective feature spaces of the kernels $k$ and $l$. This difference has the consequence of quite drastically changing the types of dependency that each statistic is sensitive to.
 
 \subsection{Directions for future research}
 
-At present, no formal characterisation has been made of the cases in which the Lancaster statistic is more sensitive to dependence than 3-way HSIC. The 
+At present, no formal characterisation has been made of the cases in which the Lancaster statistic is more sensitive to dependence than 3-way HSIC, or why it is that modifying the feature maps of the kernels (as is implicitly done when empirically centring) should have the empirical effect on sensitivity to different types of dependence that is observed. We conjecture that other statistics could be constructed with interesting properties by choosing other ways to modify the feature maps of the kernels.
 
 \section{Proofs}
 
@@ -535,6 +543,7 @@ And thus it is a normalised V-statistic. To show that it is degenerate, fix any 
 cheers!
 
 \subsubsection*{References}
+\bibliography{ref}
 
 References follow the acknowledgements.  Use unnumbered third level
 heading for the references title.  Any choice of citation style is
