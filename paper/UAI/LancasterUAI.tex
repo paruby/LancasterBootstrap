@@ -140,29 +140,36 @@ where $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n a(X_i,\cdot)$.  Indeed by by [Lan
 \end{equation}
 where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$, for a matrix $A$. Latter [Lancaster] shows that, under the null hypothesis, $n \|\hat \mu_L\|^2 $ converges to some complicated distribution. By leveraging  samples i.i.d. assumption, quantiles of this difficult distribution  can be estimated using simple permutation bootstrap, and so a test procedure is proposed.
 
-In time series setting this reasoning does not hold. It's difficult to study asymptotic disquisition of $n \|\hat \mu_L\|^2 $ for non i.i.d.  data and permutation bootstrap fails as showed in [cite something]. to construct a test in this setting we will use asymptotic and bootstrap results for $\tau$-mixing. To do so first we need to simplify problem to studying 
+In time series setting this reasoning does not hold. It's difficult to study asymptotic disquisition of $n \|\hat \mu_L\|^2 $ for non i.i.d.  data and permutation bootstrap fails as showed in experiment \ref{wildBootstrap_is_necessary} in section [experiments]. to construct a test in this setting we will use asymptotic and bootstrap results for $\tau$-mixing. 
+
+The null hypothesis of the Lancaster test is composed of three sub-components. In the following, we assume that $\mathcal{H}_Z$ holds; by symmetry, similar results hold for $\mathcal{H}_X$ and $\mathcal{H}_Y$.
+
+It can be shown that the norm of the mean embedding can also be written as
+
+\[ \|\hat \mu_L\|^2 = \frac{1}{n^2}\left(\widetilde{\tilde{K}\circ\tilde{L}}\circ\tilde{M}\right)_{++}\]
+
+We simplify the problem to studying instead the distribution of
 \[
-\| \hat \mu_{L,2} \|^2 =\frac{1}{n^2}\left(\overline{K}\circ\overline{L}\circ\overline{M}\right)_{++}
+\| \hat \mu^{(Z)}_{L,2} \|^2 =\frac{1}{n^2}\left(\overline{\overline{K}\circ\overline{L}}\circ\overline{M}\right)_{++}
 \]
 where e.g. 
 \[
 \overline{K}_{i,j} = \langle k(X_i,\cdot)-\mu_X, k(X_j,\cdot) -\mu_X \rangle,
 \]
 with $\mu_X$ being the population mean embedding of $X$. Precisely we prove
-\begin{theorem}
- Under the null, $\lim_{n \to \infty} ( \| \hat \mu_{L,2} \|^2 -\|\hat \mu_L\|^2 ) =0 $ in probability.
+\begin{theorem} Suppose that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta>0$. Under $\mathcal{H}_Z$, $\lim_{n \to \infty} ( \| \hat \mu^{(Z)}_{L,2} \|^2 -\|\hat \mu_L\|^2 ) =0 $ in probability.
 \end{theorem}
-The statistic $\| \hat \mu_{L,2} \|^2$ is much easier to study under non-i.i.d.  assumption. Indeed it can be written as a V-statics 
+The statistic $\| \hat \mu^{(Z)}_{L,2} \|^2$ is much easier to study under non-i.i.d.  assumption. Indeed it can be written as a V-statics 
 \[ 
-V_n = \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} \overline{k} \otimes \overline{l}\otimes \overline{m} (S_i,S_j)
+V_n = \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} \overline{\overline{k} \otimes \overline{l}}\otimes \overline{m} (S_i,S_j)
 \]
 where  $S_i = (X_i,Y_i,Z_i)$. The crucial observation is that
 \[
- h = \overline{k} \otimes \overline{l}\otimes \overline{m}
+ h = \overline{\overline{k} \otimes \overline{l}}\otimes \overline{m}
 \]
 is well behaved in the following sense 
 \begin{theorem}
- $h$ is bounded symmetric Lipschitz contentious kernel, which is degenerate under the null hypothesis i.e $ < Eh(S_i,\cdot),h(s,\cdot) > =0$ (  Paul i think this is easily done in RKHS using mean embedding def of Lancaster, somehow similar to what you did at the end of the proof of th 1.)
+ $h$ is bounded symmetric Lipschitz contentious kernel, which is degenerate under $\mathcal{H}_Z$ i.e $ < Eh(S_i,\cdot),h(s,\cdot) > =0$ (  Paul i think this is easily done in RKHS using mean embedding def of Lancaster, somehow similar to what you did at the end of the proof of th 1.)
 \end{theorem}
 The asymptotic analysis of $V$-statistic with degenerate kernels is still difficult, but has been done in Leacht and Kacper. Additionally, Leucht showed a way to estimate quantiles of such $V$-statistic under using the  wild bootstrap. This, combined with quite simple analysis of V-stat under the alternative, in Kacper Theorem 2 \footnote{similar results present in Leucht as specific cases.}, results in statistical test see algorithm \ref{alg:Lancaster}.
 \begin{algorithm}[tb]
@@ -293,7 +300,7 @@ If the test statistic has the form of a normalised V-statistic, then provided ce
 
 \subsection{Hilbert spaced random variable CLT}
 
-In this paper we will exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \cite{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened.
+In this paper we exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \cite{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened.
 
 \section{Lancaster Interaction for Random Processes}
 
