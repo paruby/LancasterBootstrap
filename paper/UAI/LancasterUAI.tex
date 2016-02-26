@@ -81,7 +81,7 @@
 
 \begin{abstract} 
 
-A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{iid} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we show that the Lancaster statistic satisfies the conditions required to use the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
+A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{i.i.d. } case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we show that the Lancaster statistic satisfies the conditions required to use the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
 
 %(An additional minor contribution is that it is also shown that the multiple testing correction proposed in [Lancaster] is too conservative, and a new correction is proposed that increases test power)
 \end{abstract} 
@@ -92,11 +92,11 @@ A wild bootstrap method is applied to the Lancaster three-variable interaction m
 
 Nonparametric testing of independence or interaction between random variables is to machine learning and statistics as the peer review process is to publishing: everyone agrees that it is very important, but the ways in which we go about doing it in practice often rely on assumptions that probably don't hold in reality. 
 
-Sticking to the more tractable and well-posed problem of the former, the authors observe that many existing methods in determining independence and interaction between variables rely on the assumption that the observed data are drawn \emph{iid}, which for many applications is unrealistic and restrictive \cite{gretton2005measuring}\cite{gretton2007kernel}\cite{gretton2005kernel}\cite{sejdinovic2013kernel}. Recent work has begun to extend statistical tests exploiting the theory of Reproducing Kernel Hilbert Spaces (RKHSs) from the \emph{iid} case to the time series case \cite{chwialkowski2014wild}\cite{chwialkowski2014kernel}. Of course, these tests also rely on rather restrictive assumptions on the mixing properties of the processes from which the observations are drawn; nonetheless they are a significant relaxation on the \emph{iid} assumption and are a step towards methods capable of handling more general forms of time-dependent data. 
+Sticking to the more tractable and well-posed problem of the former, the authors observe that many existing methods in determining independence and interaction between variables rely on the assumption that the observed data are drawn \emph{i.i.d. }, which for many applications is unrealistic and restrictive \cite{gretton2005measuring}\cite{gretton2007kernel}\cite{gretton2005kernel}\cite{sejdinovic2013kernel}. Recent work has begun to extend statistical tests exploiting the theory of Reproducing Kernel Hilbert Spaces (RKHSs) from the \emph{i.i.d. } case to the time series case \cite{chwialkowski2014wild}\cite{chwialkowski2014kernel}. Of course, these tests also rely on rather restrictive assumptions on the mixing properties of the processes from which the observations are drawn; nonetheless they are a significant relaxation on the \emph{i.i.d. } assumption and are a step towards methods capable of handling more general forms of time-dependent data. 
 
 The Lancaster interaction \cite{lancaster1969chi}\cite{sejdinovic2013kernel} is a signed measure that can be used to construct a test statistic capable of detecting dependence between three random variables. If the joint distribution on the three variables factorises in some way into a product of a marginal and a pairwise marginal, the Lancaster interaction is the zero measure. Given finite data, this can be used to construct a statistical test, the null hypothesis of which is that the joint distribution factorises thus. 	
 
-In the \emph{iid} case, the null distribution of the test statistic can be estimated using a permutation bootstrap technique: this amounts to shuffling the indices of one or more of the variables and recalculating the test statistic on this bootstrapped data set. When our samples instead exhibit temporal dependence, shuffling the time indices destroys this dependence and thus doing so does not correspond to a valid resample of the test statistic. 
+In the \emph{i.i.d. } case, the null distribution of the test statistic can be estimated using a permutation bootstrap technique: this amounts to shuffling the indices of one or more of the variables and recalculating the test statistic on this bootstrapped data set. When our samples instead exhibit temporal dependence, shuffling the time indices destroys this dependence and thus doing so does not correspond to a valid resample of the test statistic. 
 
 Provided that our data-generating process satisfies some technical conditions on the forms of temporal dependence, recent work by Leucht \cite{leucht2013dependent}, building on the work of Shao \cite{shao2010dependent}, can come to our rescue. The Wild Bootstrap is a method that correctly resamples from the null distribution of a test statistic, subject to certain conditions on both the test statistic and the processes from which the observations have been drawn.
 
@@ -130,21 +130,63 @@ By [Lancaster], we can consider mean embedding of this measure
 \end{align}
 
 
-Also by By [Lancaster] given a finite sample $(X_i,Y_i,Z_i)_{i=1}^n$, the norm  mean embedding of the Lancaster interaction, $\mu_L$ can be empirically estimated as
-\begin{equation}\label{eqn:lancaster}
-\|\mu_L\|^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}
-\end{equation}
-
-
-We show that under suitable mixing assumptions  distribution of  $\frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}$ is same as distribution of
-$\frac{1}{n^2}\left(\overline{K}\circ\overline{L}\circ\overline{M}\right)_{++}$
-
-We show that the above can be written as a V-statics 
-\[ V(f,\mathcal{S}) =  \frac{1}{n^k} \mathlarger{\sum}_{1\leq i,j \leq n} \overline{K}\prod \overline{L}\prod\overline{M} (S_i,S_j)
+Given a i.i.d. sample $(X_i,Y_i,Z_i)_{i=1}^n$,  norm of the mean embedding $\mu_L$ can be empirically estimated using sample centered kernel matrices. If $a$ is a kernel and $A_{i,j} = A(X_i,x_j)$, then centered kernel matrices  $\tilde{A}$ is 
+\[
+\tilde{H}_{i,j} = \langle a(X_i,\cdot)-\tilde{\mu}_X, a(X_j,\cdot) -\tilde{\mu}_X \rangle,
 \]
-where  $S_i = (X_i,Y_i,Z_i)$. Finally we show that $\overline{K} \prod \overline{L} \prod \overline{M} $ is a positive definite, degenerate, bounded kernel. This allows us to apply Leucht and kacper results and construct an interaction test 
+where $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n a(X_i,\cdot)$.  Indeed by by [Lancaster], estimator of the norm  mean embedding of the Lancaster interaction for i.i.d. samples is 
+\begin{equation}\label{eqn:lancaster}
+\|\hat \mu_L\|^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}
+\end{equation}
+where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$, for a matrix $A$. Latter [Lancaster] shows that, under the null hypothesis, $n \|\hat \mu_L\|^2 $ converges to some complicated distribution. By leveraging  samples i.i.d. assumption, quantiles of this difficult distribution  can be estimated using simple permutation bootstrap, and so a test procedure is proposed.
 
-PUT here testing theorem ie. under the null distribution of $\|\mu_L\|^2 $ can be approximated using this and that and under alternative we got consistency since this and that. 
+In time series setting this reasoning does not hold. It's difficult to study asymptotic disquisition of $n \|\hat \mu_L\|^2 $ for non i.i.d.  data and permutation bootstrap fails as showed in [cite something]. to construct a test in this setting we will use asymptotic and bootstrap results for $\tau$-mixing. To do so first we need to simplify problem to studying 
+\[
+\| \hat \mu_{L,2} \|^2 =\frac{1}{n^2}\left(\overline{K}\circ\overline{L}\circ\overline{M}\right)_{++}
+\]
+where e.g. 
+\[
+\overline{K}_{i,j} = \langle k(X_i,\cdot)-\mu_X, k(X_j,\cdot) -\mu_X \rangle,
+\]
+with $\mu_X$ being the population mean embedding of $X$. Precisely we prove
+\begin{theorem}
+ Under the null, $\lim_{n \to \infty} ( \| \hat \mu_{L,2} \|^2 -\|\hat \mu_L\|^2 ) =0 $ in probability.
+\end{theorem}
+The statistic $\| \hat \mu_{L,2} \|^2$ is much easier to study under non-i.i.d.  assumption. Indeed it can be written as a V-statics 
+\[ 
+V_n = \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} \overline{k} \otimes \overline{l}\otimes \overline{m} (S_i,S_j)
+\]
+where  $S_i = (X_i,Y_i,Z_i)$. The crucial observation is that
+\[
+ h = \overline{k} \otimes \overline{l}\otimes \overline{m}
+\]
+is well behaved in the following sense 
+\begin{theorem}
+ $h$ is bounded symmetric Lipschitz contentious kernel, which is degenerate under the null hypothesis i.e $ < Eh(S_i,\cdot),h(s,\cdot) > =0$ (  Paul i think this is easily done in RKHS using mean embedding def of Lancaster, somehow similar to what you did at the end of the proof of th 1.)
+\end{theorem}
+The asymptotic analysis of $V$-statistic with degenerate kernels is still difficult, but has been done in Leacht and Kacper. Additionally, Leucht showed a way to estimate quantiles of such $V$-statistic under using the  wild bootstrap. This, combined with quite simple analysis of V-stat under the alternative, in Kacper Theorem 2 \footnote{similar results present in Leucht as specific cases.}, results in statistical test see algorithm \ref{alg:Lancaster}.
+\begin{algorithm}[tb]
+   \caption{Test $\mathcal{H}_Z$ with Wild Bootstrap}
+   \label{alg:Lancaster}
+\begin{algorithmic}
+   \STATE {\bfseries Input:} $\tilde{K}$, $\tilde{L}$, $\tilde{M}$, each size $n\times n$, $N$= number of bootstraps, $\alpha=$ p-value threshold
+   \STATE $n\|\Delta_L\hat{P}\|^2 = \frac{1}{n}\left(\widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)_{++}$
+   \STATE samples = zeros(1,N)
+   \FOR{$i=1$ {\bfseries to} $N$}
+   \STATE Draw random matrix W according to Wild Bootstrap
+   \STATE samples[$i$] = $\frac{1}{n}\left(W^\intercal\left( \widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)W\right) _{++}$
+   \ENDFOR
+   \IF{sum($n\|\Delta_L\hat{P}\|^2 >$ samples)$>\frac{\alpha}{N}$}
+   \STATE Reject $\mathcal{H}_Z$
+   \ELSE
+   \STATE Do not reject $\mathcal{H}_Z$
+   \ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+The consistency results and type one error control result are provided in t he details section.
+
+
 
 
 \section{Details} 
@@ -167,9 +209,9 @@ If $k$ and $l$ are kernels on $\mathcal{X}$ and $\mathcal{Y}$, then $k\otimes l$
 
 \subsection{Hypothesis testing using the mean embedding}
 
-The idea of injectively embedding measures into a Hilbert space can be exploited to design statistical tests of properties of one or more distributions. For example, the Maximum Mean Discrepancy (MMD) \cite{gretton2012kernel} two-sample test is motivated by the following: suppose we are given samples $\{X_i\}_{i=1}^n$ and $\{Y_j\}_{j=1}^m$ drawn \emph{iid} from distributions $\mathbb{P}$ and $\mathbb{Q}$ respectively. If our kernel is characteristic, then $\mu_\mathbb{P} = \mu_\mathbb{Q} \iff \mathbb{P} = \mathbb{Q}$. Under the assumption that $\mathbb{P} = \mathbb{Q}$, we would therefore expect the empirical embeddings $\tilde{\mu}_\mathbb{P}$ and $\tilde{\mu}_\mathbb{Q}$ to be `close' in Hilbert space norm. More precisely, we can use the squared Hilbert space norm of their difference $\|\tilde{\mu}_\mathbb{P} - \tilde{\mu}_\mathbb{Q} \|^2$ as a test statistic which, under the null hypothesis, would have distribution increasingly concentrated close to 0 as $n$ and $m$ become large \cite{gretton2012kernel}. The null distribution of this statistic can be estimated in the finite sample case by randomly relabelling the $X$s and $Y$s (in such a way that $n$ and $m$ are preserved) to arrive at asymptotically consistent p-values.
+The idea of injectively embedding measures into a Hilbert space can be exploited to design statistical tests of properties of one or more distributions. For example, the Maximum Mean Discrepancy (MMD) \cite{gretton2012kernel} two-sample test is motivated by the following: suppose we are given samples $\{X_i\}_{i=1}^n$ and $\{Y_j\}_{j=1}^m$ drawn \emph{i.i.d. } from distributions $\mathbb{P}$ and $\mathbb{Q}$ respectively. If our kernel is characteristic, then $\mu_\mathbb{P} = \mu_\mathbb{Q} \iff \mathbb{P} = \mathbb{Q}$. Under the assumption that $\mathbb{P} = \mathbb{Q}$, we would therefore expect the empirical embeddings $\tilde{\mu}_\mathbb{P}$ and $\tilde{\mu}_\mathbb{Q}$ to be `close' in Hilbert space norm. More precisely, we can use the squared Hilbert space norm of their difference $\|\tilde{\mu}_\mathbb{P} - \tilde{\mu}_\mathbb{Q} \|^2$ as a test statistic which, under the null hypothesis, would have distribution increasingly concentrated close to 0 as $n$ and $m$ become large \cite{gretton2012kernel}. The null distribution of this statistic can be estimated in the finite sample case by randomly relabelling the $X$s and $Y$s (in such a way that $n$ and $m$ are preserved) to arrive at asymptotically consistent p-values.
 
-An independence test known as the Hilbert-Schmidt Independence Criterion (HSIC)\cite{gretton2007kernel}\cite{gretton2005kernel} can be constructed in a similar way: Given samples $\{(X_i,Y_i)\}_{i=1}^n$ drawn \emph{iid} from a joint distribution $\mathbb{P}_{XY}$, $X$ and $Y$ are independent if and only if $\mathbb{P}_{XY} = \mathbb{P}_X \mathbb{P}_Y \iff \mu_{\mathbb{P}_{XY}} = \mu_{\mathbb{P}_X\mathbb{P}_Y}$. Similarly to MMD, we can empirically estimate the two embeddings and use their squared Hilbert space distance  $\| \mu_{\mathbb{P}_{XY}} - \mu_{\mathbb{P}_X\mathbb{P}_Y}\|^2$ as a test statistic which, under the null hypothesis of independence, will be close to 0. The null distribution of this statistic can be estimated by randomly permuting the indices of one of the variables to estimate give asymptotically consistent p-values.
+An independence test known as the Hilbert-Schmidt Independence Criterion (HSIC)\cite{gretton2007kernel}\cite{gretton2005kernel} can be constructed in a similar way: Given samples $\{(X_i,Y_i)\}_{i=1}^n$ drawn \emph{i.i.d. } from a joint distribution $\mathbb{P}_{XY}$, $X$ and $Y$ are independent if and only if $\mathbb{P}_{XY} = \mathbb{P}_X \mathbb{P}_Y \iff \mu_{\mathbb{P}_{XY}} = \mu_{\mathbb{P}_X\mathbb{P}_Y}$. Similarly to MMD, we can empirically estimate the two embeddings and use their squared Hilbert space distance  $\| \mu_{\mathbb{P}_{XY}} - \mu_{\mathbb{P}_X\mathbb{P}_Y}\|^2$ as a test statistic which, under the null hypothesis of independence, will be close to 0. The null distribution of this statistic can be estimated by randomly permuting the indices of one of the variables to estimate give asymptotically consistent p-values.
 
 \subsection{Lancaster interaction test}
 
@@ -202,13 +244,13 @@ where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{i
 We can similarly group together either of the other two pairs of Gram matrices and empirically recentre.
 
 
-The next part of the statistical test is to find threshold values of the statistic beyond which we would reject the null hypothesis. Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components. In the case that the observations are drawn \emph{iid}, the data can be resampled using permutation bootstrap method. For example, under $\mathcal{H}_X$, the bootstrapped dataset $\{X_{\pi(i)},Y_i,Z_i \}_{i=1}^n$ can be used to generate a valid resample of the test statistic under $\mathcal{H}_X$. 
+The next part of the statistical test is to find threshold values of the statistic beyond which we would reject the null hypothesis. Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components. In the case that the observations are drawn \emph{i.i.d. }, the data can be resampled using permutation bootstrap method. For example, under $\mathcal{H}_X$, the bootstrapped dataset $\{X_{\pi(i)},Y_i,Z_i \}_{i=1}^n$ can be used to generate a valid resample of the test statistic under $\mathcal{H}_X$. 
 %For more information on the details of the bootstrapping method, see \cite{sejdinovic2013kernel}.
 
 Note that in order to achieve consistency for this test, we would need that $\mathcal{H}_0 \iff \Delta_LP = 0$. Unfortunately this does not hold - in \cite{sejdinovic2013kernel} examples are given of distributions for which $\mathcal{H}_0$ is false, and yet $\Delta_LP = 0$. At the time of writing, a characterisation of such distributions is unknown to the authors. Therefore, if we reject $\mathcal{H}_0$ then we conclude that the distribution does not factorise; if we fail to reject $\mathcal{H}_0$ then we can conclude nothing.
 
 \subsection{Time series}
-In this paper we are extending the existing Lancaster test from the \emph{iid} case to a case in which our observations are drawn from a random process. There are various formalisations of memory or 'mixing' of a random process \cite{doukhan1994mixing}\cite{bradley2005basic}\cite{dedecker2007weak}; of relevance to this paper are the following two:
+In this paper we are extending the existing Lancaster test from the \emph{i.i.d. } case to a case in which our observations are drawn from a random process. There are various formalisations of memory or 'mixing' of a random process \cite{doukhan1994mixing}\cite{bradley2005basic}\cite{dedecker2007weak}; of relevance to this paper are the following two:
 
 \begin{definition}\cite{leucht2013dependent}
 A process $(X_t)_{t}$ is \emph{$\tau$-mixing} if $\tau(r) \longrightarrow 0$ as $r\longrightarrow \infty$, where
@@ -230,7 +272,7 @@ Suppose that the process $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing. Then any `sub-proc
 \end{lemma}
 
 \subsection{V-statistics}
-A V-statistic \cite{serfling2009approximation} of a k-argument, symmetric function $f$ given $iid$ observations $\mathcal{S}_n = \{S_1,\ldots,S_n\}$ where each $S_i \sim \mathbb{P}$ is written
+A V-statistic \cite{serfling2009approximation} of a k-argument, symmetric function $f$ given $i.i.d. $ observations $\mathcal{S}_n = \{S_1,\ldots,S_n\}$ where each $S_i \sim \mathbb{P}$ is written
 
 \[ V(f,\mathcal{S}) =  \frac{1}{n^k} \mathlarger{\sum}_{1\leq i_1,\ldots, i_k \leq n} f(S_{i_1},\ldots,S_{i_k})\]
 
@@ -242,7 +284,7 @@ Many kernel test statistics can be viewed as normalised V-statistics which, unde
 
 \subsection{Wild Bootstrap}
 
-In many frequentist statistical tests, estimates of the test statistic threshold required to achieve a given Type I error are obtained through a bootstrap resampling method. In the case of the Lancaster and HSIC tests with \emph{iid} observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{iid} assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any temporal dependence. 
+In many frequentist statistical tests, estimates of the test statistic threshold required to achieve a given Type I error are obtained through a bootstrap resampling method. In the case of the Lancaster and HSIC tests with \emph{i.i.d. } observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{i.i.d. } assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any temporal dependence. 
 
 If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis (in contrast to other methods that first generate a new simulated dataset and then compute the test statistic on this dataset). These conditions can be categorised as concerning: (1) Appropriate $\tau$-mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(f,\mathcal{S}_n)$, then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic $nV_b(f,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}f(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(f,\mathcal{S})$ that is of crucial importance to this paper is that $f$ must be a degenerate core.
 
@@ -315,28 +357,10 @@ Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less
 
 The Lancaster test described above amounts to a method to test each of the sub-hypotheses $\mathcal{H}_X, \mathcal{H}_Y, \mathcal{H}_Z$. Rather than using the Lancaster test statistic with wild bootstrap to test each of these, we could instead use HSIC. For example, by considering the pair of variables $(X,Y)$ and $Z$ with kernels $k\otimes l$ and $m$ respectively, HSIC can be used to test $\mathcal{H}_Z$. Similar grouping of the variables can be used to test $\mathcal{H}_X$ and $\mathcal{H}_Y$. Applying the same multiple testing correction as in the Lancaster test, we derive an alternative test of dependence between three variables. We refer to this HSIC based procedure as \emph{3-way HSIC}.
 
-In the case of \emph{iid} observations, it was shown in \cite{sejdinovic2013kernel} that Lancaster statistical test is more sensitive to dependence between three random variables than the above HSIC-based test when pairwise interaction is weak but joint interaction is strong. In this section, we demonstrate that the same is true in the time series case on synthetic data.
+In the case of \emph{i.i.d. } observations, it was shown in \cite{sejdinovic2013kernel} that Lancaster statistical test is more sensitive to dependence between three random variables than the above HSIC-based test when pairwise interaction is weak but joint interaction is strong. In this section, we demonstrate that the same is true in the time series case on synthetic data.
 
 
 
-\begin{algorithm}[tb]
-   \caption{Test $\mathcal{H}_Z$ with Wild Bootstrap}
-   \label{alg:Lancaster}
-\begin{algorithmic}
-   \STATE {\bfseries Input:} $\tilde{K}$, $\tilde{L}$, $\tilde{M}$, each size $n\times n$, $N$= number of bootstraps, $\alpha=$ p-value threshold
-   \STATE $n\|\Delta_L\hat{P}\|^2 = \frac{1}{n}\left(\widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)_{++}$
-   \STATE samples = zeros(1,N)
-   \FOR{$i=1$ {\bfseries to} $N$}
-   \STATE Draw random matrix W according to Wild Bootstrap
-   \STATE samples[$i$] = $\frac{1}{n}\left(W^\intercal\left( \widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)W\right) _{++}$
-   \ENDFOR
-   \IF{sum($n\|\Delta_L\hat{P}\|^2 >$ samples)$>\frac{\alpha}{N}$}
-   \STATE Reject $\mathcal{H}_Z$
-   \ELSE
-   \STATE Do not reject $\mathcal{H}_Z$
-   \ENDIF
-\end{algorithmic}
-\end{algorithm}
 
 \subsection{Weak pairwise interaction, strong joint interaction}\label{experiment1}
 
@@ -352,7 +376,7 @@ Y_t &= \frac{1}{2}Y_{t-1} + \eta_t\\
 Z_t &= \frac{1}{2}Z_{t-1} + d |\theta_t|\text{sign}(X_t Y_t) + \zeta_t\\
 \end{align*}
 
-where $X_0, Y_0, Z_0, \epsilon_t, \eta_t, \theta_t$ and $\zeta_t$ are \emph{iid} $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $(X_t,Y_t)_t$.
+where $X_0, Y_0, Z_0, \epsilon_t, \eta_t, \theta_t$ and $\zeta_t$ are \emph{i.i.d. } $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $(X_t,Y_t)_t$.
 
 Data were generated according to this definition with varying values for the dependence coefficient. For each value of the dependence coefficient, 300 datasets were generated, each consisting of 1200 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
 
@@ -384,9 +408,9 @@ Y_t &= aY_{t-1} + \eta_t\\
 Z_t &= aZ_{t-1} +  \zeta_t\\
 \end{align*}
 
-where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{iid} $\mathcal{N}(0,1)$ random variables and $a$, called the \emph{dependence coefficient}, determines how temporally dependent the processes are. The null hypothesis in this example is true as each process is independent of the others.
+where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{i.i.d. } $\mathcal{N}(0,1)$ random variables and $a$, called the \emph{dependence coefficient}, determines how temporally dependent the processes are. The null hypothesis in this example is true as each process is independent of the others.
 
-The Lancaster test was performed using both the Wild Bootstrap and the simple permutation bootstrap (used in the \emph{iid} case) in order to sample from the null distributions of the test statistic. We used a fixed desired false positive rate $\alpha = 0.05$ with sample of size 1000, with 200 experiments run for each value of $a$. Figure \ref{wildBootstrap_is_necessary} shows the false positive rates for these two methods for varying $a$. It shows that as the processes become more dependent, the false positive rate for the permutation method becomes very large, and is not bounded by the fixed $\alpha$, whereas the false positive rate for the Wild Bootstrap method is bounded by $\alpha$.
+The Lancaster test was performed using both the Wild Bootstrap and the simple permutation bootstrap (used in the \emph{i.i.d. } case) in order to sample from the null distributions of the test statistic. We used a fixed desired false positive rate $\alpha = 0.05$ with sample of size 1000, with 200 experiments run for each value of $a$. Figure \ref{wildBootstrap_is_necessary} shows the false positive rates for these two methods for varying $a$. It shows that as the processes become more dependent, the false positive rate for the permutation method becomes very large, and is not bounded by the fixed $\alpha$, whereas the false positive rate for the Wild Bootstrap method is bounded by $\alpha$.
 \begin{figure}[ht]
 \vskip 0.2in
 \begin{center}
@@ -409,7 +433,7 @@ Y_t &= \frac{1}{2}Y_{t-1} + \eta_t\\
 Z_t &= \frac{1}{2}Z_{t-1} + d(X_t + Y_t) + \zeta_t\\
 \end{align*}
 
-where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{iid} $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $X_t$ and $Y_t$.
+where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{i.i.d. } $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $X_t$ and $Y_t$.
 
 Data were generated according to this definition with varying values for the dependence coefficient. For each value of the dependence coefficient, 300 datasets were generated, each consisting of 1200 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
 
