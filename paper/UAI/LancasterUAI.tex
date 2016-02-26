@@ -33,6 +33,7 @@
 \newtheorem{definition}{Definition}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
 \newtheorem{corollary}{Corollary}
 \newenvironment{claimproof}[1]{\par\noindent\underline{Proof:}\space#1}{\hfill $\blacksquare$}
 \newcommand{\widesim}[2][1.5]{
@@ -157,7 +158,7 @@ where e.g.
 \overline{K}_{i,j} = \langle k(X_i,\cdot)-\mu_X, k(X_j,\cdot) -\mu_X \rangle,
 \]
 with $\mu_X$ being the population mean embedding of $X$. Precisely we prove
-\begin{theorem} Suppose that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta>0$. Under $\mathcal{H}_Z$, $\lim_{n \to \infty} ( \| \hat \mu^{(Z)}_{L,2} \|^2 -\|\hat \mu_L\|^2 ) =0 $ in probability.
+\begin{theorem}\label{theorem:norm-conv-in-prob} Suppose that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta>0$. Under $\mathcal{H}_Z$, $\lim_{n \to \infty} ( \| n\hat \mu^{(Z)}_{L,2} \|^2 - n\|\hat \mu_L\|^2 ) =0 $ in probability.
 \end{theorem}
 The statistic $\| \hat \mu^{(Z)}_{L,2} \|^2$ is much easier to study under non-i.i.d.  assumption. Indeed it can be written as a V-statics 
 \[ 
@@ -168,8 +169,8 @@ where  $S_i = (X_i,Y_i,Z_i)$. The crucial observation is that
  h = \overline{\overline{k} \otimes \overline{l}}\otimes \overline{m}
 \]
 is well behaved in the following sense 
-\begin{theorem}
- $h$ is bounded symmetric Lipschitz contentious kernel, which is degenerate under $\mathcal{H}_Z$ i.e $ < Eh(S_i,\cdot),h(s,\cdot) > =0$ (  Paul i think this is easily done in RKHS using mean embedding def of Lancaster, somehow similar to what you did at the end of the proof of th 1.)
+\begin{theorem}\label{theorem:degenerate-kernel}
+Suppose that $k$, $l$ and $m$ are bounded symmetric Lipschitz contentious kernels. Then $h$ is also bounded symmetric and Lipschitz continuous, which is moreover degenerate under $\mathcal{H}_Z$ i.e $\mathbb{E}_{S}h(S,s)=0$ for any fixed $s$.
 \end{theorem}
 The asymptotic analysis of $V$-statistic with degenerate kernels is still difficult, but has been done in Leacht and Kacper. Additionally, Leucht showed a way to estimate quantiles of such $V$-statistic under using the  wild bootstrap. This, combined with quite simple analysis of V-stat under the alternative, in Kacper Theorem 2 \footnote{similar results present in Leucht as specific cases.}, results in statistical test see algorithm \ref{alg:Lancaster}.
 \begin{algorithm}[tb]
@@ -278,6 +279,16 @@ The concept of $\beta$-mixing will be invoked when applying a central limit theo
 Suppose that the process $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing. Then any `sub-process' is also $\beta$-mixing (for example $(X_t,Y_t)_t$ or $(X_t)_t$)
 \end{lemma}
 
+\subsection{Hilbert spaced random variable CLT}
+
+In this paper we exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \cite{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened.
+
+\begin{lemma}\label{lemma:hilbertCLT}
+Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta > 0$ and that $k$ is a bounded kernel on $\mathcal{X}$. Then $\|\hat\mu_X - \mu_X\|_k = O(n^{-\frac{1}{2}})$
+
+\end{lemma}
+
+
 \subsection{V-statistics}
 A V-statistic \cite{serfling2009approximation} of a k-argument, symmetric function $f$ given $i.i.d. $ observations $\mathcal{S}_n = \{S_1,\ldots,S_n\}$ where each $S_i \sim \mathbb{P}$ is written
 
@@ -298,9 +309,43 @@ If the test statistic has the form of a normalised V-statistic, then provided ce
 
 
 
-\subsection{Hilbert spaced random variable CLT}
 
-In this paper we exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \cite{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened.
+\subsection{Control of Type I error}
+
+This theorem shows that we correctly control the Type I error when testing $\mathcal{H}_Z$.
+
+\begin{theorem}
+Suppose in addition to the conditions of Theorems \ref{theorem:norm-conv-in-prob} and \ref{theorem:degenerate-kernel} that  $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is $\tau$-mixing with coefficients $\tau(m)$ satisfying $\sum_{m=1}^\infty m^2 \sqrt{\tau(m)} < \infty$, and that $W$ is drawn from a process satisfying (B2) in \cite{leucht2013dependent}. Then asymptotically, the quantiles of
+
+\[\frac{1}{n}\left(W^\intercal\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right)W\right) _{++}\]
+
+are the same as those of $ n\| \hat \mu_L\|^2$. (Kacper, is this right? You mentioned that it was technically wrong to say that the two things have the same distribution - what's the right thing to say?)
+\end{theorem}
+
+Proof??? Could make this a corollary and just say that it follows from theorem whatever in leucht.
+
+
+\subsection{Multiple testing correction}
+In the Lancaster test, we use a composite null hypothesis which requires us to test each of the three hypotheses $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ separately. We reject the null hypothesis $\mathcal{H}_0$ if and only if we reject all three of the components. In \cite{sejdinovic2013kernel}, it is suggested that the Holm-Bonferroni \cite{holm1979simple} correction be used to account for multiple testing. We show here that more relaxed conditions on the p-values can be used while still bounding the Type I error, thus increasing test power.
+
+Denote by $\mathcal{A}_*$ the event that $\mathcal{H}_*$ is rejected. Then
+
+\begin{align*}
+\mathbb{P}(\mathcal{A}_0) &= \mathbb{P}(\mathcal{A}_X \land \mathcal{A}_Y \land \mathcal{A}_Z) \\
+&\leq \min\{\mathbb{P}(\mathcal{A}_X), \mathbb{P}(\mathcal{A}_Y), \mathbb{P}(\mathcal{A}_Z)\}
+\end{align*}
+
+If $\mathcal{H}_0$ is true, then so must one of the components. WLOG assume that $\mathcal{H}_X$ is true. If we use significance levels of $\alpha$ in each test individually then $\mathbb{P}(\mathcal{A}_X) \leq \alpha$ and thus $\mathbb{P}(\mathcal{A}_0) \leq \alpha$.
+
+Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall. It is therefore more conservative than necessary and thus has worse test power compared to the `simple correction' proposed here.
+
+
+\subsection{(Semi-)consistency of testing procedure}
+
+The class of probability distributions for which $\Delta_LP=0$ is larger than $\mathcal{H}_X \lor \mathcal{H}_Y \lor\mathcal{H}_Z$, and so we cannot hope to achieve consistency with this test (ie if $\mathcal{H}_1$ is really true, we reject the null hypothesis with probability 1 in the limit $n\longrightarrow\infty$)
+
+If, however, $\Delta_LP \not =0$ then Theorem 2 of [Kacper wild bootstrap] implies that we will reject the null hypothesis with increasing probability? (Kacper, is this right?)
+
 
 \section{Lancaster Interaction for Random Processes}
 
@@ -346,19 +391,7 @@ is distributed as $ n\| \Delta_L\hat{P} \|^2$.
 
 We can therefore use this to generate samples of the test statistic $ n\| \Delta_L\hat{P} \|^2$ under the null hypothesis $\mathcal{H}_Z$. Using these samples we can select a threshold value of the test statistic such that the Type I error is bounded by whatever $\alpha$ we choose. By symmetry, we can use a similar procedure to test $\mathcal{H}_X$ and $\mathcal{H}_Y$.
 
-\subsection*{Multiple testing correction}
-In the Lancaster test, we use a composite null hypothesis which requires us to test each of the three hypotheses $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ separately. We reject the null hypothesis $\mathcal{H}_0$ if and only if we reject all three of the components. In \cite{sejdinovic2013kernel}, it is suggested that the Holm-Bonferroni \cite{holm1979simple} correction be used to account for multiple testing. We show here that more relaxed conditions on the p-values can be used while still bounding the Type I error, thus increasing test power.
 
-Denote by $\mathcal{A}_*$ the event that $\mathcal{H}_*$ is rejected. Then
-
-\begin{align*}
-\mathbb{P}(\mathcal{A}_0) &= \mathbb{P}(\mathcal{A}_X \land \mathcal{A}_Y \land \mathcal{A}_Z) \\
-&\leq \min\{\mathbb{P}(\mathcal{A}_X), \mathbb{P}(\mathcal{A}_Y), \mathbb{P}(\mathcal{A}_Z)\}
-\end{align*}
-
-If $\mathcal{H}_0$ is true, then so must one of the components. WLOG assume that $\mathcal{H}_X$ is true. If we use significance levels of $\alpha$ in each test individually then $\mathbb{P}(\mathcal{A}_X) \leq \alpha$ and thus $\mathbb{P}(\mathcal{A}_0) \leq \alpha$.
-
-Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall. It is therefore more conservative than necessary and thus has worse test power compared to the `simple correction' proposed here.
 
 \section{Experiments}
 
@@ -504,9 +537,9 @@ Thus, by Theorem 1.1 in \cite{dehling2015bootstrap}
 where $N$ is a Hilbert space valued Gaussian random variable. Thus 
 \[\|\tilde{\mu}_{X} - \mu_{X}\| = O(\frac{1}{\sqrt{n}})\]
 \end{claimproof}
+%%%
 
-
-\begin{claimproof}(Theorem \ref{theorem:lancasterAsymptote})
+\begin{claimproof}(Theorem \ref{theorem:norm-conv-in-prob})
 
 By observing that
 \begin{align*}
@@ -523,8 +556,10 @@ we can therefore expand $\tilde{K}$ in terms of $\bar{K}$ as
 \end{align*}
 and expanding $\tilde{L}$ and $\tilde{M}$ in a similar way, we can rewrite the Lancaster test statistic as
 
-\begin{align*}
-n\|\Delta_L&\hat{P}\|^2 \\&= 
+$n\hat \mu^{(Z)}_{L,2} \|^2 - n\|\hat \mu_L\|^2$
+
+\begin{align*} 
+n\|\hat \mu_L\|^2 &= 
 \frac{1}{n}(\bar{K} \circ \bar{L}\circ \bar{M})_{++} &&-
 \frac{2}{n^2}((\bar{K}\circ \bar{L}) \bar{M})_{++} \\&- 
 \frac{2}{n^2}((\bar{K} \circ \bar{M}) \bar{L})_{++} &&- 
@@ -544,7 +579,7 @@ n\|\Delta_L&\hat{P}\|^2 \\&=
 
 Each of these terms can be expressed as inner products between empirical estimates of population centred covariance operators and tensor products of mean embeddings. Rewriting them as such yields:
 \begin{align*}
-n\|\Delta_L \hat{P}\|^2 &= n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\& -
+n\|\hat \mu_L\|^2 &= n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\& -
 2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\& -
 2n\langle \bar{C}_{XZY},\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\& -
 2n\langle \bar{C}_{YZX},\bar{C}_{YZ}\otimes\bar{\mu}_X \rangle \\& +
@@ -570,7 +605,7 @@ Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respectiv
 
 It thus follows that
 \begin{align*}
-n\|\Delta_L& \hat{P}\|^2  \xrightarrow{O(n^{-\frac{1}{2}})} n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
+n\|&\hat \mu_L\|^2  \xrightarrow{O(n^{-\frac{1}{2}})} n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
 2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle -
 2n\langle \bar{C}_{XZY},\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\ &=
 \frac{1}{n}((\bar{K}\circ \bar{L}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\bar{K}\circ \bar{L})\bar{M})_{++} + \frac{1}{n^3}(\bar{K}\circ \bar{L})_{++}\bar{M}_{++}
@@ -590,19 +625,137 @@ It can be shown that $\bar{K}\circ \bar{L}$ in the above expression can be repla
 \begin{align*}
 n\|\Delta_L \hat{P}\|^2 & \longrightarrow \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\overline{\bar{K}\circ \bar{L}})\bar{M})_{++} + \frac{1}{n^3}(\overline{\bar{K}\circ \bar{L}})_{++}\bar{M}_{++}
 \end{align*}
-This is equivalent to treating $\bar{k}\otimes\bar{l}$ as a kernel on the single variable $T:=(X,Y)$ and performing another recentering trick as we did at the beginning of this proof. By rewriting the above expression in terms of the operator $\bar{C}_{TZ}$ and mean embeddings $\mu_T$ and $\mu_Z$, it can be shown by a similar argument to before that the latter two terms tend to 0 at least as $O(\frac{1}{n})$, and thus  
+This is equivalent to treating $\bar{k}\otimes\bar{l}$ as a kernel on the single variable $T:=(X,Y)$ and performing another recentering trick as we did at the beginning of this proof. By rewriting the above expression in terms of the operator $\bar{C}_{TZ}$ and mean embeddings $\mu_T$ and $\mu_Z$, it can be shown by a similar argument to before that the latter two terms tend to 0 at least as $O(n^{-\frac{1}{2}})$, and thus, substituting for the definition of $\|\hat \mu^{(Z)}_{L,2} \|^2$,
 \begin{align*}
-n\|\Delta_L \hat{P}\|^2 \xrightarrow{O(\frac{1}{\sqrt{n}})} \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}
+ n \|\hat \mu_{L} \|^2 \xrightarrow{O(\frac{1}{\sqrt{n}})} n \|\hat \mu^{(Z)}_{L,2} \|^2
 \end{align*} as required.
 
-To show that this is a normalised degenerate V-statistic observe that, writing $S_i=(X_i,Y_i,Z_i)$ and $h(S_i,S_j) = \langle\bar{\phi}(X_i)\otimes\bar{\phi}(Y_i) - C_{XY},\bar{\phi}(X_j)\otimes\bar{\phi}(Y_j) - C_{XY}\rangle\langle\bar{\phi}(Z_i),\bar{\phi}(Z_j)\rangle$, we can write:
-\begin{align*}
-&\frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}= \frac{1}{n}\sum_{ij} h(S_i,S_j)
-\end{align*}
-
-And thus it is a normalised V-statistic. To show that it is degenerate, fix any $s_i$ and observe that $\mathbb{E}_{S_j}h(s_i,S_j)=0$ since $\mathbb{E}_{XYZ} =\mathbb{E}_{XY}\mathbb{E}_{Z}$.
 
 \end{claimproof}
+
+\begin{claimproof}(Theorem \ref{theorem:degenerate-kernel})
+
+Note that $\mathbb{E}_{XYZ} = \mathbb{E}_{XY}\mathbb{E}_Z$ under $\mathcal{H}_Z$. Therefore, fixing any $s_j = (x_j,y_j,z_j)$ we have that
+
+\begin{align*}
+\mathbb{E}_{S_i}&h(S_i,s_j) = \mathbb{E}_{X_iY_i} \mathbb{E}_{Z_i}\overline{\bar{k}\otimes\bar{l}}\otimes\bar{m} (S_i,s_j) \\
+ &=  \langle\mathbb{E}_{X_iY_i}\bar{\phi}(X_i)\otimes\bar{\phi}(Y_i) - C_{XY},\bar{\phi}(x_j)\otimes\bar{\phi}(y_j) - C_{XY}\rangle \\
+ &\quad \quad \quad \quad \times \langle \mathbb{E}_{Z_i}\bar{\phi}(Z_i),\bar{\phi}(z_j)\rangle \\
+ &=  \langle 0 ,\bar{\phi}(x_j)\otimes\bar{\phi}(y_j) - C_{XY}\rangle \\
+ &\quad \quad \quad \quad \times \langle 0 ,\bar{\phi}(z_j)\rangle \\ 
+ & = 0
+\end{align*}
+
+Therefore $h$ is degenerate. Symmetry follows from the symmetry of the Hilbert space inner product.
+
+For boundedness and Lipschitz continuity, it suffices to show the two following rules for constructing new kernels from old preserve both properties (see Supplementary materials \ref{supp:bounded-and-lipschitz} for proof):
+\begin{itemize} \setlength\itemsep{0em}
+\item $k \mapsto \bar{k}$ 
+\item $(k,l) \mapsto k \otimes l$
+\end{itemize}
+It then follows that $h = \overline{\bar{k}\otimes\bar{l}}\otimes\bar{m}$ is bounded and Lipschitz continuous since it can be constructed from $k$, $l$ and $m$ using the two above rules.
+\end{claimproof}
+
+
+
+%%%
+%\begin{claimproof}(Theorem \ref{theorem:lancasterAsymptote})
+%
+%By observing that
+%\begin{align*}
+%& \phi_X(X_i)- \frac{1}{n}\sum_k\phi_X(X_k) \\
+%= &  (\phi_X(X_i) - \mu_X) - \frac{1}{n}\sum_k (\phi_X(X_k) - \mu_X)\\
+%= &\bar\phi_X(X_i)- \frac{1}{n}\sum_k\bar\phi_X(X_k)
+%\end{align*}
+%we can therefore expand $\tilde{K}$ in terms of $\bar{K}$ as
+%\begin{align*}
+%&\tilde{K}_{ij} \\ 
+%&= \langle\phi_X(X_i)- \frac{1}{n}\sum_k\phi_X(X_k),\phi_X(X_j) - \frac{1}{n}\sum_k\phi_X(X_k)\rangle \\
+%&= \langle\bar\phi_X(X_i)- \frac{1}{n}\sum_k\bar\phi_X(X_k),\bar\phi_X(X_j) - \frac{1}{n}\sum_k\bar\phi_X(X_k)\rangle \\
+%&= \bar{K}_{ij} - \frac{1}{n}\sum_k\bar{K}_{ik} - \frac{1}{n}\sum_k\bar{K}_{jk} + \frac{1}{n^2}\sum_{kl}\bar{K}_{kl}
+%\end{align*}
+%and expanding $\tilde{L}$ and $\tilde{M}$ in a similar way, we can rewrite the Lancaster test statistic as
+%
+%\begin{align*}
+%n\|\Delta_L&\hat{P}\|^2 \\&= 
+%\frac{1}{n}(\bar{K} \circ \bar{L}\circ \bar{M})_{++} &&-
+%\frac{2}{n^2}((\bar{K}\circ \bar{L}) \bar{M})_{++} \\&- 
+%\frac{2}{n^2}((\bar{K} \circ \bar{M}) \bar{L})_{++} &&- 
+%\frac{2}{n^2}((\bar{M} \circ \bar{L}) \bar{K})_{++} \\&+ 
+%\frac{1}{n^3}(\bar{K} \circ \bar{L})_{++} \bar{M}_{++} &&+ 
+%\frac{1}{n^3}(\bar{K} \circ \bar{M})_{++} \bar{L}_{++} \\&+ 
+%\frac{1}{n^3}(\bar{L} \circ \bar{M})_{++} \bar{K}_{++} &&+ 
+%\frac{2}{n^3}(\bar{M}\bar{K}\bar{L})_{++} \\&+ 
+%\frac{2}{n^3}(\bar{K}\bar{L}\bar{M})_{++} &&+ 
+%\frac{2}{n^3}(\bar{K}\bar{M}\bar{L})_{++} \\&+ 
+%\frac{4}{n^3}tr(\bar{K}_+ \circ \bar{L}_+ \circ \bar{M}_+) &&-
+%\frac{4}{n^4}(\bar{K} \bar{L})_{++} \bar{M}_{++} \\& - 
+%\frac{4}{n^4}(\bar{K}\bar{M})_{++}\bar{L}_{++} &&- 
+%\frac{4}{n^4}(\bar{L}\bar{M})_{++} \bar{K}_{++} \\&+
+%\frac{4}{n^5}\bar{K}_{++} \bar{L}_{++} \bar{M}_{++} \\
+%\end{align*}
+%
+%Each of these terms can be expressed as inner products between empirical estimates of population centred covariance operators and tensor products of mean embeddings. Rewriting them as such yields:
+%\begin{align*}
+%n\|\Delta_L \hat{P}\|^2 &= n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\& -
+%2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\& -
+%2n\langle \bar{C}_{XZY},\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\& -
+%2n\langle \bar{C}_{YZX},\bar{C}_{YZ}\otimes\bar{\mu}_X \rangle \\& +
+%n\langle \bar{C}_{XY}\otimes\bar{\mu}_Z,\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\& +
+%n\langle \bar{C}_{XZ}\otimes\bar{\mu}_Y,\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\& +
+%n\langle \bar{C}_{YZ}\otimes\bar{\mu}_X,\bar{C}_{YZ}\otimes\bar{\mu}_X \rangle \\& +
+%2n\langle \bar{\mu}_Z\otimes\bar{C}_{XY},\bar{C}_{ZX}\otimes\bar{\mu}_Y \rangle \\& +
+%2n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\& +
+%2n\langle \bar{\mu}_X\otimes\bar{C}_{ZY},\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\& +
+%4n\langle \bar{C}_{XYZ},\bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z \rangle \\& -
+%4n\langle \bar{C}_{XY}\otimes \bar{\mu}_Z,\bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z \rangle \\& -
+%4n\langle \bar{C}_{XZ}\otimes \bar{\mu}_Y,\bar{\mu}_X \otimes\bar{\mu}_Z \otimes \bar{\mu}_Y \rangle \\& -
+%4n\langle \bar{C}_{YZ}\otimes \bar{\mu}_X,\bar{\mu}_Y \otimes\bar{\mu}_Z \otimes \bar{\mu}_X \rangle \\& +
+%4n\langle \bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z,\bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z \rangle \\
+%\end{align*}
+%By assumption, $\mathbb{P}_{XYZ} =\mathbb{P}_{XY}\mathbb{P}_{Z}$ and thus the expectation operator also factorises similarly. As a consequence, 
+%\begin{align*}
+%C_{XYZ} &= \mathbb{E}_{XYZ}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)] \\
+%& = \mathbb{E}_{XY}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)]\otimes\mathbb{E}_{Z}\bar\phi_Z(Z)=0
+%\end{align*}
+%
+%Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respective Hilbert spaces. Lemma \ref{lemma:beta} tells us that each subprocess of $(X_i,Y_i,Z_i)$ satisfies the same $\beta$-mixing conditions as $(X_i,Y_i,Z_i)$, thus by applying Lemma \ref{lemma:hilbertCLT} it follows that $\|\bar{C}_{XZY}\|$, $\|\bar{C}_{YZX}\|$, $\|\bar{C}_{XZ}\|$, $\|\bar{C}_{YZ}\|$, $\|\bar{\mu}_X\|$, $\|\bar{\mu}_Y\|$, $\|\bar{\mu}_Z\| = O\left(\frac{1}{\sqrt{n}}\right)$
+%
+%It thus follows that
+%\begin{align*}
+%n\|\Delta_L& \hat{P}\|^2  \xrightarrow{O(n^{-\frac{1}{2}})} n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
+%2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle -
+%2n\langle \bar{C}_{XZY},\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\ &=
+%\frac{1}{n}((\bar{K}\circ \bar{L}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\bar{K}\circ \bar{L})\bar{M})_{++} + \frac{1}{n^3}(\bar{K}\circ \bar{L})_{++}\bar{M}_{++}
+%\end{align*}
+%
+%since all the other terms decay at least as quickly as $O(\frac{1}{\sqrt{n}})$. This is shown here for $n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle$; the proofs for the other terms are similar.
+%\begin{align*}
+%&n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\
+%&\leq n \| \bar{\mu}_X\otimes\bar{C}_{YZ}\| \|\bar{C}_{XY}\otimes\bar{\mu}_Z \| \\
+%& = n\sqrt{\langle \bar{\mu}_X\otimes\bar{C}_{YZ} , \bar{\mu}_X\otimes\bar{C}_{YZ} \rangle} \sqrt{\langle \bar{C}_{XY}\otimes\bar{\mu}_Z, \bar{C}_{XY}\otimes\bar{\mu}_Z \rangle} \\
+%& = n\sqrt{\langle \bar{\mu}_X, \bar{\mu}_X \rangle \langle \bar{C}_{YZ} , \bar{C}_{YZ} \rangle} \sqrt{\langle \bar{C}_{XY}, \bar{C}_{XY} \rangle \langle \bar{\mu}_Z, \bar{\mu}_Z \rangle} \\
+%& =  n \| \bar{\mu}_X\|\|\bar{C}_{YZ}\| \|\bar{C}_{XY}\|\|\bar{\mu}_Z \| \\
+%& = n \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)} \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)} O(1) \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)} = \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)}
+%\end{align*}
+%
+%It can be shown that $\bar{K}\circ \bar{L}$ in the above expression can be replaced with $\overline{\bar{K}\circ \bar{L}}$ while preserving equality. That is, we can equivalently write
+%\begin{align*}
+%n\|\Delta_L \hat{P}\|^2 & \longrightarrow \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\overline{\bar{K}\circ \bar{L}})\bar{M})_{++} + \frac{1}{n^3}(\overline{\bar{K}\circ \bar{L}})_{++}\bar{M}_{++}
+%\end{align*}
+%This is equivalent to treating $\bar{k}\otimes\bar{l}$ as a kernel on the single variable $T:=(X,Y)$ and performing another recentering trick as we did at the beginning of this proof. By rewriting the above expression in terms of the operator $\bar{C}_{TZ}$ and mean embeddings $\mu_T$ and $\mu_Z$, it can be shown by a similar argument to before that the latter two terms tend to 0 at least as $O(\frac{1}{n})$, and thus  
+%\begin{align*}
+%n\|\Delta_L \hat{P}\|^2 \xrightarrow{O(\frac{1}{\sqrt{n}})} \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}
+%\end{align*} as required.
+%
+%To show that this is a normalised degenerate V-statistic observe that, writing $S_i=(X_i,Y_i,Z_i)$ and $h(S_i,S_j) = \langle\bar{\phi}(X_i)\otimes\bar{\phi}(Y_i) - C_{XY},\bar{\phi}(X_j)\otimes\bar{\phi}(Y_j) - C_{XY}\rangle\langle\bar{\phi}(Z_i),\bar{\phi}(Z_j)\rangle$, we can write:
+%\begin{align*}
+%&\frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}= \frac{1}{n}\sum_{ij} h(S_i,S_j)
+%\end{align*}
+%
+%And thus it is a normalised V-statistic. To show that it is degenerate, fix any $s_i$ and observe that $\mathbb{E}_{S_j}h(s_i,S_j)=0$ since $\mathbb{E}_{XYZ} =\mathbb{E}_{XY}\mathbb{E}_{Z}$.
+%
+%\end{claimproof}
 
 
 
@@ -725,4 +878,64 @@ and thus it is a normalised V-statistic. To show that it is degenerate, fix any 
 \end{align*}	
 \end{proof}
 
+\subsection{Proof that boundedness and Lipschitz continuity is preserved}\label{supp:bounded-and-lipschitz}
+Recall that a kernel $k$ defined on $\mathcal{X}$ is Lipschitz continuous iff $\exists C_k : \forall w \enspace |k(x,w) - k(x',w)| \leq C_k d_\mathcal{X}(x,x')$ where $d_\mathcal{X}$ is the metric on $\mathcal{X}$ with respect to which $k$ is Lipschitz continuous.
+
+\begin{claim}
+$k$ bounded and Lipschitz continuous $\implies$ $\bar{k}$ is bounded and Lipschitz continuous
+\end{claim}
+\begin{claimproof}
+$k$ bounded implies there exists $B_k$ such that $|k(x,w)|\leq B_k$ $\forall x, w \in \mathcal{X}$. It follows that
+
+\begin{align*}
+|\bar{k}(x,w)| & = |k(x,w) - \mathbb{E}_X[k(X,w)] - \mathbb{E}_W[k(x,W)] + \mathbb{E}_{XW}[k(X,W)]| \\
+& \leq |k(x,w)|  + \mathbb{E}_X |k(X,w)| + \mathbb{E}_W|k(x,W)| + \mathbb{E}_{XW}|k(X,W)| \\
+& \leq 4B_k \\
+\end{align*}
+\end{claimproof}
+
+\begin{claim}
+$k$ and $l$ bounded and Lipschitz continuous with respect to the metrics $d_\mathcal{X}$ and $d_\mathcal{Y}$ respectively $\implies$ $k\otimes l$ is bounded and Lipschitz continuous with respect to any metric on $\mathcal{X}\times \mathcal{Y}$ equivalent to $d \left( (x,y),(x',y') \right) =  d_\mathcal{X}(x,x') + d_\mathcal{Y}(y,y')$
+\end{claim}
+
+Note that all norms on finite dimensional vector spaces are equivalent, and so if $\mathcal{X}$ and $\mathcal{Y}$ are finite dimensional vector spaces then $k\otimes l$ is Lipschitz continuous with respect to \emph{any} norm on $\mathcal{X}\times \mathcal{Y}$
+
+\begin{claimproof} Let $k$ and $l$ be bounded by $B_k$ and $B_l$ respectively. Then 
+
+\begin{align*}
+|k \otimes l \left( (x,y), (w,z) \right)| &= |k(x,w)l(y,z)| \\
+&= |k(x,w)||l(y,z)| \\
+&\leq B_k B_l \\
+\end{align*}
+
+Let $k$ and $l$ have Lipschitz constants $C_k$ and $C_l$ respectively. Then, for any $(w,z) \in \mathcal{X\times Y}$
+
+\begin{align*}
+|k \otimes l \left( (x,y), (w,z) \right) &- k \otimes l \left( (x',y'), (w,z) \right) |  \\
+& = |k(x,w)l(y,z) - k(x',w)l(y',z)| \\
+& = |k(x,w)l(y,z) - k(x',w)l(y,z) + k(x',w)l(y,z) - k(x',w)l(y',z)| \\
+& \leq |l(y,z)| |k(x,w) - k(x',w)| + |k(x',w)||l(y,z) - l(y',z)| \\
+& \leq B_l C_k d_\mathcal{X}(x,x') + B_k C_l d_\mathcal{Y}(y,y') \\
+& \leq \max(B_l C_k, B_k C_l )  \enspace d\left((x,y),(x',y')\right) 
+\end{align*}
+
+\end{claimproof}
+
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
