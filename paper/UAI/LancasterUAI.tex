@@ -82,7 +82,7 @@
 
 \begin{abstract} 
 
-A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{i.i.d. } case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we show that the Lancaster statistic satisfies the conditions required to use the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
+A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{i.i.d.} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we show that the Lancaster statistic satisfies the conditions required to use the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
 
 %(An additional minor contribution is that it is also shown that the multiple testing correction proposed in [Lancaster] is too conservative, and a new correction is proposed that increases test power)
 \end{abstract} 
@@ -93,11 +93,11 @@ A wild bootstrap method is applied to the Lancaster three-variable interaction m
 
 Nonparametric testing of independence or interaction between random variables is to machine learning and statistics as the peer review process is to publishing: everyone agrees that it is very important, but the ways in which we go about doing it in practice often rely on assumptions that probably don't hold in reality. 
 
-Sticking to the more tractable and well-posed problem of the former, the authors observe that many existing methods in determining independence and interaction between variables rely on the assumption that the observed data are drawn \emph{i.i.d. }, which for many applications is unrealistic and restrictive \cite{gretton2005measuring}\cite{gretton2007kernel}\cite{gretton2005kernel}\cite{sejdinovic2013kernel}. Recent work has begun to extend statistical tests exploiting the theory of Reproducing Kernel Hilbert Spaces (RKHSs) from the \emph{i.i.d. } case to the time series case \cite{chwialkowski2014wild}\cite{chwialkowski2014kernel}. Of course, these tests also rely on rather restrictive assumptions on the mixing properties of the processes from which the observations are drawn; nonetheless they are a significant relaxation on the \emph{i.i.d. } assumption and are a step towards methods capable of handling more general forms of time-dependent data. 
+Sticking to the more tractable and well-posed problem of the former, the authors observe that many existing methods in determining independence and interaction between variables rely on the assumption that the observed data are drawn \emph{i.i.d.}, which for many applications is unrealistic and restrictive \cite{gretton2005measuring}\cite{gretton2007kernel}\cite{gretton2005kernel}\cite{sejdinovic2013kernel}. Recent work has begun to extend statistical tests exploiting the theory of Reproducing Kernel Hilbert Spaces (RKHSs) from the \emph{i.i.d.} case to the time series case \cite{chwialkowski2014wild}\cite{chwialkowski2014kernel}. Of course, these tests also rely on rather restrictive assumptions on the mixing properties of the processes from which the observations are drawn; nonetheless they are a significant relaxation on the \emph{i.i.d.} assumption and are a step towards methods capable of handling more general forms of time-dependent data. 
 
 The Lancaster interaction \cite{lancaster1969chi}\cite{sejdinovic2013kernel} is a signed measure that can be used to construct a test statistic capable of detecting dependence between three random variables. If the joint distribution on the three variables factorises in some way into a product of a marginal and a pairwise marginal, the Lancaster interaction is the zero measure. Given finite data, this can be used to construct a statistical test, the null hypothesis of which is that the joint distribution factorises thus. 	
 
-In the \emph{i.i.d. } case, the null distribution of the test statistic can be estimated using a permutation bootstrap technique: this amounts to shuffling the indices of one or more of the variables and recalculating the test statistic on this bootstrapped data set. When our samples instead exhibit temporal dependence, shuffling the time indices destroys this dependence and thus doing so does not correspond to a valid resample of the test statistic. 
+In the \emph{i.i.d.} case, the null distribution of the test statistic can be estimated using a permutation bootstrap technique: this amounts to shuffling the indices of one or more of the variables and recalculating the test statistic on this bootstrapped data set. When our samples instead exhibit temporal dependence, shuffling the time indices destroys this dependence and thus doing so does not correspond to a valid resample of the test statistic. 
 
 Provided that our data-generating process satisfies some technical conditions on the forms of temporal dependence, recent work by Leucht \cite{leucht2013dependent}, building on the work of Shao \cite{shao2010dependent}, can come to our rescue. The Wild Bootstrap is a method that correctly resamples from the null distribution of a test statistic, subject to certain conditions on both the test statistic and the processes from which the observations have been drawn.
 
@@ -120,7 +120,7 @@ In this paper we show that the Lancaster interaction test statistic satisfies th
 %
 %This work combines the works of [HSIC + time series] and [Lancaster interaction] to give a non-parametric test for three variable interactions in which the samples are drawn from random processes.
 
-\section{Main results}
+\section{Main results}\label{section:main}
 The Lancaster interaction on the triple of variables $(X,Y,Z)$ is defined as the signed measure $\Delta_LP = \mathbb{P}_{XYZ} - \mathbb{P}_{XY}\mathbb{P}_{Z} - \mathbb{P}_{XZ}\mathbb{P}_{Y} - \mathbb{P}_{X}\mathbb{P}_{YZ} + 2\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}$. It is straightforward to show that if any variable is independent of the other two (equivalently, if the joint distribution $\mathbb{P}_{XYZ}$ factorises into a product of marginals in any way), then $\Delta_LP = 0$. That is, writing $\mathcal{H}_X = \{X \independent (Y,Z)\}$ and similar for $\mathcal{H}_Y$ and $\mathcal{H}_Z$, we have that
 
 \[\mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z \Rightarrow \Delta_LP=0 \]
@@ -217,48 +217,26 @@ If $k$ and $l$ are kernels on $\mathcal{X}$ and $\mathcal{Y}$, then $k\otimes l$
 
 \subsection{Hypothesis testing using the mean embedding}
 
-The idea of injectively embedding measures into a Hilbert space can be exploited to design statistical tests of properties of one or more distributions. For example, the Maximum Mean Discrepancy (MMD) \cite{gretton2012kernel} two-sample test is motivated by the following: suppose we are given samples $\{X_i\}_{i=1}^n$ and $\{Y_j\}_{j=1}^m$ drawn \emph{i.i.d. } from distributions $\mathbb{P}$ and $\mathbb{Q}$ respectively. If our kernel is characteristic, then $\mu_\mathbb{P} = \mu_\mathbb{Q} \iff \mathbb{P} = \mathbb{Q}$. Under the assumption that $\mathbb{P} = \mathbb{Q}$, we would therefore expect the empirical embeddings $\tilde{\mu}_\mathbb{P}$ and $\tilde{\mu}_\mathbb{Q}$ to be `close' in Hilbert space norm. More precisely, we can use the squared Hilbert space norm of their difference $\|\tilde{\mu}_\mathbb{P} - \tilde{\mu}_\mathbb{Q} \|^2$ as a test statistic which, under the null hypothesis, would have distribution increasingly concentrated close to 0 as $n$ and $m$ become large \cite{gretton2012kernel}. The null distribution of this statistic can be estimated in the finite sample case by randomly relabelling the $X$s and $Y$s (in such a way that $n$ and $m$ are preserved) to arrive at asymptotically consistent p-values.
+The idea of injectively embedding measures into a Hilbert space can be exploited to design statistical tests of properties of one or more distributions. For example, the Maximum Mean Discrepancy (MMD) \cite{gretton2012kernel} two-sample test is motivated by the following: suppose we are given samples $\{X_i\}_{i=1}^n$ and $\{Y_j\}_{j=1}^m$ drawn \emph{i.i.d.} from distributions $\mathbb{P}$ and $\mathbb{Q}$ respectively. If our kernel is characteristic, then $\mu_\mathbb{P} = \mu_\mathbb{Q} \iff \mathbb{P} = \mathbb{Q}$. We can estimate the quantity $\|\mu_\mathbb{P} - \mu_\mathbb{Q} \|^2$ using our finite sample of data. The quantiles of our estimator can be estimated under the assumption that $\mathbb{P} = \mathbb{Q}$, which we can use to construct a statistical test.
 
-An independence test known as the Hilbert-Schmidt Independence Criterion (HSIC)\cite{gretton2007kernel}\cite{gretton2005kernel} can be constructed in a similar way: Given samples $\{(X_i,Y_i)\}_{i=1}^n$ drawn \emph{i.i.d. } from a joint distribution $\mathbb{P}_{XY}$, $X$ and $Y$ are independent if and only if $\mathbb{P}_{XY} = \mathbb{P}_X \mathbb{P}_Y \iff \mu_{\mathbb{P}_{XY}} = \mu_{\mathbb{P}_X\mathbb{P}_Y}$. Similarly to MMD, we can empirically estimate the two embeddings and use their squared Hilbert space distance  $\| \mu_{\mathbb{P}_{XY}} - \mu_{\mathbb{P}_X\mathbb{P}_Y}\|^2$ as a test statistic which, under the null hypothesis of independence, will be close to 0. The null distribution of this statistic can be estimated by randomly permuting the indices of one of the variables to estimate give asymptotically consistent p-values.
+An independence test known as the Hilbert-Schmidt Independence Criterion (HSIC)\cite{gretton2007kernel}\cite{gretton2005kernel} can be constructed in a similar way: Given samples $\{(X_i,Y_i)\}_{i=1}^n$ drawn \emph{i.i.d.} from a joint distribution $\mathbb{P}_{XY}$, $X$ and $Y$ are independent if and only if $\mathbb{P}_{XY} = \mathbb{P}_X \mathbb{P}_Y \iff \mu_{\mathbb{P}_{XY}} = \mu_{\mathbb{P}_X\mathbb{P}_Y}$. Similarly to MMD, we can empirically estimate $\| \mu_{\mathbb{P}_{XY}} - \mu_{\mathbb{P}_X\mathbb{P}_Y}\|^2$ and estimate the quantiles of our finite sample estimator under the null hypothesis of independence, and can therefore construct a statistical test of independence.
+
 
 \subsection{Lancaster interaction test}
 
-We can extend the above ideas to consider properties of distributions on three variables. The \emph{Lancaster interaction measure} \cite{lancaster1969chi}\cite{sejdinovic2013kernel} on the triple of variables $(X,Y,Z)$ is defined as the signed measure $\Delta_LP = \mathbb{P}_{XYZ} - \mathbb{P}_{XY}\mathbb{P}_{Z} - \mathbb{P}_{XZ}\mathbb{P}_{Y} - \mathbb{P}_{X}\mathbb{P}_{YZ} + 2\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}$. It is straightforward to show that if any variable is independent of the other two (equivalently, if the joint distribution $\mathbb{P}_{XYZ}$ factorises into a product of marginals in any way), then $\Delta_LP = 0$. That is, writing $\mathcal{H}_X = \{X \independent (Y,Z)\}$ and similar for $\mathcal{H}_Y$ and $\mathcal{H}_Z$, we have that
-
-\[\mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z \Rightarrow \Delta_LP=0 \]
-
-Given a finite sample $(X_i,Y_i,Z_i)_{i=1}^n$, the mean embedding of the Lancaster interaction can be empirically estimated as $\Delta_L\hat{P} = \hat{\mu}_{\mathbb{P}_{XYZ}} - \hat{\mu}_{\mathbb{P}_{XY}\mathbb{P}_{Z}} - \hat{\mu}_{\mathbb{P}_{XZ}\mathbb{P}_{Y}} - \hat{\mu}_{\mathbb{P}_{X}\mathbb{P}_{YZ}} + 2\hat{\mu}_{\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}}$. If any of the $\mathcal{H}_{\LargerCdot}$ hold, this norm of this quantity will concentrate on 0. We use the squared RKHS norm as a test statistic for the following:
+We can extend the above ideas to the three-variable case; in this paper we exploit the Lancaster interaction measure, defined in Section \ref{section:main}. We use $\|\hat \mu_L\|^2$ as a test statistic to test the following hypotheses:
 
 $\mathcal{H}_0: \mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z $\\
 $\mathcal{H}_1: \mathbb{P}_{XYZ}$ does not factorise in any way
 
-By \cite{sejdinovic2013kernel}, we can write  
+Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components. 
 
-\begin{equation}\label{eqn:lancaster}
-\|\Delta_L\hat{P}\|_{k\otimes l \otimes m}^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}
-\end{equation}
-
-
-%Given kernels $k,l$ and $m$ on $\mathcal{X},\mathcal{Y}$ and $\mathcal{Z}$ respectively, $k\otimes l \otimes m$ defines a kernel on $\mathcal{X}\times \mathcal{Y} \times \mathcal{Z}$. We write $K, L$ and $M$ to denote the gram matrices of each kernel with respect to the observations, where for example $K_{ij} = k(X_i,X_j)$. We further write $\tilde{K}, \tilde{L}$ and $\tilde{M}$ for the empirically centred gram matrices, where for example $\tilde{K}_{ij} = k(X_i,X_j) - \frac{1}{n}\sum_ik(X_i,X_j)  - \frac{1}{n}\sum_jk(X_i,X_j) + \frac{1}{n^2}\sum_{ij}k(X_i,X_j)$. We can then write [Lancaster]
-
-
-
-where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$. For two gram matrices $A$ and $B$, it can be shown that $\left(A\circ\tilde{B}\right)_{++} = \left(\tilde{A}\circ\tilde{B}\right)_{++}$. Thus by considering $\tilde{K}\circ \tilde{L}$ to be the gram matrix of the kernel $\tilde{k}\otimes\tilde{l}$, we can also write
-
-\begin{equation}\label{eqn:lancaster2}
-\|\Delta_L\hat{P}\|_{k\otimes l \otimes m}^2 = \frac{1}{n^2}\left(\widetilde{(\tilde{K}\circ\tilde{L})}\circ\tilde{M}\right)_{++}
-\end{equation}
-
-We can similarly group together either of the other two pairs of Gram matrices and empirically recentre.
-
-
-The next part of the statistical test is to find threshold values of the statistic beyond which we would reject the null hypothesis. Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components. In the case that the observations are drawn \emph{i.i.d. }, the data can be resampled using permutation bootstrap method. For example, under $\mathcal{H}_X$, the bootstrapped dataset $\{X_{\pi(i)},Y_i,Z_i \}_{i=1}^n$ can be used to generate a valid resample of the test statistic under $\mathcal{H}_X$. 
-%For more information on the details of the bootstrapping method, see \cite{sejdinovic2013kernel}.
+The main problem we face is in estimating the quantiles of the null distribution in order to find rejection thresholds that appropriately control Type I error. Since the data are not drawn \emph{i.i.d }, the simple permutation bootstrap method of \cite{sejdinovic2013kernel} cannot be used. Instead, we exploit the Wild Bootstrap method.
 
 Note that in order to achieve consistency for this test, we would need that $\mathcal{H}_0 \iff \Delta_LP = 0$. Unfortunately this does not hold - in \cite{sejdinovic2013kernel} examples are given of distributions for which $\mathcal{H}_0$ is false, and yet $\Delta_LP = 0$. At the time of writing, a characterisation of such distributions is unknown to the authors. Therefore, if we reject $\mathcal{H}_0$ then we conclude that the distribution does not factorise; if we fail to reject $\mathcal{H}_0$ then we can conclude nothing.
 
 \subsection{Time series}
-In this paper we are extending the existing Lancaster test from the \emph{i.i.d. } case to a case in which our observations are drawn from a random process. There are various formalisations of memory or 'mixing' of a random process \cite{doukhan1994mixing}\cite{bradley2005basic}\cite{dedecker2007weak}; of relevance to this paper are the following two:
+In this paper we are extending the existing Lancaster test from the \emph{i.i.d.} case to a case in which our observations are drawn from a random process. There are various formalisations of memory or 'mixing' of a random process \cite{doukhan1994mixing}\cite{bradley2005basic}\cite{dedecker2007weak}; of relevance to this paper are the following two:
 
 \begin{definition}\cite{leucht2013dependent}
 A process $(X_t)_{t}$ is \emph{$\tau$-mixing} if $\tau(r) \longrightarrow 0$ as $r\longrightarrow \infty$, where
@@ -273,7 +251,7 @@ A process $(X_t)_{t}$ is \emph{$\beta$-mixing} (also known as \emph{absolutely r
 where the second supremum is taken  over all finite partitions $\{A_1,\ldots, A_I \}$ and  $\{B_1,\ldots, B_J\}$ of the sample space such that $A_i \in \mathcal{H}_1^n$ and $B_j \in \mathcal{H}_{n+m}^\infty$ and $\mathcal{H}_b^c = \sigma(X_b,X_{b+1},\ldots,X_{c})$
 \end{definition}
 
-The concept of $\beta$-mixing will be invoked when applying a central limit theorem in the next section. We will also need the following lemma:
+The concept of $\beta$-mixing will be invoked when applying a central limit theorem in the next section. We will also need the following lemma, proved in Supplementary material section \ref{supp:lemma-beta}:
 
 \begin{lemma}\label{lemma:beta}
 Suppose that the process $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing. Then any `sub-process' is also $\beta$-mixing (for example $(X_t,Y_t)_t$ or $(X_t)_t$)
@@ -281,7 +259,7 @@ Suppose that the process $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing. Then any `sub-proc
 
 \subsection{Hilbert spaced random variable CLT}
 
-In this paper we exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \cite{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened.
+In this paper we exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \cite{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened. Proof of the following lemma can be found in Supplementary material section \ref{supp:lemma-clt}:
 
 \begin{lemma}\label{lemma:hilbertCLT}
 Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta > 0$ and that $k$ is a bounded kernel on $\mathcal{X}$. Then $\|\hat\mu_X - \mu_X\|_k = O(n^{-\frac{1}{2}})$
@@ -302,7 +280,7 @@ Many kernel test statistics can be viewed as normalised V-statistics which, unde
 
 \subsection{Wild Bootstrap}
 
-In many frequentist statistical tests, estimates of the test statistic threshold required to achieve a given Type I error are obtained through a bootstrap resampling method. In the case of the Lancaster and HSIC tests with \emph{i.i.d. } observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{i.i.d. } assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any temporal dependence. 
+In many frequentist statistical tests, estimates of the test statistic threshold required to achieve a given Type I error are obtained through a bootstrap resampling method. In the case of the Lancaster and HSIC tests with \emph{i.i.d.} observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{i.i.d.} assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any temporal dependence. 
 
 If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis (in contrast to other methods that first generate a new simulated dataset and then compute the test statistic on this dataset). These conditions can be categorised as concerning: (1) Appropriate $\tau$-mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(f,\mathcal{S}_n)$, then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic $nV_b(f,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}f(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(f,\mathcal{S})$ that is of crucial importance to this paper is that $f$ must be a degenerate core.
 
@@ -347,57 +325,12 @@ The class of probability distributions for which $\Delta_LP=0$ is larger than $\
 If, however, $\Delta_LP \not =0$ then Theorem 2 of [Kacper wild bootstrap] implies that we will reject the null hypothesis with increasing probability? (Kacper, is this right?)
 
 
-\section{Lancaster Interaction for Random Processes}
-
-In this section we construct the Lancaster interaction test for random processes. The major difficulty in doing so is showing that, under the null hypothesis, the test statistic is a normalised degenerate V-statistic and therefore the Wild Bootstrap can be used to resample the test statistic and provide thresholds for desired p-values. The procedure for testing is summarised in Algorithm \ref{alg:Lancaster}.
-
-The basic idea of the proof presented in this paper is to rewrite the test statistic as a sum of terms involving population centred gram matrices (as opposed to the empirically centred gram matrices in the presentation of the statistic in equation \ref{eqn:lancaster}). Under the null hypothesis, one of these terms is a normalised degenerate V-statistic and all of the others decay to $0$ as $n \longrightarrow \infty$. 
-
-In contrast, existing proof methods have employed the theory of U- and V-statistics \cite{chwialkowski2014kernel,chwialkowski2014wild}; in particular, the Hoeffding decomposition of the core of a V-statistic as a sum of other cores \cite{serfling2009approximation}. This allows the rewriting of the V-statistic as a sum of other V-statistics, which under the null hypothesis decay to 0.
-
-Both approaches amount to the same result, but they tackle the issue of centring of kernels in feature space in different ways. By appealing to a central limit theorem, the kernels are centred directly in the proof presented here. In contrast, the centring is obscured behind layers of algebra and theory in the previously presented proofs.
-
-The approach taken in this paper can be modified to give a simpler proof that the Wild Bootstrap can be used for HSIC than that given in \cite{chwialkowski2014wild}; this proof is provided in the appendix.
-
-The following lemma is a consequence of the Central Limit Theorem of \cite{dehling2015bootstrap}. After having written the Lancaster test statistic as a sum of terms involving population centred gram matrices, this lemma will be crucial to showing that the majority of the terms decay to 0.
-
-\begin{lemma}\label{lemma:hilbertCLT}
-Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta > 0$ and that $k$ is a bounded kernel on $\mathcal{X}$. Then $\|\hat\mu_X - \mu_X\|_k = O(n^{-\frac{1}{2}})$
-
-\end{lemma}
-
-The following Theorem gives sufficient conditions for the hypothesis of the Wild Bootstrap to be satisfied.
-
-\begin{theorem}\label{theorem:lancasterAsymptote}
-Suppose that $\mathbb{P}_{XYZ} = \mathbb{P}_{XY}\mathbb{P}_Z$ and that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is both:
-
-\begin{itemize}
-\item $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta>0$
-\item $\tau$-mixing with coefficients $\tau(m)$ satisfying $\sum_{m=1}^\infty m^2 \sqrt{\tau(m)} < \infty$
-\end{itemize}  Then, as $n\longrightarrow \infty$, 
-
-\[ n\| \Delta_L\hat{P} \|^2 \xrightarrow{O(n^{-\frac{1}{2}})} \frac{1}{n}\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right) _{++} \]
-
-and this is a normalised degenerate V-statistic.
-\end{theorem}
-
-\begin{corollary}
-Suppose in addition to the above that $W$ is drawn from a process satisfying the conditions of \cite{leucht2013dependent}. Then asymptotically,
-
-\[\frac{1}{n}\left(W^\intercal\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right)W\right) _{++}\]
-
-is distributed as $ n\| \Delta_L\hat{P} \|^2$. 
-\end{corollary}
-
-We can therefore use this to generate samples of the test statistic $ n\| \Delta_L\hat{P} \|^2$ under the null hypothesis $\mathcal{H}_Z$. Using these samples we can select a threshold value of the test statistic such that the Type I error is bounded by whatever $\alpha$ we choose. By symmetry, we can use a similar procedure to test $\mathcal{H}_X$ and $\mathcal{H}_Y$.
-
-
 
 \section{Experiments}
 
 The Lancaster test described above amounts to a method to test each of the sub-hypotheses $\mathcal{H}_X, \mathcal{H}_Y, \mathcal{H}_Z$. Rather than using the Lancaster test statistic with wild bootstrap to test each of these, we could instead use HSIC. For example, by considering the pair of variables $(X,Y)$ and $Z$ with kernels $k\otimes l$ and $m$ respectively, HSIC can be used to test $\mathcal{H}_Z$. Similar grouping of the variables can be used to test $\mathcal{H}_X$ and $\mathcal{H}_Y$. Applying the same multiple testing correction as in the Lancaster test, we derive an alternative test of dependence between three variables. We refer to this HSIC based procedure as \emph{3-way HSIC}.
 
-In the case of \emph{i.i.d. } observations, it was shown in \cite{sejdinovic2013kernel} that Lancaster statistical test is more sensitive to dependence between three random variables than the above HSIC-based test when pairwise interaction is weak but joint interaction is strong. In this section, we demonstrate that the same is true in the time series case on synthetic data.
+In the case of \emph{i.i.d.} observations, it was shown in \cite{sejdinovic2013kernel} that Lancaster statistical test is more sensitive to dependence between three random variables than the above HSIC-based test when pairwise interaction is weak but joint interaction is strong. In this section, we demonstrate that the same is true in the time series case on synthetic data.
 
 
 
@@ -416,20 +349,18 @@ Y_t &= \frac{1}{2}Y_{t-1} + \eta_t\\
 Z_t &= \frac{1}{2}Z_{t-1} + d |\theta_t|\text{sign}(X_t Y_t) + \zeta_t\\
 \end{align*}
 
-where $X_0, Y_0, Z_0, \epsilon_t, \eta_t, \theta_t$ and $\zeta_t$ are \emph{i.i.d. } $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $(X_t,Y_t)_t$.
+where $X_0, Y_0, Z_0, \epsilon_t, \eta_t, \theta_t$ and $\zeta_t$ are \emph{i.i.d.} $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $(X_t,Y_t)_t$.
 
-Data were generated according to this definition with varying values for the dependence coefficient. For each value of the dependence coefficient, 300 datasets were generated, each consisting of 1200 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
+Data were generated with varying values of $d$. For each value of $d$, 300 datasets were generated, each consisting of 1200 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
 
-Observe that the random variables are pairwise independent but jointly dependent when considered together. Indeed, $X$ and $Y$ are independent, and $Z$ is independent of $X$ and $Y$ when considered separately since the marginal distributions of $X$ and $Y$ are both normal distributions with mean 0 and therefore $\text{sign}(X_t Y_t)$ is either $-1$ or $1$ with equal probability when conditioned upon neither or exactly one of $X_t$ or $Y_t$. When considered jointly, the three variables are dependent as knowledge of both $X$ and $Y$ gives information about the value of $Z$.
-
-In this experiment, both the Lancaster and 3-way HSIC tests should be able to detect the dependence and therefore reject the null hypothesis in the limit of infinite data. In the finite data regime, the dependence coefficient affects drastically how hard it is to detect the dependence. The results of this experiment are presented in Figure \ref{weak-pairwise-strong-joint}. Observe that the Lancaster test is much more sensitive to the dependence than the 3-way HSIC test is and achieves very high test power with weak dependence coefficients while 3-way HSIC has very low test power. Observe also that when using the simple multiple testing correction a higher test power is achieved than with the Holm-Bonferroni correction.
+Observe that the random variables are pairwise independent but jointly dependent. Both the Lancaster and 3-way HSIC tests should be able to detect the dependence and therefore reject the null hypothesis in the limit of infinite data. In the finite data regime, the value of $d$ affects drastically how hard it is to detect the dependence. The results of this experiment are presented in Figure \ref{weak-pairwise-strong-joint}, which shows that the Lancaster test achieves very high test power with weak dependence coefficients compared to 3-way HSIC. Note also that when using the simple multiple testing correction a higher test power is achieved than with the Holm-Bonferroni correction.
 
 
 \begin{figure}[ht]
 \vskip 0.2in
 \begin{center}
 \centerline{\includegraphics[scale=0.6]{UAI_Figure1.pdf}}
-\caption{Results of experiment in Section \ref{experiment1}. (S) refers to the simple multiple correction; (HB) refers to Holm-Bonferroni. Observe that the Lancaster test is much more sensitive to dependence than 3-way HSIC. Note also that the test power is higher when using the simple correction when compared to the Holm-Bonferroni multiple testing correction.}
+\caption{Results of experiment in Section \ref{experiment1}. (S) refers to the simple multiple correction; (HB) refers to Holm-Bonferroni. The Lancaster test is more sensitive to dependence than 3-way HSIC, and test power for both tests is higher when using the simple correction rather than the Holm-Bonferroni multiple testing correction.}
 \label{weak-pairwise-strong-joint}
 \end{center}
 \vskip -0.2in
@@ -448,9 +379,9 @@ Y_t &= aY_{t-1} + \eta_t\\
 Z_t &= aZ_{t-1} +  \zeta_t\\
 \end{align*}
 
-where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{i.i.d. } $\mathcal{N}(0,1)$ random variables and $a$, called the \emph{dependence coefficient}, determines how temporally dependent the processes are. The null hypothesis in this example is true as each process is independent of the others.
+where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{i.i.d.} $\mathcal{N}(0,1)$ random variables and $a$, called the \emph{dependence coefficient}, determines how temporally dependent the processes are. The null hypothesis in this example is true as each process is independent of the others.
 
-The Lancaster test was performed using both the Wild Bootstrap and the simple permutation bootstrap (used in the \emph{i.i.d. } case) in order to sample from the null distributions of the test statistic. We used a fixed desired false positive rate $\alpha = 0.05$ with sample of size 1000, with 200 experiments run for each value of $a$. Figure \ref{wildBootstrap_is_necessary} shows the false positive rates for these two methods for varying $a$. It shows that as the processes become more dependent, the false positive rate for the permutation method becomes very large, and is not bounded by the fixed $\alpha$, whereas the false positive rate for the Wild Bootstrap method is bounded by $\alpha$.
+The Lancaster test was performed using both the Wild Bootstrap and the simple permutation bootstrap (used in the \emph{i.i.d.} case) in order to sample from the null distributions of the test statistic. We used a fixed desired false positive rate $\alpha = 0.05$ with sample of size 1000, with 200 experiments run for each value of $a$. Figure \ref{wildBootstrap_is_necessary} shows the false positive rates for these two methods for varying $a$. It shows that as the processes become more dependent, the false positive rate for the permutation method becomes very large, and is not bounded by the fixed $\alpha$, whereas the false positive rate for the Wild Bootstrap method is bounded by $\alpha$.
 \begin{figure}[ht]
 \vskip 0.2in
 \begin{center}
@@ -473,20 +404,18 @@ Y_t &= \frac{1}{2}Y_{t-1} + \eta_t\\
 Z_t &= \frac{1}{2}Z_{t-1} + d(X_t + Y_t) + \zeta_t\\
 \end{align*}
 
-where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{i.i.d. } $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $X_t$ and $Y_t$.
+where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{i.i.d.} $\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $X_t$ and $Y_t$.
 
-Data were generated according to this definition with varying values for the dependence coefficient. For each value of the dependence coefficient, 300 datasets were generated, each consisting of 1200 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
+Data were generated with varying values for the dependence coefficient. For each value of $d$, 300 datasets were generated, each consisting of 1200 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
 
-In this case $Z_t$ is pairwise-dependent on both of $X_t$ and $Y_t$, in addition to all three variables being jointly dependent. Both the Lancaster and 3-way HSIC tests should be capable of detecting the dependence and therefore reject the null hypothesis in the limit of infinite data. The results of this experiment are presented in Figure \ref{strong-pairwise}. 
-
-Observe that in this case, the 3-way HSIC test is more sensitive to the dependence than the Lancaster test.
+In this case $Z_t$ is pairwise-dependent on both of $X_t$ and $Y_t$, in addition to all three variables being jointly dependent. Both the Lancaster and 3-way HSIC tests should be capable of detecting the dependence and therefore reject the null hypothesis in the limit of infinite data. The results of this experiment are presented in Figure \ref{strong-pairwise}, which demonstrates that in this case the 3-way HSIC test is more sensitive to the dependence than the Lancaster test.
 
 
 \begin{figure}[ht]
 \vskip 0.2in
 \begin{center}
 \centerline{\includegraphics[scale=0.6]{UAI_Figure3.pdf}}
-\caption{Results of experiment in Section \ref{experiment3}. (S) refers to the simple multiple correction; (HB) refers to Holm-Bonferroni. Observe that the Lancaster test is less sensitive to dependence than 3-way HSIC. Note also that the test power is higher when using the simple correction when compared to the Holm-Bonferroni multiple testing correction.}
+\caption{Results of experiment in Section \ref{experiment3}. (S) refers to the simple multiple correction; (HB) refers to Holm-Bonferroni. The Lancaster test is less sensitive to dependence than 3-way HSIC, and test power in both cases is higher when using the simple correction rather than the Holm-Bonferroni multiple testing correction.}
 \label{strong-pairwise}
 \end{center}
 \vskip -0.2in
@@ -499,7 +428,7 @@ Exchange rates between three pairs of currencies (AUD/EUR, CHF/GBP, CAD/JPY) at 
 Volatility was found to be dependent across all currency pairs by each test at the $0.05$ significance level. The signals were found to be pairwise dependent by HSIC as well as jointly dependent by 3-way HSIC. Curiously, the Lancaster test did not detect dependence, with p-values of $0.682$, $0.659$ and $0.670$ for $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ respectively.
 
 
-\section{Discussion}
+\section{Discussion and future research}
 
 It has been demonstrated that the Lancaster test is more sensitive than 3-way HSIC when pairwise interaction is weak, but that the opposite is true when pairwise interaction is strong. It is curious that the two tests have different strengths in this manner, particularly when considering the very similar forms of the statistics in each case. Indeed, to test $\mathcal{H}_Z$ using the Lancaster statistic, we bootstrap the following:
 
@@ -513,31 +442,18 @@ while for the 3-way HSIC test we bootstrap:
 nHSIC_b = \frac{1}{n}\left(\widetilde{\left( K \circ L\right) }\circ \tilde{M} \right)_{++}
 \end{align*}
 
-These two quantities differ only in the centring of $K$ and $L$, amounting to constant shifts in the respective feature spaces of the kernels $k$ and $l$. This difference has the consequence of quite drastically changing the types of dependency that each statistic is sensitive to.
+These two quantities differ only in the centring of $K$ and $L$, amounting to constant shifts in the respective feature spaces of the kernels $k$ and $l$. This difference has the consequence of quite drastically changing the types of dependency that each statistic is sensitive to and is currently not fully understood. A formal characterisation of the cases in which the Lancaster statistic is more sensitive than 3-way HSIC would be desirable.
 
-\subsection{Directions for future research}
-
-At present, no formal characterisation has been made of the cases in which the Lancaster statistic is more sensitive to dependence than 3-way HSIC, or why it is that modifying the feature maps of the kernels (as is implicitly done when empirically centring) should have the empirical effect on sensitivity to different types of dependence that is observed. We conjecture that other statistics could be constructed with interesting properties by choosing other ways to modify the feature maps of the kernels.
 
 \section{Proofs}
 
-\begin{claimproof}(Lemma \ref{lemma:hilbertCLT})
+In this section we present proofs of Theorems \ref{theorem:norm-conv-in-prob} and \ref{theorem:degenerate-kernel}. The essential idea of the proof presented in this paper is to rewrite the test statistic as a sum of terms involving population centred gram matrices. Under the null hypothesis, all but one of these terms decay to $0$ as $n \longrightarrow \infty$. 
 
-We exploit Theorem 1.1 from \cite{dehling2015bootstrap}. Using the language of this paper, $\bar{\phi}(X_i)$ is a 1-approximating functional of $(X_i)_i$, following straightforwardly from the definition of 1-approximating functionals given. 
+In contrast, existing proof methods have employed the theory of U- and V-statistics \cite{chwialkowski2014kernel,chwialkowski2014wild}; in particular, the Hoeffding decomposition of the core of a V-statistic as a sum of other cores \cite{serfling2009approximation}. This allows the rewriting of the V-statistic as a sum of other V-statistics, which under the null hypothesis decay to 0.
 
-Since our kernels are bounded, $\exists C: \enspace \|\bar{\phi}(X_i)\| < C $ and so \[\mathbb{E}\|\bar{\phi}(X_1)\|^{2+\delta} <C^{2+\delta}< \infty \enspace \forall \delta>0\]
-Thus condition (1) is satisfied.
+Both approaches amount to the same result, but they tackle the issue of centring of kernels in feature space in different ways. By appealing to a central limit theorem, the kernels are centred directly in the proof presented here. In contrast, the centring is obscured behind layers of algebra and theory in the previously presented proofs.
 
-We can take $f_m = \bar{\phi}(X_0)\enspace \forall m$ and so achieve $a_m= 0 \enspace \forall m$, thus condition (2) is satisfied.
-
-By assumption on the time series, condition (3) is satisfied.
-
-Thus, by Theorem 1.1 in \cite{dehling2015bootstrap}
-\[\sqrt{n} (\tilde{\mu}_{X} - \mu_{X}) \widesim[2]{n\longrightarrow\infty} N\]
-where $N$ is a Hilbert space valued Gaussian random variable. Thus 
-\[\|\tilde{\mu}_{X} - \mu_{X}\| = O(\frac{1}{\sqrt{n}})\]
-\end{claimproof}
-%%%
+The approach taken in this paper can be modified to give simpler a proof of similar theorems corresponding to HSIC than that given in \cite{chwialkowski2014wild}; this is provided in the appendix.
 
 \begin{claimproof}(Theorem \ref{theorem:norm-conv-in-prob})
 
@@ -775,7 +691,7 @@ Big up to all my homies
 \section{Supplementary material}
 This supplementary section contains a proof of Lemma \ref{lemma:beta} and a proof that the HSIC statistic asymptotically satisfies the hypothesis of the Wild Bootstrap.
 
-\subsection{Proof of Lemma \ref{lemma:beta}}
+\subsection{Proof of Lemma \ref{lemma:beta}}\label{supp:lemma-beta}
 
 \begin{claimproof}(Lemma \ref{lemma:beta}) 
 
@@ -798,6 +714,26 @@ Thus we have shown that  $\beta_{XYZ}(m) \longrightarrow 0 \implies \beta_{XY}(m
 A similar argument holds for any other sub-process.
 \end{claimproof}
 
+\subsection{Proof of Lemma \ref{lemma:hilbertCLT}}\label{supp:lemma-clt}
+
+\begin{claimproof}(Lemma \ref{lemma:hilbertCLT})
+
+We exploit Theorem 1.1 from \cite{dehling2015bootstrap}. Using the language of this paper, $\bar{\phi}(X_i)$ is a 1-approximating functional of $(X_i)_i$, following straightforwardly from the definition of 1-approximating functionals given. 
+
+Since our kernels are bounded, $\exists C: \enspace \|\bar{\phi}(X_i)\| < C $ and so \[\mathbb{E}\|\bar{\phi}(X_1)\|^{2+\delta} <C^{2+\delta}< \infty \enspace \forall \delta>0\]
+Thus condition (1) is satisfied.
+
+We can take $f_m = \bar{\phi}(X_0)\enspace \forall m$ and so achieve $a_m= 0 \enspace \forall m$, thus condition (2) is satisfied.
+
+By assumption on the time series, condition (3) is satisfied.
+
+Thus, by Theorem 1.1 in \cite{dehling2015bootstrap}
+\[\sqrt{n} (\tilde{\mu}_{X} - \mu_{X}) \widesim[2]{n\longrightarrow\infty} N\]
+where $N$ is a Hilbert space valued Gaussian random variable. Thus 
+\[\|\tilde{\mu}_{X} - \mu_{X}\| = O(\frac{1}{\sqrt{n}})\]
+\end{claimproof}
+%%%
+
 \subsection{Proof that HSIC can be Wild Bootstrapped}
 
 Given samples $\{(X_i,Y_i)\}_{i=1}^n$, and taking all notation involving kernels and base spaces as before, the HSIC statistic is defined to be the squared RKHS distance between the empirical embeddings of the distributions $\mathbb{P}_{XY}$ and $\mathbb{P}_X\mathbb{P}_Y$:
@@ -813,15 +749,25 @@ where the last equality can be shown easily by expanding $\tilde{K}$ (and $\tild
 &= K_{ij} - \frac{1}{n}\sum_kK_{ik} - \frac{1}{n}\sum_kK_{jk} + \frac{1}{n^2}\sum_{kl}K_{kl}
 \end{align*} 
 
-\begin{theorem}
-Suppose that $\mathbb{P}_{XY} = \mathbb{P}_X\mathbb{P}_Y$. Then 
-\begin{align*}
-nHSIC_b & \xrightarrow{O(n^{-\frac{1}{2}})} \frac{1}{n} (\bar{K}\circ \bar{L})_{++}
-\end{align*}
-and this is a normalised degenerate V-statistic.
+\begin{theorem}\label{theorem:HSIC-conv-in-prob} Suppose that $(X_i,Y_i)_{i=1}^n$ are drawn from a process that is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta>0$. Under $\mathcal{H}_0 = \{ \mathbb{P}_{XY} = \mathbb{P}_X\mathbb{P}_Y\}$, $\lim_{n \to \infty} ( nHSIC_b - \frac{1}{n} (\bar{K}\circ \bar{L})_{++} ) =0 $ in probability.
+\end{theorem}
+Similar to the case with the Lancaster statistic, $\frac{1}{n} (\bar{K}\circ \bar{L})_{++}$ is much easier to study than $nHSIC_b$ under the non-\emph{i.i.d.} assumption. It can be written as a normalised V-statistic as:
+ 
+\[ 
+nV_n = \frac{1}{n} \mathlarger{\sum}_{1\leq i,j \leq n} \bar{k} \otimes \bar{l}(S_i,S_j)
+\]
+where  $S_i = (X_i,Y_i)$. Again, the crucial observation is that
+\[
+ h = \bar{k} \otimes \bar{l}
+\]
+is well behaved in the following sense 
+\begin{theorem}\label{theorem:HSIC-degenerate-kernel}
+Suppose that $k$ and $l$ are bounded symmetric Lipschitz contentious kernels. Then $h$ is also bounded symmetric and Lipschitz continuous, which is moreover degenerate under $\mathcal{H}_0$.
 \end{theorem}
 
-\begin{proof}
+Together, Theorems \ref{theorem:HSIC-conv-in-prob} and \ref{theorem:HSIC-degenerate-kernel} justify use of the Wild Bootstrap in estimating the quantiles of the null distribution of the test statistic $nHSIC_b$.
+
+\begin{proof}(Theorem \ref{theorem:HSIC-conv-in-prob})
 By writing
 \begin{align*}
 \tilde{K}_{ij} &= \bar{K}_{ij} - \frac{1}{n}\sum_k\bar{K}_{ik} - \frac{1}{n}\sum_k\bar{K}_{jk} + \frac{1}{n^2}\sum_{kl}\bar{K}_{kl}
@@ -863,19 +809,20 @@ n\langle \bar{C}_{XY},\bar{\mu}_X  \otimes \bar{\mu}_Y \rangle \\
 \end{align*}
 
 
-It follows that $nHSIC_b  \xrightarrow{O(n^{-\frac{1}{2}})} \frac{1}{n} (\bar{K}\circ \bar{L})_{++}$
+It follows that $nHSIC_b  \xrightarrow{O(n^{-\frac{1}{2}})} \frac{1}{n} (\bar{K}\circ \bar{L})_{++}$, as required.
+\end{proof}
 
-To show that this is a normalised degenerate V-statistic observe that, writing $S_i=(X_i,Y_i)$ and $h(S_i,S_j) = \langle\bar{\phi}(X_i),\bar{\phi}(X_j)\rangle \langle\bar{\phi}(Y_i),\bar{\phi}(Y_j)\rangle$, we can write:
-\begin{align*}
- \frac{1}{n} (\bar{K}\circ \bar{L})_{++}= \frac{1}{n}\sum_{ij} h(S_i,S_j)
-\end{align*}
+\begin{proof}(Theorem \ref{theorem:HSIC-degenerate-kernel})
 
-and thus it is a normalised V-statistic. To show that it is degenerate, fix any $s_i$ and observe that 
+To show degeneracy, fix any $s_i$ and observe that 
 \begin{align*}
 \mathbb{E}_{S}h(s_i,S) &= \mathbb{E}_X\mathbb{E}_Y \langle\bar{\phi}(x_i),\bar{\phi}(X)\rangle \langle\bar{\phi}(y_i),\bar{\phi}(Y)\rangle \\
 &= \langle\bar{\phi}(x_i),\mathbb{E}_X\bar{\phi}(X)\rangle \langle\bar{\phi}(y_i),\mathbb{E}_Y\bar{\phi}(Y)\rangle \\
 &= \langle\bar{\phi}(x_i),0\rangle \langle\bar{\phi}(y_i),0\rangle = 0\\
 \end{align*}	
+
+Symmetry is inherited from symmetry of $k$ and $l$. Boundedness and Lipschitz continuity are implied by application of the claims in Section \ref{supp:bounded-and-lipschitz}.
+
 \end{proof}
 
 \subsection{Proof that boundedness and Lipschitz continuity is preserved}\label{supp:bounded-and-lipschitz}
@@ -884,7 +831,7 @@ Recall that a kernel $k$ defined on $\mathcal{X}$ is Lipschitz continuous iff $\
 \begin{claim}
 $k$ bounded and Lipschitz continuous $\implies$ $\bar{k}$ is bounded and Lipschitz continuous
 \end{claim}
-\begin{claimproof}
+\begin{proof}
 $k$ bounded implies there exists $B_k$ such that $|k(x,w)|\leq B_k$ $\forall x, w \in \mathcal{X}$. It follows that
 
 \begin{align*}
@@ -892,7 +839,7 @@ $k$ bounded implies there exists $B_k$ such that $|k(x,w)|\leq B_k$ $\forall x, 
 & \leq |k(x,w)|  + \mathbb{E}_X |k(X,w)| + \mathbb{E}_W|k(x,W)| + \mathbb{E}_{XW}|k(X,W)| \\
 & \leq 4B_k \\
 \end{align*}
-\end{claimproof}
+\end{proof}
 
 \begin{claim}
 $k$ and $l$ bounded and Lipschitz continuous with respect to the metrics $d_\mathcal{X}$ and $d_\mathcal{Y}$ respectively $\implies$ $k\otimes l$ is bounded and Lipschitz continuous with respect to any metric on $\mathcal{X}\times \mathcal{Y}$ equivalent to $d \left( (x,y),(x',y') \right) =  d_\mathcal{X}(x,x') + d_\mathcal{Y}(y,y')$
@@ -900,7 +847,7 @@ $k$ and $l$ bounded and Lipschitz continuous with respect to the metrics $d_\mat
 
 Note that all norms on finite dimensional vector spaces are equivalent, and so if $\mathcal{X}$ and $\mathcal{Y}$ are finite dimensional vector spaces then $k\otimes l$ is Lipschitz continuous with respect to \emph{any} norm on $\mathcal{X}\times \mathcal{Y}$
 
-\begin{claimproof} Let $k$ and $l$ be bounded by $B_k$ and $B_l$ respectively. Then 
+\begin{proof} Let $k$ and $l$ be bounded by $B_k$ and $B_l$ respectively. Then 
 
 \begin{align*}
 |k \otimes l \left( (x,y), (w,z) \right)| &= |k(x,w)l(y,z)| \\
@@ -919,7 +866,7 @@ Let $k$ and $l$ have Lipschitz constants $C_k$ and $C_l$ respectively. Then, for
 & \leq \max(B_l C_k, B_k C_l )  \enspace d\left((x,y),(x',y')\right) 
 \end{align*}
 
-\end{claimproof}
+\end{proof}
 
 \end{document}
 
