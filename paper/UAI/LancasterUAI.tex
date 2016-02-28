@@ -82,7 +82,7 @@
 
 \begin{abstract} 
 
-A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{i.i.d.} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we show that the Lancaster statistic satisfies the conditions required to use the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
+A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{i.i.d.} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we prove that the Lancaster statistic satisfies the conditions required to estimate the quantiles of the null distribution using the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
 
 %(An additional minor contribution is that it is also shown that the multiple testing correction proposed in [Lancaster] is too conservative, and a new correction is proposed that increases test power)
 \end{abstract} 
@@ -217,7 +217,7 @@ If $k$ and $l$ are kernels on $\mathcal{X}$ and $\mathcal{Y}$, then $k\otimes l$
 
 \subsection{Hypothesis testing using the mean embedding}
 
-The idea of injectively embedding measures into a Hilbert space can be exploited to design statistical tests of properties of one or more distributions. For example, the Maximum Mean Discrepancy (MMD) \cite{gretton2012kernel} two-sample test is motivated by the following: suppose we are given samples $\{X_i\}_{i=1}^n$ and $\{Y_j\}_{j=1}^m$ drawn \emph{i.i.d.} from distributions $\mathbb{P}$ and $\mathbb{Q}$ respectively. If our kernel is characteristic, then $\mu_\mathbb{P} = \mu_\mathbb{Q} \iff \mathbb{P} = \mathbb{Q}$. We can estimate the quantity $\|\mu_\mathbb{P} - \mu_\mathbb{Q} \|^2$ using our finite sample of data. The quantiles of our estimator can be estimated under the assumption that $\mathbb{P} = \mathbb{Q}$, which we can use to construct a statistical test.
+The idea of injectively embedding measures into a Hilbert space can be exploited to design statistical tests of properties of one or more distributions. For example, the Maximum Mean Discrepancy (MMD) \cite{gretton2012kernel} two-sample test is motivated by the following: suppose we are given samples $\{X_i\}_{i=1}^n$ and $\{Y_j\}_{j=1}^m$ drawn \emph{i.i.d.} from distributions $\mathbb{P}$ and $\mathbb{Q}$ respectively. If our kernel is characteristic, then $\mu_\mathbb{P} = \mu_\mathbb{Q} \iff \mathbb{P} = \mathbb{Q}$. We can construct a statistical test using an estimator of the quantity $\|\mu_\mathbb{P} - \mu_\mathbb{Q} \|^2$ as our test statistic, the null hypothesis of which is that $\mathbb{P} = \mathbb{Q}$. The quantiles of the null distribution can be estimated and therefore we can set consistent thresholds.
 
 An independence test known as the Hilbert-Schmidt Independence Criterion (HSIC)\cite{gretton2007kernel}\cite{gretton2005kernel} can be constructed in a similar way: Given samples $\{(X_i,Y_i)\}_{i=1}^n$ drawn \emph{i.i.d.} from a joint distribution $\mathbb{P}_{XY}$, $X$ and $Y$ are independent if and only if $\mathbb{P}_{XY} = \mathbb{P}_X \mathbb{P}_Y \iff \mu_{\mathbb{P}_{XY}} = \mu_{\mathbb{P}_X\mathbb{P}_Y}$. Similarly to MMD, we can empirically estimate $\| \mu_{\mathbb{P}_{XY}} - \mu_{\mathbb{P}_X\mathbb{P}_Y}\|^2$ and estimate the quantiles of our finite sample estimator under the null hypothesis of independence, and can therefore construct a statistical test of independence.
 
@@ -229,7 +229,7 @@ We can extend the above ideas to the three-variable case; in this paper we explo
 $\mathcal{H}_0: \mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z $\\
 $\mathcal{H}_1: \mathbb{P}_{XYZ}$ does not factorise in any way
 
-Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components. 
+Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components\footnote{Note that the value of $\|\hat \mu_L\|$ will be the same for each test, but the null distributions will in general be different for each $\mathcal{H}_{\LargerCdot}$}
 
 The main problem we face is in estimating the quantiles of the null distribution in order to find rejection thresholds that appropriately control Type I error. Since the data are not drawn \emph{i.i.d }, the simple permutation bootstrap method of \cite{sejdinovic2013kernel} cannot be used. Instead, we exploit the Wild Bootstrap method.
 
@@ -257,7 +257,7 @@ The concept of $\beta$-mixing will be invoked when applying a central limit theo
 Suppose that the process $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing. Then any `sub-process' is also $\beta$-mixing (for example $(X_t,Y_t)_t$ or $(X_t)_t$)
 \end{lemma}
 
-\subsection{Hilbert spaced random variable CLT}
+\subsection{Hilbert space random variable CLT}
 
 In this paper we exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \cite{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened. Proof of the following lemma can be found in Supplementary material section \ref{supp:lemma-clt}:
 
@@ -268,21 +268,21 @@ Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $
 
 
 \subsection{V-statistics}
-A V-statistic \cite{serfling2009approximation} of a k-argument, symmetric function $f$ given $i.i.d. $ observations $\mathcal{S}_n = \{S_1,\ldots,S_n\}$ where each $S_i \sim \mathbb{P}$ is written
+A V-statistic \cite{serfling2009approximation} of a k-argument, symmetric function $f$ given $i.i.d. $ observations $\mathcal{S}_n = \{S_1,\ldots,S_n\}$ where each $S_i \sim \mathbb{P}$ is a quantity that can be written in the form:
 
 \[ V(f,\mathcal{S}) =  \frac{1}{n^k} \mathlarger{\sum}_{1\leq i_1,\ldots, i_k \leq n} f(S_{i_1},\ldots,S_{i_k})\]
 
-In this case, $V(f,\mathcal{S})$ is a biased (but asymptotically unbiased) estimator of $\mathbb{E}_{S_{i_1},\ldots S_{i_k} \sim \mathbb{P}}[f(S_{i_1},\ldots,S_{i_k})]$
+In this case, $V(f,\mathcal{S})$ is a biased (but asymptotically unbiased) estimator of $\mathbb{E}_{S_{i_1},\ldots S_{i_k} \sim \mathbb{P}}[f(S_{i_1},\ldots,S_{i_k})]$. 
 
 In this paper we are only concerned with V-statistics for which $k=2$. We call $nV(f,\mathcal{S})$ \emph{normalised}. We call $f$ the \emph{core} of $V$ and we say that $f$ is \emph{degenerate} if, for any $s_1$, $\mathbb{E}_{S_2 \sim \mathbb{P}}[f(s_1,S_2)] = 0$, in which case we say that $V$ is a \emph{degenerate V-statistic}.
 
-Many kernel test statistics can be viewed as normalised V-statistics which, under the null hypothesis, are degenerate. If moreover the test statistics diverge under the alternative hypothesis, the test would be consistent. Our main result is to prove that, under the null hypothesis, the Lancaster statistic is asymptotically a degenerate V-statistic.
+V-statistics are useful to us because their properties are well understood, and many kernel test statistics can be viewed as normalised V-statistics which, under the null hypothesis, are degenerate. If moreover the test statistics diverge under the alternative hypothesis, the test would be consistent. Our main result is to prove that, under the null hypothesis, the Lancaster statistic is asymptotically a degenerate V-statistic.
 
 \subsection{Wild Bootstrap}
 
 In many frequentist statistical tests, estimates of the test statistic threshold required to achieve a given Type I error are obtained through a bootstrap resampling method. In the case of the Lancaster and HSIC tests with \emph{i.i.d.} observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{i.i.d.} assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any temporal dependence. 
 
-If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis (in contrast to other methods that first generate a new simulated dataset and then compute the test statistic on this dataset). These conditions can be categorised as concerning: (1) Appropriate $\tau$-mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(f,\mathcal{S}_n)$, then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic $nV_b(f,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}f(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(f,\mathcal{S})$ that is of crucial importance to this paper is that $f$ must be a degenerate core.
+If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis. These conditions can be categorised as concerning: (1) Appropriate $\tau$-mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(f,\mathcal{S}_n)$, then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic $nV_b(f,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}f(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(f,\mathcal{S})$ that is of crucial importance to this paper is that $f$ must be a degenerate core.
 
 
 
@@ -307,12 +307,10 @@ Proof??? Could make this a corollary and just say that it follows from theorem w
 In the Lancaster test, we use a composite null hypothesis which requires us to test each of the three hypotheses $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ separately. We reject the null hypothesis $\mathcal{H}_0$ if and only if we reject all three of the components. In \cite{sejdinovic2013kernel}, it is suggested that the Holm-Bonferroni \cite{holm1979simple} correction be used to account for multiple testing. We show here that more relaxed conditions on the p-values can be used while still bounding the Type I error, thus increasing test power.
 
 Denote by $\mathcal{A}_*$ the event that $\mathcal{H}_*$ is rejected. Then
-
 \begin{align*}
 \mathbb{P}(\mathcal{A}_0) &= \mathbb{P}(\mathcal{A}_X \land \mathcal{A}_Y \land \mathcal{A}_Z) \\
 &\leq \min\{\mathbb{P}(\mathcal{A}_X), \mathbb{P}(\mathcal{A}_Y), \mathbb{P}(\mathcal{A}_Z)\}
 \end{align*}
-
 If $\mathcal{H}_0$ is true, then so must one of the components. WLOG assume that $\mathcal{H}_X$ is true. If we use significance levels of $\alpha$ in each test individually then $\mathbb{P}(\mathcal{A}_X) \leq \alpha$ and thus $\mathbb{P}(\mathcal{A}_0) \leq \alpha$.
 
 Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall. It is therefore more conservative than necessary and thus has worse test power compared to the `simple correction' proposed here.
@@ -471,8 +469,6 @@ we can therefore expand $\tilde{K}$ in terms of $\bar{K}$ as
 &= \bar{K}_{ij} - \frac{1}{n}\sum_k\bar{K}_{ik} - \frac{1}{n}\sum_k\bar{K}_{jk} + \frac{1}{n^2}\sum_{kl}\bar{K}_{kl}
 \end{align*}
 and expanding $\tilde{L}$ and $\tilde{M}$ in a similar way, we can rewrite the Lancaster test statistic as
-
-$n\hat \mu^{(Z)}_{L,2} \|^2 - n\|\hat \mu_L\|^2$
 
 \begin{align*} 
 n\|\hat \mu_L\|^2 &= 
@@ -734,6 +730,63 @@ where $N$ is a Hilbert space valued Gaussian random variable. Thus
 \end{claimproof}
 %%%
 
+\subsection{Proof that boundedness and Lipschitz continuity is preserved}\label{supp:bounded-and-lipschitz}
+Recall that a kernel $k$ defined on $\mathcal{X}$ is Lipschitz continuous iff $\exists C_k : \forall w \enspace |k(x,w) - k(x',w)| \leq C_k d_\mathcal{X}(x,x')$ where $d_\mathcal{X}$ is the metric on $\mathcal{X}$ with respect to which $k$ is Lipschitz continuous.
+
+\begin{claim}
+$k$ bounded and Lipschitz continuous $\implies$ $\bar{k}$ is bounded and Lipschitz continuous
+\end{claim}
+\begin{proof}
+$k$ bounded implies there exists $B_k$ such that $|k(x,w)|\leq B_k$ $\forall x, w \in \mathcal{X}$. It follows that
+
+\begin{align*}
+|\bar{k}(x,w)| & = |k(x,w) - \mathbb{E}_X[k(X,w)] - \mathbb{E}_W[k(x,W)] + \mathbb{E}_{XW}[k(X,W)]| \\
+& \leq |k(x,w)|  + \mathbb{E}_X |k(X,w)| + \mathbb{E}_W|k(x,W)| + \mathbb{E}_{XW}|k(X,W)| \\
+& \leq 4B_k \\
+\end{align*}
+
+And thus $\bar{k}$ is bounded. For Lipschitz continuity, observe that for any $w \in \mathcal{X}$
+
+\begin{align*}
+|\bar{k}(x,w) - \bar{k}(x',w)| & = |k(x,w) - \mathbb{E}_X[k(X,w)] - \mathbb{E}_W[k(x,W)] + \mathbb{E}_{XW}[k(X,W)] \\
+& \quad \quad - k(x',w) + \mathbb{E}_X[k(X,w)] + \mathbb{E}_W[k(x',W)] - \mathbb{E}_{XW}[k(X,W)] |\\
+& = |k(x,w)- k(x',w)  + \mathbb{E}_W[k(x',W)] - \mathbb{E}_W[k(x,W)] |\\
+&\leq |k(x,w)- k(x',w)| + |\mathbb{E}_W[k(x',W)] - \mathbb{E}_W[k(x,W)] | \\
+&\leq|k(x,w)- k(x',w)| + \mathbb{E}_W|k(x',W) - k(x,W) | \\
+&\leq 2C_k d_\mathcal{X}(x,x')
+\end{align*}
+
+and thus $\bar{k}$ is Lipschitz continuous.
+
+\end{proof}
+
+\begin{claim}
+$k$ and $l$ bounded and Lipschitz continuous with respect to the metrics $d_\mathcal{X}$ and $d_\mathcal{Y}$ respectively $\implies$ $k\otimes l$ is bounded and Lipschitz continuous with respect to any metric on $\mathcal{X}\times \mathcal{Y}$ equivalent to $d \left( (x,y),(x',y') \right) =  d_\mathcal{X}(x,x') + d_\mathcal{Y}(y,y')$
+\end{claim}
+
+Note that all norms on finite dimensional vector spaces are equivalent, and so if $\mathcal{X}$ and $\mathcal{Y}$ are finite dimensional vector spaces then $k\otimes l$ is Lipschitz continuous with respect to \emph{any} norm on $\mathcal{X}\times \mathcal{Y}$
+
+\begin{proof} Let $k$ and $l$ be bounded by $B_k$ and $B_l$ respectively. Then 
+
+\begin{align*}
+|k \otimes l \left( (x,y), (w,z) \right)| &= |k(x,w)l(y,z)| \\
+&= |k(x,w)||l(y,z)| \\
+&\leq B_k B_l \\
+\end{align*}
+
+Let $k$ and $l$ have Lipschitz constants $C_k$ and $C_l$ respectively. Then, for any $(w,z) \in \mathcal{X\times Y}$
+
+\begin{align*}
+|k \otimes l \left( (x,y), (w,z) \right) &- k \otimes l \left( (x',y'), (w,z) \right) |  \\
+& = |k(x,w)l(y,z) - k(x',w)l(y',z)| \\
+& = |k(x,w)l(y,z) - k(x',w)l(y,z) + k(x',w)l(y,z) - k(x',w)l(y',z)| \\
+& \leq |l(y,z)| |k(x,w) - k(x',w)| + |k(x',w)||l(y,z) - l(y',z)| \\
+& \leq B_l C_k d_\mathcal{X}(x,x') + B_k C_l d_\mathcal{Y}(y,y') \\
+& \leq \max(B_l C_k, B_k C_l )  \enspace d\left((x,y),(x',y')\right) 
+\end{align*}
+
+\end{proof}
+
 \subsection{Proof that HSIC can be Wild Bootstrapped}
 
 Given samples $\{(X_i,Y_i)\}_{i=1}^n$, and taking all notation involving kernels and base spaces as before, the HSIC statistic is defined to be the squared RKHS distance between the empirical embeddings of the distributions $\mathbb{P}_{XY}$ and $\mathbb{P}_X\mathbb{P}_Y$:
@@ -825,48 +878,7 @@ Symmetry is inherited from symmetry of $k$ and $l$. Boundedness and Lipschitz co
 
 \end{proof}
 
-\subsection{Proof that boundedness and Lipschitz continuity is preserved}\label{supp:bounded-and-lipschitz}
-Recall that a kernel $k$ defined on $\mathcal{X}$ is Lipschitz continuous iff $\exists C_k : \forall w \enspace |k(x,w) - k(x',w)| \leq C_k d_\mathcal{X}(x,x')$ where $d_\mathcal{X}$ is the metric on $\mathcal{X}$ with respect to which $k$ is Lipschitz continuous.
 
-\begin{claim}
-$k$ bounded and Lipschitz continuous $\implies$ $\bar{k}$ is bounded and Lipschitz continuous
-\end{claim}
-\begin{proof}
-$k$ bounded implies there exists $B_k$ such that $|k(x,w)|\leq B_k$ $\forall x, w \in \mathcal{X}$. It follows that
-
-\begin{align*}
-|\bar{k}(x,w)| & = |k(x,w) - \mathbb{E}_X[k(X,w)] - \mathbb{E}_W[k(x,W)] + \mathbb{E}_{XW}[k(X,W)]| \\
-& \leq |k(x,w)|  + \mathbb{E}_X |k(X,w)| + \mathbb{E}_W|k(x,W)| + \mathbb{E}_{XW}|k(X,W)| \\
-& \leq 4B_k \\
-\end{align*}
-\end{proof}
-
-\begin{claim}
-$k$ and $l$ bounded and Lipschitz continuous with respect to the metrics $d_\mathcal{X}$ and $d_\mathcal{Y}$ respectively $\implies$ $k\otimes l$ is bounded and Lipschitz continuous with respect to any metric on $\mathcal{X}\times \mathcal{Y}$ equivalent to $d \left( (x,y),(x',y') \right) =  d_\mathcal{X}(x,x') + d_\mathcal{Y}(y,y')$
-\end{claim}
-
-Note that all norms on finite dimensional vector spaces are equivalent, and so if $\mathcal{X}$ and $\mathcal{Y}$ are finite dimensional vector spaces then $k\otimes l$ is Lipschitz continuous with respect to \emph{any} norm on $\mathcal{X}\times \mathcal{Y}$
-
-\begin{proof} Let $k$ and $l$ be bounded by $B_k$ and $B_l$ respectively. Then 
-
-\begin{align*}
-|k \otimes l \left( (x,y), (w,z) \right)| &= |k(x,w)l(y,z)| \\
-&= |k(x,w)||l(y,z)| \\
-&\leq B_k B_l \\
-\end{align*}
-
-Let $k$ and $l$ have Lipschitz constants $C_k$ and $C_l$ respectively. Then, for any $(w,z) \in \mathcal{X\times Y}$
-
-\begin{align*}
-|k \otimes l \left( (x,y), (w,z) \right) &- k \otimes l \left( (x',y'), (w,z) \right) |  \\
-& = |k(x,w)l(y,z) - k(x',w)l(y',z)| \\
-& = |k(x,w)l(y,z) - k(x',w)l(y,z) + k(x',w)l(y,z) - k(x',w)l(y',z)| \\
-& \leq |l(y,z)| |k(x,w) - k(x',w)| + |k(x',w)||l(y,z) - l(y',z)| \\
-& \leq B_l C_k d_\mathcal{X}(x,x') + B_k C_l d_\mathcal{Y}(y,y') \\
-& \leq \max(B_l C_k, B_k C_l )  \enspace d\left((x,y),(x',y')\right) 
-\end{align*}
-
-\end{proof}
 
 \end{document}
 
