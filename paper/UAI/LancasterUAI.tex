@@ -82,7 +82,7 @@
 
 \begin{abstract} 
 
-A wild bootstrap method is applied to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{i.i.d.} case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we prove that the Lancaster statistic satisfies the conditions required to estimate the quantiles of the null distribution using the wild bootstrap; second, the way in which this is proved is novel and is simpler than existing methods, and further may be applied to other statistics.
+We apply a wild bootstrap method to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap methods fail. As in the \emph{i.i.d.}~case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we prove that the Lancaster statistic satisfies the conditions required to estimate the quantiles of the null distribution using the wild bootstrap; second, the way in which this is proved is novel, simpler than existing methods, and can further be applied to other statistics.
 
 %(An additional minor contribution is that it is also shown that the multiple testing correction proposed in [Lancaster] is too conservative, and a new correction is proposed that increases test power)
 \end{abstract} 
@@ -91,17 +91,17 @@ A wild bootstrap method is applied to the Lancaster three-variable interaction m
 \label{introduction}
 %Nonparametric testing of independence or interaction between random variables is a core staple of machine learning and statistics.
 
-Nonparametric testing of independence or interaction between random variables is to machine learning and statistics as the peer review process is to publishing: everyone agrees that it is very important, but the ways in which we go about doing it in practice often rely on assumptions that probably don't hold in reality. 
+Nonparametric testing of independence or interaction between random variables is to machine learning and statistics as the peer review process is to academic publishing: everyone agrees that it is very important, but the ways in which we go about doing it in practice often rely on assumptions that probably don't hold in reality. 
 
-Sticking to the more tractable and well-posed problem of the former, the authors observe that many existing methods in determining independence and interaction between variables rely on the assumption that the observed data are drawn \emph{i.i.d.}, which for many applications is unrealistic and restrictive \cite{gretton2005measuring}\cite{gretton2007kernel}\cite{gretton2005kernel}\cite{sejdinovic2013kernel}. Recent work has begun to extend statistical tests exploiting the theory of Reproducing Kernel Hilbert Spaces (RKHSs) from the \emph{i.i.d.} case to the time series case \cite{chwialkowski2014wild}\cite{chwialkowski2014kernel}. Of course, these tests also rely on rather restrictive assumptions on the mixing properties of the processes from which the observations are drawn; nonetheless they are a significant relaxation on the \emph{i.i.d.} assumption and are a step towards methods capable of handling more general forms of time-dependent data. 
+Sticking to the more tractable and well-posed problem of the former, the authors observe that many existing methods in determining independence and interaction between variables rely on the assumption that the observed data are drawn \emph{i.i.d.}, which for many applications is unrealistic and restrictive \cite{gretton2005measuring}\cite{gretton2007kernel}\cite{gretton2005kernel}\cite{sejdinovic2013kernel}. Recent work has begun to extend statistical tests exploiting the theory of Reproducing Kernel Hilbert Spaces (RKHSs) from the \emph{i.i.d.} case to the time series case \cite{chwialkowski2014wild}\cite{chwialkowski2014kernel}. These tests also rely on rather restrictive assumptions on the mixing properties of the processes from which the observations are drawn; nonetheless they are a significant relaxation on the \emph{i.i.d.}~assumption and are a step towards methods capable of handling more general forms of time-dependent data. 
 
 The Lancaster interaction \cite{lancaster1969chi}\cite{sejdinovic2013kernel} is a signed measure that can be used to construct a test statistic capable of detecting dependence between three random variables. If the joint distribution on the three variables factorises in some way into a product of a marginal and a pairwise marginal, the Lancaster interaction is the zero measure. Given finite data, this can be used to construct a statistical test, the null hypothesis of which is that the joint distribution factorises thus. 	
 
-In the \emph{i.i.d.} case, the null distribution of the test statistic can be estimated using a permutation bootstrap technique: this amounts to shuffling the indices of one or more of the variables and recalculating the test statistic on this bootstrapped data set. When our samples instead exhibit temporal dependence, shuffling the time indices destroys this dependence and thus doing so does not correspond to a valid resample of the test statistic. 
+In the \emph{i.i.d.}~case, the null distribution of the test statistic can be estimated using a permutation bootstrap technique: this amounts to shuffling the indices of one or more of the variables and recalculating the test statistic on this bootstrapped data set. When our samples instead exhibit temporal dependence, shuffling the time indices destroys this dependence and thus doing so does not correspond to a valid resample of the test statistic. 
 
-Provided that our data-generating process satisfies some technical conditions on the forms of temporal dependence, recent work by Leucht \cite{leucht2013dependent}, building on the work of Shao \cite{shao2010dependent}, can come to our rescue. The Wild Bootstrap is a method that correctly resamples from the null distribution of a test statistic, subject to certain conditions on both the test statistic and the processes from which the observations have been drawn.
+Provided that our data-generating process satisfies some technical conditions on the forms of temporal dependence, recent work by Leucht \cite{leucht2013dependent}, building on the work of Shao \cite{shao2010dependent}, can come to our rescue. The wild bootstrap is a method that correctly resamples from the null distribution of a test statistic, subject to certain conditions on both the test statistic and the processes from which the observations have been drawn.
 
-In this paper we show that the Lancaster interaction test statistic satisfies the conditions required to apply the wild bootstrap procedure; moreover, the manner in which we prove this is significantly simpler than existing proofs in the literature of the same property for other kernel test statistics \cite{chwialkowski2014wild}\cite{chwialkowski2014kernel}. Our proof may be adapted from the Lancaster interaction to other test statistics. In the appendix, we provide an adaptation of the proof to the Hilbert Schmidt Independence Criterion (HSIC) test statistic, giving a significantly shorter and simpler proof than that given in \cite{chwialkowski2014kernel}. Our proof relies on a recently published version of the Central Limit Theorem for Hilbert space valued random variables \cite{dehling2015bootstrap} which may be substituted for more up-to-date theorems as further progress is made.
+In this paper we show that the Lancaster interaction test statistic satisfies the conditions required to apply the wild bootstrap procedure; moreover, the manner in which we prove this is significantly simpler than existing proofs in the literature of the same property for other kernel test statistics \cite{chwialkowski2014wild}\cite{chwialkowski2014kernel}. Our proof can be adapted from the Lancaster interaction to other test statistics. In the appendix, we provide an adaptation of the proof to the Hilbert Schmidt Independence Criterion (HSIC) test statistic, giving a significantly shorter and simpler proof than that given in \cite{chwialkowski2014kernel}. The proof relies on a recently published version of the Central Limit Theorem for Hilbert space valued random variables satisfying particular mixing properties \cite{dehling2015bootstrap}; as further progress is made, this may be substituted for more up-to-date theorems that make weaker mixing assumptions.
 
 %
 %\begin{itemize}
@@ -121,17 +121,20 @@ In this paper we show that the Lancaster interaction test statistic satisfies th
 %This work combines the works of [HSIC + time series] and [Lancaster interaction] to give a non-parametric test for three variable interactions in which the samples are drawn from random processes.
 
 \section{Main results}\label{section:main}
-The Lancaster interaction on the triple of random variables $(X,Y,Z)$ is defined as the signed measure $\Delta_LP = \mathbb{P}_{XYZ} - \mathbb{P}_{XY}\mathbb{P}_{Z} - \mathbb{P}_{XZ}\mathbb{P}_{Y} - \mathbb{P}_{X}\mathbb{P}_{YZ} + 2\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}$. It is straightforward to show that if any variable is independent of the other two (equivalently, if the joint distribution $\mathbb{P}_{XYZ}$ factorises into a product of marginals in any way), then $\Delta_LP = 0$. That is, writing $\mathcal{H}_X = \{X \independent (Y,Z)\}$ and similar for $\mathcal{H}_Y$ and $\mathcal{H}_Z$, we have that
+The Lancaster interaction on the triple of random variables $(X,Y,Z)$ is defined as the signed measure $\Delta_LP = \mathbb{P}_{XYZ} - \mathbb{P}_{XY}\mathbb{P}_{Z} - \mathbb{P}_{XZ}\mathbb{P}_{Y} - \mathbb{P}_{X}\mathbb{P}_{YZ} + 2\mathbb{P}_{X}\mathbb{P}_{Y}\mathbb{P}_{Z}$. This measure can be used to detect three-variable interactions. It is straightforward to show that if any variable is independent of the other two (equivalently, if the joint distribution $\mathbb{P}_{XYZ}$ factorises into a product of marginals in any way), then $\Delta_LP = 0$. That is, writing $\mathcal{H}_X = \{X \independent (Y,Z)\}$ and similar for $\mathcal{H}_Y$ and $\mathcal{H}_Z$, we have that
 
-\[\mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z \Rightarrow \Delta_LP=0 \]
+\begin{equation}\label{eqn:lancaster-zero}
+\mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z \Rightarrow \Delta_LP=0
+\end{equation}
 
-By \cite{sejdinovic2013kernel}, we can consider the mean embedding of this measure:
+
+Following \cite{sejdinovic2013kernel}, we can consider the mean embedding of this measure:
 \begin{align}
  \mu_L = \int k(x,\cdot) l(y,\cdot) m(z,\cdot) \Delta_LP 
 \end{align}
 
 
-Given a i.i.d. sample $(X_i,Y_i,Z_i)_{i=1}^n$,  norm of the mean embedding $\mu_L$ can be empirically estimated using sample centered kernel matrices. For example, for the kernel $k$ with kernel matrix $K_{i,j} = K(X_i,X_j)$, the centered kernel matrix  $\tilde{K}$ is given by
+Given an i.i.d. sample $(X_i,Y_i,Z_i)_{i=1}^n$,  norm of the mean embedding $\mu_L$ can be empirically estimated using sample centered kernel matrices. For example, for the kernel $k$ with kernel matrix $K_{i,j} = K(X_i,X_j)$, the centered kernel matrix  $\tilde{K}$ is given by
 \[
 \tilde{K}_{i,j} = \langle k(X_i,\cdot)-\tilde{\mu}_X, k(X_j,\cdot) -\tilde{\mu}_X \rangle,
 \]
@@ -139,19 +142,24 @@ where $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$.  By \cite{sejdinov
 \begin{equation}\label{eqn:lancaster}
 \|\hat \mu_L\|^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}
 \end{equation}
-where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$, for a matrix $A$. Later \cite{sejdinovic2013kernel} shows that, under the null hypothesis, $n \|\hat \mu_L\|^2 $ converges to a specific distribution, namely an infinite sum of weighted $\chi$-squared random variables. By leveraging the \emph{i.i.d.} assumption of the samples, any given quantile of this  distribution  can be estimated using simple permutation bootstrap, and so a test procedure is proposed.
+where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$, for a matrix $A$.
 
-In the time series setting this approach does not work. Temporal dependence within the samples makes  study of the asymptotic distribution of $n \|\hat \mu_L\|^2 $ difficult and the permutation bootstrap fails as showed in the experiment in Section \ref{experiment2}. To construct a test in this setting we will use asymptotic and bootstrap results for mixing processes. 
+In this paper, we construct a statistical test for three-variable interaction, using $n\|\hat \mu_L\|^2$ as the test statistic and the left hand side of Equation \ref{eqn:lancaster-zero} as the null hypothesis. Intuitively, if $n\|\hat \mu_L\|^2$ is large then the joint distribution is unlikely to factorise in any way.
 
-Mixing processes formalise a notion of the temporal structure within a process. Mixing can be thought of as the rate at which a process forgets about its past. For example, for Gaussian processes this rate can be captured by the autocorrelation function; for general processes, generalisations of autocorrelation are used. The exact assumptions are discussed in the details section, and we will refer to them as \textit{suitable mixing assumptions}.   
+Later \cite{sejdinovic2013kernel} shows that, under the null hypothesis, $n \|\hat \mu_L\|^2 $ converges to a specific distribution, namely an infinite sum of weighted $\chi$-squared random variables. By leveraging the \emph{i.i.d.} assumption of the samples, any given quantile of this  distribution  can be estimated using simple permutation bootstrap, and so a test procedure is proposed.
 
-The null hypothesis of the Lancaster test is composed of three sub-components. In the following, we assume that $\mathcal{H}_Z$ holds; by symmetry, similar results hold for $\mathcal{H}_X$ and $\mathcal{H}_Y$.
+In the time series setting this approach does not work. Temporal dependence within the samples makes  study of the asymptotic distribution of $n \|\hat \mu_L\|^2 $ difficult; in Section \ref{experiment2} we verify experimentally that the permutation bootstrap fails. To construct a test in this setting we will use asymptotic and bootstrap results for mixing processes. 
 
-It can be shown that the norm of the mean embedding \eqref{eqn:lancaster} can also be written as
+Mixing formalises the notion of the temporal structure within a process, and can be thought of as the rate at which the process forgets about its past. For example, for Gaussian processes this rate can be captured by the autocorrelation function; for general processes, generalisations of autocorrelation are used. The exact assumptions are discussed in the details section, and we will refer to them as \textit{suitable mixing assumptions}.   
+
+
+Since the null hypothesis of this test is composed of three sub-components, we must test each of $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ separately. We reject the null hypothesis if and only if we reject each of the sub-components. In the following, we assume that $\mathcal{H}_Z$ holds; by symmetry, similar results hold for $\mathcal{H}_X$ and $\mathcal{H}_Y$.
+
+It is straightforward to show that the norm of the mean embedding \eqref{eqn:lancaster} can also be written as
 
 \[ \|\hat \mu_L\|^2 = \frac{1}{n^2}\left(\widetilde{\tilde{K}\circ\tilde{L}}\circ\tilde{M}\right)_{++}\]
 
-Further, we show that the problem can be simplified to studying population centered kernels
+Our first contribution is to show that the problem can be simplified to studying population centered kernels
 \[
 \| \hat \mu^{(Z)}_{L,2} \|^2 =\frac{1}{n^2}\left(\overline{\overline{K}\circ\overline{L}}\circ\overline{M}\right)_{++}
 \]
@@ -164,7 +172,7 @@ with $\mu_X$ being the population mean embedding of $X$. Specifically, we prove 
 \end{theorem}
 The proof of Theorem \ref{theorem:norm-conv-in-prob} presented in this paper is novel and is significantly more concise than previous proofs of similar results \citep{chwialkowski2014kernel}\citep{chwialkowski2014wild}. 
 
-The statistic $\| \hat \mu^{(Z)}_{L,2} \|^2$ is much easier to study under the non-\emph{i.i.d.} assumption than $\|\hat \mu_L\|^2$. Indeed, it can expressed as a V-statistic
+Theorem \ref{theorem:norm-conv-in-prob} is useful because the statistic $\| \hat \mu^{(Z)}_{L,2} \|^2$ is much easier to study under the non-\emph{i.i.d.} assumption than $\|\hat \mu_L\|^2$. Indeed, it can expressed as a V-statistic
 \[ 
 V_n = \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} \overline{\overline{k} \otimes \overline{l}}\otimes \overline{m} (S_i,S_j)
 \]
