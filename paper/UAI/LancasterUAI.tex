@@ -201,36 +201,21 @@ The consistency results and type one error control result are provided in t he d
 
 \section{Details} 
 
-In this section we briefly introduce the theory and definitions required to understand the statement and proof of our main result. For a more in-depth introduction, see e.g. \cite{steinwart2008support}\cite{berlinet2011reproducing}\cite{scholkopf2002learning}
+In this section we discuss details of the statements and proofs of outlined in the  main result section. 
 
 
-
-We will assume that kernels $k,l,m$ are characteristic  \cite{sriperumbudur2011universality}\cite{sriperumbudur2010hilbert} and bounded. We describe some notation relevant to the kernel $k$; similar notation holds for $l$ and $m$.
-
-
-Recall that $\mu_X := \mathbb{E}_X k(X,\cdot) \in \mathcal{H}_k$ is the  mean embedding \cite{smola2007hilbert} of the random variable $X$. The  estimate of the mean embedding is $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$, we  remark that $\tilde{k}(x,x') = \langle k(x,\cdot)-\tilde{\mu}_X, k(x',\cdot)-\tilde{\mu}_X \rangle$ is a kernel. $\bar{k}(x,x') = \langle\phi_X(x)-\mu_X,\phi_X(x')-\mu_X\rangle$ is a kernel. 
-
-% TODO if you want this put it to appendix  
-% If $k$ and $l$ are kernels on $\mathcal{X}$ and $\mathcal{Y}$, then $k\otimes l$ is a kernel on $\mathcal{X}\times \mathcal{Y}$. We write $C_{XY} = \mathbb{E}_{XY}\bar{\phi}_X(X)\otimes\bar{\phi}_Y(Y)$ called the \emph{population centred covariance operator} and define $\bar{C}_{XY} = \frac{1}{n}\sum_{i=1}^n\bar{\phi}_X(X_i)\otimes\bar{\phi}_Y(Y_i)$ to be its empirical counterpart. Note that we can consider $C_{XY}$ to be an operator $\mathcal{H}_l \longrightarrow \mathcal{H}_k$, or as an element of the Hilbert space $\mathcal{H}_{k\otimes l}$. In the latter case we consider it to be the difference of the two mean embeddings $C_{XY}=\mu_{XY} - \mu_{X}\otimes\mu_{Y}$
-
-% TODO irelevant for details can briefly discusses in intro 
-% \subsection{Hypothesis testing using the mean embedding}
-% 
-% The idea of injectively embedding measures into a Hilbert space can be exploited to design statistical tests of properties of one or more distributions. For example, the Maximum Mean Discrepancy (MMD) \cite{gretton2012kernel} two-sample test is motivated by the following: suppose we are given samples $\{X_i\}_{i=1}^n$ and $\{Y_j\}_{j=1}^m$ drawn \emph{i.i.d.} from distributions $\mathbb{P}$ and $\mathbb{Q}$ respectively. If our kernel is characteristic, then $\mu_\mathbb{P} = \mu_\mathbb{Q} \iff \mathbb{P} = \mathbb{Q}$. We can construct a statistical test using an estimator of the quantity $\|\mu_\mathbb{P} - \mu_\mathbb{Q} \|^2$ as our test statistic, the null hypothesis of which is that $\mathbb{P} = \mathbb{Q}$. The quantiles of the null distribution can be estimated and therefore we can set consistent thresholds.
-% 
-% An independence test known as the Hilbert-Schmidt Independence Criterion (HSIC)\cite{gretton2007kernel}\cite{gretton2005kernel} can be constructed in a similar way: Given samples $\{(X_i,Y_i)\}_{i=1}^n$ drawn \emph{i.i.d.} from a joint distribution $\mathbb{P}_{XY}$, $X$ and $Y$ are independent if and only if $\mathbb{P}_{XY} = \mathbb{P}_X \mathbb{P}_Y \iff \mu_{\mathbb{P}_{XY}} = \mu_{\mathbb{P}_X\mathbb{P}_Y}$. Similarly to MMD, we can empirically estimate $\| \mu_{\mathbb{P}_{XY}} - \mu_{\mathbb{P}_X\mathbb{P}_Y}\|^2$ and estimate the quantiles of our finite sample estimator under the null hypothesis of independence, and can therefore construct a statistical test of independence.
-
-
-\paragraph{Lancaster interaction measure}
+throughout the paper we  will assume that kernels $k,l,m$ are characteristic  \cite{sriperumbudur2011universality}, bounded and Lipschitz continuous. We describe some notation relevant to the kernel $k$; similar notation holds for $l$ and $m$. Recall that $\mu_X := \mathbb{E}_X k(X,\cdot) \in \mathcal{H}_k$ is the  mean embedding \cite{smola2007hilbert} of the random variable $X$. Given observations $X_i$, an estimate of the mean embedding is $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$. Two modifications  of $k$ are used in this work
+\begin{align}
+\bar{k}(x,x') &= \langle\phi_X(x)-\mu_X,\phi_X(x')-\mu_X\rangle,
+\tilde{k}(x,x') &= \langle k(x,\cdot)-\tilde{\mu}_X, k(x',\cdot)-\tilde{\mu}_X \rangle \\
+\end{align}
+the first one is population centered kernel, while the other is empirically centered kernel.  
 
 As outlined in the main results section the mean embedding of the  Lancaster interaction measure \ref{section:main},$\|\hat \mu_L\|^2$, can be used  to distinguish  between following hypotheses:
 
 $\mathcal{H}_0: \mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z $\\
 $\mathcal{H}_1: \mathbb{P}_{XYZ}$ does not factorise in any way
 
-
-
-% The main problem we face is in estimating the quantiles of the null distribution in order to find rejection thresholds that appropriately control Type I error. Since the data are not drawn \emph{i.i.d }, the simple permutation bootstrap method of \cite{sejdinovic2013kernel} cannot be used. Instead, we exploit the Wild Bootstrap method.
 
 Note that in order to achieve consistency for this test, we would need that $\mathcal{H}_0 \iff \Delta_LP = 0$. Unfortunately this does not hold - in \cite{sejdinovic2013kernel} examples are given of distributions for which $\mathcal{H}_0$ is false, and yet $\Delta_LP = 0$. At the time of writing, a characterisation of such distributions is unknown to the authors. Therefore, if we reject $\mathcal{H}_0$ then we conclude that the distribution does not factorise; if we fail to reject $\mathcal{H}_0$ then we can not conclude that the distribution factorizes, though such a conclusion is technically not valid in  testing framework due to asymmetry between null and the alternative hypothesis.   
 
