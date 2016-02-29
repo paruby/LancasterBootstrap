@@ -172,19 +172,19 @@ with $\mu_X$ being the population mean embedding of $X$. Specifically, we prove 
 \end{theorem}
 The proof of Theorem \ref{theorem:norm-conv-in-prob} presented in this paper is novel and is significantly more concise than previous proofs of similar results \citep{chwialkowski2014kernel}\citep{chwialkowski2014wild}. 
 
-Theorem \ref{theorem:norm-conv-in-prob} is useful because the statistic $\| \hat \mu^{(Z)}_{L,2} \|^2$ is much easier to study under the non-\emph{i.i.d.} assumption than $\|\hat \mu_L\|^2$. Indeed, it can expressed as a V-statistic
+This theorem is useful because the statistic $\| \hat \mu^{(Z)}_{L,2} \|^2$ is much easier to study under the non-\emph{i.i.d.} assumption than $\|\hat \mu_L\|^2$. Indeed, it can expressed as a V-statistic
 \[ 
 V_n = \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} \overline{\overline{k} \otimes \overline{l}}\otimes \overline{m} (S_i,S_j)
 \]
 where  $S_i = (X_i,Y_i,Z_i)$. The crucial observation is that
 \[
- h = \overline{\overline{k} \otimes \overline{l}}\otimes \overline{m}
+ h := \overline{\overline{k} \otimes \overline{l}}\otimes \overline{m}
 \]
-is well behaved in the following sense 
+is well behaved in the following sense.
 \begin{theorem}\label{theorem:degenerate-kernel}
 Suppose that $k$, $l$ and $m$ are bounded symmetric Lipschitz contentious kernels. Then $h$ is also bounded symmetric and Lipschitz continuous, which is moreover degenerate under $\mathcal{H}_Z$ i.e $\mathbb{E}_{S}h(S,s)=0$ for any fixed $s$.
 \end{theorem}
-The asymptotic analysis of $V$-statistics with degenerate cores for non-\emph{i.i.d.} data is still complex, but we can appeal to prior work: \citep{leucht2013dependent} showed a way to estimate any given quantile of such a $V$-statistic under the null hypothesis using a method called the wild bootstrap. This, combined with analysis of the V-statistic under the alternative provided in Theorem 2 of \citep{chwialkowski2014wild}\footnote{Note that similar results are presented in \citep{leucht2013dependent} as specific cases.}, results in statistical test (see Algorithm \ref{alg:Lancaster}).
+The asymptotic analysis of such a $V$-statistic for non-\emph{i.i.d.} data is still complex, but we can appeal to prior work: \citep{leucht2013dependent} showed a way to estimate any given quantile of such a $V$-statistic under the null hypothesis using a method called the wild bootstrap. This, combined with analysis of the V-statistic under the alternative provided in Theorem 2 of \citep{chwialkowski2014wild}\footnote{Note that similar results are presented in \citep{leucht2013dependent} as specific cases.}, results in statistical test (see Algorithm \ref{alg:Lancaster}).
 \begin{algorithm}[tb]
    \caption{Test $\mathcal{H}_Z$ with Wild Bootstrap}
    \label{alg:Lancaster}
