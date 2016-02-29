@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: LancasterUAI.aux
 The style file: abbrvnat.bst
 Database file #1: ref.bib
-You've used 21 entries,
+You've used 17 entries,
             2773 wiz_defined-function locations,
-            709 strings with 7938 characters,
-and the built_in function-call counts, 10616 in all, are:
-= -- 940
-> -- 621
-< -- 17
-+ -- 211
-- -- 189
-* -- 837
-:= -- 1599
-add.period$ -- 66
-call.type$ -- 21
-change.case$ -- 119
-chr.to.int$ -- 20
-cite$ -- 42
-duplicate$ -- 499
-empty$ -- 868
-format.name$ -- 221
-if$ -- 2255
+            692 strings with 7272 characters,
+and the built_in function-call counts, 8764 in all, are:
+= -- 795
+> -- 472
+< -- 16
++ -- 162
+- -- 144
+* -- 673
+:= -- 1298
+add.period$ -- 54
+call.type$ -- 17
+change.case$ -- 95
+chr.to.int$ -- 16
+cite$ -- 34
+duplicate$ -- 424
+empty$ -- 731
+format.name$ -- 166
+if$ -- 1884
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 27
-newline$ -- 113
-num.names$ -- 84
-pop$ -- 274
+missing$ -- 20
+newline$ -- 93
+num.names$ -- 68
+pop$ -- 216
 preamble$ -- 1
-purify$ -- 104
+purify$ -- 81
 quote$ -- 0
-skip$ -- 385
+skip$ -- 328
 stack$ -- 0
-substring$ -- 439
-swap$ -- 79
-text.length$ -- 7
+substring$ -- 399
+swap$ -- 82
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 201
+type$ -- 172
 warning$ -- 0
-while$ -- 97
+while$ -- 84
 width$ -- 0
-write$ -- 277
+write$ -- 228

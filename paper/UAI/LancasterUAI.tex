@@ -206,8 +206,8 @@ In this section we discuss details of the statements and proofs of outlined in t
 
 throughout the paper we  will assume that kernels $k,l,m$ are characteristic  \cite{sriperumbudur2011universality}, bounded and Lipschitz continuous. We describe some notation relevant to the kernel $k$; similar notation holds for $l$ and $m$. Recall that $\mu_X := \mathbb{E}_X k(X,\cdot) \in \mathcal{H}_k$ is the  mean embedding \cite{smola2007hilbert} of the random variable $X$. Given observations $X_i$, an estimate of the mean embedding is $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$. Two modifications  of $k$ are used in this work
 \begin{align}
-\bar{k}(x,x') &= \langle\phi_X(x)-\mu_X,\phi_X(x')-\mu_X\rangle,
-\tilde{k}(x,x') &= \langle k(x,\cdot)-\tilde{\mu}_X, k(x',\cdot)-\tilde{\mu}_X \rangle \\
+\bar{k}(x,x') &= \langle  k(x,\cdot)-\mu_X,k(x',\cdot)-\mu_X\rangle, \\
+\tilde{k}(x,x') &= \langle k(x,\cdot)-\tilde{\mu}_X, k(x',\cdot)-\tilde{\mu}_X \rangle 
 \end{align}
 the first one is population centered kernel, while the other is empirically centered kernel.  
 
@@ -219,7 +219,7 @@ $\mathcal{H}_1: \mathbb{P}_{XYZ}$ does not factorise in any way
 
 Note that in order to achieve consistency for this test, we would need that $\mathcal{H}_0 \iff \Delta_LP = 0$. Unfortunately this does not hold - in \cite{sejdinovic2013kernel} examples are given of distributions for which $\mathcal{H}_0$ is false, and yet $\Delta_LP = 0$. At the time of writing, a characterisation of such distributions is unknown to the authors. Therefore, if we reject $\mathcal{H}_0$ then we conclude that the distribution does not factorise; if we fail to reject $\mathcal{H}_0$ then we can not conclude that the distribution factorizes, though such a conclusion is technically not valid in  testing framework due to asymmetry between null and the alternative hypothesis.   
 
-\subsection{Time series, mixing}
+\paragraph{Temporal dependence}
 As outlined in the main results section, there are various formalisations of memory or 'mixing' of a random process \cite{doukhan1994mixing}\cite{bradley2005basic}\cite{dedecker2007weak}; of relevance to this paper are the following two:
 
 \begin{definition}\cite{leucht2013dependent}
@@ -243,7 +243,6 @@ Suppose that the process $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing. Then any `sub-proc
 
 \paragraph{Mixing assumptions}
 
-TODO: Collect out mixing assumptions, get common denominator and paste here. Refer to them as mixing assumptions when possible.
 
 
 % TODO this is not necessary to prove Theorem 2, altermatively you can put  O(n^{-\frac{1}{2}}) notation in the Theorem 2.
