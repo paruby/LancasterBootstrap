@@ -125,25 +125,25 @@ The Lancaster interaction on the triple of random variables $(X,Y,Z)$ is defined
 
 \[\mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z \Rightarrow \Delta_LP=0 \]
 
-By [Lancaster], we can consider mean embedding of this measure 
+By [Lancaster], we can consider the mean embedding of this measure:
 \begin{align}
  \mu_L = \int k(x,\cdot) l(y,\cdot) m(z,\cdot) \Delta_LP 
 \end{align}
 
 
-Given a i.i.d. sample $(X_i,Y_i,Z_i)_{i=1}^n$,  norm of the mean embedding $\mu_L$ can be empirically estimated using sample centered kernel matrices. If $a$ is a kernel function and $A_{i,j} = A(X_i,X_j)$, then centered kernel matrices  $\tilde{A}$ is 
+Given a i.i.d. sample $(X_i,Y_i,Z_i)_{i=1}^n$,  norm of the mean embedding $\mu_L$ can be empirically estimated using sample centered kernel matrices. For example, for the kernel $k$ with kernel matrix $K_{i,j} = K(X_i,X_j)$, the centered kernel matrix  $\tilde{K}$ is given by
 \[
-\tilde{H}_{i,j} = \langle a(X_i,\cdot)-\tilde{\mu}_X, a(X_j,\cdot) -\tilde{\mu}_X \rangle,
+\tilde{K}_{i,j} = \langle k(X_i,\cdot)-\tilde{\mu}_X, k(X_j,\cdot) -\tilde{\mu}_X \rangle,
 \]
-where $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n a(X_i,\cdot)$.  By [Lancaster], estimator of the norm  mean embedding of the Lancaster interaction for i.i.d. samples is 
+where $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$.  By [Lancaster], an estimator of the norm of the mean embedding of the Lancaster interaction for \emph{i.i.d.} samples is 
 \begin{equation}\label{eqn:lancaster}
 \|\hat \mu_L\|^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}
 \end{equation}
-where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$, for a matrix $A$. Latter [Lancaster] shows that, under the null hypothesis, $n \|\hat \mu_L\|^2 $ converges to a specific distribution, namely infinite sum of weighted $\chi$-squared random variables. By leveraging  samples' i.i.d. assumption, quantiles of this  distribution  can be estimated using simple permutation bootstrap, and so a test procedure is proposed.
+where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$, for a matrix $A$. Later [Lancaster] shows that, under the null hypothesis, $n \|\hat \mu_L\|^2 $ converges to a specific distribution, namely an infinite sum of weighted $\chi$-squared random variables. By leveraging the \emph{i.i.d.} assumption of the samples, any given quantile of this  distribution  can be estimated using simple permutation bootstrap, and so a test procedure is proposed.
 
-In time series setting this approach does not work. Temporal dependence within the samples makes  study of asymptotic disquisition of $n \|\hat \mu_L\|^2 $ difficult  and permutation bootstrap fails as showed in experiment \ref{wildBootstrap_is_necessary} in section [experiments]. to construct a test in this setting we will use asymptotic and bootstrap results for mixing processes. 
+In the time series setting this approach does not work. Temporal dependence within the samples makes  study of the asymptotic distribution of $n \|\hat \mu_L\|^2 $ difficult and the permutation bootstrap fails as showed in experiment \ref{wildBootstrap_is_necessary} in section [experiments]. To construct a test in this setting we will use asymptotic and bootstrap results for mixing processes. 
 
-mixing processes formalize notion of the temporal structure within the process. Mixing can be though of the rate at which process forgets about its past e.g. for Gaussian processes this rate can be captured by auto correlation function. For the general processes, generalizations of auto correction are used. The exact assumptions are discusses in the details section, and we will refer to them as \textit{suitable mixing assumptions}.   
+Mixing processes formalise a notion of the temporal structure within a process. Mixing can be thought of as the rate at which a process forgets about its past e.g. for Gaussian processes this rate can be captured by the auto correlation function. For general processes, generalisations of auto correlation are used. The exact assumptions are discussed in the details section, and we will refer to them as \textit{suitable mixing assumptions}.   
 
 The null hypothesis of the Lancaster test is composed of three sub-components. In the following, we assume that $\mathcal{H}_Z$ holds; by symmetry, similar results hold for $\mathcal{H}_X$ and $\mathcal{H}_Y$.
 
