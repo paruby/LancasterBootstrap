@@ -234,7 +234,7 @@ A process $(X_t)_{t}$ is \emph{$\beta$-mixing} (also known as \emph{absolutely r
 \[ \beta(m) = \frac{1}{2} \sup_n \sup \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}(A_i \cap B_j) - \mathbb{P}(A_i)\mathbb{P}(B_j)| \]
 where the second supremum is taken  over all finite partitions $\{A_1,\ldots, A_I \}$ and  $\{B_1,\ldots, B_J\}$ of the sample space such that $A_i \in \mathcal{H}_1^n$ and $B_j \in \mathcal{H}_{n+m}^\infty$ and $\mathcal{H}_b^c = \sigma(X_b,X_{b+1},\ldots,X_{c})$
 \end{definition}
-Similar notion to $\beta$-mixing is $\tau$-mixing, which is usefully for constructing the test. We do not discuss $\tau$-mixing here since it is implied by $\beta$-mixing given random vector $S_i$ has a finite moment.   
+Similar notion to $\beta$-mixing is $\tau$-mixing, which is usefully for constructing the test. We do not discuss $\tau$-mixing in detail since it is implied by $\beta$-mixing given random vector $S_i$ has a finite moment.   
 
 
 \textbf{Mixing assumptions.} We assume that random process   $S_i = (X_i,Y_i,Z_i)$ is $\beta$ mixing with a coefficient   $\beta(m)  = o(m^{-6})$. 
@@ -253,16 +253,11 @@ We call $nV_n$ a \emph{normalised} V-statistic. We call $f$ the \emph{core} of $
 
 The limiting distribution of degenerate V-statistic is not tractable.   Estimates of the test statistic quantiles  required to achieve a given Type I error are obtained through a bootstrap  method. In the case of the Lancaster and HSIC tests with \emph{i.i.d.} observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{i.i.d.} assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any temporal dependence. 
 
-If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis. These conditions can be categorised as concerning: (1) Appropriate $\tau$-mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(f,\mathcal{S}_n)$, then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic $nV_b(f,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}f(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(f,\mathcal{S})$ that is of crucial importance to this paper is that $f$ must be a degenerate core.
-
-
-
-
-
-\subsection{Control of Type I error}
-Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components\footnote{Note that the value of $\|\hat \mu_L\|$ will be the same for each test, but the null distributions will in general be different for each $\mathcal{H}_{\LargerCdot}$}
-
-This theorem shows that we correctly control the Type I error when testing $\mathcal{H}_Z$.
+If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis. These conditions, checked in the Theorem, are mild: they include continuity and boundedness of the kernel. If these conditions are met , then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic 
+\[
+B_n = \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} W_{i}f(S_i,S_j)W_{j} 
+\]
+approximates $W_n$ well. This theorem shows that we correctly control the Type I error when testing $\mathcal{H}_Z$.
 
 \begin{theorem}
 Suppose in addition to the conditions of Theorems \ref{theorem:norm-conv-in-prob} and \ref{theorem:degenerate-kernel} that  $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is $\tau$-mixing with coefficients $\tau(m)$ satisfying $\sum_{m=1}^\infty m^2 \sqrt{\tau(m)} < \infty$, and that $W$ is drawn from a process satisfying (B2) in \cite{leucht2013dependent}. Then asymptotically, the quantiles of
@@ -271,6 +266,10 @@ Suppose in addition to the conditions of Theorems \ref{theorem:norm-conv-in-prob
 
 are the same as those of $ n\| \hat \mu_L\|^2$. (Kacper, is this right? You mentioned that it was technically wrong to say that the two things have the same distribution - what's the right thing to say?)
 \end{theorem}
+
+
+Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components\footnote{Note that the value of $\|\hat \mu_L\|$ will be the same for each test, but the null distributions will in general be different for each $\mathcal{H}_{\LargerCdot}$}
+
 
 Proof??? Could make this a corollary and just say that it follows from theorem whatever in leucht.
 
