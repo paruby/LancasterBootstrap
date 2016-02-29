@@ -234,10 +234,11 @@ A process $(X_t)_{t}$ is \emph{$\beta$-mixing} (also known as \emph{absolutely r
 \[ \beta(m) = \frac{1}{2} \sup_n \sup \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}(A_i \cap B_j) - \mathbb{P}(A_i)\mathbb{P}(B_j)| \]
 where the second supremum is taken  over all finite partitions $\{A_1,\ldots, A_I \}$ and  $\{B_1,\ldots, B_J\}$ of the sample space such that $A_i \in \mathcal{H}_1^n$ and $B_j \in \mathcal{H}_{n+m}^\infty$ and $\mathcal{H}_b^c = \sigma(X_b,X_{b+1},\ldots,X_{c})$
 \end{definition}
-Similar notion to $\beta$-mixing is $\tau$-mixing, which is usefully for constructing the test. We do not discuss $\tau$-mixing in detail since it is implied by $\beta$-mixing given random vector $S_i$ has a finite moment.   
+Similar notion to $\beta$-mixing is $\tau$-mixing, which is usefully for constructing the test. We do not discuss $\tau$-mixing here since it is implied by $\beta$-mixing given random vector $S_i$ has a finite moment.   
 
 
 \textbf{Mixing assumptions.} We assume that random process   $S_i = (X_i,Y_i,Z_i)$ is $\beta$ mixing with a coefficient   $\beta(m)  = o(m^{-6})$. 
+
 
 
 
@@ -253,11 +254,16 @@ We call $nV_n$ a \emph{normalised} V-statistic. We call $f$ the \emph{core} of $
 
 The limiting distribution of degenerate V-statistic is not tractable.   Estimates of the test statistic quantiles  required to achieve a given Type I error are obtained through a bootstrap  method. In the case of the Lancaster and HSIC tests with \emph{i.i.d.} observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{i.i.d.} assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any temporal dependence. 
 
-If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis. These conditions, checked in the Theorem, are mild: they include continuity and boundedness of the kernel. If these conditions are met , then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic 
-\[
-B_n = \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} W_{i}f(S_i,S_j)W_{j} 
-\]
-approximates $W_n$ well. This theorem shows that we correctly control the Type I error when testing $\mathcal{H}_Z$.
+If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis. These conditions can be categorised as concerning: (1) Appropriate $\tau$-mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(f,\mathcal{S}_n)$, then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic $nV_b(f,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}f(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(f,\mathcal{S})$ that is of crucial importance to this paper is that $f$ must be a degenerate core.
+
+
+
+
+
+\subsection{Control of Type I error}
+Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components\footnote{Note that the value of $\|\hat \mu_L\|$ will be the same for each test, but the null distributions will in general be different for each $\mathcal{H}_{\LargerCdot}$}
+
+This theorem shows that we correctly control the Type I error when testing $\mathcal{H}_Z$.
 
 \begin{theorem}
 Suppose in addition to the conditions of Theorems \ref{theorem:norm-conv-in-prob} and \ref{theorem:degenerate-kernel} that  $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is $\tau$-mixing with coefficients $\tau(m)$ satisfying $\sum_{m=1}^\infty m^2 \sqrt{\tau(m)} < \infty$, and that $W$ is drawn from a process satisfying (B2) in \cite{leucht2013dependent}. Then asymptotically, the quantiles of
@@ -266,10 +272,6 @@ Suppose in addition to the conditions of Theorems \ref{theorem:norm-conv-in-prob
 
 are the same as those of $ n\| \hat \mu_L\|^2$. (Kacper, is this right? You mentioned that it was technically wrong to say that the two things have the same distribution - what's the right thing to say?)
 \end{theorem}
-
-
-Since our null hypothesis is a composite of three `sub-hypotheses', we must test each of them separately and we reject the composite null hypothesis if and only if we reject all three of the components\footnote{Note that the value of $\|\hat \mu_L\|$ will be the same for each test, but the null distributions will in general be different for each $\mathcal{H}_{\LargerCdot}$}
-
 
 Proof??? Could make this a corollary and just say that it follows from theorem whatever in leucht.
 
@@ -416,7 +418,7 @@ These two quantities differ only in the centring of $K$ and $L$, amounting to co
 
 \section{Proofs}
 
-In this section we present proofs of Theorems \ref{theorem:norm-conv-in-prob} and \ref{theorem:degenerate-kernel}. The essential idea of the proof presented in this paper is to rewrite the test statistic as a sum of terms involving population centred gram matrices. Under the null hypothesis, all but one of these terms decay to $0$ as $n \longrightarrow \infty$. 
+In this section we present proofs of Theorems \ref{theorem:norm-conv-in-prob} and \ref{theorem:degenerate-kernel}. The essential idea of the proof presented in this paper is to rewrite the test statistic as a sum of terms involving population centred gram matrices. By exploiting a central limit theorem for Hilbert space valued random variables (Lemma \ref{lemma:hilbertCLT} in Supplementary material), we show that under the null hypothesis all but one of these terms decay to $0$ as $n \longrightarrow \infty$. 
 
 In contrast, existing proof methods have employed the theory of U- and V-statistics \cite{chwialkowski2014kernel,chwialkowski2014wild}; in particular, the Hoeffding decomposition of the core of a V-statistic as a sum of other cores \cite{serfling2009approximation}. This allows the rewriting of the V-statistic as a sum of other V-statistics, which under the null hypothesis decay to 0.
 
@@ -429,8 +431,8 @@ The approach taken in this paper can be modified to give simpler a proof of simi
 By observing that
 \begin{align*}
 & \phi_X(X_i)- \frac{1}{n}\sum_k\phi_X(X_k) \\
-= &  (\phi_X(X_i) - \mu_X) - \frac{1}{n}\sum_k (\phi_X(X_k) - \mu_X)\\
-= &\bar\phi_X(X_i)- \frac{1}{n}\sum_k\bar\phi_X(X_k)
+= \enspace&  (\phi_X(X_i) - \mu_X) - \frac{1}{n}\sum_k (\phi_X(X_k) - \mu_X)\\
+= \enspace&\bar\phi_X(X_i)- \frac{1}{n}\sum_k\bar\phi_X(X_k)
 \end{align*}
 we can therefore expand $\tilde{K}$ in terms of $\bar{K}$ as
 \begin{align*}
@@ -687,7 +689,14 @@ Thus we have shown that  $\beta_{XYZ}(m) \longrightarrow 0 \implies \beta_{XY}(m
 A similar argument holds for any other sub-process.
 \end{claimproof}
 
-\subsection{Proof of Lemma \ref{lemma:hilbertCLT}}\label{supp:lemma-clt}
+\subsection{Hilbert space random variable CLT}
+
+In this paper we exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \cite{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened.
+
+\begin{lemma}\label{lemma:hilbertCLT}
+Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $\sum_{m=1}^{\infty}\beta(m)^{\frac{\delta}{2+\delta}}<\infty$ for some $\delta > 0$ and that $k$ is a bounded kernel on $\mathcal{X}$. Then $\|\hat\mu_X - \mu_X\|_k = O(n^{-\frac{1}{2}})$
+
+\end{lemma}
 
 \begin{claimproof}(Lemma \ref{lemma:hilbertCLT})
 
