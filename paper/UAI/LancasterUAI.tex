@@ -125,7 +125,7 @@ The Lancaster interaction on the triple of random variables $(X,Y,Z)$ is defined
 
 \[\mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z \Rightarrow \Delta_LP=0 \]
 
-By [Lancaster], we can consider the mean embedding of this measure:
+By \cite{sejdinovic2013kernel}, we can consider the mean embedding of this measure:
 \begin{align}
  \mu_L = \int k(x,\cdot) l(y,\cdot) m(z,\cdot) \Delta_LP 
 \end{align}
@@ -135,21 +135,21 @@ Given a i.i.d. sample $(X_i,Y_i,Z_i)_{i=1}^n$,  norm of the mean embedding $\mu_
 \[
 \tilde{K}_{i,j} = \langle k(X_i,\cdot)-\tilde{\mu}_X, k(X_j,\cdot) -\tilde{\mu}_X \rangle,
 \]
-where $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$.  By [Lancaster], an estimator of the norm of the mean embedding of the Lancaster interaction for \emph{i.i.d.} samples is 
+where $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$.  By \cite{sejdinovic2013kernel}, an estimator of the norm of the mean embedding of the Lancaster interaction for \emph{i.i.d.} samples is 
 \begin{equation}\label{eqn:lancaster}
 \|\hat \mu_L\|^2 = \frac{1}{n^2}\left(\tilde{K}\circ\tilde{L}\circ\tilde{M}\right)_{++}
 \end{equation}
-where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$, for a matrix $A$. Later [Lancaster] shows that, under the null hypothesis, $n \|\hat \mu_L\|^2 $ converges to a specific distribution, namely an infinite sum of weighted $\chi$-squared random variables. By leveraging the \emph{i.i.d.} assumption of the samples, any given quantile of this  distribution  can be estimated using simple permutation bootstrap, and so a test procedure is proposed.
+where $\circ$ is the Hadamard (element-wise) product and $A_{++} = \sum_{ij}A_{ij}$, for a matrix $A$. Later \cite{sejdinovic2013kernel} shows that, under the null hypothesis, $n \|\hat \mu_L\|^2 $ converges to a specific distribution, namely an infinite sum of weighted $\chi$-squared random variables. By leveraging the \emph{i.i.d.} assumption of the samples, any given quantile of this  distribution  can be estimated using simple permutation bootstrap, and so a test procedure is proposed.
 
-In the time series setting this approach does not work. Temporal dependence within the samples makes  study of the asymptotic distribution of $n \|\hat \mu_L\|^2 $ difficult and the permutation bootstrap fails as showed in experiment \ref{wildBootstrap_is_necessary} in section [experiments]. To construct a test in this setting we will use asymptotic and bootstrap results for mixing processes. 
+In the time series setting this approach does not work. Temporal dependence within the samples makes  study of the asymptotic distribution of $n \|\hat \mu_L\|^2 $ difficult and the permutation bootstrap fails as showed in the experiment in Section \ref{experiment2}. To construct a test in this setting we will use asymptotic and bootstrap results for mixing processes. 
 
-Mixing processes formalise a notion of the temporal structure within a process. Mixing can be thought of as the rate at which a process forgets about its past e.g. for Gaussian processes this rate can be captured by the auto correlation function. For general processes, generalisations of auto correlation are used. The exact assumptions are discussed in the details section, and we will refer to them as \textit{suitable mixing assumptions}.   
+Mixing processes formalise a notion of the temporal structure within a process. Mixing can be thought of as the rate at which a process forgets about its past. For example, for Gaussian processes this rate can be captured by the autocorrelation function; for general processes, generalisations of autocorrelation are used. The exact assumptions are discussed in the details section, and we will refer to them as \textit{suitable mixing assumptions}.   
 
 The null hypothesis of the Lancaster test is composed of three sub-components. In the following, we assume that $\mathcal{H}_Z$ holds; by symmetry, similar results hold for $\mathcal{H}_X$ and $\mathcal{H}_Y$.
 
 It can be shown that the norm of the mean embedding \eqref{eqn:lancaster} can also be written as
 
-\[ \|\hat \mu_L\|^2 = \frac{1}{n^2}\left(\widetilde{\tilde{K}\circ\tilde{L}}\circ\tilde{M}\right)_{++}\].
+\[ \|\hat \mu_L\|^2 = \frac{1}{n^2}\left(\widetilde{\tilde{K}\circ\tilde{L}}\circ\tilde{M}\right)_{++}\]
 
 Further, we show that the problem can be simplified to studying population centered kernels
 \[
@@ -159,10 +159,12 @@ where e.g.
 \[
 \overline{K}_{i,j} = \langle k(X_i,\cdot)-\mu_X, k(X_j,\cdot) -\mu_X \rangle,
 \]
-with $\mu_X$ being the population mean embedding of $X$. Precisely we prove
-\begin{theorem}\label{theorem:norm-conv-in-prob} Suppose that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is a random that satisfies suitable mixing assumptions. Under $\mathcal{H}_Z$, $\lim_{n \to \infty} ( \| n\hat \mu^{(Z)}_{L,2} \|^2 - n\|\hat \mu_L\|^2 ) =0 $ in probability.
+with $\mu_X$ being the population mean embedding of $X$. Specifically, we prove the following:
+\begin{theorem}\label{theorem:norm-conv-in-prob} Suppose that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a random process satisfying suitable mixing assumptions. Under $\mathcal{H}_Z$, $\lim_{n \to \infty} ( n\| \hat \mu^{(Z)}_{L,2} \|^2 - n\|\hat \mu_L\|^2 ) =0 $ in probability.
 \end{theorem}
-The proof is in the appendix. The statistic $\| \hat \mu^{(Z)}_{L,2} \|^2$ is much easier to study under non-i.i.d.  assumption. Indeed it can be written as a V-statics 
+The proof of Theorem \ref{theorem:norm-conv-in-prob} presented in this paper is novel and is significantly more concise than previous proofs of similar results \citep{chwialkowski2014kernel}\citep{chwialkowski2014wild}. 
+
+The statistic $\| \hat \mu^{(Z)}_{L,2} \|^2$ is much easier to study under the non-\emph{i.i.d.} assumption than $\|\hat \mu_L\|^2$. Indeed, it can expressed as a V-statistic
 \[ 
 V_n = \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} \overline{\overline{k} \otimes \overline{l}}\otimes \overline{m} (S_i,S_j)
 \]
@@ -174,7 +176,7 @@ is well behaved in the following sense
 \begin{theorem}\label{theorem:degenerate-kernel}
 Suppose that $k$, $l$ and $m$ are bounded symmetric Lipschitz contentious kernels. Then $h$ is also bounded symmetric and Lipschitz continuous, which is moreover degenerate under $\mathcal{H}_Z$ i.e $\mathbb{E}_{S}h(S,s)=0$ for any fixed $s$.
 \end{theorem}
-The asymptotic analysis of $V$-statistic with degenerate kernels for non-i.i.d. data  is still difficult, but has been done in Leacht and Kacper. Additionally, Leucht showed a way to estimate quantiles of such $V$-statistic under using the  wild bootstrap. This, combined with quite simple analysis of V-stat under the alternative, in Kacper Theorem 2 \footnote{similar results present in Leucht as specific cases.}, results in statistical test see algorithm \ref{alg:Lancaster}.
+The asymptotic analysis of $V$-statistics with degenerate cores for non-\emph{i.i.d.} data is still complex, but we can appeal to prior work: \citep{leucht2013dependent} showed a way to estimate any given quantile of such a $V$-statistic under the null hypothesis using a method called the wild bootstrap. This, combined with analysis of the V-statistic under the alternative provided in Theorem 2 of \citep{chwialkowski2014wild}\footnote{Note that similar results are presented in \citep{leucht2013dependent} as specific cases.}, results in statistical test (see Algorithm \ref{alg:Lancaster}).
 \begin{algorithm}[tb]
    \caption{Test $\mathcal{H}_Z$ with Wild Bootstrap}
    \label{alg:Lancaster}
@@ -194,33 +196,35 @@ The asymptotic analysis of $V$-statistic with degenerate kernels for non-i.i.d. 
 \end{algorithmic}
 \end{algorithm}
 
-The consistency results and type one error control result are provided in t he details section.
+Results regarding consistency and Type I error control are provided in Section \ref{section:details}.
 
 
 
 
-\section{Details} 
+\section{Technical details}\label{section:details}
 
-In this section we discuss details of the statements and proofs of outlined in the  main result section. 
+In this section we discuss technical details of the statements and proofs outlined in the main results section. 
 
 
-throughout the paper we  will assume that kernels $k,l,m$ are characteristic  \cite{sriperumbudur2011universality}, bounded and Lipschitz continuous. We describe some notation relevant to the kernel $k$; similar notation holds for $l$ and $m$. Recall that $\mu_X := \mathbb{E}_X k(X,\cdot) \in \mathcal{H}_k$ is the  mean embedding \cite{smola2007hilbert} of the random variable $X$. Given observations $X_i$, an estimate of the mean embedding is $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$. Two modifications  of $k$ are used in this work
+Throughout the paper we  will assume that kernels $k,l,m$ are characteristic  \cite{sriperumbudur2011universality}, bounded and Lipschitz continuous. We describe some notation relevant to the kernel $k$; similar notation holds for $l$ and $m$. Recall that $\mu_X := \mathbb{E}_X k(X,\cdot) \in \mathcal{H}_k$ is the  mean embedding \cite{smola2007hilbert} of the random variable $X$. Given observations $X_i$, an estimate of the mean embedding is $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$. Two modifications  of $k$ are used in this work:
 \begin{align}
 \bar{k}(x,x') &= \langle  k(x,\cdot)-\mu_X,k(x',\cdot)-\mu_X\rangle, \\
 \tilde{k}(x,x') &= \langle k(x,\cdot)-\tilde{\mu}_X, k(x',\cdot)-\tilde{\mu}_X \rangle 
 \end{align}
-the first one is population centered kernel, while the other is empirically centered kernel.  
+These are denoted the \emph{population centered kernel} and \emph{empirically centered kernel} respectively.  
 
-As outlined in the main results section the mean embedding of the  Lancaster interaction measure \ref{section:main},$\|\hat \mu_L\|^2$, can be used  to distinguish  between following hypotheses:
+As outlined in the main results section, the mean embedding of the Lancaster interaction measure \ref{section:main},$\|\hat \mu_L\|^2$, can be used  to distinguish  between the following hypotheses:
 
 $\mathcal{H}_0: \mathcal{H}_X \enspace \lor \enspace \mathcal{H}_Y \enspace \lor \enspace \mathcal{H}_Z $\\
 $\mathcal{H}_1: \mathbb{P}_{XYZ}$ does not factorise in any way
 
 
-Note that in order to achieve consistency for this test, we would need that $\mathcal{H}_0 \iff \Delta_LP = 0$. Unfortunately this does not hold - in \cite{sejdinovic2013kernel} examples are given of distributions for which $\mathcal{H}_0$ is false, and yet $\Delta_LP = 0$. At the time of writing, a characterisation of such distributions is unknown to the authors. Therefore, if we reject $\mathcal{H}_0$ then we conclude that the distribution does not factorise; if we fail to reject $\mathcal{H}_0$ then we can not conclude that the distribution factorizes, though such a conclusion is technically not valid in  testing framework due to asymmetry between null and the alternative hypothesis.   
+Note that in order to achieve consistency for this test, we would need that $\mathcal{H}_0 \iff \Delta_LP = 0$. Unfortunately this does not hold - in \cite{sejdinovic2013kernel} examples are given of distributions for which $\mathcal{H}_0$ is false, and yet $\Delta_LP = 0$. At the time of writing, a characterisation of such distributions is unknown to the authors. Therefore, if we reject $\mathcal{H}_0$ then we conclude that the distribution does not factorise; if we fail to reject $\mathcal{H}_0$ then we cannot conclude that the distribution factorises.
 
-\paragraph{Temporal dependence}
-there are various formalisations of memory or 'mixing' of a random process \cite{doukhan1994mixing,bradley2005basic,dedecker2007weak}; of relevance to this paper is the following :
+%TODO what is mean by this?: though such a conclusion is technically not valid in  testing framework due to asymmetry between null and the alternative hypothesis.   
+
+\subsection{Temporal dependence}
+There are various formalisations of memory or `mixing' of a random process \cite{doukhan1994mixing,bradley2005basic,dedecker2007weak}; of relevance to this paper is the following :
 
 % \begin{definition}\cite{leucht2013dependent}
 % A process $(X_t)_{t}$ is \emph{$\tau$-mixing} if $\tau(r) \longrightarrow 0$ as $r\longrightarrow \infty$, where
@@ -234,10 +238,10 @@ A process $(X_t)_{t}$ is \emph{$\beta$-mixing} (also known as \emph{absolutely r
 \[ \beta(m) = \frac{1}{2} \sup_n \sup \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}(A_i \cap B_j) - \mathbb{P}(A_i)\mathbb{P}(B_j)| \]
 where the second supremum is taken  over all finite partitions $\{A_1,\ldots, A_I \}$ and  $\{B_1,\ldots, B_J\}$ of the sample space such that $A_i \in \mathcal{H}_1^n$ and $B_j \in \mathcal{H}_{n+m}^\infty$ and $\mathcal{H}_b^c = \sigma(X_b,X_{b+1},\ldots,X_{c})$
 \end{definition}
-Similar notion to $\beta$-mixing is $\tau$-mixing, which is usefully for constructing the test. We do not discuss $\tau$-mixing here since it is implied by $\beta$-mixing given random vector $S_i$ has a finite moment.   
+A related notion is that of $\tau$-mixing. This is a property required to apply the wild bootstrap method of \cite{leucht2013dependent}, but we do not discuss $\tau$-mixing here since it is implied by $\beta$-mixing under the assumption that $X_i$ has any finite moment.   
 
 
-\textbf{Mixing assumptions.} We assume that random process   $S_i = (X_i,Y_i,Z_i)$ is $\beta$ mixing with a coefficient   $\beta(m)  = o(m^{-6})$. 
+\subsection*{Mixing assumptions} We assume that the random process $S_i = (X_i,Y_i,Z_i)$ is $\beta$ mixing with mixing coefficients satisfying   $\beta(m)  = o(m^{-6})$. Throughout this paper we refer to this assumption as \emph{suitable mixing assumptions}.
 
 
 
@@ -245,16 +249,16 @@ Similar notion to $\beta$-mixing is $\tau$-mixing, which is usefully for constru
 
 
 \subsection{Construction of the test}
-As outlined in the previous section  $\hat \mu^{(Z)}_{L,2}$ is a V-statistic \cite{serfling2009approximation}. A V-statistic   of a 2-argument, symmetric function $h$ given  observations $\mathcal{S}_n = \{S_1,\ldots,S_n\}$  is:
+As outlined in the previous section,  $\|\hat \mu^{(Z)}_{L,2}\|^2$ is a V-statistic \cite{serfling2009approximation}. A V-statistic   of a 2-argument, symmetric function $h$ given  observations $\mathcal{S}_n = \{S_1,\ldots,S_n\}$  is:
 
-\[ V_n =  \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} f(S_i,S_j)\]
+\[ V_n =  \frac{1}{n^2} \mathlarger{\sum}_{1\leq i,j \leq n} h(S_i,S_j)\]
 
 
-We call $nV_n$ a \emph{normalised} V-statistic. We call $f$ the \emph{core} of $V$ and we say that $f$ is \emph{degenerate} if, for any $s_1$, $\mathbb{E}_{S_2 \sim \mathbb{P}}[f(s_1,S_2)] = 0$, in which case we say that $V$ is a \emph{degenerate V-statistic}. Many kernel test statistics can be viewed as normalised V-statistics which, under the null hypothesis, are degenerate. In the Theorem 2 we prove that, under the null hypothesis, the Lancaster statistic is asymptotically a degenerate V-statistic. 
+We call $nV_n$ a \emph{normalised} V-statistic. We call $h$ the \emph{core} of $V$ and we say that $h$ is \emph{degenerate} if, for any $s_1$, $\mathbb{E}_{S_2 \sim \mathbb{P}}[h(s_1,S_2)] = 0$, in which case we say that $V$ is a \emph{degenerate V-statistic}. Many kernel test statistics can be viewed as normalised V-statistics which, under the null hypothesis, are degenerate. In the Theorem 2 we prove that, under the null hypothesis, the Lancaster statistic is asymptotically a degenerate V-statistic. 
 
-The limiting distribution of degenerate V-statistic is not tractable.   Estimates of the test statistic quantiles  required to achieve a given Type I error are obtained through a bootstrap  method. In the case of the Lancaster and HSIC tests with \emph{i.i.d.} observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{i.i.d.} assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any temporal dependence. 
+The limiting distribution of a degenerate V-statistic is not tractable.   Estimates of the test statistic quantiles  required to achieve a given Type I error are obtained through a bootstrap  method. In the case of the Lancaster and HSIC tests with \emph{i.i.d.} observations, this is done by permuting the time indices of one of the variables to simulate samples from the distribution in which the permuted variable is independent of the other(s). However, this procedure relies on the \emph{i.i.d.} assumption of the data generating process - if, in fact, subsequent samples are \emph{not} independent of previous samples, then permuting the order of the time indices destroys any temporal dependence. 
 
-If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis. These conditions can be categorised as concerning: (1) Appropriate $\tau$-mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(f,\mathcal{S}_n)$, then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic $nV_b(f,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}f(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(f,\mathcal{S})$ that is of crucial importance to this paper is that $f$ must be a degenerate core.
+If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the Wild Bootstrap \cite{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis. These conditions can be categorised as concerning: (1) Appropriate mixing of the process from which our observations are drawn; (2) The core of the V-statistic. If these conditions are met by the statistic $nV(h,\mathcal{S}_n)$, then \cite{leucht2013dependent} tell us that a random matrix $W$ can be drawn such that the bootstrapped statistic $nV_b(h,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}h(S_j,S_p)W_{pq}$ is distributed according to the null distribution of $nV$. The condition on $V(h,\mathcal{S})$ that is of crucial importance to this paper is that $h$ must be a degenerate core.
 
 
 
@@ -265,16 +269,15 @@ Since our null hypothesis is a composite of three `sub-hypotheses', we must test
 
 This theorem shows that we correctly control the Type I error when testing $\mathcal{H}_Z$.
 
-\begin{theorem}
-Suppose in addition to the conditions of Theorems \ref{theorem:norm-conv-in-prob} and \ref{theorem:degenerate-kernel} that  $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a process that is $\tau$-mixing with coefficients $\tau(m)$ satisfying $\sum_{m=1}^\infty m^2 \sqrt{\tau(m)} < \infty$, and that $W$ is drawn from a process satisfying (B2) in \cite{leucht2013dependent}. Then asymptotically, the quantiles of
+\begin{theorem}\label{theorem:quantiles-converge}
+Suppose that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a random process satisfying suitable mixing conditions, and that $W$ is drawn from a process satisfying (B2) in \cite{leucht2013dependent}. Then asymptotically, the quantiles of
 
 \[\frac{1}{n}\left(W^\intercal\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right)W\right) _{++}\]
 
-are the same as those of $ n\| \hat \mu_L\|^2$. (Kacper, is this right? You mentioned that it was technically wrong to say that the two things have the same distribution - what's the right thing to say?)
+converge to those of $ n\| \hat \mu_L\|^2$. 
 \end{theorem}
 
-Proof??? Could make this a corollary and just say that it follows from theorem whatever in leucht.
-
+%TODO proof!
 
 \subsection{Multiple testing correction}
 In the Lancaster test, we use a composite null hypothesis which requires us to test each of the three hypotheses $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ separately. We reject the null hypothesis $\mathcal{H}_0$ if and only if we reject all three of the components. In \cite{sejdinovic2013kernel}, it is suggested that the Holm-Bonferroni \cite{holm1979simple} correction be used to account for multiple testing. We show here that more relaxed conditions on the p-values can be used while still bounding the Type I error, thus increasing test power.
@@ -291,9 +294,13 @@ Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less
 
 \subsection{(Semi-)consistency of testing procedure}
 
-The class of probability distributions for which $\Delta_LP=0$ is larger than $\mathcal{H}_X \lor \mathcal{H}_Y \lor\mathcal{H}_Z$, and so we cannot hope to achieve consistency with this test (ie if $\mathcal{H}_1$ is really true, we reject the null hypothesis with probability 1 in the limit $n\longrightarrow\infty$)
+The class of probability distributions for which $\Delta_LP=0$ is larger than $\mathcal{H}_X \lor \mathcal{H}_Y \lor\mathcal{H}_Z$, and so we cannot hope to achieve true consistency with this test (ie if $\mathcal{H}_1$ is really true, we reject the null hypothesis with probability 1 in the limit $n\longrightarrow\infty$). However, the following result does hold:
 
-If, however, $\Delta_LP \not =0$ then Theorem 2 of [Kacper wild bootstrap] implies that we will reject the null hypothesis with increasing probability? (Kacper, is this right?)
+\begin{theorem}\label{theorem:consistent}
+Suppose that $\Delta_LP \not =0$. Then as $n\longrightarrow\infty$, the probability of correctly rejecting $\mathcal{H}_0$ converges to 1.
+\end{theorem}
+
+
 
 
 
@@ -716,6 +723,11 @@ where $N$ is a Hilbert space valued Gaussian random variable. Thus
 \end{claimproof}
 %%%
 
+\subsection{Proof that quantiles converge}
+Proof of Theorem \ref{theorem:quantiles-converge}
+
+\subsection{Proof of semi-consistency}
+Proof of Theorem \ref{theorem:consistent}
 \subsection{Proof that boundedness and Lipschitz continuity is preserved}\label{supp:bounded-and-lipschitz}
 Recall that a kernel $k$ defined on $\mathcal{X}$ is Lipschitz continuous iff $\exists C_k : \forall w \enspace |k(x,w) - k(x',w)| \leq C_k d_\mathcal{X}(x,x')$ where $d_\mathcal{X}$ is the metric on $\mathcal{X}$ with respect to which $k$ is Lipschitz continuous.
 
