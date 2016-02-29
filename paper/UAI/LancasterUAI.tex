@@ -721,7 +721,7 @@ Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $
 
 \end{lemma}
 
-\begin{claimproof}(Lemma \ref{lemma:hilbertCLT})
+\begin{proof}(Lemma \ref{lemma:hilbertCLT})
 
 We exploit Theorem 1.1 from \cite{dehling2015bootstrap}. Using the language of this paper, $\bar{\phi}(X_i)$ is a 1-approximating functional of $(X_i)_i$, following straightforwardly from the definition of 1-approximating functionals given. 
 
@@ -736,19 +736,28 @@ Thus, by Theorem 1.1 in \cite{dehling2015bootstrap}
 \[\sqrt{n} (\tilde{\mu}_{X} - \mu_{X}) \widesim[2]{n\longrightarrow\infty} N\]
 where $N$ is a Hilbert space valued Gaussian random variable. Thus 
 \[\|\tilde{\mu}_{X} - \mu_{X}\| = O(\frac{1}{\sqrt{n}})\]
-\end{claimproof}
+\end{proof}
 %%%
 
-\subsection{Proof that quantiles converge}\label{supp:quantile-proof}
+\subsection{Control of Type I error}\label{supp:quantile-proof}
+Theorem \ref{theorem:quantiles-converge} shows that the quantiles of the bootstrapped statistic $nV_b$ (which we can estimate by drawing a large number of samples) converge to those of the test statistic $\|\hat \mu_L\|^2$ under the null hypothesis. Therefore, we can estimate rejection thresholds to appropriately control Type I error.
+
 \begin{proof}(Theorem \ref{theorem:quantiles-converge})
 
-By Theorem 3.1 in \cite{leucht2013dependent}, $nV_b$ converges in distribution to the null distribution of $nV(h,\mathcal{S}_n)$
+We use Theorem 3.1 from \cite{leucht2013dependent}. By assumption, condition (B2) is satisfied by the random matrix $W$. (A2) is satisfied due to Theorem \ref{theorem:degenerate-kernel}. (B1) is satisfied due to the suitable mixing assumptions.
+
+Therefore, Theorem 3.1 implies that $nV_b$ converges in probability to the null distribution of $n\|\hat \mu_{L,2}^{(Z)}\|^2$. Since $n\|\mu_L\|^2$ also converges in probability to $n\|\hat \mu_{L,2}^{(Z)}\|^2$, it follows that $nV_b$ converges to $n\|\mu_L\|^2$ in probability, and thus also in distribution. Convergence in distribution implies that the quantiles converge.
 \end{proof} 
 
 
 
-\subsection{Proof of semi-consistency}\label{supp:consistent}
-Proof of Theorem \ref{theorem:consistent}
+\subsection{Semi-consistency}\label{supp:consistent}
+Theorem \ref{theorem:consistent} provides a consistency result: if $\Delta_LP\not = 0$, then we correctly reject $\mathcal{H}_0$ with probability 1 in the limit $n\longrightarrow\infty$.
+
+\begin{proof}
+By Theorem 2 from \cite{chwialkowski2014wild}, $nV_b$ converges to some random variable with finite variance, while $n\|\hat{\mu}_L\|^2 \longrightarrow \infty$. Thus if $Q_\alpha$ is the $\alpha$-quantile of $nV_b$, then $P(n\|\hat{\mu}_L\|^2 > Q_\alpha) \longrightarrow 1 $ for any $\alpha$.
+\end{proof}
+
 \subsection{Proof that boundedness and Lipschitz continuity is preserved}\label{supp:bounded-and-lipschitz}
 Recall that a kernel $k$ defined on $\mathcal{X}$ is Lipschitz continuous iff $\exists C_k : \forall w \enspace |k(x,w) - k(x',w)| \leq C_k d_\mathcal{X}(x,x')$ where $d_\mathcal{X}$ is the metric on $\mathcal{X}$ with respect to which $k$ is Lipschitz continuous.
 
