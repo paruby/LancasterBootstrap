@@ -220,14 +220,14 @@ $\mathcal{H}_1: \mathbb{P}_{XYZ}$ does not factorise in any way
 Note that in order to achieve consistency for this test, we would need that $\mathcal{H}_0 \iff \Delta_LP = 0$. Unfortunately this does not hold - in \cite{sejdinovic2013kernel} examples are given of distributions for which $\mathcal{H}_0$ is false, and yet $\Delta_LP = 0$. At the time of writing, a characterisation of such distributions is unknown to the authors. Therefore, if we reject $\mathcal{H}_0$ then we conclude that the distribution does not factorise; if we fail to reject $\mathcal{H}_0$ then we can not conclude that the distribution factorizes, though such a conclusion is technically not valid in  testing framework due to asymmetry between null and the alternative hypothesis.   
 
 \paragraph{Temporal dependence}
-As outlined in the main results section, there are various formalisations of memory or 'mixing' of a random process \cite{doukhan1994mixing}\cite{bradley2005basic}\cite{dedecker2007weak}; of relevance to this paper are the following two:
+there are various formalisations of memory or 'mixing' of a random process \cite{doukhan1994mixing,bradley2005basic,dedecker2007weak}; of relevance to this paper is the following :
 
-\begin{definition}\cite{leucht2013dependent}
-A process $(X_t)_{t}$ is \emph{$\tau$-mixing} if $\tau(r) \longrightarrow 0$ as $r\longrightarrow \infty$, where
-\[\tau(r) = \sup_{l\in \mathbb{N}} \frac{1}{l} \sup_{r\leq i_1 \leq \ldots \leq i_l} \tau(\mathcal{F}_0,(X_{i_1}, \ldots, X_{i_l})) \longrightarrow 0\]
-where
-\[ \tau(\mathcal{M},X) = \mathbb{E} (\sup_{g \in \Lambda} | \int g(t) \mathbb{P}_{X|\mathcal{M}}(dt) -  \int g(t) \mathbb{P}_{X}(dt) |)\]
-\end{definition}
+% \begin{definition}\cite{leucht2013dependent}
+% A process $(X_t)_{t}$ is \emph{$\tau$-mixing} if $\tau(r) \longrightarrow 0$ as $r\longrightarrow \infty$, where
+% \[\tau(r) = \sup_{l\in \mathbb{N}} \frac{1}{l} \sup_{r\leq i_1 \leq \ldots \leq i_l} \tau(\mathcal{F}_0,(X_{i_1}, \ldots, X_{i_l})) \longrightarrow 0\]
+% where
+% \[ \tau(\mathcal{M},X) = \mathbb{E} (\sup_{g \in \Lambda} | \int g(t) \mathbb{P}_{X|\mathcal{M}}(dt) -  \int g(t) \mathbb{P}_{X}(dt) |)\]
+% \end{definition}
 
 \begin{definition}
 A process $(X_t)_{t}$ is \emph{$\beta$-mixing} (also known as \emph{absolutely regular}) if $\beta(m) \longrightarrow 0$ as $m\longrightarrow \infty$, where
@@ -235,11 +235,7 @@ A process $(X_t)_{t}$ is \emph{$\beta$-mixing} (also known as \emph{absolutely r
 where the second supremum is taken  over all finite partitions $\{A_1,\ldots, A_I \}$ and  $\{B_1,\ldots, B_J\}$ of the sample space such that $A_i \in \mathcal{H}_1^n$ and $B_j \in \mathcal{H}_{n+m}^\infty$ and $\mathcal{H}_b^c = \sigma(X_b,X_{b+1},\ldots,X_{c})$
 \end{definition}
 
-The concept of $\beta$-mixing will be invoked when applying a central limit theorem in the next section. We will also need the following lemma, proved in Supplementary material section \ref{supp:lemma-beta}:
 
-\begin{lemma}\label{lemma:beta}
-Suppose that the process $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing. Then any `sub-process' is also $\beta$-mixing (for example $(X_t,Y_t)_t$ or $(X_t)_t$)
-\end{lemma}
 
 \paragraph{Mixing assumptions}
 
@@ -674,6 +670,12 @@ Big up to all my homies
 
 \section{Supplementary material}
 This supplementary section contains a proof of Lemma \ref{lemma:beta} and a proof that the HSIC statistic asymptotically satisfies the hypothesis of the Wild Bootstrap.
+
+
+
+\begin{lemma}\label{lemma:beta}
+Suppose that the process $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing. Then any `sub-process' is also $\beta$-mixing (for example $(X_t,Y_t)_t$ or $(X_t)_t$)
+\end{lemma}
 
 \subsection{Proof of Lemma \ref{lemma:beta}}\label{supp:lemma-beta}
 
