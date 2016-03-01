@@ -58,23 +58,7 @@
 \author{} % LEAVE BLANK FOR ORIGINAL SUBMISSION.
           % UAI  reviewing is double-blind.
 
-% The author names and affiliations should appear only in the accepted paper.
-%
-%\author{ {\bf Harry Q.~Bovik\thanks{Footnote for author to give an
-%alternate address.}} \\
-%Computer Science Dept. \\
-%Cranberry University\\
-%Pittsburgh, PA 15213 \\
-%\And
-%{\bf Coauthor}  \\
-%Affiliation          \\
-%Address \\
-%\And
-%{\bf Coauthor}   \\
-%Affiliation \\
-%Address    \\
-%(if needed)\\
-%}
+
 
 \begin{document}
 
@@ -399,13 +383,11 @@ Observe that the random variables are pairwise independent but jointly dependent
 This experiment demonstrates that in the time series case, existing permutation bootstrap methods fail to control the Type I error, while the  wild bootstrap correctly identifies test statistic thresholds and appropriately controls Type I error.
 
 Synthetic data were generated from autoregressive processes $X$, $Y$ and $Z$ according to:
-
 \begin{align*}
 X_t &= aX_{t-1} + \epsilon_t\\
 Y_t &= aY_{t-1} + \eta_t\\
 Z_t &= aZ_{t-1} +  \zeta_t\\
 \end{align*}
-
 where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{i.i.d.}~$\mathcal{N}(0,1)$ random variables and $a$, called the \emph{dependence coefficient}, determines how temporally dependent the processes are. The null hypothesis in this example is true as each process is independent of the others.
 
 The Lancaster test was performed using both the Wild Bootstrap and the simple permutation bootstrap (used in the \emph{i.i.d.}~case) in order to sample from the null distributions of the test statistic. We used a fixed desired false positive rate $\alpha = 0.05$ with sample of size 1000, with 200 experiments run for each value of $a$. Figure \ref{wildBootstrap_is_necessary} shows the false positive rates for these two methods for varying $a$. It shows that as the processes become more dependent, the false positive rate for the permutation method becomes very large, and is not bounded by the fixed $\alpha$, whereas the false positive rate for the Wild Bootstrap method is bounded by $\alpha$.
@@ -424,13 +406,11 @@ The Lancaster test was performed using both the Wild Bootstrap and the simple pe
 This experiment demonstrates a limitation of the Lancaster test. When pairwise interaction is strong, 3-way HSIC has greater test power than Lancaster.
 
 Synthetic data were generated from autoregressive processes $X$, $Y$ and $Z$ according to:
-
 \begin{align*}
 X_t &= \frac{1}{2}X_{t-1} + \epsilon_t\\
 Y_t &= \frac{1}{2}Y_{t-1} + \eta_t\\
 Z_t &= \frac{1}{2}Z_{t-1} + d(X_t + Y_t) + \zeta_t\\
 \end{align*}
-
 where $X_0, Y_0, Z_0, \epsilon_t, \eta_t$ and $\zeta_t$ are \emph{i.i.d.}~$\mathcal{N}(0,1)$ random variables and $d\in\mathbb{R}$, called the \emph{dependence} coefficient, determines the extent to which the process $(Z_t)_t$ is dependent on $X_t$ and $Y_t$.
 
 Data were generated with varying values for the dependence coefficient. For each value of $d$, 300 datasets were generated, each consisting of 1200 consecutive observations of the variables. Gaussian kernels with bandwidth parameter 1 were used on each variable, and 250 bootstrapping procedures were used for each test on each dataset.
@@ -521,7 +501,9 @@ n\|\hat \mu_L\|^2 &=
 \frac{4}{n^5}\bar{K}_{++} \bar{L}_{++} \bar{M}_{++} \\
 \end{align*}
 
-Each of these terms can be expressed as inner products between empirical estimates of population centred covariance operators and tensor products of mean embeddings. Rewriting them as such yields:
+We denote by $C_{XYZ} = \mathbb{E}_{XYZ}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)]$ the population centred covariance operator with empirical estimate $\bar{C}_{XYZ} = \sum_i\bar\phi_X(X_i)\otimes\bar\phi_Y(Y_i)\otimes\bar\phi_Z(Z_i)$. We define similarly the quantities $C_{XY}, C_{YZX}, \ldots$ with corresponding empirical counterparts $\bar{C}_{XY}, \bar{C}_{YZX}, \ldots$ where for example $C_{YZ} = \mathbb{E}_{YZ}[\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)]$
+
+Each of the terms in the above expression for $n\|\hat \mu_L\|^2$ can be expressed as inner products between empirical estimates of population centred covariance operators and tensor products of mean embeddings. Rewriting them as such yields:
 \begin{align*}
 n\|\hat \mu_L\|^2 &= n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\& -
 2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\& -
