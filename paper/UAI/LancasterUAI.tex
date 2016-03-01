@@ -475,13 +475,15 @@ These two quantities differ only in the centring of $K$ and $L$, amounting to co
 
 \section{Proofs}\label{section:proofs}
 
-In this section we present proofs of Theorems \ref{theorem:norm-conv-in-prob} and \ref{theorem:degenerate-kernel}. The essential idea of the proof presented in this paper is to rewrite the test statistic as a sum of terms involving population centred gram matrices. By exploiting a central limit theorem for Hilbert space valued random variables (Lemma \ref{lemma:hilbertCLT} in Supplementary material), we show that under the null hypothesis all but one of these terms decay to $0$ as $n \longrightarrow \infty$. 
-
-In contrast, existing proof methods have employed the theory of U- and $V$-statistics \citep{chwialkowski2014kernel,chwialkowski2014wild}; in particular, the Hoeffding decomposition of the core of a $V$-statistic as a sum of other cores \citep{serfling2009approximation}. This allows the rewriting of the $V$-statistic as a sum of other $V$-statistics, which under the null hypothesis decay to 0.
-
-Both approaches amount to the same result, but they tackle the issue of centring of kernels in feature space in different ways. By appealing to a central limit theorem, the kernels are centred directly in the proof presented here. In contrast, the centring is obscured behind layers of algebra and theory in the previously presented proofs.
-
-The approach taken in this paper can be modified to give simpler a proof of similar theorems corresponding to HSIC than that given in \citet{chwialkowski2014wild}; this is provided in the appendix.
+An outline of the proof of Theorem \ref{theorem:norm-conv-in-prob} was given in Section \ref{section:main}; here we provide the full proof, as well as a proof of Theorem \ref{theorem:degenerate-kernel}. 
+%
+%In this section we present proofs of Theorems \ref{theorem:norm-conv-in-prob} and \ref{theorem:degenerate-kernel}. The essential idea of the proof presented in this paper is to rewrite the test statistic as a sum of terms involving population centred gram matrices. By exploiting a central limit theorem for Hilbert space valued random variables (Lemma \ref{lemma:hilbertCLT} in Supplementary material), we show that under the null hypothesis all but one of these terms decay to $0$ as $n \longrightarrow \infty$. 
+%
+%In contrast, existing proof methods have employed the theory of U- and $V$-statistics \citep{chwialkowski2014kernel,chwialkowski2014wild}; in particular, the Hoeffding decomposition of the core of a $V$-statistic as a sum of other cores \citep{serfling2009approximation}. This allows the rewriting of the $V$-statistic as a sum of other $V$-statistics, which under the null hypothesis decay to 0.
+%
+%Both approaches amount to the same result, but they tackle the issue of centring of kernels in feature space in different ways. By appealing to a central limit theorem, the kernels are centred directly in the proof presented here. In contrast, the centring is obscured behind layers of algebra and theory in the previously presented proofs.
+%
+%The approach taken in this paper can be modified to give simpler a proof of similar theorems corresponding to HSIC than that given in \citet{chwialkowski2014wild}; this is provided in the appendix.
 
 \begin{proof}(Theorem \ref{theorem:norm-conv-in-prob})
 
@@ -715,17 +717,39 @@ Omitted for review process
 \onecolumn
 
 \section{Supplementary material}
-This supplementary section contains a proof of Lemma \ref{lemma:beta} and a proof that the HSIC statistic asymptotically satisfies the hypothesis of the Wild Bootstrap.
+This supplementary section contains proofs omitted from the main paper and includes a proof that the HSIC statistic asymptotically satisfies the hypothesis of the Wild Bootstrap.
 
 
 
+
+
+
+
+\subsection{Hilbert space random variable CLT}\label{supp:hilbert-clt}
+
+In this paper we exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \citep{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened.
+\begin{proof}(Lemma \ref{lemma:hilbertCLT})
+We exploit Theorem 1.1 from \citet{dehling2015bootstrap}. Using the language of this paper, $\bar{\phi}(X_i)$ is a 1-approximating functional of $(X_i)_i$, following straightforwardly from the definition of 1-approximating functionals given. 
+
+Since our kernels are bounded, $\exists C: \enspace \|\bar{\phi}(X_i)\| < C $ and so \[\mathbb{E}\|\bar{\phi}(X_1)\|^{2+\delta} <C^{2+\delta}< \infty \enspace \forall \delta>0\]
+Thus condition (1) is satisfied.
+
+We can take $f_m = \bar{\phi}(X_0)\enspace \forall m$ and so achieve $a_m= 0 \enspace \forall m$, thus condition (2) is satisfied.
+
+By assumption on the time series, condition (3) is satisfied.
+
+Thus, by Theorem 1.1 in \citet{dehling2015bootstrap}
+\[\sqrt{n} (\tilde{\mu}_{X} - \mu_{X}) \widesim[2]{n\longrightarrow\infty} N\]
+where $N$ is a Hilbert space valued Gaussian random variable and convergence is in distribution. Thus 
+\[\|\tilde{\mu}_{X} - \mu_{X}\| = O_P(\frac{1}{\sqrt{n}})\]
+\end{proof}
+%%%
+
+\subsection{Sub-processes of $\beta$-mixing processes are $\beta$-mixing}\label{supp:lemma-beta}
 \begin{lemma}\label{lemma:beta}
 Suppose that the process $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing. Then any `sub-process' is also $\beta$-mixing (for example $(X_t,Y_t)_t$ or $(X_t)_t$)
 \end{lemma}
-
-\subsection{Proof of Lemma \ref{lemma:beta}}\label{supp:lemma-beta}
-
-\begin{claimproof}(Lemma \ref{lemma:beta}) 
+\begin{proof}(Lemma \ref{lemma:beta}) 
 
 Let us consider $(X_t,Y_t)_t$.
 Let us call $\beta_{XYZ}(m)$ the coefficients for the process $(X_t,Y_t,Z_t)_t$, and $\beta_{XY}(m)$ the coefficients for the process $(X_t,Y_t)_t$. 
@@ -744,29 +768,7 @@ Thus
 Thus we have shown that  $\beta_{XYZ}(m) \longrightarrow 0 \implies \beta_{XY}(m) \longrightarrow 0$. That is, if  $(X_t,Y_t,Z_t)_t$ is $\beta$-mixing then so is  $(X_t,Y_t)_t$ 
 
 A similar argument holds for any other sub-process.
-\end{claimproof}
-
-\subsection{Hilbert space random variable CLT}\label{supp:hilbert-clt}
-
-In this paper we exploit a Central Limit Theorem for Hilbert space valued random variables that are functions of random processes \citep{dehling2015bootstrap}. One of the conditions required to apply this theorem concerns appropriate $\beta$-mixing of the underlying processes. This theorem is used as a black-box, and it is hoped by the authors that as further theorems concerning CLT-properties of Hilbert space random variables are developed, the conditions required of the processes may be weakened.
-
-\begin{proof}(Lemma \ref{lemma:hilbertCLT})
-
-We exploit Theorem 1.1 from \citet{dehling2015bootstrap}. Using the language of this paper, $\bar{\phi}(X_i)$ is a 1-approximating functional of $(X_i)_i$, following straightforwardly from the definition of 1-approximating functionals given. 
-
-Since our kernels are bounded, $\exists C: \enspace \|\bar{\phi}(X_i)\| < C $ and so \[\mathbb{E}\|\bar{\phi}(X_1)\|^{2+\delta} <C^{2+\delta}< \infty \enspace \forall \delta>0\]
-Thus condition (1) is satisfied.
-
-We can take $f_m = \bar{\phi}(X_0)\enspace \forall m$ and so achieve $a_m= 0 \enspace \forall m$, thus condition (2) is satisfied.
-
-By assumption on the time series, condition (3) is satisfied.
-
-Thus, by Theorem 1.1 in \citet{dehling2015bootstrap}
-\[\sqrt{n} (\tilde{\mu}_{X} - \mu_{X}) \widesim[2]{n\longrightarrow\infty} N\]
-where $N$ is a Hilbert space valued Gaussian random variable and convergence is in distribution. Thus 
-\[\|\tilde{\mu}_{X} - \mu_{X}\| = O_P(\frac{1}{\sqrt{n}})\]
 \end{proof}
-%%%
 
 \subsection{Control of Type I error}\label{supp:quantile-proof}
 Theorem \ref{theorem:quantiles-converge} shows that the quantiles of the bootstrapped statistic $nV_b$ (which we can estimate by drawing a large number of samples) converge to those of the test statistic $\|\hat \mu_L\|^2$ under the null hypothesis. Therefore, we can estimate rejection thresholds to appropriately control Type I error.
