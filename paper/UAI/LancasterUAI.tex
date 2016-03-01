@@ -452,10 +452,11 @@ In this case $Z_t$ is pairwise-dependent on both of $X_t$ and $Y_t$, in addition
 
 \subsection{FOREX Data}
 
-Exchange rates between three pairs of currencies (AUD/EUR, CHF/GBP, CAD/JPY) at 5 minute intervals over 7 consecutive trading days were obtained. The data were processed by taking the returns (difference between consecutive terms within each time series, $x_t^r = x_t-x_{t-1}$) which were then decomposed into volatility ($x_t^v=|x_t^r|$) and signal ($x_t^s = \mathtt{sign}(x_t^r)$) terms. The dependence of the signal and volatility terms across currency pairs were then analysed using Lancaster and 3-way HSIC, as well as (normal) HSIC to detect pairwise dependence. 
+Exchange rates between three currencies (GBP, USD, EUR) at 5 minute intervals over 7 consecutive trading days were obtained. The data were processed by taking the returns (difference between consecutive terms within each time series, $x_t^r = x_t-x_{t-1}$) which were then normalised (divided by standard deviation). We performed the Lancaster test, 3-way HSIC and pairwise HSIC on using the first $800$ entries of each processed series. All tests rejected the null hypothesis. The Lancaster test returned $p$-values of 0 for each of $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ with $10000$ bootstrapping procedures.
 
-Volatility was found to be dependent across all currency pairs by each test at the $0.05$ significance level. The signals were found to be pairwise dependent by HSIC as well as jointly dependent by 3-way HSIC. Curiously, the Lancaster test did not detect dependence, with p-values of $0.682$, $0.659$ and $0.670$ for $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ respectively.
+We then shifted one of the time series and repeated the tests (i.e.~we used entries $1$ to $800$ of two of the processed series and entries $801$ to $1600$ of the third). In this case, pairwise HSIC still detected dependence between the two unshifted time series, and both Lancaster and 3-way HSIC did not reject the null hypothesis that the joint distribution factorises. The Lancaster test returned $p$-values of $0.2708$, $0.2725$ and $0.1975$ for $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ respectively.
 
+In both cases, the Lancaster test behaves as expected. Due to arbitrage, any two exchange rates should determine the third and the Lancaster test correctly identifies a joint dependence in the returns. However, when we shift one of the time series, we break the dependence between it and the other series. Lancaster correctly identifies here that the underlying distribution does factorise.
 
 \section{Discussion and future research}\label{section:discussion}
 
