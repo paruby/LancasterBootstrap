@@ -97,13 +97,16 @@ In the \emph{i.i.d.}~case, the null distribution of the test statistic can be es
 
 Provided that our data-generating process satisfies some technical conditions on the forms of temporal dependence, recent work by \citet{leucht2013dependent}, building on the work of \citet{shao2010dependent}, can come to our rescue. The wild bootstrap is a method that correctly resamples from the null distribution of a test statistic, subject to certain conditions on both the test statistic and the processes from which the observations have been drawn.
 
-In this paper we show that the Lancaster interaction test statistic satisfies the conditions required to apply the wild bootstrap procedure; moreover, the manner in which we prove this is significantly simpler than existing proofs in the literature of the same property for other kernel test statistics \citep{chwialkowski2014wild,chwialkowski2014kernel}. Previous proofs have relied on the classical theory of V-statistics to analyse the asymptotic distribution of the kernel statistic. In particular, the Hoeffding decomposition gives an expression for the kernel test statistic as a sum of other V-statistics. Understanding the asymptotic properties of the components of this decomposition is then conceptually tractable, but algebraically extremely painful. Moreover, as the complexity of the test statistic under analysis grows, the number of terms that must be considered in this approach grows factorially.\footnote{See for example Lemma 8 in Supplementary material A.3 of \citet{chwialkowski2014kernel}. The proof of this lemma requires keeping track of $4!$ terms; an equivalent approach for the Lancaster test would have $6!$ terms. Depending on the precise structure of the statistic, this approach applied to a test involving 4 variables could require as many as $8!=40320$ terms.} We conjecture that such analysis of interaction statistics of 4 or more variables would in practice be infeasible without automatic theorem provers due to the sheer number of terms that would need to be kept track of.
+In this paper we show that the Lancaster interaction test statistic satisfies the conditions required to apply the wild bootstrap procedure; moreover, the manner in which we prove this is significantly simpler than existing proofs in the literature of the same property for other kernel test statistics \citep{chwialkowski2014wild,chwialkowski2014kernel}. Previous proofs have relied on the classical theory of V-statistics to analyse the asymptotic distribution of the kernel statistic. In particular, the Hoeffding decomposition gives an expression for the kernel test statistic as a sum of other V-statistics. Understanding the asymptotic properties of the components of this decomposition is then conceptually tractable, but algebraically extremely painful. Moreover, as the complexity of the test statistic under analysis grows, the number of terms that must be considered in this approach grows factorially.\footnote{See for example Lemma 8 in Supplementary material A.3 of \citet{chwialkowski2014kernel}. The proof of this lemma requires keeping track of $4!$ terms; an equivalent approach for the Lancaster test would have $6!$ terms. Depending on the precise structure of the statistic, this approach applied to a test involving 4 variables could require as many as $8!=40320$ terms.} We conjecture that such analysis of interaction statistics of 4 or more variables would in practice be unfeasible without automatic theorem provers due to the sheer number of terms that would need to be kept track of.
 
 In contrast, in the approach taken in this paper we explicitly consider our test statistic to be the norm of a Hilbert space operator. We exploit a Central Limit Theorem for Hilbert space valued random variables to show that our test statistic converges in probability to the norm of a related population-centred Hilbert space operator, for which the asymptotic analysis is much simpler. Our approach is novel; previous analyses have not, to our knowledge, leveraged the Hilbert space geometry in the context of V-statistics in this way. 
 
 We propose that our method may in future be applied to the asymptotic analysis of other kernel statistics. In the appendix, we provide an application of this method to the Hilbert Schmidt Independence Criterion (HSIC) test statistic, giving a significantly shorter and simpler proof than that given in \citet{chwialkowski2014kernel}
 
 The Central Limit Theorem that we use in this paper makes certain assumptions on the mixing properties of the random processes from which our data are drawn; as further progress is made, this may be substituted for more up-to-date theorems that make weaker mixing assumptions.
+
+\paragraph{Outline:}
+In Section \ref{section:main}, we detail the Lancaster interaction test and provide our main results. These results justify use of the wild bootstrap to understand the null distribution of the test statistic. In Section \ref{section:details}, we provide more detail about the wild bootstrap, prove that its use correctly controls Type I error and give a consistency result. In Section \ref{section:experiments}, we evaluate the Lancaster test on synthetic data to identify cases in which it outperforms existing methods, as well as cases in which it is outperformed. In Section \ref{section:discussion}, we discuss our results. In Section \ref{section:proofs}, we provide proofs of the main results of this paper, in particular the aforementioned novel proof. Further proofs may be found in the Supplementary material.
 
 %In this paper we show that the Lancaster interaction test statistic satisfies the conditions required to apply the wild bootstrap procedure; moreover, the manner in which we prove this is significantly simpler than existing proofs in the literature of the same property for other kernel test statistics \citep{chwialkowski2014wild,chwialkowski2014kernel}. Our proof can be adapted from the Lancaster interaction to other test statistics. In the appendix, we provide an adaptation of the proof to the Hilbert Schmidt Independence Criterion (HSIC) test statistic, giving a significantly shorter and simpler proof than that given in \citet{chwialkowski2014kernel}. The proof relies on a recently published version of the Central Limit Theorem for Hilbert space valued random variables satisfying particular mixing properties \citep{dehling2015bootstrap}; as further progress is made, this may be substituted for more up-to-date theorems that make weaker mixing assumptions.
 
@@ -247,12 +250,23 @@ The asymptotic analysis of such a $V$-statistic for non-\emph{i.i.d.}~data is st
 
 In Section \ref{section:details} we discuss the wild bootstrap and provide results regarding consistency and Type I error control.
 
+\subsection{Multiple testing correction}
+In the Lancaster test, we reject the composite null hypothesis $\mathcal{H}_0$ if and only if we reject all three of the components. In \citet{sejdinovic2013kernel}, it is suggested that the Holm-Bonferroni correction be used to account for multiple testing \citep{holm1979simple}. We show here that more relaxed conditions on the p-values can be used while still bounding the Type I error, thus increasing test power.
+
+Denote by $\mathcal{A}_*$ the event that $\mathcal{H}_*$ is rejected. Then
+\begin{align*}
+\mathbb{P}(\mathcal{A}_0) &= \mathbb{P}(\mathcal{A}_X \land \mathcal{A}_Y \land \mathcal{A}_Z) \\
+&\leq \min\{\mathbb{P}(\mathcal{A}_X), \mathbb{P}(\mathcal{A}_Y), \mathbb{P}(\mathcal{A}_Z)\}
+\end{align*}
+If $\mathcal{H}_0$ is true, then so must one of the components. WLOG assume that $\mathcal{H}_X$ is true. If we use significance levels of $\alpha$ in each test individually then $\mathbb{P}(\mathcal{A}_X) \leq \alpha$ and thus $\mathbb{P}(\mathcal{A}_0) \leq \alpha$.
+
+Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall. It is therefore more conservative than necessary and thus has worse test power compared to the `simple correction' proposed here.
 
 
 
 \section{The wild bootstrap}\label{section:details}
 
-In this section we discuss technical details of the Theorems and testing procedure outlined in Section \ref{section:main}. 
+In this section we discuss the wild bootstrap and provide consistency and Type I error results.
 
 
 \subsection{Temporal dependence}
@@ -294,25 +308,24 @@ If the test statistic has the form of a normalised V-statistic, then provided ce
 
 The condition on the core that is of crucial importance to this paper is that it must be degenerate. Theorem \ref{theorem:degenerate-kernel} justifies the use of the wild bootstrap.
 
-Given the statistic $nV(h,\mathcal{S}_n)$, \citet{leucht2013dependent} tells us that a random matrix $W$ can be drawn such that the bootstrapped statistic\footnote{Note that for fixed $\mathcal{S}_n$, $nV_b(h,\mathcal{S}_n)$ is a random variable through the randomness introduced by $W$}
-\[nV_b(h,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j,p,q}W_{ij}h(S_j,S_p)W_{pq}\]
+Given the statistic $nV(h,\mathcal{S}_n)$, \citet{leucht2013dependent} tells us that a random vector $W$ of length $n$ can be drawn such that the bootstrapped statistic\footnote{Note that for fixed $\mathcal{S}_n$, $nV_b(h,\mathcal{S}_n)$ is a random variable through the randomness introduced by $W$}
+\[nV_b(h,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j}W_{i}h(S_i,S_j)W_{j}\]
 is distributed according to the null distribution of $nV$. 
 
 By generating many such $W$ and calculating $nV_b$ for each, we can estimate the quantiles of $nV$. 
 
 \subsection{Generating $W$}
 
-
-
+The process generating $W$ must satisfy conditions (B2) given on page 6 of \citet{leucht2013dependent} for $nV_b$ to correctly resample from the null distribution of $nV$. For brevity, we provide here only an example of such a process; the interested reader should consult \citet{leucht2013dependent} or Appedix A of \citet{chwialkowski2014wild} for a more detailed discussion of the bootstrapping process. The following bootstrapping process was used in the experiments in Section \ref{section:experiments}:
+\[W_t = e^{-1/l_n}W_{t-1} + \sqrt{1 - e^{-2/l_n}}\epsilon_t \]
+where $W_1$, $\epsilon_1, \ldots, \epsilon_t$ are independent $\mathcal{N}(0,1)$ random variables. $l_n$ should be taken from a sequence $\{l_n\}$ such that $\lim_{n\longrightarrow\infty}l_n = \infty$; in practice we used $l_n=20$ for all of the experiments since the values of $n$ were roughly comparable in each case.
 \subsection{Control of Type I error}
 
 The following theorem shows that by estimating the quantiles of the wild bootstrapped statistic $nV_b$ we correctly control the Type I error when testing $\mathcal{H}_Z$.
 
 \begin{theorem}\label{theorem:quantiles-converge}
 Suppose that $(X_i,Y_i,Z_i)_{i=1}^n$ are drawn from a random process satisfying suitable mixing conditions, and that $W$ is drawn from a process satisfying (B2) in \citet{leucht2013dependent}. Then asymptotically, the quantiles of
-
-\[nV_b = \frac{1}{n}\left(W^\intercal\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right)W\right) _{++}\]
-
+\[nV_b = \frac{1}{n}\left(W^\intercal\left( \overline{\left( \bar{K} \circ \bar{L}\right) }\circ \bar{M} \right)W\right)\]
 converge to those of $ n\| \hat \mu_L\|^2$. 
 \end{theorem}
 
@@ -322,17 +335,6 @@ See Supplementary material \ref{supp:quantile-proof}
 
 %TODO proof!
 
-\subsection{Multiple testing correction}
-In the Lancaster test, we use a composite null hypothesis which requires us to test each of the three hypotheses $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ separately. We reject the null hypothesis $\mathcal{H}_0$ if and only if we reject all three of the components. In \citet{sejdinovic2013kernel}, it is suggested that the Holm-Bonferroni correction be used to account for multiple testing \citep{holm1979simple}. We show here that more relaxed conditions on the p-values can be used while still bounding the Type I error, thus increasing test power.
-
-Denote by $\mathcal{A}_*$ the event that $\mathcal{H}_*$ is rejected. Then
-\begin{align*}
-\mathbb{P}(\mathcal{A}_0) &= \mathbb{P}(\mathcal{A}_X \land \mathcal{A}_Y \land \mathcal{A}_Z) \\
-&\leq \min\{\mathbb{P}(\mathcal{A}_X), \mathbb{P}(\mathcal{A}_Y), \mathbb{P}(\mathcal{A}_Z)\}
-\end{align*}
-If $\mathcal{H}_0$ is true, then so must one of the components. WLOG assume that $\mathcal{H}_X$ is true. If we use significance levels of $\alpha$ in each test individually then $\mathbb{P}(\mathcal{A}_X) \leq \alpha$ and thus $\mathbb{P}(\mathcal{A}_0) \leq \alpha$.
-
-Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall. It is therefore more conservative than necessary and thus has worse test power compared to the `simple correction' proposed here.
 
 
 \subsection{(Semi-)consistency of testing procedure}
@@ -351,7 +353,7 @@ See Supplementary material \ref{supp:consistent}
 At the time of writing, a characterisation of distributions for which $\mathcal{H}_0$ is false yet $\Delta_LP=0$ is unknown. Therefore, if we reject $\mathcal{H}_0$ then we conclude that the distribution does not factorise; if we fail to reject $\mathcal{H}_0$ then we cannot conclude that the distribution factorises.
 
 
-\section{Experiments}
+\section{Experiments}\label{section:experiments}
 
 The Lancaster test described above amounts to a method to test each of the sub-hypotheses $\mathcal{H}_X, \mathcal{H}_Y, \mathcal{H}_Z$. Rather than using the Lancaster test statistic with wild bootstrap to test each of these, we could instead use HSIC. For example, by considering the pair of variables $(X,Y)$ and $Z$ with kernels $k\otimes l$ and $m$ respectively, HSIC can be used to test $\mathcal{H}_Z$. Similar grouping of the variables can be used to test $\mathcal{H}_X$ and $\mathcal{H}_Y$. Applying the same multiple testing correction as in the Lancaster test, we derive an alternative test of dependence between three variables. We refer to this HSIC based procedure as \emph{3-way HSIC}.
 
@@ -453,7 +455,7 @@ Exchange rates between three pairs of currencies (AUD/EUR, CHF/GBP, CAD/JPY) at 
 Volatility was found to be dependent across all currency pairs by each test at the $0.05$ significance level. The signals were found to be pairwise dependent by HSIC as well as jointly dependent by 3-way HSIC. Curiously, the Lancaster test did not detect dependence, with p-values of $0.682$, $0.659$ and $0.670$ for $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ respectively.
 
 
-\section{Discussion and future research}
+\section{Discussion and future research}\label{section:discussion}
 
 It has been demonstrated that the Lancaster test is more sensitive than 3-way HSIC when pairwise interaction is weak, but that the opposite is true when pairwise interaction is strong. It is curious that the two tests have different strengths in this manner, particularly when considering the very similar forms of the statistics in each case. Indeed, to test $\mathcal{H}_Z$ using the Lancaster statistic, we bootstrap the following:
 
@@ -540,33 +542,33 @@ C_{XYZ} &= \mathbb{E}_{XYZ}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)\otimes\bar\phi_Z(Z
 & = \mathbb{E}_{XY}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)]\otimes\mathbb{E}_{Z}\bar\phi_Z(Z)=0
 \end{align*}
 
-Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respective Hilbert spaces. Lemma \ref{lemma:beta} tells us that each subprocess of $(X_i,Y_i,Z_i)$ satisfies the same $\beta$-mixing conditions as $(X_i,Y_i,Z_i)$, thus by applying Lemma \ref{lemma:hilbertCLT} it follows that $\|\bar{C}_{XZY}\|$, $\|\bar{C}_{YZX}\|$, $\|\bar{C}_{XZ}\|$, $\|\bar{C}_{YZ}\|$, $\|\bar{\mu}_X\|$, $\|\bar{\mu}_Y\|$, $\|\bar{\mu}_Z\| = O\left(\frac{1}{\sqrt{n}}\right)$
+Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respective Hilbert spaces. Lemma \ref{lemma:beta} tells us that each subprocess of $(X_i,Y_i,Z_i)$ satisfies the same $\beta$-mixing conditions as $(X_i,Y_i,Z_i)$, thus by applying Lemma \ref{lemma:hilbertCLT} it follows that $\|\bar{C}_{XZY}\|$, $\|\bar{C}_{YZX}\|$, $\|\bar{C}_{XZ}\|$, $\|\bar{C}_{YZ}\|$, $\|\bar{\mu}_X\|$, $\|\bar{\mu}_Y\|$, $\|\bar{\mu}_Z\| = O_P\left(n^{-\frac{1}{2}}\right)$
 
 It thus follows that
 \begin{align*}
-n\|&\hat \mu_L\|^2  \xrightarrow{O(n^{-\frac{1}{2}})} n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
+n\|&\hat \mu_L\|^2  \xrightarrow{O_P(n^{-\frac{1}{2}})} n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
 2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle -
 2n\langle \bar{C}_{XZY},\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\ &=
 \frac{1}{n}((\bar{K}\circ \bar{L}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\bar{K}\circ \bar{L})\bar{M})_{++} + \frac{1}{n^3}(\bar{K}\circ \bar{L})_{++}\bar{M}_{++}
 \end{align*}
 
-since all the other terms decay at least as quickly as $O(\frac{1}{\sqrt{n}})$. This is shown here for $n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle$; the proofs for the other terms are similar.
+since all the other terms decay at least as quickly as $O_P(\frac{1}{\sqrt{n}})$. This is shown here for $n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle$; the proofs for the other terms are similar.
 \begin{align*}
 &n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\
 &\leq n \| \bar{\mu}_X\otimes\bar{C}_{YZ}\| \|\bar{C}_{XY}\otimes\bar{\mu}_Z \| \\
 & = n\sqrt{\langle \bar{\mu}_X\otimes\bar{C}_{YZ} , \bar{\mu}_X\otimes\bar{C}_{YZ} \rangle} \sqrt{\langle \bar{C}_{XY}\otimes\bar{\mu}_Z, \bar{C}_{XY}\otimes\bar{\mu}_Z \rangle} \\
 & = n\sqrt{\langle \bar{\mu}_X, \bar{\mu}_X \rangle \langle \bar{C}_{YZ} , \bar{C}_{YZ} \rangle} \sqrt{\langle \bar{C}_{XY}, \bar{C}_{XY} \rangle \langle \bar{\mu}_Z, \bar{\mu}_Z \rangle} \\
 & =  n \| \bar{\mu}_X\|\|\bar{C}_{YZ}\| \|\bar{C}_{XY}\|\|\bar{\mu}_Z \| \\
-& = n \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)} \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)} O(1) \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)} = \mathsmaller{O\left(\frac{1}{\sqrt{n}}\right)}
+& = n \mathsmaller{O_P\left(\frac{1}{\sqrt{n}}\right)} \mathsmaller{O_P\left(\frac{1}{\sqrt{n}}\right)} O_P(1) \mathsmaller{O_P\left(\frac{1}{\sqrt{n}}\right)} = \mathsmaller{O_P\left(\frac{1}{\sqrt{n}}\right)}
 \end{align*}
 
 It can be shown that $\bar{K}\circ \bar{L}$ in the above expression can be replaced with $\overline{\bar{K}\circ \bar{L}}$ while preserving equality. That is, we can equivalently write
 \begin{align*}
 n\|\Delta_L \hat{P}\|^2 & \longrightarrow \frac{1}{n}((\overline{\bar{K}\circ \bar{L}}) \circ \bar{M})_{++}\\& - \frac{2}{n^2}((\overline{\bar{K}\circ \bar{L}})\bar{M})_{++} + \frac{1}{n^3}(\overline{\bar{K}\circ \bar{L}})_{++}\bar{M}_{++}
 \end{align*}
-This is equivalent to treating $\bar{k}\otimes\bar{l}$ as a kernel on the single variable $T:=(X,Y)$ and performing another recentering trick as we did at the beginning of this proof. By rewriting the above expression in terms of the operator $\bar{C}_{TZ}$ and mean embeddings $\mu_T$ and $\mu_Z$, it can be shown by a similar argument to before that the latter two terms tend to 0 at least as $O(n^{-\frac{1}{2}})$, and thus, substituting for the definition of $\|\hat \mu^{(Z)}_{L,2} \|^2$,
+This is equivalent to treating $\bar{k}\otimes\bar{l}$ as a kernel on the single variable $T:=(X,Y)$ and performing another recentering trick as we did at the beginning of this proof. By rewriting the above expression in terms of the operator $\bar{C}_{TZ}$ and mean embeddings $\mu_T$ and $\mu_Z$, it can be shown by a similar argument to before that the latter two terms tend to 0 at least as $O_P(n^{-\frac{1}{2}})$, and thus, substituting for the definition of $\|\hat \mu^{(Z)}_{L,2} \|^2$,
 \begin{align*}
- n \|\hat \mu_{L} \|^2 \xrightarrow{O(\frac{1}{\sqrt{n}})} n \|\hat \mu^{(Z)}_{L,2} \|^2
+ n \|\hat \mu_{L} \|^2 \xrightarrow{O_P(\frac{1}{\sqrt{n}})} n \|\hat \mu^{(Z)}_{L,2} \|^2
 \end{align*} as required.
 
 
@@ -891,7 +893,7 @@ C_{XY} & = \mathbb{E}_{XY}[\bar{\phi}_X(X)\otimes\bar{\phi}_Y(Y)] \\
 & = \mathbb{E}_{X}[\bar{\phi}_X(X)]\otimes\mathbb{E}_Y[\bar{\phi}_Y(Y)] = 0\otimes 0 = 0\\
 \end{align*}
 
-Thus by Lemma \ref{lemma:hilbertCLT} as before, it follows that $\|\bar{C}_{XY}\|, \|\bar{\mu}_X\|, \|\bar{\mu}_Y\| = O(n^{-\frac{1}{2}})$. 
+Thus by Lemma \ref{lemma:hilbertCLT} as before, it follows that $\|\bar{C}_{XY}\|, \|\bar{\mu}_X\|, \|\bar{\mu}_Y\| = O_P(n^{-\frac{1}{2}})$. 
 
 We can write the latter two terms in the above expression for $nHSIC_b$ in terms of these quantities:
 
@@ -904,7 +906,7 @@ n\langle \frac{1}{n} \sum_{j}[\bar{\phi}_X(X_j)\otimes\bar{\phi}_Y(Y_j)],
 [\frac{1}{n} \sum_{i}\bar{\phi}_X(X_i)]\otimes[\frac{1}{n} \sum_{k}\bar{\phi}_Y(Y_k)]\rangle \\&=
 n\langle \bar{C}_{XY},\bar{\mu}_X  \otimes \bar{\mu}_Y \rangle \\ 
 &\leq n \|\bar{C}_{XY}\|\|\bar{\mu}_X\| \| \bar{\mu}_Y\|\\
-&= O(n^{-\frac{1}{2}})
+&= O_P(n^{-\frac{1}{2}})
 \end{align*}
 
 \begin{align*}
@@ -912,7 +914,7 @@ n\langle \bar{C}_{XY},\bar{\mu}_X  \otimes \bar{\mu}_Y \rangle \\
  & =  \frac{1}{n^3}\mathlarger{\mathlarger{\sum}}_{i,j}\mathlarger{\mathlarger{\langle}} \bar{\phi}_X(X_i), \bar{\phi}_X(X_j) \mathlarger{\mathlarger{\rangle}} \mathlarger{\mathlarger{\sum}}_{k,l}\mathlarger{\mathlarger{\langle}} \bar{\phi}_Y(Y_k), \bar{\phi}_Y(Y_l) \mathlarger{\mathlarger{\rangle}} \\ &
  = n\mathlarger{\mathlarger{\langle}} \frac{1}{n}\sum_i\bar{\phi}_X(X_i) , \frac{1}{n}\sum_j\bar{\phi}_X(X_j) \mathlarger{\mathlarger{\rangle}} \mathlarger{\mathlarger{\langle}} \frac{1}{n}\sum_k\bar{\phi}_Y(Y_k)  , \frac{1}{n}\sum_l\bar{\phi}_Y(Y_l) \mathlarger{\mathlarger{\rangle}}\\&
  = n \mathlarger{\mathlarger{\langle}} \bar{\mu}_X , \bar{\mu}_X \mathlarger{\mathlarger{\rangle}} \mathlarger{\mathlarger{\langle}} \bar{\mu}_Y , \bar{\mu}_Y  \mathlarger{\mathlarger{\rangle}} \\ &
-= n\|\bar{\mu}_X \|^2 \|\bar{\mu}_Y \|^2\\ &= nO(n^{-2}) \\&= O(n^{-1})
+= n\|\bar{\mu}_X \|^2 \|\bar{\mu}_Y \|^2\\ &= nO_P(n^{-2}) \\&= O_P(n^{-1})
 \end{align*}
 
 
