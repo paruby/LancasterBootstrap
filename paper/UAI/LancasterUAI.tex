@@ -97,7 +97,7 @@ In the \emph{i.i.d.}~case, the null distribution of the test statistic can be es
 
 Provided that our data-generating process satisfies some technical conditions on the forms of temporal dependence, recent work by \citet{leucht2013dependent}, building on the work of \citet{shao2010dependent}, can come to our rescue. The wild bootstrap is a method that correctly resamples from the null distribution of a test statistic, subject to certain conditions on both the test statistic and the processes from which the observations have been drawn.
 
-In this paper we show that the Lancaster interaction test statistic satisfies the conditions required to apply the wild bootstrap procedure; moreover, the manner in which we prove this is significantly simpler than existing proofs in the literature of the same property for other kernel test statistics \citep{chwialkowski2014wild,chwialkowski2014kernel}. Previous proofs have relied on the classical theory of V-statistics to analyse the asymptotic distribution of the kernel statistic. In particular, the Hoeffding decomposition gives an expression for the kernel test statistic as a sum of other V-statistics. Understanding the asymptotic properties of the components of this decomposition is then conceptually tractable, but algebraically extremely painful. Moreover, as the complexity of the test statistic under analysis grows, the number of terms that must be considered in this approach grows factorially.\footnote{See for example Lemma 8 in Supplementary material A.3 of \citet{chwialkowski2014kernel}. The proof of this lemma requires keeping track of $4!$ terms; an equivalent approach for the Lancaster test would have $6!$ terms. Depending on the precise structure of the statistic, this approach applied to a test involving 4 variables could require as many as $8!=40320$ terms.} We conjecture that such analysis of interaction statistics of 4 or more variables would in practice be unfeasible without automatic theorem provers due to the sheer number of terms that would need to be kept track of.
+In this paper we show that the Lancaster interaction test statistic satisfies the conditions required to apply the wild bootstrap procedure; moreover, the manner in which we prove this is significantly simpler than existing proofs in the literature of the same property for other kernel test statistics \citep{chwialkowski2014wild,chwialkowski2014kernel}. Previous proofs have relied on the classical theory of V-statistics to analyse the asymptotic distribution of the kernel statistic. In particular, the Hoeffding decomposition gives an expression for the kernel test statistic as a sum of other V-statistics. Understanding the asymptotic properties of the components of this decomposition is then conceptually tractable, but algebraically extremely painful. Moreover, as the complexity of the test statistic under analysis grows, the number of terms that must be considered in this approach grows factorially.\footnote{See for example Lemma 8 in Supplementary material A.3 of \citet{chwialkowski2014kernel}. The proof of this lemma requires keeping track of $4!$ terms; an equivalent approach for the Lancaster test would have $6!$ terms. Depending on the precise structure of the statistic, this approach applied to a test involving 4 variables could require as many as $8!=40320$ terms.} We conjecture that such analysis of interaction statistics of 4 or more variables would in practice be unfeasible without automatic theorem provers due to the sheer number of terms in the resulting computations.
 
 In contrast, in the approach taken in this paper we explicitly consider our test statistic to be the norm of a Hilbert space operator. We exploit a Central Limit Theorem for Hilbert space valued random variables to show that our test statistic converges in probability to the norm of a related population-centred Hilbert space operator, for which the asymptotic analysis is much simpler. Our approach is novel; previous analyses have not, to our knowledge, leveraged the Hilbert space geometry in the context of V-statistics in this way. 
 
@@ -106,7 +106,7 @@ We propose that our method may in future be applied to the asymptotic analysis o
 The Central Limit Theorem that we use in this paper makes certain assumptions on the mixing properties of the random processes from which our data are drawn; as further progress is made, this may be substituted for more up-to-date theorems that make weaker mixing assumptions.
 
 \paragraph{Outline:}
-In Section \ref{section:main}, we detail the Lancaster interaction test and provide our main results. These results justify use of the wild bootstrap to understand the null distribution of the test statistic. In Section \ref{section:details}, we provide more detail about the wild bootstrap, prove that its use correctly controls Type I error and give a consistency result. In Section \ref{section:experiments}, we evaluate the Lancaster test on synthetic data to identify cases in which it outperforms existing methods, as well as cases in which it is outperformed. In Section \ref{section:discussion}, we discuss our results. In Section \ref{section:proofs}, we provide proofs of the main results of this paper, in particular the aforementioned novel proof. Further proofs may be found in the Supplementary material.
+In Section \ref{section:main}, we detail the Lancaster interaction test and provide our main results. These results justify use of the wild bootstrap to understand the null distribution of the test statistic. In Section \ref{section:details}, we provide more detail about the wild bootstrap, prove that its use correctly controls Type I error and give a consistency result. In Section \ref{section:experiments}, we evaluate the Lancaster test on synthetic data to identify cases in which it outperforms existing methods, as well as cases in which it is outperformed. In Section \ref{section:discussion}, we conclude with a discussion. In Section \ref{section:proofs}, we provide proofs of the main results of this paper, in particular the aforementioned novel proof. Further proofs may be found in the Supplementary material.
 
 %In this paper we show that the Lancaster interaction test statistic satisfies the conditions required to apply the wild bootstrap procedure; moreover, the manner in which we prove this is significantly simpler than existing proofs in the literature of the same property for other kernel test statistics \citep{chwialkowski2014wild,chwialkowski2014kernel}. Our proof can be adapted from the Lancaster interaction to other test statistics. In the appendix, we provide an adaptation of the proof to the Hilbert Schmidt Independence Criterion (HSIC) test statistic, giving a significantly shorter and simpler proof than that given in \citet{chwialkowski2014kernel}. The proof relies on a recently published version of the Central Limit Theorem for Hilbert space valued random variables satisfying particular mixing properties \citep{dehling2015bootstrap}; as further progress is made, this may be substituted for more up-to-date theorems that make weaker mixing assumptions.
 
@@ -131,7 +131,7 @@ In Section \ref{section:main}, we detail the Lancaster interaction test and prov
 
 \subsection{Kernel notation}
 
-Throughout the paper we  will assume that the kernels $k,l,m$, defined on the domains $\mathcal{X}$, $\mathcal{Y}$ and $\mathcal{Z}$ respectively, are characteristic  \citep{sriperumbudur2011universality}, bounded and Lipschitz continuous. We describe some notation relevant to the kernel $k$; similar notation holds for $l$ and $m$. Recall that $\mu_X := \mathbb{E}_X k(X,\cdot) \in \mathcal{H}_k$ is the  mean embedding \citep{smola2007hilbert} of the random variable $X$. Given observations $X_i$, an estimate of the mean embedding is $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$. Two modifications  of $k$ are used in this work:
+Throughout this paper we  will assume that the kernels $k,l,m$, defined on the domains $\mathcal{X}$, $\mathcal{Y}$ and $\mathcal{Z}$ respectively, are characteristic  \citep{sriperumbudur2011universality}, bounded and Lipschitz continuous. We describe some notation relevant to the kernel $k$; similar notation holds for $l$ and $m$. Recall that $\mu_X := \mathbb{E}_X k(X,\cdot) \in \mathcal{H}_k$ is the  mean embedding \citep{smola2007hilbert} of the random variable $X$. Given observations $X_i$, an estimate of the mean embedding is $\tilde{\mu}_X = \frac{1}{n}\sum_{i=1}^n k(X_i,\cdot)$. Two modifications  of $k$ are used in this work:
 \begin{align}
 \bar{k}(x,x') &= \langle  k(x,\cdot)-\mu_X,k(x',\cdot)-\mu_X\rangle, \\
 \tilde{k}(x,x') &= \langle k(x,\cdot)-\tilde{\mu}_X, k(x',\cdot)-\tilde{\mu}_X \rangle 
@@ -205,11 +205,11 @@ Suppose that $(X_i)$ is $\beta$-mixing with coefficients $\beta(m)$ satisfying $
 \end{lemma}
 
 \begin{proof}\textit{(Theorem \ref{theorem:norm-conv-in-prob})}
-We provide a short sketch of the proof here; for a full proof, see Section \ref{section:proofs}
+We provide a short sketch of the proof here; for a full proof, see Section \ref{section:proofs}.
 
-The key idea is to note that we can rewrite $n\|\hat \mu_L\|^2$ in terms of the population centred kernel matrices $\overline{K}$, $\overline{L}$ and $\overline{M}$. Each of the resulting terms can in turn be converted to an inner product between quantities of the form $\hat\mu - \mu$, where $\hat\mu$ is an empirical estimator of $\mu$, where the $\mu$ are mean embeddings and covariance operators.
+The key idea is to note that we can rewrite $n\|\hat \mu_L\|^2$ in terms of the population centred kernel matrices $\overline{K}$, $\overline{L}$ and $\overline{M}$. Each of the resulting terms can in turn be converted to an inner product between quantities of the form $\hat\mu - \mu$, where $\hat\mu$ is an empirical estimator of $\mu$, and each $\mu$ is a mean embedding or covariance operator.
 
-By applying Lemma \ref{lemma:hilbertCLT} to show that the $\hat\mu - \mu$ converge to 0 sufficiently quickly, we show that most of these terms converge in probability to 0, with the residual terms equaling $n\| \hat \mu^{(Z)}_{L,2} \|^2$.
+By applying Lemma \ref{lemma:hilbertCLT} to the $\hat\mu - \mu$, we show that most of these terms converge in probability to 0, with the residual terms equaling $n\| \hat \mu^{(Z)}_{L,2} \|^2$.
 \end{proof}
 As discussed in Section \ref{section:intro}, the essential idea of this proof is novel and the resulting proof is significantly more concise than previous approaches \citep{chwialkowski2014kernel,chwialkowski2014wild}. 
 
@@ -234,13 +234,13 @@ The asymptotic analysis of such a $V$-statistic for non-\emph{i.i.d.}~data is st
    \label{alg:Lancaster}
 \begin{algorithmic}
    \STATE {\bfseries Input:} $\tilde{K}$, $\tilde{L}$, $\tilde{M}$, each size $n\times n$, $N$= number of bootstraps, $\alpha=$ p-value threshold
-   \STATE $n\|\Delta_L\hat{P}\|^2 = \frac{1}{n}\left(\widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)_{++}$
+   \STATE $n\|\hat{\mu}_L\|^2 = \frac{1}{n}\left(\widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)_{++}$
    \STATE samples = zeros(1,N)
    \FOR{$i=1$ {\bfseries to} $N$}
-   \STATE Draw random matrix W according to Wild Bootstrap
+   \STATE Draw random vector W according to Equation \ref{equation:bootstrap}
    \STATE samples[$i$] = $\frac{1}{n}\left(W^\intercal\left( \widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)W\right) _{++}$
    \ENDFOR
-   \IF{sum($n\|\Delta_L\hat{P}\|^2 >$ samples)$>\frac{\alpha}{N}$}
+   \IF{sum($n\|\hat{\mu}_L\|^2 >$ samples)$>\frac{\alpha}{N}$}
    \STATE Reject $\mathcal{H}_Z$
    \ELSE
    \STATE Do not reject $\mathcal{H}_Z$
@@ -260,7 +260,7 @@ Denote by $\mathcal{A}_*$ the event that $\mathcal{H}_*$ is rejected. Then
 \end{align*}
 If $\mathcal{H}_0$ is true, then so must one of the components. WLOG assume that $\mathcal{H}_X$ is true. If we use significance levels of $\alpha$ in each test individually then $\mathbb{P}(\mathcal{A}_X) \leq \alpha$ and thus $\mathbb{P}(\mathcal{A}_0) \leq \alpha$.
 
-Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall. It is therefore more conservative than necessary and thus has worse test power compared to the `simple correction' proposed here.
+Therefore rejecting $\mathcal{H}_0$ in the event that each test has p-value less than $\alpha$ individually guarantees a Type I error overall of at most $\alpha$. In contrast, the Holm-Bonferonni method requires that the sorted p-values be lower than $[\frac{\alpha}{3},\frac{\alpha}{2},\alpha]$ in order to reject the null hypothesis overall. It is therefore more conservative than necessary and thus has worse test power compared to the `simple correction' proposed here. This is experimentally verified in Section \ref{section:experiments}.
 
 
 
@@ -282,7 +282,7 @@ There are various formalisations of memory or `mixing' of a random process \cite
 \begin{definition}
 A process $(X_t)_{t}$ is \emph{$\beta$-mixing} (also known as \emph{absolutely regular}) if $\beta(m) \longrightarrow 0$ as $m\longrightarrow \infty$, where
 \[ \beta(m) = \frac{1}{2} \sup_n \sup \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}(A_i \cap B_j) - \mathbb{P}(A_i)\mathbb{P}(B_j)| \]
-where the second supremum is taken  over all finite partitions $\{A_1,\ldots, A_I \}$ and  $\{B_1,\ldots, B_J\}$ of the sample space such that $A_i \in \mathcal{H}_1^n$ and $B_j \in \mathcal{H}_{n+m}^\infty$ and $\mathcal{H}_b^c = \sigma(X_b,X_{b+1},\ldots,X_{c})$
+where the second supremum is taken  over all finite partitions $\{A_1,\ldots, A_I \}$ and  $\{B_1,\ldots, B_J\}$ of the sample space such that $A_i \in \mathcal{F}_1^n$ and $B_j \in \mathcal{F}_{n+m}^\infty$ and $\mathcal{F}_b^c = \sigma(X_b,X_{b+1},\ldots,X_{c})$
 \end{definition}
 A related notion is that of $\tau$-mixing. This is a property required to apply the wild bootstrap method of \citet{leucht2013dependent}, but we do not discuss $\tau$-mixing here since it is implied by $\beta$-mixing under the assumption that $X_i$ has any finite moment.   
 
@@ -306,7 +306,7 @@ We call $nV_n$ a \emph{normalised} V-statistic. We call $h$ the \emph{core} of $
 
 If the test statistic has the form of a normalised V-statistic, then provided certain extra conditions are met, the wild bootstrap of \citet{leucht2013dependent} is a method to directly resample the test statistic under the null hypothesis. These conditions can be categorised as concerning: (1) appropriate mixing of the process from which our observations are drawn; (2) the core of the V-statistic. 
 
-The condition on the core that is of crucial importance to this paper is that it must be degenerate. Theorem \ref{theorem:degenerate-kernel} justifies the use of the wild bootstrap.
+The condition on the core that is of crucial importance to this paper is that it must be degenerate. Theorem \ref{theorem:degenerate-kernel} justifies our use of the wild bootstrap in the Lancaster interaction test.
 
 Given the statistic $nV(h,\mathcal{S}_n)$, \citet{leucht2013dependent} tells us that a random vector $W$ of length $n$ can be drawn such that the bootstrapped statistic\footnote{Note that for fixed $\mathcal{S}_n$, $nV_b(h,\mathcal{S}_n)$ is a random variable through the randomness introduced by $W$}
 \[nV_b(h,\mathcal{S}_n)=\frac{1}{n}\sum_{i,j}W_{i}h(S_i,S_j)W_{j}\]
@@ -317,7 +317,9 @@ By generating many such $W$ and calculating $nV_b$ for each, we can estimate the
 \subsection{Generating $W$}
 
 The process generating $W$ must satisfy conditions (B2) given on page 6 of \citet{leucht2013dependent} for $nV_b$ to correctly resample from the null distribution of $nV$. For brevity, we provide here only an example of such a process; the interested reader should consult \citet{leucht2013dependent} or Appedix A of \citet{chwialkowski2014wild} for a more detailed discussion of the bootstrapping process. The following bootstrapping process was used in the experiments in Section \ref{section:experiments}:
-\[W_t = e^{-1/l_n}W_{t-1} + \sqrt{1 - e^{-2/l_n}}\epsilon_t \]
+\begin{equation}\label{equation:bootstrap}
+W_t = e^{-1/l_n}W_{t-1} + \sqrt{1 - e^{-2/l_n}}\epsilon_t 
+\end{equation}
 where $W_1$, $\epsilon_1, \ldots, \epsilon_t$ are independent $\mathcal{N}(0,1)$ random variables. $l_n$ should be taken from a sequence $\{l_n\}$ such that $\lim_{n\longrightarrow\infty}l_n = \infty$; in practice we used $l_n=20$ for all of the experiments since the values of $n$ were roughly comparable in each case.
 \subsection{Control of Type I error}
 
