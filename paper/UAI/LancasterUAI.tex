@@ -66,7 +66,7 @@
 
 \begin{abstract} 
 
-We apply a wild bootstrap method to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which existing permutation bootstrap method fails. As in the \emph{i.i.d.}~case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we prove that the Lancaster statistic satisfies the conditions required to estimate the quantiles of the null distribution using the wild bootstrap; second, the manner in which this is proved is novel, simpler than existing methods, and can further be applied to other statistics.
+We apply a wild bootstrap method to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which the existing permutation bootstrap method fails. As in the \emph{i.i.d.}~case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we prove that the Lancaster statistic satisfies the conditions required to estimate the quantiles of the null distribution using the wild bootstrap; second, the manner in which this is proved is novel, simpler than existing methods, and can further be applied to other statistics.
 
 %(An additional minor contribution is that it is also shown that the multiple testing correction proposed in [Lancaster] is too conservative, and a new correction is proposed that increases test power)
 \end{abstract} 
@@ -528,10 +528,7 @@ By assumption, $\mathbb{P}_{XYZ} =\mathbb{P}_{XY}\mathbb{P}_{Z}$ and thus the ex
 C_{XYZ} &= \mathbb{E}_{XYZ}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)] \\
 & = \mathbb{E}_{XY}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)]\otimes\mathbb{E}_{Z}\bar\phi_Z(Z)=0
 \end{align*}
-
-Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respective Hilbert spaces. Lemma \ref{lemma:beta} tells us that each subprocess of $(X_i,Y_i,Z_i)$ satisfies the same $\beta$-mixing conditions as $(X_i,Y_i,Z_i)$, thus by applying Lemma \ref{lemma:hilbertCLT} it follows that $\|\bar{C}_{XZY}\|$, $\|\bar{C}_{YZX}\|$, $\|\bar{C}_{XZ}\|$, $\|\bar{C}_{YZ}\|$, $\|\bar{\mu}_X\|$, $\|\bar{\mu}_Y\|$, $\|\bar{\mu}_Z\| = O_P\left(n^{-\frac{1}{2}}\right)$
-
-It thus follows that
+Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respective Hilbert spaces. Lemma \ref{lemma:beta} tells us that each subprocess of $(X_i,Y_i,Z_i)$ satisfies the same $\beta$-mixing conditions as $(X_i,Y_i,Z_i)$, thus by applying Lemma \ref{lemma:hilbertCLT} it follows that $\|\bar{C}_{XZY}\|$, $\|\bar{C}_{YZX}\|$, $\|\bar{C}_{XZ}\|$, $\|\bar{C}_{YZ}\|$, $\|\bar{\mu}_X\|$, $\|\bar{\mu}_Y\|$, $\|\bar{\mu}_Z\| = O_P\left(n^{-\frac{1}{2}}\right)$. Therefore
 \begin{align*}
 n\|&\hat \mu_L\|^2  \xrightarrow{O_P(n^{-\frac{1}{2}})} n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
 2n\langle \bar{C}_{XYZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle -
@@ -557,23 +554,18 @@ This is equivalent to treating $\bar{k}\otimes\bar{l}$ as a kernel on the single
 \begin{align*}
  n \|\hat \mu_{L} \|^2 \xrightarrow{O_P(\frac{1}{\sqrt{n}})} n \|\hat \mu^{(Z)}_{L,2} \|^2
 \end{align*} as required.
-
-
 \end{proof}
 
 \begin{proof}(Theorem \ref{theorem:degenerate-kernel})
 
 Note that $\mathbb{E}_{XYZ} = \mathbb{E}_{XY}\mathbb{E}_Z$ under $\mathcal{H}_Z$. Therefore, fixing any $s_j = (x_j,y_j,z_j)$ we have that
-
 \begin{align*}
 \mathbb{E}_{S_i}&h(S_i,s_j) = \mathbb{E}_{X_iY_i} \mathbb{E}_{Z_i}\overline{\bar{k}\otimes\bar{l}}\otimes\bar{m} (S_i,s_j) \\
  &=  \langle\mathbb{E}_{X_iY_i}\bar{\phi}(X_i)\otimes\bar{\phi}(Y_i) - C_{XY},\bar{\phi}(x_j)\otimes\bar{\phi}(y_j) - C_{XY}\rangle \\
  &\quad \quad \quad \quad \times \langle \mathbb{E}_{Z_i}\bar{\phi}(Z_i),\bar{\phi}(z_j)\rangle \\
  &=  \langle 0 ,\bar{\phi}(x_j)\otimes\bar{\phi}(y_j) - C_{XY}\rangle \\
- &\quad \quad \quad \quad \times \langle 0 ,\bar{\phi}(z_j)\rangle \\ 
- & = 0
+ &\quad \quad \quad \quad \times \langle 0 ,\bar{\phi}(z_j)\rangle  = 0
 \end{align*}
-
 Therefore $h$ is degenerate. Symmetry follows from the symmetry of the Hilbert space inner product.
 
 For boundedness and Lipschitz continuity, it suffices to show the two following rules for constructing new kernels from old preserve both properties (see Supplementary materials \ref{supp:bounded-and-lipschitz} for proof):
