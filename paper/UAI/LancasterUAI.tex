@@ -3,7 +3,6 @@
 
 \documentclass[]{article}
 \usepackage{proceed2e}
-
 % Set the typeface to Times Roman
 \usepackage{times}
 
@@ -47,6 +46,8 @@
 % following usepackage line and replace \usepackage{icml2015} with
 % \usepackage[nohyperref]{icml2015} above.
 \usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 
 % Packages hyperref and algorithmic misbehave sometimes.  We can fix
 % this with the following command.
@@ -55,15 +56,19 @@
 
 \title{A Kernel Test for Three-Variable Interactions with Random Processes}
 
-\author{} % LEAVE BLANK FOR ORIGINAL SUBMISSION.
-          % UAI  reviewing is double-blind.
+\author{ {\bf Paul K. Rubenstein$^{123}$}, \quad {\bf Kacper P. Chwialkowski$^3$}, \quad {\bf Arthur Gretton$^4$}  \\
+$^1$Machine Learning Group, University of Cambridge\\
+$^2$Empirical Inference, MPI for Intelligent Systems, Tübingen, Germany\\
+$^3$Department of Computer Science, University College London\\
+$^4$Gatsby Computational Neuroscience Unit, University College London\\
+\texttt{pkr23@cam.ac.uk, kacper.chwialkowski@gmail.com, arthur.gretton@gmail.com}
+}
+
 
 
 
 \begin{document}
-
-\maketitle
-
+	\maketitle
 \begin{abstract} 
 
 We apply a wild bootstrap method to the Lancaster three-variable interaction measure in order to detect factorisation of the joint distribution on three variables forming a stationary random process, for which the existing permutation bootstrap method fails. As in the \emph{i.i.d.}~case, the Lancaster test is found to outperform existing tests in cases for which two independent variables individually have a weak influence on a third, but that when considered jointly the influence is strong. The main contributions of this paper are twofold: first, we prove that the Lancaster statistic satisfies the conditions required to estimate the quantiles of the null distribution using the wild bootstrap; second, the manner in which this is proved is novel, simpler than existing methods, and can further be applied to other statistics.
@@ -677,11 +682,8 @@ It then follows that $h = \overline{\bar{k}\otimes\bar{l}}\otimes\bar{m}$ is bou
 %\end{claimproof}
 
 
-
-\subsubsection*{Acknowledgements} 
-Omitted for review process
-
-\subsubsection*{References}
+\newpage
+\section*{References}
 \bibliography{ref}
 
 
