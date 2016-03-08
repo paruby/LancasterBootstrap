@@ -486,8 +486,8 @@ we can therefore expand $\tilde{K}$ in terms of $\bar{K}$ as
 &= \langle\bar\phi_X(X_i)- \frac{1}{n}\sum_k\bar\phi_X(X_k),\bar\phi_X(X_j) - \frac{1}{n}\sum_k\bar\phi_X(X_k)\rangle \\
 &= \bar{K}_{ij} - \frac{1}{n}\sum_k\bar{K}_{ik} - \frac{1}{n}\sum_k\bar{K}_{jk} + \frac{1}{n^2}\sum_{kl}\bar{K}_{kl}
 \end{align*}
-and expanding $\tilde{L}$ and $\tilde{M}$ in a similar way, we can rewrite the Lancaster test statistic as
 
+and expanding $\tilde{L}$ and $\tilde{M}$ in a similar way, we can rewrite the Lancaster test statistic as
 \begin{align*} 
 n\|\hat \mu_L\|^2 &= 
 \frac{1}{n}(\bar{K} \circ \bar{L}\circ \bar{M})_{++} &&-
@@ -506,8 +506,7 @@ n\|\hat \mu_L\|^2 &=
 \frac{4}{n^4}(\bar{L}\bar{M})_{++} \bar{K}_{++} \\&+
 \frac{4}{n^5}\bar{K}_{++} \bar{L}_{++} \bar{M}_{++} \\
 \end{align*}
-
-We denote by $C_{XYZ} = \mathbb{E}_{XYZ}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)]$ the population centred covariance operator with empirical estimate $\bar{C}_{XYZ} = \sum_i\bar\phi_X(X_i)\otimes\bar\phi_Y(Y_i)\otimes\bar\phi_Z(Z_i)$. We define similarly the quantities $C_{XY}, C_{YZX}, \ldots$ with corresponding empirical counterparts $\bar{C}_{XY}, \bar{C}_{YZX}, \ldots$ where for example $C_{YZ} = \mathbb{E}_{YZ}[\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)]$
+We denote by $C_{XYZ} = \mathbb{E}_{XYZ}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)]$ the population centred covariance operator with empirical estimate $\bar{C}_{XYZ} = \frac{1}{n}\sum_i\bar\phi_X(X_i)\otimes\bar\phi_Y(Y_i)\otimes\bar\phi_Z(Z_i)$. We define similarly the quantities $C_{XY}, C_{YZX}, \ldots$ with corresponding empirical counterparts $\bar{C}_{XY}, \bar{C}_{YZX}, \ldots$ where for example $C_{YZ} = \mathbb{E}_{YZ}[\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)]$
 
 Each of the terms in the above expression for $n\|\hat \mu_L\|^2$ can be expressed as inner products between empirical estimates of population centred covariance operators and tensor products of mean embeddings. Rewriting them as such yields:
 \begin{align*}
@@ -518,8 +517,11 @@ n\|\hat \mu_L\|^2 &= n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\& -
 n\langle \bar{C}_{XY}\otimes\bar{\mu}_Z,\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\& +
 n\langle \bar{C}_{XZ}\otimes\bar{\mu}_Y,\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\& +
 n\langle \bar{C}_{YZ}\otimes\bar{\mu}_X,\bar{C}_{YZ}\otimes\bar{\mu}_X \rangle \\& +
-2n\langle \bar{\mu}_Z\otimes\bar{C}_{XY},\bar{C}_{ZX}\otimes\bar{\mu}_Y \rangle \\& +
-2n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\& +
+2n\langle \bar{\mu}_Z\otimes\bar{C}_{XY},\bar{C}_{ZX}\otimes\bar{\mu}_Y \rangle \\
+& \enspace \vdots
+\end{align*}
+\begin{align*}
+&+2n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\& +
 2n\langle \bar{\mu}_X\otimes\bar{C}_{ZY},\bar{C}_{XZ}\otimes\bar{\mu}_Y \rangle \\& +
 4n\langle \bar{C}_{XYZ},\bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z \rangle \\& -
 4n\langle \bar{C}_{XY}\otimes \bar{\mu}_Z,\bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z \rangle \\& -
@@ -527,11 +529,18 @@ n\langle \bar{C}_{YZ}\otimes\bar{\mu}_X,\bar{C}_{YZ}\otimes\bar{\mu}_X \rangle \
 4n\langle \bar{C}_{YZ}\otimes \bar{\mu}_X,\bar{\mu}_Y \otimes\bar{\mu}_Z \otimes \bar{\mu}_X \rangle \\& +
 4n\langle \bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z,\bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z \rangle \\
 \end{align*}
-By assumption, $\mathbb{P}_{XYZ} =\mathbb{P}_{XY}\mathbb{P}_{Z}$ and thus the expectation operator also factorises similarly. As a consequence, in population $C_{XYZ}=0$,  
+By assumption, $\mathbb{P}_{XYZ} =\mathbb{P}_{XY}\mathbb{P}_{Z}$ and thus the expectation operator also factorises similarly. As a consequence, $C_{XYZ}=0$. Indeed, for any $A \in HS(\mathcal{F_Z}, \mathcal{F}_X \otimes \mathcal{F_Y})$
 \begin{align*}
-C_{XYZ} &= \mathbb{E}_{XYZ}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)\otimes\bar\phi_Z(Z)] \\
-& = \mathbb{E}_{XY}[\bar\phi_X(X)\otimes\bar\phi_Y(Y)]\otimes\mathbb{E}_{Z}\bar\phi_Z(Z)=0
+&\mathbb{E}_{XYZ}\langle A, \bar{C}_{XYZ}\rangle \\
+&= \frac{1}{n}\sum_i \mathbb{E}_{XY}\mathbb{E}_{Z}\langle A, \bar{\phi}_X(X_i)\otimes \bar{\phi}_Y(Y_i) \otimes \bar{\phi}_Z(Z_i) \rangle\\
+&= \frac{1}{n}\sum_i \mathbb{E}_{XY}\mathbb{E}_{Z}\langle\bar{\phi}_X(X_i)\otimes \bar{\phi}_Y(Y_i),  A  \bar{\phi}_Z(Z_i) \rangle_{\mathcal{F}_{X}\otimes \mathcal{F}_Y}\\
+&= \frac{1}{n}\sum_i \mathbb{E}_{XY}\langle\bar{\phi}_X(X_i)\otimes \bar{\phi}_Y(Y_i),  A \mathbb{E}_{Z} \bar{\phi}_Z(Z_i) \rangle_{\mathcal{F}_{X}\otimes \mathcal{F}_Y}\\
+& = 0\\
 \end{align*}
+
+\vspace{-0.7cm}
+where the penultimate line follows from the linearity of $A$ and the Bochner integrability of $\bar{\phi}_Z(Z)$, which in turn follows from the conditions required for $\mu_Z$ to exist. We conclude that $C_{XYZ} = \mathbb{E}_{XYZ} \bar{C}_{XYZ} = 0$.
+
 Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respective Hilbert spaces. Lemma \ref{lemma:beta} tells us that each subprocess of $(X_i,Y_i,Z_i)$ satisfies the same $\beta$-mixing conditions as $(X_i,Y_i,Z_i)$, thus by applying Lemma \ref{lemma:hilbertCLT} it follows that $\|\bar{C}_{XZY}\|$, $\|\bar{C}_{YZX}\|$, $\|\bar{C}_{XZ}\|$, $\|\bar{C}_{YZ}\|$, $\|\bar{\mu}_X\|$, $\|\bar{\mu}_Y\|$, $\|\bar{\mu}_Z\| = O_P\left(n^{-\frac{1}{2}}\right)$. Therefore
 \begin{align*}
 n\|&\hat \mu_L\|^2  \xrightarrow{O_P(n^{-\frac{1}{2}})} n\langle \bar{C}_{XYZ},\bar{C}_{XYZ} \rangle \\ &-
