@@ -857,48 +857,46 @@ Suppose that $k$ and $l$ are bounded symmetric Lipschitz contentious kernels. Th
 Together, Theorems \ref{theorem:HSIC-conv-in-prob} and \ref{theorem:HSIC-degenerate-kernel} justify use of the Wild Bootstrap in estimating the quantiles of the null distribution of the test statistic $nHSIC_b$.
 
 \begin{proof}(Theorem \ref{theorem:HSIC-conv-in-prob})
-By writing
-\begin{align*}
-\tilde{K}_{ij} &= \bar{K}_{ij} - \frac{1}{n}\sum_k\bar{K}_{ik} - \frac{1}{n}\sum_k\bar{K}_{jk} + \frac{1}{n^2}\sum_{kl}\bar{K}_{kl}
-\end{align*} 
-and similar for $\tilde{L}$ we can rewrite $nHSIC_b$ as 
-\begin{align*}
-nHSIC_b & = \frac{1}{n} (\bar{K}\circ \bar{L})_{++}  - \frac{2}{n^2}(\bar{K}\bar{L})_{++} + \frac{1}{n^3}\bar{K}_{++}\bar{L}_{++} \\
-\end{align*}
-We will show that the latter two terms in the above expression decay to 0 as $n\longrightarrow\infty$. 
+We can equivalently write $HSIC_b$ as the norm of the empirically centred covariance operator, which is invariant to population centering the feature maps:
 
-By assumption, $\mathbb{P}_{XY} = \mathbb{P}_X\mathbb{P}_Y$ and thus the expectation operator factorises similarly. Therefore 
 \begin{align*}
-C_{XY} & = \mathbb{E}_{XY}[\bar{\phi}_X(X)\otimes\bar{\phi}_Y(Y)] \\
-& = \mathbb{E}_{X}[\bar{\phi}_X(X)]\otimes\mathbb{E}_Y[\bar{\phi}_Y(Y)] = 0\otimes 0 = 0\\
+HSIC_b &= \| \frac{1}{n}\sum_i\left( \phi_X(X_i) - \frac{1}{n}\sum_j \phi_X(X_j) \right) \otimes \frac{1}{n}\sum_i\left( \phi_Y(Y_i) - \frac{1}{n}\sum_j \phi_Y(Y_j) \right)\| \\
+& = \| \frac{1}{n}\sum_i\left( \bar\phi_X(X_i) - \frac{1}{n}\sum_j \bar\phi_X(X_j) \right) \otimes \frac{1}{n}\sum_i\left( \bar\phi_Y(Y_i) - \frac{1}{n}\sum_j \bar\phi_Y(Y_j) \right)\| \\
+\end{align*} 
+
+Expanding this, we can rewrite the above in terms of inner products involving the population centred covariance operator and the population centred mean embeddings:
+
+\begin{align*}
+nHSIC_b &= n\| \bar{C}_{XY} \|^2 - 2n \langle \bar{C}_{XY} , \bar{\mu}_X \otimes \bar{\mu}_Y \rangle + n\| \bar{\mu}_X \otimes \bar{\mu}_Y  \|^2
+\end{align*} 
+
+The first term in the expression can be written as $n\| \bar{C}_{XY} \|^2 = \frac{1}{n}\sum_{ij}\bar{k}(X_i,X_j)\bar{l}(Y_i,Y_j)= \frac{1}{n}\sum_{ij} h(S_i,S_j)$. We show that the remaining two terms decay to zero in probability.
+
+By assumption, $\mathbb{P}_{XY} = \mathbb{P}_X\mathbb{P}_Y$ and thus the expectation operator factorises similarly. Therefore, for any $A\in HS(\mathcal{F}_Y,\mathcal{F}_X)$, 
+\begin{align*}
+\mathbb{E}_{XY} \langle A , \bar{C}_{XY} \rangle & = \frac{1}{n}\sum_i \mathbb{E}_{X}\mathbb{E}_{Y} \langle A , \left( \phi_X(X_i) - \mu_X \right) \otimes \left( \phi_Y(Y_i) - \mu_Y \right)\rangle_{HS} \\
+& = \frac{1}{n}\sum_i \mathbb{E}_{X}\mathbb{E}_{Y}\langle \phi_X(X_i) - \mu_X  ,  A \left( \phi_Y(Y_i) - \mu_Y \right) \rangle_{\mathcal{F}_X} \\
+& = \frac{1}{n}\sum_i \mathbb{E}_{Y}\langle \mathbb{E}_{X}\left(\phi_X(X_i) - \mu_X\right)  ,  A \left( \phi_Y(Y_i) - \mu_Y \right) \rangle_{\mathcal{F}_X} \\
+& = 0
 \end{align*}
+
+where the penultimate line follows from the Bochner integrability of the quantity $\phi_X(X) - \mu_X$ (which in turn follows from the conditions under which $\mu_X$ exists). It follows that $\mathbb{E}_{XY} \bar{C}_{XY} = 0$.
 
 Thus by Lemma \ref{lemma:hilbertCLT} as before, it follows that $\|\bar{C}_{XY}\|, \|\bar{\mu}_X\|, \|\bar{\mu}_Y\| = O_P(n^{-\frac{1}{2}})$. 
 
-We can write the latter two terms in the above expression for $nHSIC_b$ in terms of these quantities:
+It thus follows that the two latter quantities in the above expression for $nHSIC_b$ decay to $0$ in probability.
 
 \begin{align*}
-\frac{1}{n^2}(\bar{K}\bar{L})_{++} &= \frac{1}{n^2} \sum_{ijk}\bar{K}_{ij}\bar{L}_{jk}\\
-&= \frac{1}{n^2} \sum_{ijk}\langle \bar{\phi}_X(X_i),\bar{\phi}_X(X_j) \rangle \langle \bar{\phi}_Y(Y_j),\bar{\phi}_Y(Y_k)\rangle \\&=
-\frac{1}{n^2} \sum_{ijk}\langle \bar{\phi}_X(X_j)\otimes\bar{\phi}_Y(Y_j),
-\bar{\phi}_X(X_i)\otimes\bar{\phi}_Y(Y_k)\rangle \\&=
-n\langle \frac{1}{n} \sum_{j}[\bar{\phi}_X(X_j)\otimes\bar{\phi}_Y(Y_j)],
-[\frac{1}{n} \sum_{i}\bar{\phi}_X(X_i)]\otimes[\frac{1}{n} \sum_{k}\bar{\phi}_Y(Y_k)]\rangle \\&=
-n\langle \bar{C}_{XY},\bar{\mu}_X  \otimes \bar{\mu}_Y \rangle \\ 
-&\leq n \|\bar{C}_{XY}\|\|\bar{\mu}_X\| \| \bar{\mu}_Y\|\\
+n\langle \bar{C}_{XY},\bar{\mu}_X  \otimes \bar{\mu}_Y \rangle &\leq n \|\bar{C}_{XY}\|\|\bar{\mu}_X\| \| \bar{\mu}_Y\|\\
 &= O_P(n^{-\frac{1}{2}})
 \end{align*}
 
 \begin{align*}
- \frac{1}{n^3}\bar{K}_{++}\bar{L}_{++} &= \frac{1}{n^3}\mathlarger{\mathlarger{\sum}}_{i,j}\bar{K}_{ij}\bar{L}_{ij}\\
- & =  \frac{1}{n^3}\mathlarger{\mathlarger{\sum}}_{i,j}\mathlarger{\mathlarger{\langle}} \bar{\phi}_X(X_i), \bar{\phi}_X(X_j) \mathlarger{\mathlarger{\rangle}} \mathlarger{\mathlarger{\sum}}_{k,l}\mathlarger{\mathlarger{\langle}} \bar{\phi}_Y(Y_k), \bar{\phi}_Y(Y_l) \mathlarger{\mathlarger{\rangle}} \\ &
- = n\mathlarger{\mathlarger{\langle}} \frac{1}{n}\sum_i\bar{\phi}_X(X_i) , \frac{1}{n}\sum_j\bar{\phi}_X(X_j) \mathlarger{\mathlarger{\rangle}} \mathlarger{\mathlarger{\langle}} \frac{1}{n}\sum_k\bar{\phi}_Y(Y_k)  , \frac{1}{n}\sum_l\bar{\phi}_Y(Y_l) \mathlarger{\mathlarger{\rangle}}\\&
- = n \mathlarger{\mathlarger{\langle}} \bar{\mu}_X , \bar{\mu}_X \mathlarger{\mathlarger{\rangle}} \mathlarger{\mathlarger{\langle}} \bar{\mu}_Y , \bar{\mu}_Y  \mathlarger{\mathlarger{\rangle}} \\ &
-= n\|\bar{\mu}_X \|^2 \|\bar{\mu}_Y \|^2\\ &= nO_P(n^{-2}) \\&= O_P(n^{-1})
+\| \bar{\mu}_X \otimes \bar{\mu}_Y \|^2 & = n\|\bar{\mu}_X \|^2 \|\bar{\mu}_Y \|^2\\ &= nO_P(n^{-2}) \\&= O_P(n^{-1})
 \end{align*}
 
 
-It follows that $nHSIC_b  \xrightarrow{O(n^{-\frac{1}{2}})} \frac{1}{n} (\bar{K}\circ \bar{L})_{++}$, as required.
+It follows that $nHSIC_b  \xrightarrow{O(n^{-\frac{1}{2}})} = n\|\bar{C}_{XY}\|^2 = \frac{1}{n} (\bar{K}\circ \bar{L})_{++}$, as required.
 \end{proof}
 
 \begin{proof}(Theorem \ref{theorem:HSIC-degenerate-kernel})
