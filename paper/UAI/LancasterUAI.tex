@@ -526,6 +526,8 @@ n\langle \bar{C}_{YZ}\otimes\bar{\mu}_X,\bar{C}_{YZ}\otimes\bar{\mu}_X \rangle \
 4n\langle \bar{C}_{YZ}\otimes \bar{\mu}_X,\bar{\mu}_Y \otimes\bar{\mu}_Z \otimes \bar{\mu}_X \rangle \\& +
 4n\langle \bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z,\bar{\mu}_X \otimes\bar{\mu}_Y \otimes \bar{\mu}_Z \rangle \\
 \end{align*}
+
+\vspace{-0.5cm}
 By assumption, $\mathbb{P}_{XYZ} =\mathbb{P}_{XY}\mathbb{P}_{Z}$ and thus the expectation operator also factorises similarly. As a consequence, $C_{XYZ}=0$. Indeed, given any $A \in \mathcal{F}_X \otimes \mathcal{F_Y} \otimes \mathcal{F_Z}$, we can consider $A$ to be a bounded linear operator $\mathcal{F_Z} \longrightarrow\mathcal{F}_X \otimes \mathcal{F_Y} $. It follows that\footnote{We can bring the $\mathbb{E}_Z$ inside the inner product in the penultimate line due to the Bochner integrability of $\bar{\phi}_Z(Z)$, which follows from the conditions required for $\mu_Z$ to exist \citep{steinwart2008support}. }
 \begin{align*}
 &\mathbb{E}_{XYZ}\langle A, \bar{C}_{XYZ}\rangle \\
@@ -535,7 +537,7 @@ By assumption, $\mathbb{P}_{XYZ} =\mathbb{P}_{XY}\mathbb{P}_{Z}$ and thus the ex
 & = 0\\
 \end{align*}
 
-\vspace{-0.7cm}
+\vspace{-0.9cm}
 We conclude that $C_{XYZ} = \mathbb{E}_{XYZ} \bar{C}_{XYZ} = 0$.
 
 Similarly, $C_{XZY}$, $C_{YZX}$, $C_{XZ}$, $C_{YZ}$ are all 0 in their respective Hilbert spaces. Lemma \ref{lemma:beta} tells us that each subprocess of $(X_i,Y_i,Z_i)$ satisfies the same $\beta$-mixing conditions as $(X_i,Y_i,Z_i)$, thus by applying Lemma \ref{lemma:hilbertCLT} it follows that $\|\bar{C}_{XZY}\|$, $\|\bar{C}_{YZX}\|$, $\|\bar{C}_{XZ}\|$, $\|\bar{C}_{YZ}\|$, $\|\bar{\mu}_X\|$, $\|\bar{\mu}_Y\|$, $\|\bar{\mu}_Z\| = O_P\left(n^{-\frac{1}{2}}\right)$. Therefore
@@ -551,6 +553,8 @@ since all the other terms decay at least as quickly as $O_P(\frac{1}{\sqrt{n}})$
 &n\langle \bar{\mu}_X\otimes\bar{C}_{YZ},\bar{C}_{XY}\otimes\bar{\mu}_Z \rangle \\
 &\leq n \| \bar{\mu}_X\otimes\bar{C}_{YZ}\| \|\bar{C}_{XY}\otimes\bar{\mu}_Z \| \\
 & = n\sqrt{\langle \bar{\mu}_X\otimes\bar{C}_{YZ} , \bar{\mu}_X\otimes\bar{C}_{YZ} \rangle} \sqrt{\langle \bar{C}_{XY}\otimes\bar{\mu}_Z, \bar{C}_{XY}\otimes\bar{\mu}_Z \rangle} \\
+\end{align*}
+\begin{align*}
 & = n\sqrt{\langle \bar{\mu}_X, \bar{\mu}_X \rangle \langle \bar{C}_{YZ} , \bar{C}_{YZ} \rangle} \sqrt{\langle \bar{C}_{XY}, \bar{C}_{XY} \rangle \langle \bar{\mu}_Z, \bar{\mu}_Z \rangle} \\
 & =  n \| \bar{\mu}_X\|\|\bar{C}_{YZ}\| \|\bar{C}_{XY}\|\|\bar{\mu}_Z \| \\
 & = n \mathsmaller{O_P\left(\frac{1}{\sqrt{n}}\right)} \mathsmaller{O_P\left(\frac{1}{\sqrt{n}}\right)} O_P(1) \mathsmaller{O_P\left(\frac{1}{\sqrt{n}}\right)} = \mathsmaller{O_P\left(\frac{1}{\sqrt{n}}\right)}
@@ -878,6 +882,7 @@ nHSIC_b &= n\| \bar{C}_{XY} \|^2 - 2n \langle \bar{C}_{XY} , \bar{\mu}_X \otimes
 
 The first term in this expression can be written as $n\| \bar{C}_{XY} \|^2 = \frac{1}{n}\sum_{ij}\bar{k}(X_i,X_j)\bar{l}(Y_i,Y_j)= \frac{1}{n}\sum_{ij} h(S_i,S_j)$. We show that the remaining two terms decay to zero in probability.
 
+\pagebreak
 By assumption, $\mathbb{P}_{XY} = \mathbb{P}_X\mathbb{P}_Y$ and thus the expectation operator factorises similarly. Therefore, for any $A\in HS(\mathcal{F}_Y,\mathcal{F}_X)$, 
 \begin{align*}
 \mathbb{E}_{XY} \langle A , \bar{C}_{XY} \rangle & = \frac{1}{n}\sum_i \mathbb{E}_{X}\mathbb{E}_{Y} \langle A , \left( \phi_X(X_i) - \mu_X \right) \otimes \left( \phi_Y(Y_i) - \mu_Y \right)\rangle_{HS} \\
@@ -886,7 +891,7 @@ By assumption, $\mathbb{P}_{XY} = \mathbb{P}_X\mathbb{P}_Y$ and thus the expecta
 & = 0
 \end{align*}
 
-where the commutativity of $\mathbb{E}_Z$ with the inner product in the penultimate line follows from the Bochner integrability of the quantity $\phi_X(X) - \mu_X$, which in turn follows from the conditions under which $C_{XY}$ exists \citep{steinwart2008support}. It follows that $\mathbb{E}_{XY} \bar{C}_{XY} = 0$.
+where the commutativity of $\mathbb{E}_X$ with the inner product in the penultimate line follows from the Bochner integrability of the quantity $\phi_X(X) - \mu_X$, which in turn follows from the conditions under which $\mu_{X}$ exists \citep{steinwart2008support}. It follows that $\mathbb{E}_{XY} \bar{C}_{XY} = 0$.
 
 Thus by Lemma \ref{lemma:hilbertCLT} as before, it follows that $\|\bar{C}_{XY}\|, \|\bar{\mu}_X\|, \|\bar{\mu}_Y\| = O_P(n^{-\frac{1}{2}})$. 
 
