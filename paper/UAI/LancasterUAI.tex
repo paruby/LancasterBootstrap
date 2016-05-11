@@ -166,8 +166,7 @@ The null hypothesis $\mathcal{H}_0$ is a composite of the three `sub-hypotheses'
 
 In the time series setting this approach does not work. Temporal dependence within the samples makes  study of the asymptotic distribution of $n \|\hat \mu_L\|^2 $ difficult; in Section \ref{experiment2} we verify experimentally that the permutation bootstrap used in the \emph{i.i.d}~case fails. To construct a test in this setting we will use asymptotic and bootstrap results for mixing processes. 
 
-Mixing formalises the notion of the temporal structure within a process, and can be thought of as the rate at which the process forgets about its past. For example, for Gaussian processes this rate can be captured by the autocorrelation function; for general processes, generalisations of autocorrelation are used. The exact assumptions we make about the mixing properties of processes in this paper are discussed in Section \ref{section:details}, and we will refer to them as \textit{suitable mixing assumptions} for brevity in statements of results throughout this paper.   
-
+Mixing formalises the notion of the temporal structure within a process, and can be thought of as the rate at which the process forgets about its past. For example, for Gaussian processes this rate can be captured by the autocorrelation function; for general processes, generalisations of autocorrelation are used. The exact assumptions we make about the mixing properties of processes in this paper are discussed in Supplementary material \ref{supp:mixing}. For brevity in statements of results throughout this paper, however, we define sufficient \textit{suitable mixing assumptions} in Section \ref{section:details}.
 
 \subsection{MAIN RESULTS}
 
@@ -928,7 +927,7 @@ Symmetry is inherited from symmetry of $k$ and $l$. Boundedness and Lipschitz co
 
 Throughout this paper, there are (related) assumptions that need to be made on the random processes we consider in order to satisfy the conditions of (1) the wild bootstrap; and (2) the Hilbert space CLT. For simplicity, we wrapped up the assumptions into the single "suitable mixing assumptions". We discuss here the precise assumptions that are needed, how they relate to the suitable mixing assumptions and the applicability of the suitable mixing assumptions.
 
-(1) For their proof of the consistency of the wild bootstrap, \cite{leucht2013dependent} invoke the notion of tau-mixing. We require that the tau-mixing coefficients $\tau(n)$ satisfy the hypothesis of their theorem, namely that $\sum_{n=1}^{\infty} n^2 \tau(n) < \infty$.
+(1) For their proof of the consistency of the wild bootstrap, \cite{leucht2013dependent} invoke the notion of $\tau$-mixing. We require that the $\tau$-mixing coefficients $\tau(n)$ satisfy the hypothesis of their theorem, namely that $\sum_{n=1}^{\infty} n^2 \tau(n) < \infty$.
 
 Properties of $\tau$-mixing, for example its relationship to other types of more commonly understood mixing or models that satisfy $\tau$-mixing, are discussed in \cite{dedecker2005new}. In particular, under the assumption that $X_i$ has finite $p$th moment for any $p>1$, $\tau$-mixing implies beta-mixing. Examples of systems that are $\tau$-mixing are: causal functions of stationary sequences, iterated random functions, Markov chains and expanding maps.
 
