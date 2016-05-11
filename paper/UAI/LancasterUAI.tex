@@ -55,7 +55,7 @@
 
 \title{A Kernel Test for Three-Variable Interactions with Random Processes}
 
-\author{ {\bf Paul K. Rubenstein$^{123}$}, \quad {\bf Kacper P. Chwialkowski$^3$}, \quad {\bf Arthur Gretton$^4$}  \\
+\author{ {\bf Paul K. Rubenstein$^{123}$} \quad {\bf Kacper P. Chwialkowski$^3$} \quad {\bf Arthur Gretton$^4$}  \\
 $^1$Machine Learning Group, University of Cambridge\\
 $^2$Empirical Inference, MPI for Intelligent Systems, Tübingen, Germany\\
 $^3$Department of Computer Science, University College London\\
@@ -217,7 +217,7 @@ Suppose that $k$, $l$ and $m$ are bounded, symmetric, Lipschitz continuous kerne
 \begin{proof}
 See Section \ref{section:proofs}
 \end{proof}
-The asymptotic analysis of such a $V$-statistic for non-\emph{i.i.d.}~data is still complex, but we can appeal to prior work: \citet{leucht2013dependent} showed a way to estimate any given quantile of such a $V$-statistic under the null hypothesis using a method called the wild bootstrap. This, combined with analysis of the $V$-statistic under the alternative hypothesis provided in Theorem 2 of \citet{chwialkowski2014wild}\footnote{Note that similar results are presented in \citet{leucht2013dependent} as specific cases.}, results in statistical test (see Algorithm \ref{alg:Lancaster}).
+The asymptotic analysis of such a $V$-statistic for non-\emph{i.i.d.}~data is still complex, but we can appeal to prior work: \citet{leucht2013dependent} showed a way to estimate any given quantile of such a $V$-statistic under the null hypothesis using a method called the wild bootstrap (introduced in Section \ref{section:details}). This, combined with analysis of the $V$-statistic under the alternative hypothesis provided in Theorem 2 of \citet{chwialkowski2014wild}\footnote{Note that similar results are presented in \citet{leucht2013dependent} as specific cases.}, results in a statistical test given in Algorithm \ref{alg:Lancaster}. The wild bootstrap is used in line $(\ast)$ to generate samples of the null distribution.
 \begin{algorithm}[tb]
    \caption{Test $\mathcal{H}_Z$ with Wild Bootstrap}
    \label{alg:Lancaster}
@@ -227,7 +227,7 @@ The asymptotic analysis of such a $V$-statistic for non-\emph{i.i.d.}~data is st
    \STATE samples = zeros(1,N)
    \FOR{$i=1$ {\bfseries to} $N$}
    \STATE Draw random vector W according to Equation \ref{equation:bootstrap}
-   \STATE samples[$i$] = $\frac{1}{n}W^\intercal\left( \widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)W$
+   \STATE samples[$i$] = $\frac{1}{n}W^\intercal\left( \widetilde{\left( \tilde{K} \circ \tilde{L}\right) }\circ \tilde{M} \right)W$ \quad \quad $(\ast)$
    \ENDFOR
    \IF{sum($n\|\hat{\mu}_L\|^2 >$ samples)$>\frac{\alpha}{N}$}
    \STATE Reject $\mathcal{H}_Z$
@@ -273,10 +273,8 @@ A process $(X_t)_{t}$ is \emph{$\beta$-mixing} (also known as \emph{absolutely r
 \[ \beta(m) = \frac{1}{2} \sup_n \sup \sum_{i=1}^I \sum_{j=1}^J | \mathbb{P}(A_i \cap B_j) - \mathbb{P}(A_i)\mathbb{P}(B_j)| \]
 where the second supremum is taken  over all finite partitions $\{A_1,\ldots, A_I \}$ and  $\{B_1,\ldots, B_J\}$ of the sample space such that $A_i \in \mathcal{F}_1^n$ and $B_j \in \mathcal{F}_{n+m}^\infty$ and $\mathcal{F}_b^c = \sigma(X_b,X_{b+1},\ldots,X_{c})$
 \end{definition}
-A related notion is that of $\tau$-mixing. This is a property required to apply the wild bootstrap method of \citet{leucht2013dependent}, but we do not discuss $\tau$-mixing here since it is implied by $\beta$-mixing under the assumption that $X_i$ has finite $p$-th moment for any $p>1$.   
 
-
-\subsection*{SUITABLE MIXING ASSUMPTIONS} We assume that the random process $S_i = (X_i,Y_i,Z_i)$ is $\beta$ mixing with mixing coefficients satisfying   $\beta(m)  = o(m^{-6})$. Throughout this paper we refer to this assumption as \emph{suitable mixing assumptions}.
+\subsection*{SUITABLE MIXING ASSUMPTIONS} We assume that the random process $S_i = (X_i,Y_i,Z_i)$ is $\beta$ mixing with mixing coefficients satisfying   $\beta(m)  = o(m^{-6})$. Throughout this paper we refer to this assumption as \emph{suitable mixing assumptions}. For a more in depth discussion of the mixing assumptions made in this paper, see Supplementary materials \ref{supp:mixing}.
 
 
 \subsection{$V$-STATISTICS}\label{subsection:v-statistic}
@@ -433,9 +431,9 @@ In this case $Z_t$ is pairwise-dependent on both of $X_t$ and $Y_t$, in addition
 
 \subsection{FOREX DATA}
 
-Exchange rates between three currencies (GBP, USD, EUR) at 5 minute intervals over 7 consecutive trading days were obtained. The data were processed by taking the returns (difference between consecutive terms within each time series, $x_t^r = x_t-x_{t-1}$) which were then normalised (divided by standard deviation). We performed the Lancaster test, 3-way HSIC and pairwise HSIC on using the first $800$ entries of each processed series. All tests rejected the null hypothesis. The Lancaster test returned $p$-values of 0 for each of $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ with $10000$ bootstrapping procedures.
+Exchange rates between three currencies (GBP, USD, EUR) at 5 minute intervals over 7 consecutive trading days were obtained. The data were processed by taking the returns (difference between consecutive terms within each time series, $x_t^r = x_t-x_{t-1}$) which were then normalised (divided by standard deviation). We performed the Lancaster test, 3-way HSIC and pairwise HSIC on using the first $800$ entries of each processed series. All tests rejected the null hypothesis. The Lancaster and 3-way HSIC tests both returned $p$-values of 0 for each of $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ with $10000$ bootstrapping procedures.
 
-We then shifted one of the time series and repeated the tests (i.e.~we used entries $1$ to $800$ of two of the processed series and entries $801$ to $1600$ of the third). In this case, pairwise HSIC still detected dependence between the two unshifted time series, and both Lancaster and 3-way HSIC did not reject the null hypothesis that the joint distribution factorises. The Lancaster test returned $p$-values of $0.2708$, $0.2725$ and $0.1975$ for $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ respectively.
+We then shifted one of the time series and repeated the tests (i.e.~we used entries $1$ to $800$ of two of the processed series and entries $801$ to $1600$ of the third). In this case, pairwise HSIC still detected dependence between the two unshifted time series, and both Lancaster and 3-way HSIC did not reject the null hypothesis that the joint distribution factorises. The Lancaster test returned $p$-values of $0.2708$, $0.2725$ and $0.1975$ for $\mathcal{H}_X$, $\mathcal{H}_Y$ and $\mathcal{H}_Z$ respectively. 3-way HSIC resturn $p$-values of $0.3133$, $0.0000$ and $0.0000$ respectively.
 
 In both cases, the Lancaster test behaves as expected. Due to arbitrage, any two exchange rates should determine the third and the Lancaster test correctly identifies a joint dependence in the returns. However, when we shift one of the time series, we break the dependence between it and the other series. Lancaster correctly identifies here that the underlying distribution does factorise.
 
@@ -591,6 +589,9 @@ It then follows that $h = \overline{\bar{k}\otimes\bar{l}}\otimes\bar{m}$ is bou
 \end{proof}
 
 
+\subsection*{ACKNOWLEDGEMENTS}
+The authors would like to acknowledge fruitful conversations with all the crew
+ORCID 0000-0003-3169-7624
 
 %%%
 %\begin{claimproof}(Theorem \ref{theorem:lancasterAsymptote})
@@ -923,6 +924,22 @@ Symmetry is inherited from symmetry of $k$ and $l$. Boundedness and Lipschitz co
 
 \end{proof}
 
+\subsection{DISCUSSION OF MIXING ASSUMPTIONS}\label{supp:mixing}
+
+Throughout this paper, there are (related) assumptions that need to be made on the random processes we consider in order to satisfy the conditions of (1) the wild bootstrap; and (2) the Hilbert space CLT. For simplicity, we wrapped up the assumptions into the single "suitable mixing assumptions". We discuss here the precise assumptions that are needed, how they relate to the suitable mixing assumptions and the applicability of the suitable mixing assumptions.
+
+(1) For their proof of the consistency of the wild bootstrap, \cite{leucht2013dependent} invoke the notion of tau-mixing. We require that the tau-mixing coefficients $\tau(n)$ satisfy the hypothesis of their theorem, namely that $\sum_{n=1}^{\infty} n^2 \tau(n) < \infty$.
+
+Properties of $\tau$-mixing, for example its relationship to other types of more commonly understood mixing or models that satisfy $\tau$-mixing, are discussed in \cite{dedecker2005new}. In particular, under the assumption that $X_i$ has finite $p$th moment for any $p>1$, $\tau$-mixing implies beta-mixing. Examples of systems that are $\tau$-mixing are: causal functions of stationary sequences, iterated random functions, Markov chains and expanding maps.
+
+
+(2) In order to use the Hilbert space CLT, we require that our processes are $\beta$-mixing with coefficients $\beta(n)$ satisfying $\sum_{n=1}^{\infty} \beta(n)^{\delta/(2+\delta)} < \infty$ for some $\delta >0$ and $\sum_{n=1}^{\infty} n \beta(n) < \infty$
+
+In particular, both (1) and (2) are satisfied by a process that is $\beta$-mixing with coefficients $\beta(n) = o(n^{-6})$ as stated in the "Suitable Mixing" section. 
+
+Many commonly studied processes satisfy the “suitable mixing” condition. In particular Corollary 3.6 of \cite{bradley2005basic} states that Harris recurrent and aperiodic markov chains satisfy absolute regularity and Theorem 3.7 of \cite{bradley2005basic} states that geometric ergodicity implies geometric decay of beta coefficients. Interestingly Theorem 3.3 of \cite{bradley2005basic} describes situations in which a non-stationary chain mixes exponentially. 
+
+Note, however, that our novel proof idea relies on the Hilbert space CLT and so requires only assumption (2) above to be used. Therefore our proof idea could be applied to the asymptotic study of other V-statistics in the case that the processes are beta-mixing with $\beta(n) = o(n^{-3+\epsilon})$ for any $\epsilon > 0$.
 
 
 \end{document}
