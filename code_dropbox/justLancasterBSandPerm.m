@@ -30,7 +30,7 @@ clear M;
 fprintf('Constructing X independence test statistic...\n')
 xMatrix = Kc.*empirically_centre(Lc.*Mc);
 fprintf('Bootstrapping X independence test statistic...\n')
-xresults = bootstrap_null(n,numBootstraps,xMatrix,alpha,@bootstrap_series,2);
+xresults = bootstrap_null(n,numBootstraps,xMatrix,alpha,@bootstrap_series_2,2);
 fprintf('Permuting X independence test statistic...\n')
 xperm = perm_null(n,numBootstraps,Kc,Lc.*Mc,0.05);
 clear xMatrix
@@ -39,7 +39,7 @@ clear xMatrix
 fprintf('Constructing Y independence test statistic...\n')
 yMatrix = Lc.*empirically_centre(Kc.*Mc);
 fprintf('Bootstrapping Y independence test statistic...\n')
-yresults = bootstrap_null(n,numBootstraps,yMatrix,alpha,@bootstrap_series,2);
+yresults = bootstrap_null(n,numBootstraps,yMatrix,alpha,@bootstrap_series_2,2);
 fprintf('Permuting Y independence test statistic...\n')
 yperm = perm_null(n,numBootstraps,Lc,Mc.*Mc,0.05);
 clear yMatrix
@@ -47,7 +47,7 @@ clear yMatrix
 fprintf('Constructing Z independence test statistic...\n')
 zMatrix = Mc.*empirically_centre(Kc.*Lc);
 fprintf('Bootstrapping Z independence test statistic...\n')
-zresults = bootstrap_null(n,numBootstraps,zMatrix,alpha,@bootstrap_series,2);
+zresults = bootstrap_null(n,numBootstraps,zMatrix,alpha,@bootstrap_series_2,2);
 fprintf('Permuting Z independence test statistic...\n')
 zperm = perm_null(n,numBootstraps,Mc,Kc.*Lc,0.05);
 clear zMatrix
